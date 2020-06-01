@@ -1,0 +1,10 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.yellow-bg{
+    -fx-background-color: #faf49a;
+}
