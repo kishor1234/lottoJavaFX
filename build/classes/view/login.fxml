@@ -24,9 +24,9 @@
                               </Label>
                           </children>
                       </Pane>
-                      <Label fx:id="msg" layoutX="14.0" layoutY="46.0" text="Error Message" textFill="WHITE">
+                      <Label fx:id="msg" layoutX="14.0" layoutY="46.0" text="Error Message" textFill="#dd9b9b">
                           <font>
-                              <Font name="System Bold" size="13.0" />
+                              <Font name="System Bold" size="18.0" />
                           </font>
                       </Label>
                       <Label layoutX="14.0" layoutY="73.0" text="Username" textFill="WHITE">
@@ -75,6 +75,9 @@
                                   <font>
                                       <Font name="System Bold" size="18.0" />
                                   </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                               </Label>
                           </center>
                       </BorderPane>
@@ -84,6 +87,9 @@
                                   <font>
                                       <Font name="System Bold" size="18.0" />
                                   </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                               </Label>
                           </center>
                       </BorderPane>
@@ -93,6 +99,9 @@
                                   <font>
                                       <Font name="System Bold" size="18.0" />
                                   </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                               </Label>
                           </center>
                       </BorderPane>

@@ -31,6 +31,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
@@ -494,6 +496,7 @@ public class DashboardController {
     //end
     /**
      * Initializes the controller class.
+     *
      * @param myRep
      * @param printers
      */
@@ -841,27 +844,34 @@ public class DashboardController {
                     msgPanel.getChildren().clear();
                     String data = httpAPI._jsonRequest("?r=message", "");
                     Text msg = new Text(data);
-                    msg.setFill(Color.BROWN);
-                    msg.setStrokeWidth(2);
-                    msg.setStroke(Color.RED);
+                    msg.setFill(Color.RED);
+//                    msg.setStrokeWidth(2);
+//                    msg.setStroke(Color.RED);
                     msg.setTextOrigin(VPos.TOP);
-                    msg.setFont(Font.font(15));
+                    msg.setFont(Font.font(18));
                     msgPanel.getChildren().add(msg);
-                    TranslateTransition transition = TranslateTransitionBuilder.create()
-                            .duration(new Duration(10200))
-                            .node(msg)
-                            .interpolator(Interpolator.LINEAR)
-                            .cycleCount(Timeline.INDEFINITE)
-                            .build();
-                    
-                    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-                    int width = gd.getDisplayMode().getWidth();
-                    
-                    transition.setFromX(width);
-                    transition.setToX(-width);
-                    transition.play();
+                    // Get the Width of the Scene and the Text
+                    double sceneWidth = msgPanel.getWidth();
+                    double textWidth = msg.getLayoutBounds().getWidth();
+
+                    // Define the Durations
+                    Duration startDuration = Duration.ZERO;
+                    Duration endDuration = Duration.seconds(40);
+
+                    // Create the start and end Key Frames
+                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
+                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
+                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), -1.0 * textWidth);
+                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
+
+                    // Create a Timeline
+                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+                    // Let the animation run forever
+                    timeline.setCycleCount(Timeline.INDEFINITE);
+                    // Run the animation
+                    timeline.play();
                 };
-                
+
                 Platform.runLater(updater);
             });
             threadMessageBar.start();

@@ -9,6 +9,7 @@ import Sys.SystemInfo;
 import Sys.api.SystemMacAddress;
 import Sys.api.httpAPI;
 import com.google.gson.JsonObject;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -117,12 +118,35 @@ public class LoginController implements Initializable {
 
     @FXML
     private void restartGame(MouseEvent event) {
-        System.out.println("System Restarting");
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            String OSName = System.getProperty("os.name");
+            if (OSName.contains("Windows")) {
+                Process proc = runtime.exec("shutdown -h -t 0");
+            } else {
+                Process proc = runtime.exec("sudo reboot");
+            }
+
+        } catch (IOException ex) {
+
+        }
+        System.exit(0);
     }
 
     @FXML
     private void shutdownGame(MouseEvent event) {
-        System.out.println("System Shuting Down!");
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            String OSName = System.getProperty("os.name");
+            if (OSName.contains("Windows")) {
+                Process proc = runtime.exec("shutdown -s -t 0");
+            } else {
+                Process proc = runtime.exec("sudo shutdown -h now");
+            }
+        } catch (IOException ex) {
+            //Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);
     }
 
     private void loadPrinter() {
