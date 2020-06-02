@@ -1931,8 +1931,7 @@ public class DashboardController {
                     if (finas.getKey().equals("gameetime")) {
                         lastDraw.setText(TimeFormats.timeConvert(finas.getValue()));
                         //subSeries = finas.getValue().split("-");
-                    }
-                    if (finas.getKey().equals("series")) {
+                    }else if (finas.getKey().equals("series")) {
                         //subSeries = finas.getValue().split("-");
                     } else {
                         int key = Integer.parseInt(finas.getKey());
@@ -1976,7 +1975,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            //System.out.println("Erron Thread-8 " + ex.getMessage());
+            System.out.println("Erron Thread-8 " + ex.getMessage());
         }
 //        try {
 //            Thread t = new Thread() {
