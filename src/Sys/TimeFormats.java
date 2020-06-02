@@ -11,7 +11,7 @@ public class TimeFormats {
             final SimpleDateFormat sdf = new SimpleDateFormat("H:mm:ss");
             final Date dateObj = sdf.parse(time);
             
-            time= new SimpleDateFormat("H:mm aa").format(dateObj);
+            time= new SimpleDateFormat("h:mm aa").format(dateObj);
         } catch (final ParseException e) {
             e.printStackTrace();
         }

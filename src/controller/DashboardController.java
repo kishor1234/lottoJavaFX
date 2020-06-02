@@ -535,8 +535,8 @@ public class DashboardController {
             end.setVisible(false);
             id.setVisible(true);
             printer.setText(defaultPrinter);
-            this.mapButton();
-            this.mapJTextField();
+            mapButton();
+            mapJTextField();
             runNSOutput();
             //this.setLocationRelativeTo(null);
             messageRefreshThread();
@@ -550,6 +550,7 @@ public class DashboardController {
             for (int i = 0; i < 100; i++) {
                 TextField jf = jField.get("E_" + i);
                 jf.setAlignment(Pos.CENTER);
+                jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;");
                 jf.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
                 int p = i;
                 jf.setOnKeyReleased(e -> keyRelease(e, jf, p));
@@ -1215,7 +1216,8 @@ public class DashboardController {
             while (i < 100) {
                 // //System.out.println("E_" + i);
                 TextField jf = jField.get("E_" + i);
-                jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;");
+                jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                //jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;");
                 //jf.setBackground(Color.WHITE);
                 //jf.setFont(new java.awt.Font("Ubuntu", 1, 15));
                 i++;
