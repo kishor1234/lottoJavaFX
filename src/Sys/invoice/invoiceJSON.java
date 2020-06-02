@@ -62,7 +62,7 @@ public class invoiceJSON {
                 printPage += "Total Point    : " + printMap.get("amount") + "\n\n";
                 printPage += "Invoice " + printMap.get("game") + "\n";
                 //printPage += invoiceJSON.getBarocde();
-                System.out.println(printPage);
+                //System.out.println(printPage);
                 PrintInvoice.Sample(currentPrinter, printPage, printMap.get("game"));
 //            printerService.printString("PDF", printPage);
 //            byte[] cutP = new byte[]{0x1d, 'V', 1};

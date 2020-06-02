@@ -49,6 +49,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -550,8 +551,17 @@ public class DashboardController {
             for (int i = 0; i < 100; i++) {
                 TextField jf = jField.get("E_" + i);
                 jf.setAlignment(Pos.CENTER);
-                jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;");
+                jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;-fx-border-width:2px;");
                 jf.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+                jf.setOnKeyPressed((e) -> {
+                    jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                        if (event.getCode() == KeyCode.TAB) {
+                            //System.out.println("Tab pressed");
+                            event.consume();
+                        }
+                    });
+                });
+
                 int p = i;
                 jf.setOnKeyReleased(e -> keyRelease(e, jf, p));
 
@@ -1244,7 +1254,7 @@ public class DashboardController {
             TextField jf = jField.get("E_" + i);
             //jf.setForeground(Color.GRAY);
             //jf.setBackground(Color.white);
-            jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;");
+            jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
             jf.setText("");
             jf.setPromptText("" + start);
 
@@ -1547,7 +1557,7 @@ public class DashboardController {
                                 if (Integer.parseInt(K) != p) {
                                     temp.setText(jf.getText());
                                 }
-                                temp.setStyle("-fx-background-color:#99ff99;");
+                                temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                                 index = "" + K;
                                 tQty = tQty + Integer.parseInt(jf.getText());
                                 if (isNumeric(jf.getText())) {
@@ -1563,7 +1573,7 @@ public class DashboardController {
 
                                 Map<String, String> jString = new HashMap<>();
                                 TextField temp = jField.get("E_" + p);
-                                temp.setStyle("-fx-background-color:#99ff99;");
+                                temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                                 jString.put("num", p + "");
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonEmp = gson.toJson(jString);
@@ -1579,12 +1589,12 @@ public class DashboardController {
                                     if (Integer.parseInt(myFixRep.getString("" + so)) != p) {
                                         temdp.setText(jf.getText());
                                     }
-                                    temdp.setStyle("-fx-background-color:#99ff99;");
+                                    temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                                     setNumberMulti(myFixRep.getString("" + so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
 
                                     so++;
                                 }
-                            } catch (Exception ex) {
+                            } catch (JSONException | NumberFormatException ex) {
                                 //System.out.println(ex.getMessage());
                             }
                             break;
@@ -1592,7 +1602,7 @@ public class DashboardController {
                         default:
                             index = "" + p;
                             TextField temp = jField.get("E_" + p);
-                            temp.setStyle("-fx-background-color:#99ff99;");
+                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                             setNumberMulti(index, temp.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
                             break;
                     }
@@ -1616,7 +1626,7 @@ public class DashboardController {
                             if (Integer.parseInt(K) != p) {
                                 temp.setText(jf.getText());
                             }
-                            temp.setStyle("-fx-background-color:#99ff99;");
+                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                             index = "" + K;
                             tQty = tQty + Integer.parseInt(jf.getText());
                             setNumber(index, jf.getText(), seriesLable.getText(), subSeriesNo.getText());
@@ -1627,7 +1637,7 @@ public class DashboardController {
                         try {
                             Map<String, String> jString = new HashMap<>();
                             TextField temp = jField.get("E_" + p);
-                            temp.setStyle("-fx-background-color:#99ff99;");
+                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                             jString.put("num", p + "");
                             Gson gson = new GsonBuilder().setPrettyPrinting().create();
                             String jsonEmp = gson.toJson(jString);
@@ -1642,7 +1652,7 @@ public class DashboardController {
                                 if (Integer.parseInt(myFixResponNormal.getString("" + so)) != p) {
                                     temdp.setText(jf.getText());
                                 }
-                                temdp.setStyle("-fx-background-color:#99ff99;");
+                                temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                                 setNumber(myFixResponNormal.getString("" + so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText());
 
                                 so++;
@@ -1655,7 +1665,7 @@ public class DashboardController {
                     default:
                         index = "" + p;
                         TextField temp = jField.get("E_" + p);
-                        temp.setStyle("-fx-background-color:#99ff99;");
+                        temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                         setNumber(index, temp.getText(), seriesLable.getText(), subSeriesNo.getText());
                         break;
                 }
@@ -1683,7 +1693,7 @@ public class DashboardController {
                     ////System.out.println(entry.getKey());
                     temp = jField.get("E_" + entry.getKey());
                     temp.setText(entry.getValue());
-                    temp.setStyle("-fx-background-color:#99ff99;");
+                    temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                 }
             }
 
@@ -1908,7 +1918,7 @@ public class DashboardController {
             String jsonEmp = gson.toJson(finalMap);
             ////System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
-            System.out.println("Result" + Data);
+            //System.out.println("Result" + Data);
             ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
             int ip = 0;
             int x = 8;
@@ -1933,7 +1943,7 @@ public class DashboardController {
                     if (finas.getKey().equals("gameetime")) {
                         lastDraw.setText(TimeFormats.timeConvert(finas.getValue()));
                         //subSeries = finas.getValue().split("-");
-                    }else if (finas.getKey().equals("series")) {
+                    } else if (finas.getKey().equals("series")) {
                         //subSeries = finas.getValue().split("-");
                     } else {
                         int key = Integer.parseInt(finas.getKey());
@@ -1977,7 +1987,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            System.out.println("Erron Thread-8 " + ex.getMessage());
+            //System.out.println("Erron Thread-8 " + ex.getMessage());
         }
 //        try {
 //            Thread t = new Thread() {
