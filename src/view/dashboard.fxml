@@ -12,13 +12,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1100.0" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <Pane fx:id="msgPanel" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <Pane fx:id="msgPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
@@ -54,7 +54,7 @@
                               </Button>
                            </children>
                         </Pane>
-                        <Pane layoutX="278.0" layoutY="11.0" prefHeight="44.0" prefWidth="175.0" HBox.hgrow="ALWAYS" />
+                        <Pane layoutX="278.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                         <Pane layoutX="403.0" layoutY="11.0" prefHeight="45.0" prefWidth="233.0" HBox.hgrow="ALWAYS">
                            <children>
                               <TextField fx:id="claimReader" alignment="CENTER" layoutX="-3.0" layoutY="9.0" onKeyReleased="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" />
@@ -75,11 +75,11 @@
             </VBox>
          </bottom>
          <top>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="108.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                      <children>
-                        <Pane prefHeight="99.0" prefWidth="110.0" style="-fx-background-color: #b3ffb3;">
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="110.0" style="-fx-background-color: #b3ffb3;" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="10.0" layoutY="4.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -88,7 +88,7 @@
                               </ImageView>
                            </children>
                         </Pane>
-                        <VBox prefHeight="108.0" prefWidth="171.0">
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="170.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Pane prefHeight="50.0" prefWidth="147.0" styleClass="yellow-bg" stylesheets="@../css/dashboard.css">
                                  <children>
@@ -129,7 +129,7 @@
                               </Pane>
                            </children>
                         </VBox>
-                        <ScrollPane style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
+                        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
                            <content>
                               <VBox fx:id="resultPane" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
                                  <opaqueInsets>
@@ -140,30 +140,30 @@
                         </ScrollPane>
                      </children>
                   </HBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="29.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                  <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                      <children>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="110.0" HBox.hgrow="ALWAYS">
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
                            <children>
                               <Text layoutX="3.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Amusement" />
                            </children>
                         </Pane>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="132.0" HBox.hgrow="ALWAYS">
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button layoutY="2.0" mnemonicParsing="false" onAction="#actionOnResultUpdate" prefHeight="40.0" prefWidth="133.0" style="-fx-background-color: #faf49a; -fx-border-color: #CCCCCC; -fx-border-radius: 5px;" text="Result Update">
+                              <Button layoutY="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionOnResultUpdate" style="-fx-background-color: #faf49a; -fx-border-color: #CCCCCC; -fx-border-radius: 5px;" text="Result Update">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Button>
                            </children>
                            <HBox.margin>
-                              <Insets top="-2.0" />
+                              <Insets />
                            </HBox.margin>
                         </Pane>
-                        <Pane prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="result" layoutX="16.0" layoutY="12.0" onMouseClicked="#showResultBoard" text="Result">
+                              <Label fx:id="result" layoutX="24.0" layoutY="8.0" onMouseClicked="#showResultBoard" text="Result">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -174,11 +174,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <Pane layoutX="274.0" layoutY="10.0" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane layoutX="274.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="operator" layoutX="6.0" layoutY="12.0" onMouseClicked="#operatorAction" text="Operator">
+                              <Label fx:id="operator" layoutX="9.0" layoutY="8.0" onMouseClicked="#operatorAction" text="Operator">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -189,11 +189,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <Pane layoutX="370.0" layoutY="10.0" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="reprint" layoutX="12.0" layoutY="12.0" onMouseClicked="#reprintTicketAction" text="Reprint">
+                              <Label fx:id="reprint" layoutX="18.0" layoutY="8.0" onMouseClicked="#reprintTicketAction" text="Reprint">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -204,11 +204,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <Pane layoutX="466.0" layoutY="10.0" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane layoutX="466.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="cancel" layoutX="15.0" layoutY="12.0" onMouseClicked="#cancelTicketAction" text="Cancel">
+                              <Label fx:id="cancel" layoutX="23.0" layoutY="8.0" onMouseClicked="#cancelTicketAction" text="Cancel">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -219,11 +219,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <Pane layoutX="562.0" layoutY="10.0" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane layoutX="562.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="password" layoutX="5.0" layoutY="12.0" onMouseClicked="#actionChangePassword" text="Password">
+                              <Label fx:id="password" layoutX="6.0" layoutY="8.0" onMouseClicked="#actionChangePassword" text="Password">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -234,11 +234,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <Pane layoutX="658.0" layoutY="10.0" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane layoutX="658.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="complaint" layoutX="3.0" layoutY="12.0" text="Complaint">
+                              <Label fx:id="complaint" layoutX="2.0" layoutY="8.0" text="Complaint">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -249,11 +249,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Pane>
-                        <Pane layoutX="719.0" layoutY="10.0" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                        <Pane layoutX="719.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label fx:id="singout" layoutX="11.0" layoutY="12.0" onMouseClicked="#singoutAction" text="Sign Off">
+                              <Label fx:id="singout" layoutX="14.0" layoutY="8.0" onMouseClicked="#singoutAction" text="Sign Off" textFill="RED">
                                  <font>
-                                    <Font name="System Bold" size="13.0" />
+                                    <Font name="System Bold" size="20.0" />
                                  </font>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -562,7 +562,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB0" text="1000-1099" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB0" prefWidth="94.0" text="1000-1099" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -579,7 +579,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB1" text="1100-1199" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB1" prefWidth="94.0" text="1100-1199" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -596,7 +596,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB2" text="1200-1299" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB2" prefWidth="94.0" text="1200-1299" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -613,7 +613,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB3" prefWidth="94.0" text="1300-1399" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB3" prefWidth="100.0" text="1300-1399" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -630,7 +630,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB4" prefWidth="94.0" text="1400-1499" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB4" prefWidth="100.0" text="1400-1499" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -647,7 +647,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB5" prefWidth="94.0" text="1500-1599" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB5" prefWidth="100.0" text="1500-1599" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -664,7 +664,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB6" prefWidth="94.0" text="1600-1699" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB6" prefWidth="100.0" text="1600-1699" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -681,7 +681,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB7" prefWidth="94.0" text="1700-1799" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB7" prefWidth="100.0" text="1700-1799" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -698,7 +698,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB8" prefWidth="94.0" text="1800-1899" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB8" prefWidth="100.0" text="1800-1899" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -715,7 +715,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="B9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB9" prefWidth="94.0" text="1900-1999" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="B9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB9" prefWidth="100.0" text="1900-1999" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
