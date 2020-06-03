@@ -527,7 +527,8 @@
                               </HBox>
                               <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="end" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="30.0" />
+                                    <TextField fx:id="custome" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="30.0" text="0" />
+                                    <TextField fx:id="end1" alignment="TOP_RIGHT" layoutX="23.0" layoutY="10.0" prefHeight="30.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="162.0" HBox.hgrow="ALWAYS">
@@ -576,10 +577,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -593,10 +597,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -610,10 +617,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -627,10 +637,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #5ba36a;" text="02*03=0540" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c3" style="-fx-background-color: #5ba36a;" text="02*03=0540" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -644,10 +657,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #d98d81;" text="02*05=0900" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c4" style="-fx-background-color: #d98d81;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -661,10 +677,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #b9b1e6;" text="02*05=0900" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c5" style="-fx-background-color: #b9b1e6;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -678,10 +697,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #ea9e7b;" text="02*10=1800" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c6" style="-fx-background-color: #ea9e7b;" text="02*10=1800" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -695,10 +717,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #a4cc5a;" text="02*20=3600" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c7" style="-fx-background-color: #a4cc5a;" text="02*20=3600" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -712,10 +737,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #c9bdaf;" text="02*25=4500" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c8" style="-fx-background-color: #c9bdaf;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -729,10 +757,13 @@
                                                 <Insets />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #17bcbd;" text="02*25=4500" HBox.hgrow="ALWAYS">
+                                          <CheckBox fx:id="c9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c9" style="-fx-background-color: #17bcbd;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>

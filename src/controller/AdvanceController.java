@@ -16,12 +16,17 @@ import java.util.Iterator;
 import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
@@ -47,6 +52,7 @@ public class AdvanceController {
     private HBox tf;
 
     public String fileData = "";
+    public DropShadow shadow = new DropShadow();
 
     /**
      * Initializes the controller class.
@@ -112,13 +118,18 @@ public class AdvanceController {
                     }
 
                 } catch (Exception ex) {
-                    System.out.println("Msg " + ex.getMessage());
+                   // System.out.println("Msg " + ex.getMessage());
                 }
                 adCheck.put(ks + "", checkbox);
                 checkbox.setOnAction(e -> adCheckBoxAction(checkbox, temp));
-                checkbox.setStyle("-fx-margin: 2em 2em 2em 2em ;");
+                //checkbox.setStyle("-fx-margin: 2em 2em 2em 2em ;");
+                checkbox.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 13));
+                checkbox.setStyle("-fx-background-color:#ffe014; -fx-spacing: 5; -fx-border-width: 0; -fx-padding: 10 10 10 10; -fx-border-color:yellow;-fx-background-radius:3; -fx-border-radius:3;");
+                //checkbox.setOnAction(e -> setaMapMultiple(checkbox, temp)); //.setOnAction(e -> aMap.put("" + sr, temp.get("series")));
+                HBox.setMargin(checkbox, new Insets(5, 5, 5, 5));
+                checkbox.setEffect(shadow);
                 hbC.getChildren().add(checkbox);
-                if (i == 10) {
+                if (i == 7) {
                     drawpan.getChildren().add(hbC);
                     hbC = new HBox();
                     i = -1;

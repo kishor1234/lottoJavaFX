@@ -862,25 +862,25 @@ public class DashboardController {
                     msg.setFont(Font.font(18));
                     msgPanel.getChildren().add(msg);
                     // Get the Width of the Scene and the Text
-                    double sceneWidth = msgPanel.getWidth();
-                    double textWidth = msg.getLayoutBounds().getWidth();
-
-                    // Define the Durations
-                    Duration startDuration = Duration.ZERO;
-                    Duration endDuration = Duration.seconds(40);
-
-                    // Create the start and end Key Frames
-                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
-                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
-                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), -1.0 * textWidth);
-                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
-
-                    // Create a Timeline
-                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
-                    // Let the animation run forever
-                    timeline.setCycleCount(Timeline.INDEFINITE);
-                    // Run the animation
-                    timeline.play();
+//                    double sceneWidth = msgPanel.getWidth();
+//                    double textWidth = msg.getLayoutBounds().getWidth();
+//
+//                    // Define the Durations
+//                    Duration startDuration = Duration.ZERO;
+//                    Duration endDuration = Duration.seconds(40);
+//
+//                    // Create the start and end Key Frames
+//                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
+//                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
+//                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), -1.0 * textWidth);
+//                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
+//
+//                    // Create a Timeline
+//                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+//                    // Let the animation run forever
+//                    timeline.setCycleCount(Timeline.INDEFINITE);
+//                    // Run the animation
+//                    timeline.play();
                 };
 
                 Platform.runLater(updater);
