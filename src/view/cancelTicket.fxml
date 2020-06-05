@@ -30,7 +30,7 @@
                   <Button fx:id="close" mnemonicParsing="false" onAction="#closeWindo" style="-fx-background-color: #FF0000;" text="X" textFill="WHITE" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <TableView fx:id="ticket_info" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="ticket_info" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/reprintticket.css" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="srno" prefWidth="60.0" text="SR.NO" />
                 <TableColumn fx:id="ticket" prefWidth="111.0" text="TICKET" />

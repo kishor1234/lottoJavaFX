@@ -13,8 +13,6 @@ import Sys.invoice.invoiceJSON;
 import Sys.invoice.singleResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -30,12 +28,9 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.animation.TranslateTransitionBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -493,6 +488,28 @@ public class DashboardController {
     private Pane msgPanel;
     @FXML
     private Text lastDraw;
+    @FXML
+    private TextField custome;
+    @FXML
+    private CheckBox c0;
+    @FXML
+    private CheckBox c1;
+    @FXML
+    private CheckBox c2;
+    @FXML
+    private CheckBox c3;
+    @FXML
+    private CheckBox c4;
+    @FXML
+    private CheckBox c5;
+    @FXML
+    private CheckBox c6;
+    @FXML
+    private CheckBox c7;
+    @FXML
+    private CheckBox c8;
+    @FXML
+    private CheckBox c9;
 
     //end
     /**
@@ -521,6 +538,7 @@ public class DashboardController {
         this.defaultPrinter = printers;
         this.myResponse = myRep;
         waits(this.myResponse, this.defaultPrinter);
+        resetDashboard();
     }
 
     public void waits(JSONObject myResponse, String printers) {
@@ -534,6 +552,7 @@ public class DashboardController {
             advance.setVisible(false);
             start.setVisible(false);
             end.setVisible(false);
+            custome.setVisible(false);
             id.setVisible(true);
             printer.setText(defaultPrinter);
             mapButton();
@@ -862,25 +881,25 @@ public class DashboardController {
                     msg.setFont(Font.font(18));
                     msgPanel.getChildren().add(msg);
                     // Get the Width of the Scene and the Text
-//                    double sceneWidth = msgPanel.getWidth();
-//                    double textWidth = msg.getLayoutBounds().getWidth();
-//
-//                    // Define the Durations
-//                    Duration startDuration = Duration.ZERO;
-//                    Duration endDuration = Duration.seconds(40);
-//
-//                    // Create the start and end Key Frames
-//                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
-//                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
-//                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), -1.0 * textWidth);
-//                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
-//
-//                    // Create a Timeline
-//                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
-//                    // Let the animation run forever
-//                    timeline.setCycleCount(Timeline.INDEFINITE);
-//                    // Run the animation
-//                    timeline.play();
+                    double sceneWidth = msgPanel.getWidth();
+                    double textWidth = msg.getLayoutBounds().getWidth();
+
+                    // Define the Durations
+                    Duration startDuration = Duration.ZERO;
+                    Duration endDuration = Duration.seconds(40);
+
+                    // Create the start and end Key Frames
+                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
+                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
+                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), 0 * textWidth);
+                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
+
+                    // Create a Timeline
+                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+                    // Let the animation run forever
+                    timeline.setCycleCount(Timeline.INDEFINITE);
+                    // Run the animation
+                    timeline.play();
                 };
 
                 Platform.runLater(updater);
@@ -900,6 +919,20 @@ public class DashboardController {
     public void removeMainSeries(String Series) {
         //Map<String, Map> tempSeries = new HashMap<>();
         series.remove(Series);
+    }
+
+    private void unsetSubSeries(String subSeries, String Main) {
+        try {
+            Map<String, Map> mainSeries = series.get(Main);//get Main   
+            Map<String, ArrayList> tempSubSeries = new HashMap<>();
+            ArrayList<Map> aMap = new ArrayList<>();
+            String s[] = subSeries.split("-");
+            tempSubSeries.remove(s[0]);
+            mainSeries.remove(s[0]);
+            ////System.out.println(mainSeries);
+        } catch (Exception ex) {
+            //System.out.println(ex.getMessage());
+        }
     }
 
     public void setSubSeries(String subSeries, String Main) {//Mian=1000-1900
@@ -928,31 +961,64 @@ public class DashboardController {
                 Map<String, Map> mainSeries = series.get(Main);//Main
                 String sp = s + "";
                 ////System.out.println(Dashboard.series);
-                if (mainSeries.get(sp) == null) {
-                    setSubSeries(sp, Main);
-                }
-                Map<String, ArrayList> tempSubSeries = mainSeries.get(sp);//Sub
-                ArrayList<Map> aMap = tempSubSeries.get(sp);//Array
-                boolean flag = false;
-                for (int i = 0; i < aMap.size(); ++i) {
-                    Map<String, String> numberTemp = aMap.get(i);
-                    for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
-                        if (finas.getKey().equals(index)) {
-                            if (Integer.parseInt(value) <= 0) {
-                                numberTemp.remove(finas.getKey());
-                            } else {
-                                numberTemp.replace(finas.getKey(), value);
+                if (Integer.parseInt(custome.getText()) > 0) {
+                    for (Map.Entry<String, Map> mainSer : mainSeries.entrySet()) {
+                        //keyor sp ==3100 example
+                        Map<String, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
+                        ArrayList<Map> aMap = tempSubSeries.get(mainSer.getKey());//Array
+                        boolean flag = false;
+                        for (int i = 0; i < aMap.size(); ++i) {
+                            Map<String, String> numberTemp = aMap.get(i);
+                            for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                                if (finas.getKey().equals(index)) {
+                                    if (Integer.parseInt(value) <= 0) {
+                                        numberTemp.remove(finas.getKey());
+                                    } else {
+                                        numberTemp.replace(finas.getKey(), value);
+                                    }
+                                    flag = true;
+                                }
                             }
-                            flag = true;
+
                         }
+                        if (!flag) {
+                            Map<String, String> number = new HashMap<>();
+                            if (Integer.parseInt(value) > 0) {
+                                number.put(index, value);
+                                aMap.add(number);
+                            }
+                        }
+//                        System.out.println("Key = " + entry.getKey()
+//                                + ", Value = " + entry.getValue());
                     }
 
-                }
-                if (!flag) {
-                    Map<String, String> number = new HashMap<>();
-                    if (Integer.parseInt(value) > 0) {
-                        number.put(index, value);
-                        aMap.add(number);
+                } else {
+                    if (mainSeries.get(sp) == null) {
+                        setSubSeries(sp, Main);
+                    }
+                    Map<String, ArrayList> tempSubSeries = mainSeries.get(sp);//Sub
+                    ArrayList<Map> aMap = tempSubSeries.get(sp);//Array
+                    boolean flag = false;
+                    for (int i = 0; i < aMap.size(); ++i) {
+                        Map<String, String> numberTemp = aMap.get(i);
+                        for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                            if (finas.getKey().equals(index)) {
+                                if (Integer.parseInt(value) <= 0) {
+                                    numberTemp.remove(finas.getKey());
+                                } else {
+                                    numberTemp.replace(finas.getKey(), value);
+                                }
+                                flag = true;
+                            }
+                        }
+
+                    }
+                    if (!flag) {
+                        Map<String, String> number = new HashMap<>();
+                        if (Integer.parseInt(value) > 0) {
+                            number.put(index, value);
+                            aMap.add(number);
+                        }
                     }
                 }
             }
@@ -1017,31 +1083,64 @@ public class DashboardController {
                     String ser[] = serie.split("-");//selected main
                     Map<String, Map> mainSeries = series.get(serie);//Main
                     int sp = Integer.parseInt(ss[0]) + Integer.parseInt(ser[0]) - 1000;
-                    if (mainSeries.get("" + sp) == null) {
-                        setSubSeries("" + sp, serie);
-                    }
-                    Map<String, ArrayList> tempSubSeries = mainSeries.get("" + sp);//Sub
-                    ArrayList<Map> aMap = tempSubSeries.get("" + sp);//Array
-                    boolean flag = false;
-                    for (int i = 0; i < aMap.size(); ++i) {
-                        Map<String, String> numberTemp = aMap.get(i);
-                        for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
-                            if (finas.getKey().equals(index)) {
-                                if (Integer.parseInt(value) <= 0) {
-                                    numberTemp.remove(finas.getKey());
-                                } else {
-                                    numberTemp.replace(finas.getKey(), value);
+                    if (Integer.parseInt(custome.getText()) > 0) {
+                        for (Map.Entry<String, Map> mainSer : mainSeries.entrySet()) {
+                            //keyor sp ==3100 example
+                            Map<String, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
+                            ArrayList<Map> aMap = tempSubSeries.get(mainSer.getKey());//Array
+                            boolean flag = false;
+                            for (int i = 0; i < aMap.size(); ++i) {
+                                Map<String, String> numberTemp = aMap.get(i);
+                                for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                                    if (finas.getKey().equals(index)) {
+                                        if (Integer.parseInt(value) <= 0) {
+                                            numberTemp.remove(finas.getKey());
+                                        } else {
+                                            numberTemp.replace(finas.getKey(), value);
+                                        }
+                                        flag = true;
+                                    }
                                 }
-                                flag = true;
+
                             }
+                            if (!flag) {
+                                Map<String, String> number = new HashMap<>();
+                                if (Integer.parseInt(value) > 0) {
+                                    number.put(index, value);
+                                    aMap.add(number);
+                                }
+                            }
+//                        System.out.println("Key = " + entry.getKey()
+//                                + ", Value = " + entry.getValue());
                         }
 
-                    }
-                    if (!flag) {
-                        Map<String, String> number = new HashMap<>();
-                        if (Integer.parseInt(value) > 0) {
-                            number.put(index, value);
-                            aMap.add(number);
+                    } else {
+                        if (mainSeries.get("" + sp) == null) {
+                            setSubSeries("" + sp, serie);
+                        }
+                        Map<String, ArrayList> tempSubSeries = mainSeries.get("" + sp);//Sub
+                        ArrayList<Map> aMap = tempSubSeries.get("" + sp);//Array
+                        boolean flag = false;
+                        for (int i = 0; i < aMap.size(); ++i) {
+                            Map<String, String> numberTemp = aMap.get(i);
+                            for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                                if (finas.getKey().equals(index)) {
+                                    if (Integer.parseInt(value) <= 0) {
+                                        numberTemp.remove(finas.getKey());
+                                    } else {
+                                        numberTemp.replace(finas.getKey(), value);
+                                    }
+                                    flag = true;
+                                }
+                            }
+
+                        }
+                        if (!flag) {
+                            Map<String, String> number = new HashMap<>();
+                            if (Integer.parseInt(value) > 0) {
+                                number.put(index, value);
+                                aMap.add(number);
+                            }
                         }
                     }
                 }
@@ -1091,13 +1190,13 @@ public class DashboardController {
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     while (true) {
                         //System.out.println("Series Map " + series);
-                        String jsonEmp = gson.toJson(multiSeries);
+                        //String jsonEmp = gson.toJson(multiSeries);
                         //System.out.println("MultiSeries Json " + jsonEmp);
                         //System.out.println("Advance Array " + advanceDrawArray);
                         //calculateTotal();
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(5000);
                             resetFinalTotal();
                         } catch (InterruptedException ex) {
                             //System.out.println(ex.getMessage());
@@ -1105,7 +1204,7 @@ public class DashboardController {
                     }
                 }
             };
-            //t.start();
+            t.start();
         } catch (Exception ex) {
             //System.out.println(ex.getMessage());
         }
@@ -1385,7 +1484,7 @@ public class DashboardController {
         if (interval == 10) {
             buy.setDisable(true);
         }
-        if (interval == 0) {
+        if (interval == 1) {
             Thread timClock = new Thread(new Runnable() {
 
                 @Override
@@ -1888,6 +1987,7 @@ public class DashboardController {
 
                         lastTransaction();
                         calculateTotal();
+                        resetManualPlatSeleted();
 
                     }
                 };
@@ -1918,7 +2018,7 @@ public class DashboardController {
             String jsonEmp = gson.toJson(finalMap);
             ////System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
-            //System.out.println("Result" + Data);
+            System.out.println("Result" + Data);
             ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
             int ip = 0;
             int x = 8;
@@ -1962,7 +2062,7 @@ public class DashboardController {
                         HBox.setMargin(p, new Insets(1, 1, 1, 1));
                         p.setStyle("-fx-background-color: " + ColorArray[ip] + ";");
                         p.setBackground(new Background(new BackgroundFill(Color.web(ColorArray[ip]), CornerRadii.EMPTY, Insets.EMPTY)));
-                        p.setPrefSize(100, 30);
+                        p.setPrefSize(90, 30);
                         p.setStyle("-fx-border-color: #000000;");
 
                         p.getChildren().add(jLable);
@@ -2211,6 +2311,8 @@ public class DashboardController {
         } else {
             alls.setText("true");
             selectAll("#00FFFF");
+            custome.setText(String.valueOf(0));
+            resetManualPlatSeleted();
             subSeriesNo.setText(seriesLable.getText());
         }
     }
@@ -2506,11 +2608,6 @@ public class DashboardController {
                 stage.setHeight(bounds.getHeight());
                 stage.setScene(new Scene(root));
                 themStyle(stage, root);
-//                
-//                stage.setMaximized(true);
-//                stage.setFullScreen(true);
-//                stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-//                themStyle(stage, root);
                 stage.setTitle("Series");
                 stage.setOnHidden(evt -> multiMap = Scl.getText());
                 stage.showAndWait();
@@ -2539,6 +2636,7 @@ public class DashboardController {
                 stage.setOnHidden(evt -> multiMap = SC.getText());
                 stage.showAndWait();
                 loadSeries(multiMap);
+                resetManualPlatSeleted();
             } catch (IOException ex) {
                 //System.out.println("Multi else Error " + ex.getMessage());
             }
@@ -2557,6 +2655,8 @@ public class DashboardController {
                 seriesLable.setText(entry.getValue());
                 if (!multi.isSelected()) {
                     selectDefaultSeriesMulti(Integer.parseInt(entry.getKey()));
+                } else {
+                    selectDefaultSeriesMulti(0);
                 }
                 setMainSeries(entry.getValue());
             }
@@ -2842,8 +2942,10 @@ public class DashboardController {
             //stage.setOnHidden(evt -> multiMap = Scl.getText());
             stage.showAndWait();
             //loadSeries(multiMap);
+
         } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -2864,8 +2966,10 @@ public class DashboardController {
             stage.setTitle("Change Password");
             themStyle(stage, root);
             stage.showAndWait();
+
         } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -2904,8 +3008,10 @@ public class DashboardController {
             stage.setScene(new Scene(root));
             themStyle(stage, root);
             stage.showAndWait();
+
         } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -2928,8 +3034,10 @@ public class DashboardController {
             stage.setScene(new Scene(root));
             themStyle(stage, root);
             stage.showAndWait();
+
         } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -2951,8 +3059,10 @@ public class DashboardController {
             themStyle(stage, root);
             stage.setTitle("Reprint Ticket");
             stage.showAndWait();
+
         } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -2973,8 +3083,10 @@ public class DashboardController {
             stage.setTitle("Login");
             stage.show();
             singout.getScene().getWindow().hide();
+
         } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DashboardController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -3002,6 +3114,106 @@ public class DashboardController {
                 }
             };
             t.start();
+        }
+    }
+
+    @FXML
+    private void action_c0(javafx.event.ActionEvent event) {
+        singleDrawPlatSelected(event, B0, c0);
+    }
+
+    @FXML
+    private void action_c1(javafx.event.ActionEvent event) {
+        singleDrawPlatSelected(event, B1, c1);
+    }
+
+    @FXML
+    private void action_c2(javafx.event.ActionEvent event) {
+        singleDrawPlatSelected(event, B2, c2);
+    }
+
+    @FXML
+    private void action_c3(javafx.event.ActionEvent event) {
+        singleDrawPlatSelected(event, B3, c3);
+    }
+
+    @FXML
+    private void action_c4(javafx.event.ActionEvent event) {
+        singleDrawPlatSelected(event, B4, c4);
+    }
+
+    @FXML
+    private void action_c5(javafx.event.ActionEvent event) {
+         singleDrawPlatSelected(event, B5, c5);
+    }
+
+    @FXML
+    private void action_c6(javafx.event.ActionEvent event) {
+         singleDrawPlatSelected(event, B6, c6);
+    }
+
+    @FXML
+    private void action_c7(javafx.event.ActionEvent event) {
+         singleDrawPlatSelected(event, B7, c7);
+    }
+
+    @FXML
+    private void action_c8(javafx.event.ActionEvent event) {
+         singleDrawPlatSelected(event, B8, c8);
+    }
+
+    @FXML
+    private void action_c9(javafx.event.ActionEvent event) {
+         singleDrawPlatSelected(event, B9, c9);
+    }
+
+    private void singleDrawPlatSelected(javafx.event.ActionEvent event, Button B0, CheckBox c0) {
+        try {
+            int count = Integer.parseInt(custome.getText());
+            if (c0.isSelected()) {
+                if (multi.isSelected()) {
+                    System.out.println("MultiSeries Array" + multiSeries);
+                    for (int i = 0; i < multiSeries.size(); i++) {
+                        //i got form button text emx 1000-1099 but my series is 3000-3900
+                        //1100+3000-1000=3100
+                        //
+                        int Default = 1000;
+                        String mult[] = multiSeries.get(i).split("-");
+                        String bSplit[] = B0.getText().split("-");
+                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int second = first + 99;
+                        String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
+                        setSubSeries(cTxt, multiSeries.get(i));
+                    }
+                } else {
+                    setSubSeries(B0.getText(), seriesLable.getText());
+                }
+                count++;
+            } else {
+                unsetSubSeries(B0.getText(), seriesLable.getText());
+                count--;
+            }
+            custome.setText(String.valueOf(count));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    private void resetManualPlatSeleted() {
+        try {
+            custome.setText(String.valueOf(0));
+            c0.setSelected(false);
+            c1.setSelected(false);
+            c2.setSelected(false);
+            c3.setSelected(false);
+            c4.setSelected(false);
+            c5.setSelected(false);
+            c6.setSelected(false);
+            c7.setSelected(false);
+            c8.setSelected(false);
+            c9.setSelected(false);
+        } catch (Exception e) {
+
         }
     }
 

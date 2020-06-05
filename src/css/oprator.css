@@ -5,3 +5,15 @@
 .mainFxmlClass {
 
 }
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER;
+    
+}
+.table-view .table-row-cell{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER;
+    -fx-fill: #000000;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

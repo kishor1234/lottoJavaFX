@@ -36,10 +36,11 @@ public class invoiceJSON {
             ArrayList<Map> ja = (ArrayList) jo.get("print");
             for (int i = 0; i < ja.size(); i++) {
                 Map<String, String> printMap = ja.get(i);
+                // System.out.println("Print data "+printMap);
                 printPage += "Rajashreee Lottery\n";
                 printPage += "Draw ID:" + printMap.get("gametimeid") + "     Draw Time:" + printMap.get("gameendtime") + "\n\n";
                 printPage += "Num  qty  Num  qty  Num  qty  \n";
-                Map<String, ArrayList> printMapd = ja.get(0);
+                Map<String, ArrayList> printMapd = ja.get(i);
                 ArrayList<Map> point = printMapd.get("point");
                 int k = 1;
                 for (int j = 0; j < point.size(); j++) {
@@ -67,6 +68,7 @@ public class invoiceJSON {
 //            printerService.printString("PDF", printPage);
 //            byte[] cutP = new byte[]{0x1d, 'V', 1};
 //            printerService.printBytes("PDF", cutP);
+                //System.out.println("New Print");
                 printPage = "";
             }
         } else {

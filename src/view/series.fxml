@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -15,6 +16,15 @@
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Series or Multipule Munber" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Pane HBox.hgrow="ALWAYS" />
                   <Button fx:id="btn2" mnemonicParsing="false" onAction="#buttonClick" style="-fx-background-color: #FF0000;" text="X" textFill="#fcfafa" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>

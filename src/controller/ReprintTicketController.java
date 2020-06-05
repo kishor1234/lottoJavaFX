@@ -22,11 +22,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javax.swing.JOptionPane;
 import org.json.simple.parser.JSONParser;
 
@@ -57,6 +65,8 @@ public class ReprintTicketController {
     private String owner;
     @FXML
     private Button close;
+    private double xOffset=0;
+    private double yOffset=0;
 
     /**
      * Initializes the controller class.
@@ -97,6 +107,7 @@ public class ReprintTicketController {
             String cdata = dtf.format(now);
             JsonObject person = new JsonObject();
             person.addProperty("enterydate", cdata);
+            //person.addProperty("game", ticket);
             person.addProperty("own", owner);
             String jsonString = person.toString();
             String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
@@ -117,22 +128,22 @@ public class ReprintTicketController {
 
     private void reprintTicket(String ticket) {
         try {
-            int input = JOptionPane.showConfirmDialog(null, "Do you really want to Reprint ticket? it cause dublicat ticket");
-            if (input == 0) {
-            Map<String, String> data = new HashMap<>();
-            data.put("game", ticket);
-            //data.put("own", owner);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String jsonEmp = gson.toJson(data);
-            String Data = httpAPI._jsonRequest("?r=reprintDesktopPrint", jsonEmp);
-            System.out.println("Data \n" + Data);
-            // invoiceJSON.invoiceJSONPrint(Data,printer);
-            String msg = invoiceJSON.invoiceJSONPrint(Data, printer);
-            JOptionPane.showMessageDialog(null, msg);
-            }
-            else{
-                 JOptionPane.showMessageDialog(null, "Ticket Repring Process cancel!");
-            }
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/singleTicket.fxml"));
+            Parent root = loader.load();
+            SingleTicketController Scl = loader.getController();
+            Scl.initLoadData(owner,ticket, printer);
+            Stage stage = new Stage();
+            stage.setTitle("Reprint Ticket");
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
+            stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());
+            stage.setScene(new Scene(root));
+            themStyle(stage, root);
+            stage.showAndWait();
         } catch (Exception ex) {
             Logger.getLogger(ReprintTicketController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -149,5 +160,21 @@ public class ReprintTicketController {
     private void closeWindo(ActionEvent event) {
         close.getScene().getWindow().hide();
     }
+
+    private void themStyle(Stage stage, Parent root) {
+        stage.initStyle(StageStyle.TRANSPARENT);
+            //stage.initStyle(StageStyle.UNDERDECORATED);
+
+        //grab your root here
+        root.setOnMousePressed((MouseEvent event1) -> {
+            xOffset = event1.getSceneX();
+            double yOffset = event1.getSceneY();
+        });
+
+        //move around here
+        root.setOnMouseDragged((MouseEvent event1) -> {
+            stage.setX(event1.getScreenX() - xOffset);
+            stage.setY(event1.getScreenY() - yOffset);
+        });    }
 
 }

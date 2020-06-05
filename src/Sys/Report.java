@@ -10,19 +10,22 @@ package Sys;
  * @author asksoft
  */
 public class Report {
-    String srno,userid,game,ticketno,drawid,netPoint,discountPer,discountPoint,finalPoint,winPoint,netPayable,date;
-    public Report(String srno,String userid,String game,String ticketno,String drawid,String netPoint,String discountPer,String discountPoint,String finalPoint,String winPoint,String netPayable,String date){
-        this.srno=srno;
-        this.userid=userid;
-        this.game=game;
-        this.ticketno=ticketno;
-        this.drawid=drawid;
-        this.netPoint=netPoint;
-        this.discountPer=discountPer;
-        this.discountPoint=discountPoint;
-        this.finalPoint=finalPoint;
-        this.winPoint=winPoint;
-        this.date=date;
+
+    String srno, userid, game, ticketno, drawid, netPoint, discountPer, discountPoint, finalPoint, winPoint, netPayable, date;
+
+    public Report(String srno, String userid, String game, String ticketno, String drawid, String netPoint, String discountPer, String discountPoint, String finalPoint, String winPoint, String netPayable, String date) {
+        this.srno = srno;
+        this.userid = userid;
+        this.game = game;
+        this.ticketno = ticketno;
+        this.drawid = drawid;
+        this.netPoint = netPoint;
+        this.discountPer = discountPer;
+        this.discountPoint = discountPoint;
+        this.finalPoint = finalPoint;
+        this.winPoint = winPoint;
+        this.netPayable = netPayable;
+        this.date = date;
     }
 
     public String getSrno() {
@@ -105,6 +108,14 @@ public class Report {
         this.winPoint = winPoint;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getNetPayable() {
         return netPayable;
     }
@@ -113,12 +124,4 @@ public class Report {
         this.netPayable = netPayable;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-    
 }

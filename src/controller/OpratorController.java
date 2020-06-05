@@ -6,21 +6,16 @@
 package controller;
 
 import Sys.Report;
-import Sys.Ticket;
 import Sys.api.httpAPI;
 import Sys.invoice.PrinterService;
 import com.google.gson.JsonObject;
-import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -70,8 +65,7 @@ public class OpratorController {
     private TableColumn<Report, String> finalPoint;
     @FXML
     private TableColumn<Report, String> winPoint;
-    @FXML
-    private TableColumn<Report, String> netPayable;
+   
     @FXML
     private TableColumn<Report, String> date;
     @FXML
@@ -85,6 +79,9 @@ public class OpratorController {
     private String owner;
     private String printer;
     private String data;
+    @FXML
+    private TableColumn<Report, String> netPayable;
+   
 
     /**
      * Initializes the controller class.
@@ -96,7 +93,7 @@ public class OpratorController {
         game.setCellValueFactory(new PropertyValueFactory<>("game"));
         ticketno.setCellValueFactory(new PropertyValueFactory<>("ticketno"));
         drawid.setCellValueFactory(new PropertyValueFactory<>("drawid"));
-        netPoint.setCellValueFactory(new PropertyValueFactory<>("netPint"));
+        netPoint.setCellValueFactory(new PropertyValueFactory<>("netPoint"));
         discountPer.setCellValueFactory(new PropertyValueFactory<>("discountPer"));
         discountPoint.setCellValueFactory(new PropertyValueFactory<>("discountPoint"));
         finalPoint.setCellValueFactory(new PropertyValueFactory<>("finalPoint"));
@@ -128,8 +125,7 @@ public class OpratorController {
 
             ArrayList<Map> aMap = (ArrayList<Map>) jo.get("data");
             //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-            aMap.stream().forEach((aMap1) -> {
-
+            aMap.stream().forEach((Map aMap1) -> {
                 dt_ticket.add(new Report(aMap1.get("id").toString(), aMap1.get("userid").toString(), aMap1.get("game").toString(), aMap1.get("ticket").toString(), aMap1.get("drawid").toString(), aMap1.get("netPoint").toString(), aMap1.get("discountPer").toString(), aMap1.get("discountPoint").toString(), aMap1.get("finalPoint").toString(), aMap1.get("winAmount").toString(), aMap1.get("netPayble").toString(), aMap1.get("date").toString()));
             });
 

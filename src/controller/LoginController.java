@@ -6,7 +6,6 @@
 package controller;
 
 import Sys.SystemInfo;
-import Sys.api.SystemMacAddress;
 import Sys.api.httpAPI;
 import com.google.gson.JsonObject;
 import java.io.IOException;
@@ -25,7 +24,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -90,11 +88,11 @@ public class LoginController implements Initializable {
         //person.addProperty("printer", defaultPrinter.getText());
         person.addProperty("device", SystemInfo.getSystemName());
         String jsonString = person.toString();
-        //System.out.println(jsonString);
+        System.out.println(jsonString);
 
         try {
             String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-            //System.out.println(data);
+            System.out.println(data);
             JSONObject myResponse = new JSONObject(data);
             int status = Integer.parseInt(myResponse.getString("status"));
 

@@ -27,48 +27,43 @@
                   </VBox>
                   <HBox prefHeight="50.0" prefWidth="980.0" style="-fx-background-color: #FFFFFF; -fx-border-color: blue;">
                      <children>
-                        <Pane prefHeight="48.0" prefWidth="154.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="b1" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="10.0" mnemonicParsing="false" onAction="#opneAdvanceDrawSelecter" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="ADVANCE DRAW">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="b2" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="10.0" mnemonicParsing="false" onAction="#Actionb2" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="REFRESH">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="bSeries" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#selectSeriesActionbtn" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="SERIES">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </Pane>
+                        <Button fx:id="b1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#opneAdvanceDrawSelecter" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="ADVANCE DRAW" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="b2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Actionb2" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="REFRESH" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="bSeries" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectSeriesActionbtn" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="SERIES" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
+                        <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
                         <Pane layoutX="278.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <Pane layoutX="403.0" layoutY="11.0" prefHeight="45.0" prefWidth="233.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <TextField fx:id="claimReader" alignment="CENTER" layoutX="-3.0" layoutY="9.0" onKeyReleased="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" />
-                           </children>
-                        </Pane>
-                        <Pane layoutX="492.0" layoutY="11.0" prefHeight="48.0" prefWidth="89.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <ImageView fitHeight="48.0" fitWidth="180.0" layoutX="54.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/mobile-phone-signal-strength.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
+                        <TextField fx:id="claimReader" alignment="CENTER" onKeyReleased="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <ImageView fitHeight="48.0" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/mobile-phone-signal-strength.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
                </children>
@@ -77,388 +72,408 @@
          <top>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                      <children>
-                        <Pane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="110.0" style="-fx-background-color: #b3ffb3;" HBox.hgrow="ALWAYS">
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;">
                            <children>
-                              <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="10.0" layoutY="4.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="10.0" layoutY="10.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/rajashri4.png" />
+                                    <Image url="@../assets/rjlx.png" />
                                  </image>
                               </ImageView>
+                              <Text layoutX="28.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Amusement">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
                            </children>
+                           <padding>
+                              <Insets bottom="2.0" left="4.0" right="2.0" top="2.0" />
+                           </padding>
                         </Pane>
-                        <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="170.0" HBox.hgrow="ALWAYS">
+                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Pane prefHeight="50.0" prefWidth="147.0" styleClass="yellow-bg" stylesheets="@../css/dashboard.css">
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Label layoutX="18.0" layoutY="6.0" text="RajaLaxmi Lottery">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Text fx:id="clockLabel" layoutX="37.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03:47:31: PM">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Text>
+                                    <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="170.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label layoutX="18.0" layoutY="6.0" text="RajaLaxmi Lottery">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Text fx:id="clockLabel" layoutX="37.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03:47:31: PM">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </Pane>
+                                          <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: #802b00;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text fx:id="lastDraw" fill="#d7cfcf" layoutX="32.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:15 AM">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </Pane>
+                                          <Pane prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #000000;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="userid" layoutX="80.0" layoutY="4.0" prefHeight="19.0" prefWidth="89.0" text="20200431" textAlignment="CENTER" textFill="#f2efef">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <Text fx:id="id" fill="WHITE" layoutX="7.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D_50" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                    <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
+                                       <content>
+                                          <VBox fx:id="resultPane" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
+                                             <opaqueInsets>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </opaqueInsets>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
                                  </children>
-                              </Pane>
-                              <Pane prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #802b00;">
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Text fx:id="lastDraw" fill="#d7cfcf" layoutX="32.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:15 AM">
+                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionOnResultUpdate" style="-fx-background-color: #faf49a; -fx-border-color: #CCCCCC; -fx-border-radius: 5px;" text="Result Update">
                                        <font>
-                                          <Font name="System Bold" size="20.0" />
+                                          <Font size="15.0" />
                                        </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #000000;">
-                                 <children>
-                                    <Label fx:id="userid" layoutX="80.0" layoutY="4.0" prefHeight="19.0" prefWidth="89.0" text="20200431" textAlignment="CENTER" textFill="#f2efef">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Text fx:id="id" fill="WHITE" layoutX="7.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D_50" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                           </children>
-                        </VBox>
-                        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
-                           <content>
-                              <VBox fx:id="resultPane" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
-                                 <opaqueInsets>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </opaqueInsets>
-                              </VBox>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Text layoutX="3.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Amusement" />
-                           </children>
-                        </Pane>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button layoutY="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionOnResultUpdate" style="-fx-background-color: #faf49a; -fx-border-color: #CCCCCC; -fx-border-radius: 5px;" text="Result Update">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Pane>
-                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="result" layoutX="24.0" layoutY="8.0" onMouseClicked="#showResultBoard" text="Result">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="274.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="operator" layoutX="9.0" layoutY="8.0" onMouseClicked="#operatorAction" text="Operator">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="reprint" layoutX="18.0" layoutY="8.0" onMouseClicked="#reprintTicketAction" text="Reprint">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="466.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="cancel" layoutX="23.0" layoutY="8.0" onMouseClicked="#cancelTicketAction" text="Cancel">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="562.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="password" layoutX="6.0" layoutY="8.0" onMouseClicked="#actionChangePassword" text="Password">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="658.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="complaint" layoutX="2.0" layoutY="8.0" text="Complaint">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="719.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="singout" layoutX="14.0" layoutY="8.0" onMouseClicked="#singoutAction" text="Sign Off" textFill="RED">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="62.0" prefWidth="780.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="110.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <TextField fx:id="printer" alignment="CENTER" editable="false" layoutX="10.0" layoutY="31.0" prefHeight="25.0" prefWidth="91.0" />
-                              <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selectd Printer" />
-                           </children>
-                        </Pane>
-                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Pane prefHeight="30.0" prefWidth="133.0" style="-fx-border-color: #000000;">
-                                 <VBox.margin>
-                                    <Insets bottom="2.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <Text fx:id="uid" layoutX="16.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name 20200431">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #000000;">
-                                 <children>
-                                    <Text fx:id="seriesLable" layoutX="36.0" layoutY="19.0" onMouseClicked="#selectSeriesAction" strokeType="OUTSIDE" strokeWidth="0.0" text="1000-1900">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
+                                    </Button>
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="result" layoutX="19.0" layoutY="2.0" onMouseClicked="#showResultBoard" text="Result">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                    </Text>
+                                    </Pane>
+                                    <Pane layoutX="274.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="operator" layoutX="11.0" layoutY="2.0" onMouseClicked="#operatorAction" text="Account">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Pane>
+                                    <Pane layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="reprint" layoutX="16.0" layoutY="2.0" onMouseClicked="#reprintTicketAction" text="Reprint">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Pane>
+                                    <Pane layoutX="466.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="cancel" layoutX="18.0" layoutY="2.0" onMouseClicked="#cancelTicketAction" text="Cancel">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Pane>
+                                    <Pane layoutX="562.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="password" layoutX="10.0" layoutY="2.0" onMouseClicked="#actionChangePassword" text="Password">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Pane>
+                                    <Pane layoutX="658.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="complaint" layoutX="8.0" layoutY="2.0" text="Complaint">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Pane>
+                                    <Pane layoutX="719.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="singout" layoutX="13.0" layoutY="2.0" onMouseClicked="#singoutAction" text="Sign Off" textFill="RED">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Label>
+                                       </children>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Pane>
                                  </children>
-                              </Pane>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="62.0" prefWidth="780.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="110.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <TextField fx:id="printer" alignment="CENTER" editable="false" layoutX="10.0" layoutY="31.0" prefHeight="25.0" prefWidth="91.0" />
+                                          <Text layoutX="21.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRINTER">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin>
+                                    </Pane>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Pane prefHeight="30.0" prefWidth="133.0" style="-fx-border-color: #000000;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <Text fx:id="uid" layoutX="16.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name 20200431">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </Pane>
+                                          <Pane prefHeight="28.0" prefWidth="150.0" style="-fx-border-color: #000000;" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text fx:id="seriesLable" layoutX="36.0" layoutY="19.0" onMouseClicked="#selectSeriesAction" strokeType="OUTSIDE" strokeWidth="0.0" text="1000-1900">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Text>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </Pane>
+                                       </children>
+                                    </VBox>
+                                    <HBox prefHeight="62.0" prefWidth="297.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="32.0" prefWidth="323.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="5.0" text="Time to Dr." textFill="#d82b2b">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="29.0" prefWidth="323.0">
+                                                   <children>
+                                                      <Text fx:id="drawClock" fill="RED" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:02:33" wrappingWidth="99.6005859375">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="32.0" prefWidth="323.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="5.0" text="Dr. Time" textFill="#d82b2b">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="29.0" prefWidth="323.0">
+                                                   <children>
+                                                      <Text fx:id="dTime" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03:16 PM">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="32.0" prefWidth="323.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="7.0" text="Dr. Date" textFill="#d82b2b">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="29.0" prefWidth="323.0">
+                                                   <children>
+                                                      <Label fx:id="cDate" alignment="CENTER" contentDisplay="CENTER" layoutX="-8.0" layoutY="4.0" text="05-01-2020">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="357.0" layoutY="11.0" prefHeight="200.0" prefWidth="60.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="5.0" text="Balance" textFill="#d82b2b">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Text fx:id="balance" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*********">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="428.0" layoutY="11.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="5.0" text="Last Tr. No." textFill="#d82b2b">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Text fx:id="last" fill="#7c32eb" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticke">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <VBox layoutX="429.0" layoutY="11.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="6.0" text="Last Sale Amt." textFill="#d82b2b">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Text fx:id="lastamt" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rs. 00.00">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="2.0" />
+                                       </HBox.margin>
+                                    </HBox>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
-                        <HBox prefHeight="62.0" prefWidth="297.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" HBox.hgrow="ALWAYS">
-                           <children>
-                              <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Pane prefHeight="32.0" prefWidth="323.0">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="5.0" text="Time to Dr." textFill="#d82b2b">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="29.0" prefWidth="323.0">
-                                       <children>
-                                          <Text fx:id="drawClock" fill="RED" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:02:33" wrappingWidth="99.6005859375">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Pane prefHeight="32.0" prefWidth="323.0">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="5.0" text="Dr. Time" textFill="#d82b2b">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="29.0" prefWidth="323.0">
-                                       <children>
-                                          <Text fx:id="dTime" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03:16 PM">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Pane prefHeight="32.0" prefWidth="323.0">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="7.0" text="Dr. Date" textFill="#d82b2b">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="29.0" prefWidth="323.0">
-                                       <children>
-                                          <Label fx:id="cDate" alignment="CENTER" contentDisplay="CENTER" layoutX="-8.0" layoutY="4.0" text="05-01-2020">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="357.0" layoutY="11.0" prefHeight="200.0" prefWidth="60.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="5.0" text="Balance" textFill="#d82b2b">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Text fx:id="balance" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*********">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="428.0" layoutY="11.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="5.0" text="Last Tr. No." textFill="#d82b2b">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Text fx:id="last" fill="#7c32eb" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticke">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="429.0" layoutY="11.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="6.0" text="Last Sale Amt." textFill="#d82b2b">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                             <padding>
-                                                <Insets left="10.0" right="10.0" />
-                                             </padding>
-                                          </Label>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
-                                       <children>
-                                          <Text fx:id="lastamt" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rs. 00.00">
-                                             <font>
-                                                <Font name="System Bold" size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </Pane>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
                      </children>
                   </HBox>
                </children>
@@ -469,7 +484,7 @@
                <center>
                   <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                        <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
@@ -478,7 +493,7 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets top="10.0" />
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Text>
                                  </children>
@@ -528,7 +543,7 @@
                               <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextField fx:id="custome" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="30.0" text="0" />
-                                    <TextField fx:id="end1" alignment="TOP_RIGHT" layoutX="23.0" layoutY="10.0" prefHeight="30.0" prefWidth="30.0" />
+                                    <TextField fx:id="end" alignment="TOP_RIGHT" layoutX="23.0" layoutY="10.0" prefHeight="30.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="162.0" HBox.hgrow="ALWAYS">
@@ -545,6 +560,9 @@
                                  </children>
                               </HBox>
                            </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                         <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                            <children>
