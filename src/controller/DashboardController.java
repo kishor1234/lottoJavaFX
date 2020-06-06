@@ -855,13 +855,14 @@ public class DashboardController {
 
     public void messageRefreshThread() {
         try {
-            Thread msgThread = new Thread() {
-                @Override
-                public void run() {
-                    setMessageBar();
-                }
-            };
-            msgThread.start();
+//            Thread msgThread = new Thread() {
+//                @Override
+//                public void run() {
+//                    setMessageBar();
+//                }
+//            };
+//            msgThread.start();
+            setMessageBar();
         } catch (Exception ex) {
 
         }
@@ -1204,7 +1205,7 @@ public class DashboardController {
                     }
                 }
             };
-            t.start();
+            // t.start();
         } catch (Exception ex) {
             //System.out.println(ex.getMessage());
         }
@@ -1929,7 +1930,7 @@ public class DashboardController {
         Thread Balance = new Thread() {
             @Override
             public void run() {
-                while (true) {
+                if (true) {
                     try {
                         runnableBalance();
                         Thread.sleep(1000);
@@ -1988,6 +1989,7 @@ public class DashboardController {
                         lastTransaction();
                         calculateTotal();
                         resetManualPlatSeleted();
+                        runnableBalance();
 
                     }
                 };
@@ -2201,6 +2203,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2212,6 +2215,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2223,6 +2227,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2234,6 +2239,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2245,6 +2251,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2256,6 +2263,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2267,6 +2275,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2278,6 +2287,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2289,6 +2299,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2300,6 +2311,7 @@ public class DashboardController {
         resetVarticalInput();
         resetHorizontalInput();
         alls.setText("false");
+        buttonClickResetCheckOption();
     }
 
     @FXML
@@ -2467,7 +2479,7 @@ public class DashboardController {
                                     //System.out.println(jsonEmp);
 
                                     String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                    ////System.out.println("Data \n" + Data);
+                                    System.out.println("Data \n" + Data);
                                     invoiceJSON iJ = new invoiceJSON();
                                     msg = iJ.invoiceJSONPrint(Data, printer.getText());
                                     lastTransaction();
@@ -2490,7 +2502,7 @@ public class DashboardController {
                                 String jsonEmp = gson.toJson(finalMap);
                                 //System.out.println(jsonEmp);
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                //System.out.println("Data \n" + Data);
+                                System.out.println("Data \n" + Data);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
                                 invoiceJSON iJ = new invoiceJSON();
                                 msg = iJ.invoiceJSONPrint(Data, printer.getText());
@@ -3144,27 +3156,27 @@ public class DashboardController {
 
     @FXML
     private void action_c5(javafx.event.ActionEvent event) {
-         singleDrawPlatSelected(event, B5, c5);
+        singleDrawPlatSelected(event, B5, c5);
     }
 
     @FXML
     private void action_c6(javafx.event.ActionEvent event) {
-         singleDrawPlatSelected(event, B6, c6);
+        singleDrawPlatSelected(event, B6, c6);
     }
 
     @FXML
     private void action_c7(javafx.event.ActionEvent event) {
-         singleDrawPlatSelected(event, B7, c7);
+        singleDrawPlatSelected(event, B7, c7);
     }
 
     @FXML
     private void action_c8(javafx.event.ActionEvent event) {
-         singleDrawPlatSelected(event, B8, c8);
+        singleDrawPlatSelected(event, B8, c8);
     }
 
     @FXML
     private void action_c9(javafx.event.ActionEvent event) {
-         singleDrawPlatSelected(event, B9, c9);
+        singleDrawPlatSelected(event, B9, c9);
     }
 
     private void singleDrawPlatSelected(javafx.event.ActionEvent event, Button B0, CheckBox c0) {
@@ -3215,6 +3227,11 @@ public class DashboardController {
         } catch (Exception e) {
 
         }
+    }
+
+    private void buttonClickResetCheckOption() {
+        resetManualPlatSeleted();
+
     }
 
 }

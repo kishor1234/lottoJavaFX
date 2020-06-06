@@ -54,7 +54,7 @@
                         <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
                         <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
                         <Pane layoutX="278.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                        <TextField fx:id="claimReader" alignment="CENTER" onKeyReleased="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="claimReader" alignment="CENTER" onKeyReleased="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
