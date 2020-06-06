@@ -406,7 +406,7 @@
                                                 </Pane>
                                                 <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
                                                    <children>
-                                                      <Text fx:id="balance" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*********">
+                                                      <Text fx:id="balance" layoutX="14.0" layoutY="19.0" onMouseClicked="#showandhide" strokeType="OUTSIDE" strokeWidth="0.0" text="*****">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>

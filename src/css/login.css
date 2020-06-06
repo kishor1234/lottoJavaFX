@@ -5,6 +5,12 @@
 .mainFxmlClass {
 
 }
+.login{
+    -fx-background-image: url("../assets/bg2.jpg");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
 .pane{
     -fx-background-image: url("../assets/bg.jpg");
     -fx-background-repeat: stretch;   

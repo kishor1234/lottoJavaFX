@@ -45,6 +45,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -57,6 +58,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -510,6 +512,10 @@ public class DashboardController {
     private CheckBox c8;
     @FXML
     private CheckBox c9;
+    private boolean show = false;
+    private int totq;
+    private int fin;
+    private int tota;
 
     //end
     /**
@@ -545,14 +551,14 @@ public class DashboardController {
         try {
 
             advanceDrawArray = new ArrayList<>();
-            NSystems.setVisible(false);
-            subSeriesNo.setVisible(false);
-            alls.setVisible(false);
-            CMulti.setVisible(false);
-            advance.setVisible(false);
-            start.setVisible(false);
-            end.setVisible(false);
-            custome.setVisible(false);
+//            NSystems.setVisible(false);
+//            subSeriesNo.setVisible(false);
+//            alls.setVisible(false);
+//            CMulti.setVisible(false);
+//            advance.setVisible(false);
+//            start.setVisible(false);
+//            end.setVisible(false);
+//            custome.setVisible(false);
             id.setVisible(true);
             printer.setText(defaultPrinter);
             mapButton();
@@ -1601,9 +1607,23 @@ public class DashboardController {
                 amtField.setText((entry.getValue() * 2) + "");
                 finalQty = finalQty + entry.getValue();
             }
-            finalAmt = finalQty * 2;
-            totalqty.setText(finalQty + "");
-            totalamt.setText(finalAmt + "");
+            if (advance.getText().equals("true")) {
+                int nm = advanceDrawArray.size();
+
+                fin = finalQty * 2;
+                totq = finalQty;
+                tota = fin;
+
+                finalQty = finalQty * nm;
+                finalAmt = finalQty * 2;
+                totalqty.setText(finalQty + "");
+                totalamt.setText(finalAmt + "");
+            } else {
+                finalAmt = finalQty * 2;
+                totalqty.setText(finalQty + "");
+                totalamt.setText(finalAmt + "");
+            }
+
         } catch (Exception edx) {
 
         }
@@ -2185,9 +2205,9 @@ public class DashboardController {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String finalData = gson.toJson(finalMap);
             String data = httpAPI._jsonRequest("?r=lastTransaction", finalData);
-            JSONObject myResponse = new JSONObject(data);
-            last.setText(myResponse.getString("last"));
-            lastamt.setText("Rs. " + myResponse.getString("lastamt"));
+            JSONObject myrep = new JSONObject(data);
+            last.setText(myrep.getString("last"));
+            lastamt.setText("Rs. " + myrep.getString("lastamt"));
         } catch (Exception ex) {
 
         }
@@ -2449,6 +2469,7 @@ public class DashboardController {
                     try {
                         String qt = totalqty.getText();
                         String am = totalamt.getText();
+
                         if (qt.equals("") && am.equals("")) {
                             qt = "0";
                             am = "0";
@@ -2460,14 +2481,16 @@ public class DashboardController {
 
                             if (advance.getText().equals("true")) {
                                 for (int i = 0; i < advanceDrawArray.size(); i++) {
+                                    qt = String.valueOf(totq);
+                                    am = String.valueOf(tota);
                                     Map<String, String> advanceDraw = advanceDrawArray.get(i);
                                     Map<String, Map> finalMap = new HashMap<>();
                                     Map<String, String> data = new HashMap<>();
                                     data.put("userid", userid.getText());
 
                                     data.put("drawid", advanceDraw.get("gametimeid"));
-                                    data.put("totalqty", totalqty.getText());
-                                    data.put("totalamt", totalamt.getText());
+                                    data.put("totalqty", qt);
+                                    data.put("totalamt", am);
                                     data.put("perPoint", "2");
                                     data.put("start", advanceDraw.get("gametime"));
                                     data.put("end", advanceDraw.get("gameendtime"));
@@ -2520,6 +2543,7 @@ public class DashboardController {
                         //System.out.println(ex.getMessage());
                     }
                 }
+
             };
             buy.setDisable(true);
             t.start();
@@ -2666,7 +2690,9 @@ public class DashboardController {
                 SelectedSingleSeries = entry.getKey() + "";
                 seriesLable.setText(entry.getValue());
                 if (!multi.isSelected()) {
+
                     selectDefaultSeriesMulti(Integer.parseInt(entry.getKey()));
+                    selectSubSeries(B0);
                 } else {
                     selectDefaultSeriesMulti(0);
                 }
@@ -2936,29 +2962,35 @@ public class DashboardController {
     }
 
     public void openResult() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/result.fxml"));
-            Parent root = loader.load();
-            ResultController Scl = loader.getController();
-            Scl.initLoadData("multi", seriesLable.getText());
-            Stage stage = new Stage();
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
-            stage.setScene(new Scene(root));
-            themStyle(stage, root);
-            stage.setTitle("Result Borad");
-            //stage.setOnHidden(evt -> multiMap = Scl.getText());
-            stage.showAndWait();
-            //loadSeries(multiMap);
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/result.fxml"));
+                    Parent root = loader.load();
+                    ResultController Scl = loader.getController();
+                    Scl.initLoadData("multi", seriesLable.getText());
+                    Stage stage = new Stage();
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
+                    themStyle(stage, root);
+                    stage.setTitle("Result Borad");
+                    //stage.setOnHidden(evt -> multiMap = Scl.getText());
+                    stage.showAndWait();
+                    //loadSeries(multiMap);
+                } catch (IOException ex) {
+                    Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            };
 
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+            Platform.runLater(updater);
+        });
+        openThread.start();
+
     }
 
     @FXML
@@ -2976,7 +3008,8 @@ public class DashboardController {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Change Password");
-            themStyle(stage, root);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            //themStyle(stage, root);
             stage.showAndWait();
 
         } catch (IOException ex) {
@@ -2987,19 +3020,23 @@ public class DashboardController {
 
     public void themStyle(Stage stage, Parent root) {
         stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.setFullScreen(true);
+        stage.setResizable(false);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             //stage.initStyle(StageStyle.UNDERDECORATED);
 
         //grab your root here
-        root.setOnMousePressed((MouseEvent event1) -> {
-            xOffset = event1.getSceneX();
-            yOffset = event1.getSceneY();
-        });
-
-        //move around here
-        root.setOnMouseDragged((MouseEvent event1) -> {
-            stage.setX(event1.getScreenX() - xOffset);
-            stage.setY(event1.getScreenY() - yOffset);
-        });
+//        root.setOnMousePressed((MouseEvent event1) -> {
+//            xOffset = event1.getSceneX();
+//            yOffset = event1.getSceneY();
+//        });
+//
+//        //move around here
+//        root.setOnMouseDragged((MouseEvent event1) -> {
+//            stage.setX(event1.getScreenX() - xOffset);
+//            stage.setY(event1.getScreenY() - yOffset);
+//        });
     }
 
     @FXML
@@ -3112,18 +3149,48 @@ public class DashboardController {
                         Map<String, String> finalMap = new HashMap<>();
                         finalMap.put("id", claimReader.getText());
                         finalMap.put("userid", userid.getText());
+                        String did[] = id.getText().split("_");
+                        finalMap.put("gameid", did[1]);
                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
                         String jsonEmp = gson.toJson(finalMap);
                         ////System.out.println(jsonEmp);
                         String data = httpAPI._jsonRequest("?r=checkWinner", jsonEmp);
-                        //System.out.println(data);
+                        System.out.println(data);
                         String msg = claimJSON.claimJSONPrint(data, printer.getText());
-                        JOptionPane.showMessageDialog(null, msg);
+                        claimMessageBox(msg);
+                        //JOptionPane.showMessageDialog(null, msg);
                         claimReader.setText("");
                         runnableBalance();
                     } catch (Exception ex) {
                         //System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
                     }
+                }
+
+                private void claimMessageBox(String msg) {
+                    Thread claimMessage = new Thread(() -> {
+                        Runnable updater = () -> {
+                            try {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/claim.fxml"));
+                                Parent root = loader.load();
+                                ClaimController Scl = loader.getController();
+                                Scl.initLoadData(msg);
+                                Stage stage = new Stage();
+                                stage.setScene(new Scene(root));
+                                stage.setTitle("Claim");
+                                stage.initStyle(StageStyle.TRANSPARENT);
+                                //themStyle(stage, root);
+                                stage.showAndWait();
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(DashboardController.class
+                                        .getName()).log(Level.SEVERE, null, ex);
+                            }
+                        };
+
+                        Platform.runLater(updater);
+                    });
+                    claimMessage.start();
+
                 }
             };
             t.start();
@@ -3233,6 +3300,17 @@ public class DashboardController {
     private void buttonClickResetCheckOption() {
         resetManualPlatSeleted();
 
+    }
+
+    @FXML
+    private void showandhide(MouseEvent event) {
+        if (show) {
+            balance.setText("*****");
+            show = false;
+        } else {
+            runnableBalance();
+            show = true;
+        }
     }
 
 }

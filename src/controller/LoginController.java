@@ -24,8 +24,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -196,18 +198,21 @@ public class LoginController implements Initializable {
     public void themStyle(Stage stage, Parent root) {
         stage.initStyle(StageStyle.TRANSPARENT);
             //stage.initStyle(StageStyle.UNDERDECORATED);
-
+        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.setFullScreen(true);
+        stage.setResizable(false);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         //grab your root here
-        root.setOnMousePressed((MouseEvent event1) -> {
-            xOffset = event1.getSceneX();
-            yOffset = event1.getSceneY();
-        });
-
-        //move around here
-        root.setOnMouseDragged((MouseEvent event1) -> {
-            stage.setX(event1.getScreenX() - xOffset);
-            stage.setY(event1.getScreenY() - yOffset);
-        });
+//        root.setOnMousePressed((MouseEvent event1) -> {
+//            xOffset = event1.getSceneX();
+//            yOffset = event1.getSceneY();
+//        });
+//
+//        //move around here
+//        root.setOnMouseDragged((MouseEvent event1) -> {
+//            stage.setX(event1.getScreenX() - xOffset);
+//            stage.setY(event1.getScreenY() - yOffset);
+//        });
     }
 
     @FXML
