@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,8 +61,8 @@ public class ReprintTicketController {
     private String owner;
     @FXML
     private Button close;
-    private double xOffset=0;
-    private double yOffset=0;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     /**
      * Initializes the controller class.
@@ -122,26 +123,35 @@ public class ReprintTicketController {
     }
 
     private void reprintTicket(String ticket) {
-        try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/singleTicket.fxml"));
-            Parent root = loader.load();
-            SingleTicketController Scl = loader.getController();
-            Scl.initLoadData(owner,ticket, printer);
-            Stage stage = new Stage();
-            stage.setTitle("Reprint Ticket");
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
-            stage.setScene(new Scene(root));
-            themStyle(stage, root);
-            stage.showAndWait();
-        } catch (Exception ex) {
-            Logger.getLogger(ReprintTicketController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+
+                try {
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/singleTicket.fxml"));
+                    Parent root = loader.load();
+                    SingleTicketController Scl = loader.getController();
+                    Scl.initLoadData(owner, ticket, printer);
+                    Stage stage = new Stage();
+                    stage.setTitle("Reprint Ticket");
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
+                    themStyle(stage, root);
+                    stage.showAndWait();
+                } catch (Exception ex) {
+                    Logger.getLogger(ReprintTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
     }
 
     void initLoadData(String own, String print) {
@@ -170,6 +180,7 @@ public class ReprintTicketController {
         root.setOnMouseDragged((MouseEvent event1) -> {
             stage.setX(event1.getScreenX() - xOffset);
             stage.setY(event1.getScreenY() - yOffset);
-        });    }
+        });
+    }
 
 }

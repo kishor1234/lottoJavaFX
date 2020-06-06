@@ -551,14 +551,14 @@ public class DashboardController {
         try {
 
             advanceDrawArray = new ArrayList<>();
-//            NSystems.setVisible(false);
-//            subSeriesNo.setVisible(false);
-//            alls.setVisible(false);
-//            CMulti.setVisible(false);
-//            advance.setVisible(false);
-//            start.setVisible(false);
-//            end.setVisible(false);
-//            custome.setVisible(false);
+            NSystems.setVisible(false);
+            subSeriesNo.setVisible(false);
+            alls.setVisible(false);
+            CMulti.setVisible(false);
+            advance.setVisible(false);
+            start.setVisible(false);
+            end.setVisible(false);
+            custome.setVisible(false);
             id.setVisible(true);
             printer.setText(defaultPrinter);
             mapButton();
@@ -1242,7 +1242,26 @@ public class DashboardController {
                 break;
             default:
                 try {
-                    if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
+                    if (e.getText().equals("")) {
+                        int vartical = 0;//add 10
+                        while (i <= 99) {
+                            TextField varticalTF = varticalTextField.get("I_" + vartical);
+                            TextField jf = jField.get("E_" + i);
+                            if (!"".equals(varticalTF.getText())) {
+                                int vPoint = Integer.parseInt(varticalTF.getText());
+                                int t = vPoint + Integer.parseInt(p);
+                                jf.setText(t + "");
+                                inputSystem(i, jf);
+
+                            } else {
+                                jf.setText(p);
+                                inputSystem(i, jf);
+
+                            }
+                            i = i + 10;
+                            vartical = vartical + 10;
+                        }
+                    } else if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
                         int vartical = 0;//add 10
                         while (i <= 99) {
                             TextField varticalTF = varticalTextField.get("I_" + vartical);
@@ -1273,7 +1292,7 @@ public class DashboardController {
     }
 
     private void BulkNumberWriteVartical(int i, String p, javafx.scene.input.KeyEvent e) {
-        // //System.out.println(e.getKeyCode());
+        System.out.println(e.getCode().toString());
         switch (e.getCode().toString()) {
             case "UP":
                 int tempN = i - 10;
@@ -1296,7 +1315,26 @@ public class DashboardController {
                 break;
             default:
                 try {
-                    if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
+                    if (e.getText().equals("")) {
+                        int horizontal = 0;//add 10
+                        int tp = i + 10;
+                        while (i < tp) {
+                            TextField varticalTF = horizontalTextField.get("B_" + horizontal);
+                            TextField jf = jField.get("E_" + i);
+                            // e.getKeyChar();
+                            if (!"".equals(varticalTF.getText())) {
+                                int vPoint = Integer.parseInt(varticalTF.getText());
+                                int t = vPoint + Integer.parseInt(p);
+                                jf.setText(t + "");
+                                inputSystem(i, jf);
+                            } else {
+                                jf.setText(p);
+                                inputSystem(i, jf);
+                            }
+                            i++;
+                            horizontal++;
+                        }
+                    } else if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
                         int horizontal = 0;//add 10
                         int tp = i + 10;
                         while (i < tp) {
@@ -1316,10 +1354,10 @@ public class DashboardController {
                             horizontal++;
                         }
                     } else {
-                        //JOptionPane.showMessageDialog(this, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (Exception ex) {
-                    //System.out.println("NUmber only " + ex.getMessage());
+                    System.out.println("NUmber only " + ex.getMessage());
                 }
                 break;
         }
@@ -2040,7 +2078,7 @@ public class DashboardController {
             String jsonEmp = gson.toJson(finalMap);
             ////System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
-            System.out.println("Result" + Data);
+            //System.out.println("Result" + Data);
             ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
             int ip = 0;
             int x = 8;
@@ -2628,55 +2666,62 @@ public class DashboardController {
     }
 
     public void openSeries() {
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                if (multi.isSelected()) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
+                        Parent root = loader.load();
+                        SeriesController Scl = loader.getController();
+                        Scl.initLoadData("multi", multiMap);
+                        Stage stage = new Stage();
+                        Screen screen = Screen.getPrimary();
+                        Rectangle2D bounds = screen.getVisualBounds();
+                        stage.setX(bounds.getMinX());
+                        stage.setY(bounds.getMinY());
+                        stage.setWidth(bounds.getWidth());
+                        stage.setHeight(bounds.getHeight());
+                        stage.setScene(new Scene(root));
+                        themStyle(stage, root);
+                        stage.setTitle("Series");
+                        stage.setOnHidden(evt -> multiMap = Scl.getText());
+                        stage.showAndWait();
+                        loadSeries(multiMap);
+                    } catch (IOException ex) {
+                        //System.out.println("Multi if Error " + ex.getMessage());
+                    }
+                } else {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
+                        Parent root = loader.load();
+                        SeriesController SC = loader.getController();
+                        SC.initLoadData("single", multiMap);
 
-        if (multi.isSelected()) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
-                Parent root = loader.load();
-                SeriesController Scl = loader.getController();
-                Scl.initLoadData("multi", multiMap);
-                Stage stage = new Stage();
-                Screen screen = Screen.getPrimary();
-                Rectangle2D bounds = screen.getVisualBounds();
-                stage.setX(bounds.getMinX());
-                stage.setY(bounds.getMinY());
-                stage.setWidth(bounds.getWidth());
-                stage.setHeight(bounds.getHeight());
-                stage.setScene(new Scene(root));
-                themStyle(stage, root);
-                stage.setTitle("Series");
-                stage.setOnHidden(evt -> multiMap = Scl.getText());
-                stage.showAndWait();
-                loadSeries(multiMap);
-            } catch (IOException ex) {
-                //System.out.println("Multi if Error " + ex.getMessage());
-            }
-        } else {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
-                Parent root = loader.load();
-                SeriesController SC = loader.getController();
-                SC.initLoadData("single", multiMap);
+                        //Show scene 2 in new window
+                        Stage stage = new Stage();
+                        Screen screen = Screen.getPrimary();
+                        Rectangle2D bounds = screen.getVisualBounds();
+                        stage.setX(bounds.getMinX());
+                        stage.setY(bounds.getMinY());
+                        stage.setWidth(bounds.getWidth());
+                        stage.setHeight(bounds.getHeight());
+                        stage.setScene(new Scene(root));
+                        themStyle(stage, root);
+                        stage.setTitle("Select Sereis");
+                        stage.setOnHidden(evt -> multiMap = SC.getText());
+                        stage.showAndWait();
+                        loadSeries(multiMap);
+                        resetManualPlatSeleted();
+                    } catch (IOException ex) {
+                        //System.out.println("Multi else Error " + ex.getMessage());
+                    }
+                }
 
-                //Show scene 2 in new window
-                Stage stage = new Stage();
-                Screen screen = Screen.getPrimary();
-                Rectangle2D bounds = screen.getVisualBounds();
-                stage.setX(bounds.getMinX());
-                stage.setY(bounds.getMinY());
-                stage.setWidth(bounds.getWidth());
-                stage.setHeight(bounds.getHeight());
-                stage.setScene(new Scene(root));
-                themStyle(stage, root);
-                stage.setTitle("Select Sereis");
-                stage.setOnHidden(evt -> multiMap = SC.getText());
-                stage.showAndWait();
-                loadSeries(multiMap);
-                resetManualPlatSeleted();
-            } catch (IOException ex) {
-                //System.out.println("Multi else Error " + ex.getMessage());
-            }
-        }
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
 
     }
 
@@ -2924,41 +2969,50 @@ public class DashboardController {
     }
 
     private void openAdvance() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/advance.fxml"));
-            Parent root = loader.load();
-            AdvanceController Scl = loader.getController();
-            Scl.initLoadData(advanceDraw);
-            Stage stage = new Stage();
-            stage.setTitle("Select Advance Draw");
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
-            stage.setScene(new Scene(root));
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/advance.fxml"));
+                    Parent root = loader.load();
+                    AdvanceController Scl = loader.getController();
+                    Scl.initLoadData(advanceDraw);
+                    Stage stage = new Stage();
+                    stage.setTitle("Select Advance Draw");
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
 //            stage.setMaximized(true);
 //            stage.setFullScreen(true);
 //            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            themStyle(stage, root);
-            stage.showAndWait();
-            //System.out.println("Advance Selected Draw " + advanceDraw);
-            advanceDrawArray = new ArrayList<>();
-            advanceDraw.entrySet().stream().forEach((entry) -> {
-                advanceDrawArray.add(entry.getValue());
-            });
+                    themStyle(stage, root);
+                    stage.showAndWait();
+                    System.out.println("Advance Selected Draw " + advanceDraw);
+                    advanceDrawArray = new ArrayList<>();
+                    advanceDraw.entrySet().stream().forEach((entry) -> {
+                        advanceDrawArray.add(entry.getValue());
+                    });
 
-            if (!advanceDrawArray.isEmpty()) {
-                advance.setText("true");
-            } else {
-                advance.setText("false");
-            }
-            //System.out.println("AdvanceDrawArray " + advanceDrawArray);
-            //loadSeries(multiMap);
-        } catch (Exception ex) {
-            //System.out.println("Seect iit load Advance Action Error " + ex.getMessage());
-        }
+                    if (!advanceDrawArray.isEmpty()) {
+                        advance.setText("true");
+                    } else {
+                        advance.setText("false");
+                    }
+                    //System.out.println("AdvanceDrawArray " + advanceDrawArray);
+                    //loadSeries(multiMap);
+                } catch (Exception ex) {
+                    //System.out.println("Seect iit load Advance Action Error " + ex.getMessage());
+                }
+
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
+
     }
 
     public void openResult() {
@@ -3000,22 +3054,30 @@ public class DashboardController {
 
     @FXML
     private void actionChangePassword(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/changepassword.fxml"));
-            Parent root = loader.load();
-            ChangepasswordController Scl = loader.getController();
-            Scl.initLoadData(userid.getText());
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Change Password");
-            stage.initStyle(StageStyle.TRANSPARENT);
-            //themStyle(stage, root);
-            stage.showAndWait();
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/changepassword.fxml"));
+                    Parent root = loader.load();
+                    ChangepasswordController Scl = loader.getController();
+                    Scl.initLoadData(userid.getText());
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Change Password");
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    //themStyle(stage, root);
+                    stage.showAndWait();
 
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+                } catch (IOException ex) {
+                    Logger.getLogger(DashboardController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
+
     }
 
     public void themStyle(Stage stage, Parent root) {
@@ -3041,78 +3103,103 @@ public class DashboardController {
 
     @FXML
     private void reprintTicketAction(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/reprintTicket.fxml"));
-            Parent root = loader.load();
-            ReprintTicketController Scl = loader.getController();
-            Scl.initLoadData(userid.getText(), printer.getText());
-            Stage stage = new Stage();
-            stage.setTitle("Reprint Ticket");
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
-            stage.setScene(new Scene(root));
-            themStyle(stage, root);
-            stage.showAndWait();
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
 
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/reprintTicket.fxml"));
+                    Parent root = loader.load();
+                    ReprintTicketController Scl = loader.getController();
+                    Scl.initLoadData(userid.getText(), printer.getText());
+                    Stage stage = new Stage();
+                    stage.setTitle("Reprint Ticket");
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
+                    themStyle(stage, root);
+                    stage.showAndWait();
+
+                } catch (IOException ex) {
+                    Logger.getLogger(DashboardController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
     }
 
     @FXML
     private void cancelTicketAction(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cancelTicket.fxml"));
-            Parent root = loader.load();
-            CancelTicketController Scl = loader.getController();
-            String drawid[] = id.getText().split("_");
-            Scl.initLoadData(userid.getText(), printer.getText(), drawid[1]);
-            Stage stage = new Stage();
-            stage.setTitle("Reprint Ticket");
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
-            stage.setScene(new Scene(root));
-            themStyle(stage, root);
-            stage.showAndWait();
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cancelTicket.fxml"));
+                    Parent root = loader.load();
+                    CancelTicketController Scl = loader.getController();
+                    String drawid[] = id.getText().split("_");
+                    Scl.initLoadData(userid.getText(), printer.getText(), drawid[1]);
+                    Stage stage = new Stage();
+                    stage.setTitle("Reprint Ticket");
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
+                    themStyle(stage, root);
+                    stage.showAndWait();
 
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+                } catch (IOException ex) {
+                    Logger.getLogger(DashboardController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
+
     }
 
     @FXML
     private void operatorAction(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/oprator.fxml"));
-            Parent root = loader.load();
-            OpratorController Scl = loader.getController();
-            Scl.initLoadData(userid.getText(), printer.getText());
-            Stage stage = new Stage();
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
-            stage.setScene(new Scene(root));
-            themStyle(stage, root);
-            stage.setTitle("Reprint Ticket");
-            stage.showAndWait();
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/oprator.fxml"));
+                    Parent root = loader.load();
+                    OpratorController Scl = loader.getController();
+                    Scl.initLoadData(userid.getText(), printer.getText());
+                    Stage stage = new Stage();
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
+                    themStyle(stage, root);
+                    stage.setTitle("Reprint Ticket");
+                    stage.showAndWait();
 
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+                } catch (IOException ex) {
+                    Logger.getLogger(DashboardController.class
+                            .getName()).log(Level.SEVERE, null, ex);
+                }
+            };
+
+            Platform.runLater(updater);
+        });
+        openThread.start();
+
     }
 
     @FXML

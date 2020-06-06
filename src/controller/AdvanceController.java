@@ -43,7 +43,7 @@ public class AdvanceController {
     @FXML
     private Text max;
 
-    public static ArrayList<Map> advanceDrawArray = new ArrayList<Map>();//multi series option
+    public static ArrayList<Map> advanceDrawArray = new ArrayList<>();//multi series option
     public static Map<String, Map> advanceDraw = new HashMap<>();//multi series option
     @FXML
     private Button button;
@@ -60,7 +60,7 @@ public class AdvanceController {
     @FXML
     private void selectDrawvianumber(KeyEvent event) {
         try {
-            advanceDraw = new HashMap<>();
+            //advanceDraw = new HashMap<>();
             for (int i = 0; i < adCheck.size(); i++) {
                 CheckBox js = adCheck.get(i + "");
                 js.setSelected(false);
@@ -83,6 +83,7 @@ public class AdvanceController {
                 i++;
 
             }
+            //System.out.println("Selected Advance Draw "+advanceDraw);
 
         } catch (JsonSyntaxException | NumberFormatException ex) {
             // JOptionPane.showMessageDialog(null, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
@@ -118,7 +119,7 @@ public class AdvanceController {
                     }
 
                 } catch (Exception ex) {
-                   // System.out.println("Msg " + ex.getMessage());
+                    // System.out.println("Msg " + ex.getMessage());
                 }
                 adCheck.put(ks + "", checkbox);
                 checkbox.setOnAction(e -> adCheckBoxAction(checkbox, temp));
@@ -171,6 +172,7 @@ public class AdvanceController {
     }
 
     Map<String, Map> getAdvanceArray() {
+        //System.out.println("Selected Advance Draw " + advanceDraw);
         return advanceDraw;
     }
 }

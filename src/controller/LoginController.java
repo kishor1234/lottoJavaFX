@@ -84,6 +84,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void login(ActionEvent event) {
+        msg.setText("Authenticating... Please Wait!");
         JsonObject person = new JsonObject();
         person.addProperty("userid", userid.getText());
         person.addProperty("password", password.getText());
