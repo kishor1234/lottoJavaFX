@@ -286,7 +286,7 @@
                                                 <Insets bottom="2.0" />
                                              </VBox.margin>
                                              <children>
-                                                <Text fx:id="uid" layoutX="16.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name 20200431">
+                                                <Text fx:id="uid" layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name 20200431">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
@@ -570,10 +570,13 @@
                                  <children>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="110.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
+                                          <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="85.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="Page Up | Down" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                              <font>
@@ -594,6 +597,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -602,6 +608,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -614,6 +623,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -622,6 +634,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -634,6 +649,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -642,6 +660,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -654,6 +675,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c3" style="-fx-background-color: #5ba36a;" text="02*03=0540" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -662,6 +686,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -674,6 +701,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c4" style="-fx-background-color: #d98d81;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -682,6 +712,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -694,6 +727,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c5" style="-fx-background-color: #b9b1e6;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -702,6 +738,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -714,6 +753,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c6" style="-fx-background-color: #ea9e7b;" text="02*10=1800" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -722,6 +764,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -734,6 +779,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c7" style="-fx-background-color: #a4cc5a;" text="02*20=3600" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -742,6 +790,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -754,6 +805,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c8" style="-fx-background-color: #c9bdaf;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -762,6 +816,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>
@@ -774,6 +831,9 @@
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </Button>
                                           <CheckBox fx:id="c9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c9" style="-fx-background-color: #17bcbd;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -782,6 +842,9 @@
                                              <padding>
                                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                              </padding>
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
                                           </CheckBox>
                                        </children>
                                        <VBox.margin>

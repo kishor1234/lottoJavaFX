@@ -2541,8 +2541,8 @@ public class DashboardController {
 
                                     String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
                                     //System.out.println("Data \n" + Data);
-                                    invoiceJSON iJ = new invoiceJSON();
-                                    msg = iJ.invoiceJSONPrint(Data, printer.getText());
+                                    //invoiceJSON iJ = new invoiceJSON();
+                                    msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                     lastTransaction();
                                 }
                             } else {
@@ -2565,14 +2565,15 @@ public class DashboardController {
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
                                 //System.out.println("Data \n" + Data);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
-                                invoiceJSON iJ = new invoiceJSON();
-                                msg = iJ.invoiceJSONPrint(Data, printer.getText());
+                                msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                 lastTransaction();
 
                             }
+                            if (msg.equals("Success")) {
 
-                            JOptionPane.showMessageDialog(null, msg);
-
+                            } else {
+                                JOptionPane.showMessageDialog(null, msg);
+                            }
                         }
 
                         resetAll();
