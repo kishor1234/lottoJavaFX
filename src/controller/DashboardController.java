@@ -2479,7 +2479,7 @@ public class DashboardController {
                                     //System.out.println(jsonEmp);
 
                                     String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                    System.out.println("Data \n" + Data);
+                                    //System.out.println("Data \n" + Data);
                                     invoiceJSON iJ = new invoiceJSON();
                                     msg = iJ.invoiceJSONPrint(Data, printer.getText());
                                     lastTransaction();
@@ -2502,7 +2502,7 @@ public class DashboardController {
                                 String jsonEmp = gson.toJson(finalMap);
                                 //System.out.println(jsonEmp);
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                System.out.println("Data \n" + Data);
+                                //System.out.println("Data \n" + Data);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
                                 invoiceJSON iJ = new invoiceJSON();
                                 msg = iJ.invoiceJSONPrint(Data, printer.getText());
@@ -3120,6 +3120,7 @@ public class DashboardController {
                         String msg = claimJSON.claimJSONPrint(data, printer.getText());
                         JOptionPane.showMessageDialog(null, msg);
                         claimReader.setText("");
+                        runnableBalance();
                     } catch (Exception ex) {
                         //System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
                     }
@@ -3184,7 +3185,7 @@ public class DashboardController {
             int count = Integer.parseInt(custome.getText());
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
-                    System.out.println("MultiSeries Array" + multiSeries);
+                    //System.out.println("MultiSeries Array" + multiSeries);
                     for (int i = 0; i < multiSeries.size(); i++) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100

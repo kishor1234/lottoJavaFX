@@ -53,7 +53,7 @@ public class ResultController {
         person.addProperty("series", series.getText());
         person.addProperty("gdate", gdate.getValue().toString());
         String jsonString = person.toString();
-        //System.out.println(jsonString);
+        ////System.out.println(jsonString);
 
         try {
             String data = httpAPI._jsonRequest("?r=result", jsonString);

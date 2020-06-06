@@ -11,27 +11,22 @@ import Sys.invoice.invoiceJSON;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -110,7 +105,7 @@ public class SingleTicketController {
 
             ticket_info.setItems(data_ticket);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
         }
     }
 
@@ -130,7 +125,7 @@ public class SingleTicketController {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String jsonEmp = gson.toJson(data);
                 String Data = httpAPI._jsonRequest("?r=reprintDesktopPrint", jsonEmp);
-                System.out.println("Data \n" + Data);
+                //System.out.println("Data \n" + Data);
                 // invoiceJSON.invoiceJSONPrint(Data,printer);
                 String msg = invoiceJSON.invoiceJSONPrint(Data, printer);
                 JOptionPane.showMessageDialog(null, msg);

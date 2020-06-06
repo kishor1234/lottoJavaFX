@@ -22,8 +22,8 @@ import java.util.Map;
  */
 public class httpAPI {
 
-    //public static String api_url = "http://api.omlotto.com/";
-    public static String api_url = "http://api.newloto.lcl/";
+    public static String api_url = "http://api.omlotto.com/";
+    //public static String api_url = "http://api.newloto.lcl/";
 
     public static void main(String[] args) {
         Map params = new LinkedHashMap<>();

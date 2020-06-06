@@ -98,7 +98,7 @@ public class AdvanceController {
     public void loadAdvance() {
         try {
 
-            System.out.println("Advance Draw JSON " + fileData);
+            //System.out.println("Advance Draw JSON " + fileData);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             AdvanceData series = gson.fromJson(fileData, AdvanceData.class);
             ArrayList<Map> test = series.getProperties();
@@ -140,7 +140,7 @@ public class AdvanceController {
             drawpan.getChildren().add(hbC);
             max.setText(ks + "");
         } catch (JsonSyntaxException | NumberFormatException ex) {
-            System.out.println("Advance Error " + ex.getMessage());
+            //System.out.println("Advance Error " + ex.getMessage());
         }
     }
 

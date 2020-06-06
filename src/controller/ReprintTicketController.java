@@ -7,14 +7,10 @@ package controller;
 
 import Sys.Ticket;
 import Sys.api.httpAPI;
-import Sys.invoice.invoiceJSON;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +31,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javax.swing.JOptionPane;
 import org.json.simple.parser.JSONParser;
 
 /**
@@ -95,7 +90,7 @@ public class ReprintTicketController {
 
     private void actionCols() {
         ticket.setCellFactory(TextFieldTableCell.forTableColumn());
-        System.out.println(ticket.getText());
+        //System.out.println(ticket.getText());
     }
 
     private void loadData() {

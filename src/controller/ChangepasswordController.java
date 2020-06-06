@@ -8,13 +8,10 @@ package controller;
 import Sys.api.httpAPI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -63,7 +60,7 @@ public class ChangepasswordController {
             old_password.setText("");
             new_password.setText("");
         } catch (JSONException | NumberFormatException ex) {
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
         }
     }
 

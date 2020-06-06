@@ -61,7 +61,7 @@ public class SeriesController {
     void initLoadData(String multi, Map<String, String> oldMap) {
         cbMap = new HashMap<>();
         String fileData = httpAPI._jsonRequest("?r=loadSeries", "");
-        System.out.println(multi + " Series Load Data " + fileData);
+        //System.out.println(multi + " Series Load Data " + fileData);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         seriesData series = gson.fromJson(fileData, seriesData.class);
         ArrayList<Map> test = series.getProperties();
@@ -190,14 +190,14 @@ public class SeriesController {
     }
 
     private void setaMapMultiple(CheckBox checkbox, Map<String, String> temp) {
-        //System.out.println(checkbox.isSelected());
+        ////System.out.println(checkbox.isSelected());
         if (checkbox.isSelected()) {
             int sr = Integer.parseInt(temp.get("id")) - 1;
             aMap.put("" + sr, temp.get("series"));
         } else {
             int sr = Integer.parseInt(temp.get("id")) - 1;
             aMap.remove("" + sr);
-            System.out.println("Remove " + sr + "" + aMap);
+            //System.out.println("Remove " + sr + "" + aMap);
         }
     }
 

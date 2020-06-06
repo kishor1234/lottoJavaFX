@@ -11,7 +11,6 @@ import Sys.invoice.PrinterService;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.function.Consumer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -113,9 +112,9 @@ public class OpratorController {
             person.addProperty("tdate", tdate.getValue().toString());
             person.addProperty("userid", owner);
             String jsonString = person.toString();
-            System.out.println(jsonString);
+            //System.out.println(jsonString);
             data = httpAPI._jsonRequest("/?r=report", jsonString);
-            System.out.println(data);
+            //System.out.println(data);
             Object obj = new JSONParser().parse(data);
             JSONObject jo = (JSONObject) obj;
             netPT.setText(jo.get("totalNetPoint").toString());
@@ -131,7 +130,7 @@ public class OpratorController {
 
             data_info.setItems(dt_ticket);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
         }
     }
 

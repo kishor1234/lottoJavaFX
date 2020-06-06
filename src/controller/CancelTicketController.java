@@ -89,7 +89,7 @@ public class CancelTicketController {
 
     private void actionCols() {
         ticket.setCellFactory(TextFieldTableCell.forTableColumn());
-        System.out.println(ticket.getText());
+        ////System.out.println(ticket.getText());
     }
 
     private void loadData() {
@@ -133,7 +133,7 @@ public class CancelTicketController {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String jsonEmp = gson.toJson(data);
                 String Data = httpAPI._jsonRequest("?r=cancelTicket", jsonEmp);
-                System.out.println(Data);
+                //System.out.println(Data);
                 Object obj = new JSONParser().parse(Data);
                 JSONObject jo = (JSONObject) obj;
                 String msg = (String) jo.get("message");

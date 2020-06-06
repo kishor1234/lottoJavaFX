@@ -76,7 +76,7 @@ public class LoginController implements Initializable {
         try {
             lc.defaultPrinter.setText(printer);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -88,11 +88,11 @@ public class LoginController implements Initializable {
         //person.addProperty("printer", defaultPrinter.getText());
         person.addProperty("device", SystemInfo.getSystemName());
         String jsonString = person.toString();
-        System.out.println(jsonString);
+        ////System.out.println(jsonString);
 
         try {
             String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-            System.out.println(data);
+            ////System.out.println(data);
             JSONObject myResponse = new JSONObject(data);
             int status = Integer.parseInt(myResponse.getString("status"));
 
@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
             }
 
         } catch (JSONException | NumberFormatException ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -189,7 +189,7 @@ public class LoginController implements Initializable {
             btnLogin.getScene().getWindow().hide();
             //loadSeries(multiMap);
         } catch (Exception ex) {
-            //System.out.println("Switching Scan View  Error " + ex.getMessage());
+            ////System.out.println("Switching Scan View  Error " + ex.getMessage());
         }
     }
 
