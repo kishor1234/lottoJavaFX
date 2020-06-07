@@ -10,14 +10,19 @@ import Sys.api.httpAPI;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.print.Printer;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -61,6 +66,8 @@ public class LoginController implements Initializable {
     private double yOffset = 0;
     @FXML
     private Button btnLogin;
+
+    private Map<String, Button> pButton = new HashMap<>();
 
     /**
      * Initializes the controller class.
@@ -151,13 +158,15 @@ public class LoginController implements Initializable {
     }
 
     private void loadPrinter() {
-        PrintService[] loadPrinter = Sys.Printers.loadPrinter();
-        for (PrintService printerService : loadPrinter) {
-            defaultPrinter.setText(printerService.getName());
-            Button printerButton = new Button(printerService.getName());
+        ObservableSet<Printer> printers = Printer.getAllPrinters();
+
+        for (Printer printer : printers) {
+            defaultPrinter.setText(printer.getName());
+            Button printerButton = new Button(printer.getName());
+            pButton.put(printer.getName(), printerButton);
             printerButton.setMaxSize(100, 200);
             printerButton.setStyle("-fx-background-color: #42f58a;-fx-border-color:#FFFFFF; ");
-            printerButton.setOnAction(e -> setDefaultPrinter(printerService.getName()));
+            printerButton.setOnAction(e -> setDefaultPrinter(printer.getName()));
             printerBox.getChildren().add(printerButton);
 
         }
@@ -165,6 +174,20 @@ public class LoginController implements Initializable {
 
     private void setDefaultPrinter(String name) {
         defaultPrinter.setText(name);
+        Iterator<String> it = pButton.keySet().iterator();
+        while (it.hasNext()) {
+            String key = it.next();
+            if (key.equals(name)) {
+                Button printerButton = pButton.get(key);
+                printerButton.setMaxSize(100, 200);
+                printerButton.setStyle("-fx-background-color: #f0e851;-fx-border-color:#FFFFFF; ");
+            } else {
+                Button printerButton = pButton.get(key);
+                printerButton.setMaxSize(100, 200);
+                printerButton.setStyle("-fx-background-color: #42f58a;-fx-border-color:#FFFFFF; ");
+            }
+
+        }
     }
 
     private void switchScenView(String fxml, DashboardController dashboardController, JSONObject myResponse, ActionEvent event) {
@@ -198,7 +221,7 @@ public class LoginController implements Initializable {
 
     public void themStyle(Stage stage, Parent root) {
         stage.initStyle(StageStyle.TRANSPARENT);
-            //stage.initStyle(StageStyle.UNDERDECORATED);
+        //stage.initStyle(StageStyle.UNDERDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         //stage.setFullScreen(true);
         stage.setResizable(false);
@@ -218,23 +241,24 @@ public class LoginController implements Initializable {
 
     @FXML
     private void test(MouseEvent event) {
-        try {
-            defaultPrinter.setVisible(true);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
-            Parent root = loader.load();
-            SeriesController sc = loader.getController();
-           // sc.initLoadData("PDF");
-
-            //Show scene 2 in new window            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Second Window");
-            // stage.setOnHidden(evt -> defaultPrinter.setText(sc.getText()));
-            stage.show();
-
-        } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            defaultPrinter.setVisible(true);
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
+//            Parent root = loader.load();
+//            SeriesController sc = loader.getController();
+//           // sc.initLoadData("PDF");
+//
+//            //Show scene 2 in new window            
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.setTitle("Second Window");
+//            // stage.setOnHidden(evt -> defaultPrinter.setText(sc.getText()));
+//            stage.show();
+//
+//        } catch (Exception ex) {
+//            Logger.getLogger(LoginController.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
 }

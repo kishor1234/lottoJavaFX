@@ -62,15 +62,14 @@ public class SingleTicketController {
     private Button Accept;
     @FXML
     private Button cancel;
-    public String ticket ;
+    public String ticket;
     private String printer;
     private String owner;
+    private String amount;
 
     /**
      * Initializes the controller class.
      */
-    
-
     private void initColom() {
         srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
         drDate.setCellValueFactory(new PropertyValueFactory<>("drDate"));
@@ -89,19 +88,38 @@ public class SingleTicketController {
             LocalDateTime now = LocalDateTime.now();
             String cdata = dtf.format(now);
             JsonObject person = new JsonObject();
-            person.addProperty("game", ticket);
+            person.addProperty("utrno", ticket);
             person.addProperty("own", owner);
+            person.addProperty("action", "entry");
+
             String jsonString = person.toString();
             String data = httpAPI._jsonRequest("/?r=singleTicketPrint", jsonString);
-            Object obj = new JSONParser().parse(data);
-            JSONObject jo = (JSONObject) obj;
-            String status = (String) jo.get("status");
-            msg.setText((String) jo.get("msg"));
-            ArrayList<Map> aMap = (ArrayList<Map>) jo.get("point");
-            //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-            aMap.stream().forEach((aMap1) -> {
-                data_ticket.add(new SingleTicket(aMap1.get("srno").toString(), aMap1.get("drDate").toString(), aMap1.get("drTime").toString(), aMap1.get("name").toString(), aMap1.get("mrp").toString(), aMap1.get("digit").toString(), aMap1.get("qty").toString()));
-            });
+            //get unitrid 
+            Object obj2 = new JSONParser().parse(data);
+            Map<String, String> adbPrint = new HashMap<>();
+            ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+            for (int i = 0; i < aMap.size(); i++) {
+                Map<String, String> temP = aMap.get(i);
+                adbPrint = new HashMap<>();
+                adbPrint.put("trno", temP.get("trno"));
+                adbPrint.put("own", owner);
+                adbPrint.put("action", "subentry");
+                adbPrint.put("amount", amount);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String jsonPrint = gson.toJson(adbPrint);
+                System.out.println(jsonPrint);
+                String Data = httpAPI._jsonRequest("?r=singleTicketPrint", jsonPrint);
+                Object obj = new JSONParser().parse(Data);
+                JSONObject jo = (JSONObject) obj;
+                String status = (String) jo.get("status");
+                msg.setText((String) jo.get("msg"));
+                ArrayList<Map> aMap2 = (ArrayList<Map>) jo.get("point");
+                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+                aMap2.stream().forEach((aMap1) -> {
+                    data_ticket.add(new SingleTicket(aMap1.get("srno").toString(), aMap1.get("drDate").toString(), aMap1.get("drTime").toString(), aMap1.get("name").toString(), aMap1.get("mrp").toString(), aMap1.get("digit").toString(), aMap1.get("qty").toString()));
+                });
+            }
+            //
 
             ticket_info.setItems(data_ticket);
         } catch (Exception ex) {
@@ -119,16 +137,40 @@ public class SingleTicketController {
         try {
             int input = JOptionPane.showConfirmDialog(null, "Do you really want to Reprint ticket? it cause dublicat ticket");
             if (input == 0) {
-                Map<String, String> data = new HashMap<>();
-                data.put("game", ticket);
-                data.put("own", owner);
+
+                Map<String, String> adbPrint = new HashMap<>();
+                adbPrint.put("utrno", ticket);
+                adbPrint.put("own", owner);
+                adbPrint.put("action", "entry");
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                String jsonEmp = gson.toJson(data);
-                String Data = httpAPI._jsonRequest("?r=reprintDesktopPrint", jsonEmp);
-                //System.out.println("Data \n" + Data);
-                // invoiceJSON.invoiceJSONPrint(Data,printer);
-                String msg = invoiceJSON.invoiceJSONPrint(Data, printer);
-                JOptionPane.showMessageDialog(null, msg);
+                String jsonPrint = gson.toJson(adbPrint);
+                System.out.println(jsonPrint);
+                String Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                Object obj2 = new JSONParser().parse(Data);
+                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                for (int i = 0; i < aMap.size(); i++) {
+                    Map<String, String> temP = aMap.get(i);
+                    adbPrint = new HashMap<>();
+                    adbPrint.put("game", temP.get("game"));
+                    adbPrint.put("own", owner);
+                    adbPrint.put("action", "subentry");
+                    //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    jsonPrint = gson.toJson(adbPrint);
+                    System.out.println(jsonPrint);
+                    Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                    String msgs = invoiceJSON.invoiceJSONPrint(Data, printer);
+
+                }
+//                Map<String, String> data = new HashMap<>();
+//                data.put("trno", ticket);
+//                data.put("own", owner);
+//                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//                String jsonEmp = gson.toJson(data);
+//                String Data = httpAPI._jsonRequest("?r=reprintDesktopPrint", jsonEmp);
+//                //System.out.println("Data \n" + Data);
+//                // invoiceJSON.invoiceJSONPrint(Data,printer);
+//                String msg = invoiceJSON.invoiceJSONPrint(Data, printer);
+//                JOptionPane.showMessageDialog(null, msg);
             } else {
                 JOptionPane.showMessageDialog(null, "Ticket Repring Process cancel!");
             }
@@ -142,10 +184,11 @@ public class SingleTicketController {
         cancel.getScene().getWindow().hide();
     }
 
-    void initLoadData(String owner,String ticket, String printer) {
-        this.ticket=ticket;
-        this.printer=printer;
-        this.owner=owner;
+    void initLoadData(String owner, String ticket, String printer, String amount) {
+        this.ticket = ticket;
+        this.printer = printer;
+        this.owner = owner;
+        this.amount = amount;
         initColom();
         loadData();
     }

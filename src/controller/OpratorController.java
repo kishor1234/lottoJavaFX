@@ -64,7 +64,7 @@ public class OpratorController {
     private TableColumn<Report, String> finalPoint;
     @FXML
     private TableColumn<Report, String> winPoint;
-   
+
     @FXML
     private TableColumn<Report, String> date;
     @FXML
@@ -80,7 +80,6 @@ public class OpratorController {
     private String data;
     @FXML
     private TableColumn<Report, String> netPayable;
-   
 
     /**
      * Initializes the controller class.
@@ -112,9 +111,9 @@ public class OpratorController {
             person.addProperty("tdate", tdate.getValue().toString());
             person.addProperty("userid", owner);
             String jsonString = person.toString();
-            //System.out.println(jsonString);
+            System.out.println(jsonString);
             data = httpAPI._jsonRequest("/?r=report", jsonString);
-            //System.out.println(data);
+            System.out.println(data);
             Object obj = new JSONParser().parse(data);
             JSONObject jo = (JSONObject) obj;
             netPT.setText(jo.get("totalNetPoint").toString());
@@ -122,15 +121,16 @@ public class OpratorController {
             wpt.setText(jo.get("wintPoint").toString());
             npt.setText(jo.get("netPayble").toString());
 
-            ArrayList<Map> aMap = (ArrayList<Map>) jo.get("data");
-            //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-            aMap.stream().forEach((Map aMap1) -> {
-                dt_ticket.add(new Report(aMap1.get("id").toString(), aMap1.get("userid").toString(), aMap1.get("game").toString(), aMap1.get("ticket").toString(), aMap1.get("drawid").toString(), aMap1.get("netPoint").toString(), aMap1.get("discountPer").toString(), aMap1.get("discountPoint").toString(), aMap1.get("finalPoint").toString(), aMap1.get("winAmount").toString(), aMap1.get("netPayble").toString(), aMap1.get("date").toString()));
-            });
+            ArrayList<Map> dataArray = (ArrayList<Map>) jo.get("data");
+            for (Map dataArray1 : dataArray) {
+                Map<String, String> aMap1 = dataArray1;
+                System.out.println("Data "+aMap1);
+                dt_ticket.add(new Report(aMap1.get("id"), aMap1.get("userid"), aMap1.get("game"), aMap1.get("ticket"), aMap1.get("drawid"), aMap1.get("netPoint"), aMap1.get("discountPer"), aMap1.get("discountPoint"), aMap1.get("finalPoint"), aMap1.get("winAmount"), aMap1.get("netPayble"), aMap1.get("date")));
+            }
 
             data_info.setItems(dt_ticket);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
     }
 

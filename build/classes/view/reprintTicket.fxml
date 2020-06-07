@@ -32,11 +32,10 @@
             </HBox>
             <TableView fx:id="ticket_info" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/reprintticket.css" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn fx:id="srno" prefWidth="60.0" text="SR.NO" />
-                <TableColumn fx:id="ticket" prefWidth="111.0" text="TICKET" />
-                  <TableColumn fx:id="amount" text="AMOUNT" />
-                  <TableColumn fx:id="drawid" prefWidth="77.0" text="DRAW ID" />
-                  <TableColumn fx:id="drawtime" prefWidth="100.0" text="DRAW TIME" />
+                <TableColumn fx:id="srno" prefWidth="60.0" text="Sr.No" />
+                <TableColumn fx:id="utrno" prefWidth="111.0" text="Tr. No." />
+                  <TableColumn fx:id="amount" text="Amount" />
+                  <TableColumn fx:id="userid" prefWidth="77.0" text="User" />
                   <TableColumn fx:id="date" prefWidth="72.0" text="DATE" />
                   <TableColumn fx:id="action" prefWidth="89.0" text="ACTION" />
               </columns>

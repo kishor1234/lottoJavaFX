@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: red;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CancelpoupController">
+    <stylesheets>
+        <URL value="@/css/cancelpoup.css" />
+    </stylesheets>
+   <children>
+      <BorderPane layoutX="158.0" layoutY="20.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancel Ticket" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+         </center>
+      </BorderPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="67.0" prefWidth="756.0" VBox.vgrow="ALWAYS">
+                     <center>
+                        <Text fx:id="last" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="237.0" prefWidth="756.0">
+                     <center>
+                        <Text fx:id="info" strokeType="OUTSIDE" strokeWidth="0.0" text="I hereby req. uset for cancellation of the same and indernmety for any misuse of the side cancelled Cash Invoice" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </BorderPane.margin>
+                        </Text>
+                     </center>
+                  </BorderPane>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="25.0" prefWidth="259.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="action" mnemonicParsing="false" onAction="#AcceptAction" prefHeight="25.0" prefWidth="87.0" text="Accept" HBox.hgrow="ALWAYS" />
+                  <Pane prefWidth="20.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="close" mnemonicParsing="false" onAction="#CloseAction" prefHeight="25.0" prefWidth="92.0" text="Close" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Pane prefHeight="25.0" prefWidth="156.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

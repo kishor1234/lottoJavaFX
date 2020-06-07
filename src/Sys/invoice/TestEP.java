@@ -21,12 +21,12 @@ public class TestEP {
     public static void main(String args[]) {
         PrinterOutputStream printerOutputStream = null;
         try {
-            PrintService printService = PrinterOutputStream.getPrintServiceByName("PDF");
+            PrintService printService = PrinterOutputStream.getPrintServiceByName("Boomaga");
             printerOutputStream = new PrinterOutputStream(printService);
             EscPos escpos = new EscPos(printerOutputStream);
             escpos.writeLF("Hello Wold");
             escpos.feed(5);
-            escpos.cut(EscPos.CutMode.FULL);
+            //escpos.cut(EscPos.CutMode.FULL);
             escpos.close();
         } catch (IOException ex) {
             Logger.getLogger(TestEP.class.getName()).log(Level.SEVERE, null, ex);

@@ -43,26 +43,28 @@ public class ReprintTicketController {
 
     @FXML
     private TableColumn<Ticket, String> srno;
-    @FXML
-    private TableColumn<Ticket, String> ticket;
+
     @FXML
     private TableColumn<Ticket, String> amount;
-    @FXML
-    private TableColumn<Ticket, String> drawid;
-    @FXML
-    private TableColumn<Ticket, String> drawtime;
+
     @FXML
     private TableColumn<Ticket, String> date;
     @FXML
     private TableColumn<Ticket, Button> action;
     @FXML
     private TableView<Ticket> ticket_info;
+
     private String printer;
     private String owner;
+
     @FXML
     private Button close;
     private double xOffset = 0;
     private double yOffset = 0;
+    @FXML
+    private TableColumn<Ticket, String> utrno;
+    @FXML
+    private TableColumn<Ticket, String> userid;
 
     /**
      * Initializes the controller class.
@@ -80,17 +82,16 @@ public class ReprintTicketController {
 
     private void intiCols() {
         srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
-        ticket.setCellValueFactory(new PropertyValueFactory<>("ticket"));
+        utrno.setCellValueFactory(new PropertyValueFactory<>("utrno"));
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        drawid.setCellValueFactory(new PropertyValueFactory<>("drawid"));
-        drawtime.setCellValueFactory(new PropertyValueFactory<>("drawtime"));
+        userid.setCellValueFactory(new PropertyValueFactory<>("userid"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         action.setCellValueFactory(new PropertyValueFactory<>("action"));
         actionCols();
     }
 
     private void actionCols() {
-        ticket.setCellFactory(TextFieldTableCell.forTableColumn());
+        utrno.setCellFactory(TextFieldTableCell.forTableColumn());
         //System.out.println(ticket.getText());
     }
 
@@ -104,16 +105,27 @@ public class ReprintTicketController {
             JsonObject person = new JsonObject();
             person.addProperty("enterydate", cdata);
             //person.addProperty("game", ticket);
-            person.addProperty("own", owner);
+            person.addProperty("userid", owner);
             String jsonString = person.toString();
+            System.out.println(jsonString);
             String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
+            System.out.println(data);
             Object obj = new JSONParser().parse(data);
             ArrayList<Map> aMap = (ArrayList<Map>) obj;
             //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+
             aMap.stream().forEach((aMap1) -> {
-                Button btn = new Button("Reprint");
-                btn.setOnAction(e -> reprintTicket(aMap1.get("ticket").toString()));
-                data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
+                if ("0".equals((aMap1.get("active").toString()))) {
+                    Button btn = new Button("Already Cancel");
+
+                    data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
+
+                } else {
+                    Button btn = new Button("Reprint");
+                    btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString()));
+                    data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
+
+                }
             });
 
             ticket_info.setItems(data_ticket);
@@ -122,7 +134,7 @@ public class ReprintTicketController {
         }
     }
 
-    private void reprintTicket(String ticket) {
+    private void reprintTicket(String ticket, String amount) {//ticket=utrno
         Thread openThread = new Thread(() -> {
             Runnable updater = () -> {
 
@@ -131,7 +143,7 @@ public class ReprintTicketController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/singleTicket.fxml"));
                     Parent root = loader.load();
                     SingleTicketController Scl = loader.getController();
-                    Scl.initLoadData(owner, ticket, printer);
+                    Scl.initLoadData(owner, ticket, printer, amount);
                     Stage stage = new Stage();
                     stage.setTitle("Reprint Ticket");
                     Screen screen = Screen.getPrimary();

@@ -13,18 +13,16 @@ import javafx.scene.control.Button;
  */
 public class Ticket {
 
-    String srno, ticket, amount, drawid, drawtime, date;
+    String srno, utrno, amount, userid, date;
     Button action;
-    
-    public Ticket(String srno,String ticket,String amount,String drawid,String drawtime,String date,Button action)
-    {
-        this.srno=srno;
-        this.ticket=ticket;
-        this.amount=amount;
-        this.drawid=drawid;
-        this.drawtime=drawtime;
-        this.date=date;
-        this.action=action;
+
+    public Ticket(String srno, String utrno, String amount, String userid, String date, Button action) {
+        this.srno = srno;
+        this.utrno = utrno;
+        this.amount = amount;
+        this.userid = userid;
+        this.date = date;
+        this.action = action;
     }
 
     public String getSrno() {
@@ -35,12 +33,12 @@ public class Ticket {
         this.srno = srno;
     }
 
-    public String getTicket() {
-        return ticket;
+    public String getUtrno() {
+        return utrno;
     }
 
-    public void setTicket(String ticket) {
-        this.ticket = ticket;
+    public void setUtrno(String utrno) {
+        this.utrno = utrno;
     }
 
     public String getAmount() {
@@ -51,20 +49,12 @@ public class Ticket {
         this.amount = amount;
     }
 
-    public String getDrawid() {
-        return drawid;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setDrawid(String drawid) {
-        this.drawid = drawid;
-    }
-
-    public String getDrawtime() {
-        return drawtime;
-    }
-
-    public void setDrawtime(String drawtime) {
-        this.drawtime = drawtime;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getDate() {
@@ -82,7 +72,5 @@ public class Ticket {
     public void setAction(Button action) {
         this.action = action;
     }
-    
-    
 
 }

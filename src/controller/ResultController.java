@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Sys.TimeFormats;
 import Sys.api.httpAPI;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
@@ -67,14 +68,14 @@ public class ResultController {
                 VBox.setMargin(mainVBox, new Insets(5, 2, 2, 2));
                 HBox hBox1 = new HBox();
                 HBox hBox2 = new HBox();
-                Label drID = new Label(sData.get("gameid"));
+                Label drID = new Label("Draw");
                 drID.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
                 hBox1.setAlignment(Pos.BASELINE_LEFT);
                 drID.setMaxWidth(Double.POSITIVE_INFINITY);
                 drID.setMaxHeight(Double.POSITIVE_INFINITY);
 
                 HBox.setHgrow(drID, Priority.ALWAYS);
-                Label drTime = new Label(sData.get("gameetime"));
+                Label drTime = new Label(TimeFormats.timeConvert(sData.get("gameetime")));
                 drTime.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
                 drTime.setMaxWidth(Double.POSITIVE_INFINITY);
                 drTime.setMaxHeight(Double.POSITIVE_INFINITY);

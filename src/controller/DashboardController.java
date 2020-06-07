@@ -66,6 +66,7 @@ import javafx.util.Duration;
 import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  * FXML Controller class
@@ -2518,6 +2519,13 @@ public class DashboardController {
                         } else {
 
                             if (advance.getText().equals("true")) {
+                                Map<String, Map> adbR = new HashMap<>();
+                                Map<String, String> dat = new HashMap<>();
+                                dat.put("adtotalqty", totalqty.getText());
+                                dat.put("adtotalamt", totalamt.getText());
+                                dat.put("advance", "true");
+                                dat.put("userid", userid.getText());
+                                adbR.put("main", dat);
                                 for (int i = 0; i < advanceDrawArray.size(); i++) {
                                     qt = String.valueOf(totq);
                                     am = String.valueOf(tota);
@@ -2525,26 +2533,61 @@ public class DashboardController {
                                     Map<String, Map> finalMap = new HashMap<>();
                                     Map<String, String> data = new HashMap<>();
                                     data.put("userid", userid.getText());
-
                                     data.put("drawid", advanceDraw.get("gametimeid"));
                                     data.put("totalqty", qt);
                                     data.put("totalamt", am);
+
                                     data.put("perPoint", "2");
                                     data.put("start", advanceDraw.get("gametime"));
                                     data.put("end", advanceDraw.get("gameendtime"));
                                     data.put("ip", "127.0.0.1");
                                     finalMap.put("basic", data);
                                     finalMap.put("data", series);
-                                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                    String jsonEmp = gson.toJson(finalMap);
-                                    //System.out.println(jsonEmp);
+                                    adbR.put(String.valueOf(i), finalMap);
 
-                                    String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                    //System.out.println("Data \n" + Data);
-                                    //invoiceJSON iJ = new invoiceJSON();
-                                    msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
-                                    lastTransaction();
                                 }
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                String jsonEmp = gson.toJson(adbR);
+                                //System.out.println(jsonEmp);
+
+                                String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
+                                System.out.println("Data \n" + Data);
+                                //get unitrid 
+                                Object obj = new JSONParser().parse(Data);
+                                System.out.println(obj);
+                                // typecasting obj to JSONObject 
+                                Map<String, String> joMap = (Map<String, String>) obj;
+                                //JSONObject jo = (JSONObject) obj;
+                                // getting firstName and lastName 
+                                String utrno = (String) joMap.get("print");
+                                Map<String, String> adbPrint = new HashMap<>();
+                                adbPrint.put("utrno", utrno);
+                                adbPrint.put("own", userid.getText());
+                                adbPrint.put("action", "entry");
+                                //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                String jsonPrint = gson.toJson(adbPrint);
+                                System.out.println(jsonPrint);
+                                Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                Object obj2 = new JSONParser().parse(Data);
+                                System.out.println(obj);
+                                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                                for (int i = 0; i < aMap.size(); i++) {
+                                    Map<String, String> temP = aMap.get(i);
+                                    adbPrint = new HashMap<>();
+                                    adbPrint.put("game", temP.get("game"));
+                                    adbPrint.put("own", userid.getText());
+                                    adbPrint.put("action", "subentry");
+                                    //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                    jsonPrint = gson.toJson(adbPrint);
+                                    System.out.println(jsonPrint);
+                                    Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                    msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+
+                                }
+                                //invoiceJSON iJ = new invoiceJSON();
+
+                                //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                lastTransaction();
                             } else {
                                 Map<String, Map> finalMap = new HashMap<>();
                                 Map<String, String> data = new HashMap<>();
@@ -2554,16 +2597,17 @@ public class DashboardController {
                                 data.put("totalqty", totalqty.getText());
                                 data.put("totalamt", totalamt.getText());
                                 data.put("perPoint", "2");
+                                data.put("advance", "false");
                                 data.put("start", start.getText());
                                 data.put("end", end.getText());
                                 data.put("ip", "127.0.0.1");
-                                finalMap.put("basic", data);
+                                finalMap.put("main", data);
                                 finalMap.put("data", series);
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonEmp = gson.toJson(finalMap);
-                                //System.out.println(jsonEmp);
+                                System.out.println(jsonEmp);
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                //System.out.println("Data \n" + Data);
+                                System.out.println("Data \n" + Data);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
                                 msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                 lastTransaction();
@@ -2579,7 +2623,7 @@ public class DashboardController {
                         resetAll();
                         buy.setDisable(false);
                     } catch (Exception ex) {
-                        //System.out.println(ex.getMessage());
+                        System.out.println(ex.getMessage());
                     }
                 }
 
@@ -3141,23 +3185,21 @@ public class DashboardController {
         Thread openThread = new Thread(() -> {
             Runnable updater = () -> {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cancelTicket.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/cancelpoup.fxml"));
                     Parent root = loader.load();
-                    CancelTicketController Scl = loader.getController();
+                    CancelpoupController Scl = loader.getController();
                     String drawid[] = id.getText().split("_");
                     Scl.initLoadData(userid.getText(), printer.getText(), drawid[1]);
                     Stage stage = new Stage();
                     stage.setTitle("Reprint Ticket");
                     Screen screen = Screen.getPrimary();
-                    Rectangle2D bounds = screen.getVisualBounds();
-                    stage.setX(bounds.getMinX());
-                    stage.setY(bounds.getMinY());
-                    stage.setWidth(bounds.getWidth());
-                    stage.setHeight(bounds.getHeight());
+//                  
                     stage.setScene(new Scene(root));
                     themStyle(stage, root);
                     stage.showAndWait();
+                    updateBalance();
 
+                    lastTransaction();
                 } catch (IOException ex) {
                     Logger.getLogger(DashboardController.class
                             .getName()).log(Level.SEVERE, null, ex);

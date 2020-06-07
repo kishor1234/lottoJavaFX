@@ -1550,21 +1550,13 @@
                                              <children>
                                                 <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="QTY" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="QTY" VBox.vgrow="ALWAYS">
                                                    <font>
-                                                      <Font size="15.0" />
+                                                      <Font name="System Bold" size="15.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
                                                 </TextField>
-                                                <TextField fx:id="Q1000_1900" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
-                                                   <VBox.margin>
-                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                                                   </VBox.margin>
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                </TextField>
-                                                <TextField fx:id="Q2000_2900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q1000_1900" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1572,7 +1564,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q3000_3900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1580,7 +1572,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q4000_4900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1588,7 +1580,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q5000_5900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1596,7 +1588,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q6000_6900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1604,7 +1596,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q7000_7900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1612,7 +1604,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q8000_8900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1620,7 +1612,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q9000_9900" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1628,7 +1620,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="Q10000_10900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1636,7 +1628,15 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="totalqty" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="Q10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                   <VBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="totalqty" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
@@ -1653,21 +1653,13 @@
                                              <children>
                                                 <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="AMT ₹ " style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="AMT ₹ " VBox.vgrow="ALWAYS">
                                                    <font>
-                                                      <Font size="15.0" />
+                                                      <Font name="System Bold" size="15.0" />
                                                    </font>
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
                                                 </TextField>
-                                                <TextField fx:id="A1000_1900" alignment="TOP_LEFT" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
-                                                   <VBox.margin>
-                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                                                   </VBox.margin>
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                </TextField>
-                                                <TextField fx:id="A2000_2900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A1000_1900" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1675,7 +1667,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A3000_3900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1683,7 +1675,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A4000_4900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1691,7 +1683,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A5000_5900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1699,7 +1691,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A6000_6900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1707,7 +1699,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A7000_7900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1715,7 +1707,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A8000_8900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1723,7 +1715,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A9000_9900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1731,7 +1723,7 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="A10000_10900" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <VBox.margin>
                                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                    </VBox.margin>
@@ -1739,7 +1731,15 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </TextField>
-                                                <TextField fx:id="totalamt" alignment="TOP_LEFT" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                <TextField fx:id="A10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                   <VBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="totalamt" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>

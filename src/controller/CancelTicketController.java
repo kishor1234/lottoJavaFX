@@ -110,7 +110,7 @@ public class CancelTicketController {
             aMap.stream().forEach((aMap1) -> {
                 Button btn = new Button("Cancel");
                 btn.setOnAction(e -> cancelTicket(aMap1.get("ticket").toString()));
-                data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
+                //data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
             });
 
             ticket_info.setItems(data_ticket);

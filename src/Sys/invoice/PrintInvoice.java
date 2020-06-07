@@ -50,12 +50,11 @@ public class PrintInvoice {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
             BarCode barcode = new BarCode();
-            escpos.writeLF(title, "Rajashree Lottery")
-                    .feed(3)
+            escpos.writeLF(title, "RajLaxmi Lottery")
+                    .feed(5)
                     .write(Data)
                     .feed(8);
-            escpos.write(barcode, Barcode)
-                    .cut(EscPos.CutMode.FULL);
+            escpos.write(barcode, Barcode).cut(EscPos.CutMode.FULL);
 
             escpos.close();
 
@@ -67,18 +66,18 @@ public class PrintInvoice {
 
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.out.println("Usage: java -jar xyz.jar (\"printer name\")");
-            System.out.println("Printer list to use:");
-            String[] printServicesNames = PrinterOutputStream.getListPrintServicesNames();
-            for (String printServiceName : printServicesNames) {
-                System.out.println(printServiceName);
-               
-            }
+//            System.out.println("Usage: java -jar xyz.jar (\"printer name\")");
+//            System.out.println("Printer list to use:");
+//            String[] printServicesNames = PrinterOutputStream.getListPrintServicesNames();
+//            for (String printServiceName : printServicesNames) {
+//                System.out.println(printServiceName);
+//               
+//            }
+            //PrintInvoice.Sample("PDF", "TESTING", "123456");
 
-            //System.exit(0);
         }
-        
 
+        //System.exit(0);
     }
 
 }
