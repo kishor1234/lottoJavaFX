@@ -67,7 +67,7 @@ public class PrintInvoice {
             String line = "10";
             Paragraph p = new Paragraph(new Phrase(lineSpacing, line, FontFactory.getFont(FontFactory.COURIER, fntSize)));
             Font f3 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
-            p = new Paragraph("Rajashreee Lottery");
+            p = new Paragraph("RajLaxmi Lottery");
             p.setFont(f3);
             document.add(p);
             f3 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
@@ -82,7 +82,7 @@ public class PrintInvoice {
             document.add(code128.createImageWithBarcode(writer.getDirectContent(), null, null));
             document.close();
 
-            System.out.println("Document Generated...!!!!!!");
+            //System.out.println("Document Generated...!!!!!!");
             DocFlavor flavor = DocFlavor.BYTE_ARRAY.PDF;
             PrintService[] services = PrintServiceLookup.lookupPrintServices(flavor, null);
             PrintService ps = null;
@@ -95,11 +95,11 @@ public class PrintInvoice {
             DocPrintJob job = ps.createPrintJob();
             job.addPrintJobListener(new PrintJobAdapter() {
                 public void printDataTransferCompleted(PrintJobEvent event) {
-                    System.out.println("data transfer complete");
+                    //System.out.println("data transfer complete");
                 }
 
                 public void printJobNoMoreEvents(PrintJobEvent event) {
-                    System.out.println("received no more events");
+                    //System.out.println("received no more events");
                 }
             });
             FileInputStream fis = new FileInputStream("Java4s_BarCode_128.pdf");
@@ -136,11 +136,7 @@ public class PrintInvoice {
 //                escpos.cut(EscPos.CutMode.FULL);
 //
 //                escpos.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(PrintInvoice.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DocumentException ex) {
-            Logger.getLogger(PrintInvoice.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PrintException ex) {
+        } catch (FileNotFoundException | DocumentException | PrintException ex) {
             Logger.getLogger(PrintInvoice.class.getName()).log(Level.SEVERE, null, ex);
         }
 

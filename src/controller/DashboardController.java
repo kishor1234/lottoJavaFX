@@ -2637,7 +2637,7 @@ public class DashboardController {
                                 String jsonEmp = gson.toJson(finalMap);
                                 //System.out.println(jsonEmp);
                                 final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                ////System.out.println("Data \n" + Data);
+                                //System.out.println("Data \n" + Data);
                                 resetAll();
                                 buy.setDisable(false);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
