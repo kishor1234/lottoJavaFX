@@ -14,8 +14,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +35,6 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javax.print.PrintService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,30 +90,40 @@ public class LoginController implements Initializable {
     @FXML
     private void login(ActionEvent event) {
         msg.setText("Authenticating... Please Wait!");
-        JsonObject person = new JsonObject();
-        person.addProperty("userid", userid.getText());
-        person.addProperty("password", password.getText());
-        //person.addProperty("printer", defaultPrinter.getText());
-        person.addProperty("device", SystemInfo.getSystemName());
-        String jsonString = person.toString();
-        ////System.out.println(jsonString);
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                 msg.setText("Authenticating... Please Wait!");
+                JsonObject person = new JsonObject();
+                person.addProperty("userid", userid.getText());
+                person.addProperty("password", password.getText());
+                //person.addProperty("printer", defaultPrinter.getText());
+                person.addProperty("device", SystemInfo.getSystemName());
+                String jsonString = person.toString();
+                ////System.out.println(jsonString);
 
-        try {
-            String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-            ////System.out.println(data);
-            JSONObject myResponse = new JSONObject(data);
-            int status = Integer.parseInt(myResponse.getString("status"));
+                try {
+                    String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
+                    ////System.out.println(data);
+                    JSONObject myResponse = new JSONObject(data);
+                    int status = Integer.parseInt(myResponse.getString("status"));
 
-            if (status == 1) {
-                msg.setText(myResponse.getString("message"));
-                switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
-            } else {
-                msg.setText(myResponse.getString("message"));
-            }
+                    if (status == 1) {
+                        msg.setText(myResponse.getString("message"));
+                        switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
+                    } else {
+                        msg.setText(myResponse.getString("message"));
+                    }
 
-        } catch (JSONException | NumberFormatException ex) {
-            ////System.out.println(ex.getMessage());
-        }
+                } catch (JSONException | NumberFormatException ex) {
+                    ////System.out.println(ex.getMessage());
+                }
+            };
+
+            Platform.runLater(updater);
+        });
+        
+        openThread.start();
+
     }
 
     @FXML
@@ -205,6 +213,7 @@ public class LoginController implements Initializable {
             stage.setWidth(bounds.getWidth());
             stage.setHeight(bounds.getHeight());
             stage.setScene(new Scene(root));
+
 //            stage.setMaximized(true);
 //            stage.setFullScreen(true);
 //            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);

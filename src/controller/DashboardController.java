@@ -44,6 +44,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -436,8 +437,8 @@ public class DashboardController {
     @FXML
     private TextField claimReader;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+    private final double xOffset = 0;
+    private final double yOffset = 0;
 
     //custome veriable
     public SeriesClass sc = new SeriesClass();
@@ -570,7 +571,7 @@ public class DashboardController {
             mapVarticalTextField();
             mapHorizontalTextField();
             //JSONObject myResponse = new JSONObject(data);
-            //System.out.println("User ID " + myResponse.getString("userid"));
+            ////System.out.println("User ID " + myResponse.getString("userid"));
             userid.setText(myResponse.getString("userid"));
             id.setText(myResponse.getString("id"));
             uid.setText(myResponse.getString("name") + " " + myResponse.getString("userid"));
@@ -582,7 +583,7 @@ public class DashboardController {
                 jf.setOnKeyPressed((e) -> {
                     jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                         if (event.getCode() == KeyCode.TAB) {
-                            //System.out.println("Tab pressed");
+                            ////System.out.println("Tab pressed");
                             event.consume();
                         }
                     });
@@ -604,7 +605,7 @@ public class DashboardController {
             //loadPrinter();
             lastTransaction();
         } catch (Exception ex) {
-            //System.out.println("Error on initParameter " + ex.getMessage());
+            ////System.out.println("Error on initParameter " + ex.getMessage());
         }
     }
 
@@ -655,18 +656,18 @@ public class DashboardController {
                     while (true) {
                         DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
                         Date dateobj = new Date();
-                        ////System.out.println(df.format(dateobj));
+                        //////System.out.println(df.format(dateobj));
                         clockLabel.setText(df.format(dateobj));
                         Thread.sleep(1000);
 
                     }
                 } catch (InterruptedException ex) {
-                    //System.out.println("ShowTimer error " + ex.getMessage());
+                    ////System.out.println("ShowTimer error " + ex.getMessage());
                 }
             }
         };
         t.start();
-        ////System.out.println();
+        //////System.out.println();
     }
 
     private void mapButton() {
@@ -699,7 +700,7 @@ public class DashboardController {
             horizontalTextField.put("B_8", B_8);
             horizontalTextField.put("B_9", B_9);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -727,7 +728,7 @@ public class DashboardController {
             totalField.put("A10000_10900", A10000_10900);
 
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -744,7 +745,7 @@ public class DashboardController {
             varticalTextField.put("I_80", I_80);
             varticalTextField.put("I_90", I_90);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -915,7 +916,7 @@ public class DashboardController {
             threadMessageBar.start();
 
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -937,9 +938,9 @@ public class DashboardController {
             String s[] = subSeries.split("-");
             tempSubSeries.remove(s[0]);
             mainSeries.remove(s[0]);
-            ////System.out.println(mainSeries);
+            //////System.out.println(mainSeries);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -951,9 +952,9 @@ public class DashboardController {
             String s[] = subSeries.split("-");
             tempSubSeries.put(s[0], aMap);
             mainSeries.put(s[0], tempSubSeries);
-            ////System.out.println(mainSeries);
+            //////System.out.println(mainSeries);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
 
     }
@@ -968,7 +969,7 @@ public class DashboardController {
             for (int s = Integer.parseInt(ss[0]); s <= Integer.parseInt(ss[1]); s = s + 100) {
                 Map<String, Map> mainSeries = series.get(Main);//Main
                 String sp = s + "";
-                ////System.out.println(Dashboard.series);
+                //////System.out.println(Dashboard.series);
                 if (Integer.parseInt(custome.getText()) > 0) {
                     for (Map.Entry<String, Map> mainSer : mainSeries.entrySet()) {
                         //keyor sp ==3100 example
@@ -996,7 +997,7 @@ public class DashboardController {
                                 aMap.add(number);
                             }
                         }
-//                        System.out.println("Key = " + entry.getKey()
+//                        //System.out.println("Key = " + entry.getKey()
 //                                + ", Value = " + entry.getValue());
                     }
 
@@ -1037,7 +1038,7 @@ public class DashboardController {
 //            aMap.add(number);
 
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
 
     }
@@ -1053,7 +1054,7 @@ public class DashboardController {
                     for (int s = Integer.parseInt(ss[0]); s <= Integer.parseInt(ss[1]); s = s + 100) {
                         Map<String, Map> mainSeries = series.get(serie);//Main
                         String sp = s + "";
-                        //System.out.println("MainSeries" + mainSeries);
+                        ////System.out.println("MainSeries" + mainSeries);
                         if (mainSeries.get(sp) == null) {
                             setSubSeries(sp, serie);
                         }
@@ -1085,9 +1086,9 @@ public class DashboardController {
 
                     }
                 } else {
-                    //System.out.println(serie);
+                    ////System.out.println(serie);
                     String ss[] = Sub.split("-");//subseries
-                    // //System.out.println(ss);
+                    // ////System.out.println(ss);
                     String ser[] = serie.split("-");//selected main
                     Map<String, Map> mainSeries = series.get(serie);//Main
                     int sp = Integer.parseInt(ss[0]) + Integer.parseInt(ser[0]) - 1000;
@@ -1118,7 +1119,7 @@ public class DashboardController {
                                     aMap.add(number);
                                 }
                             }
-//                        System.out.println("Key = " + entry.getKey()
+//                        //System.out.println("Key = " + entry.getKey()
 //                                + ", Value = " + entry.getValue());
                         }
 
@@ -1155,7 +1156,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
 
     }
@@ -1187,39 +1188,39 @@ public class DashboardController {
                 @Override
                 public void run() {
 //                    while (true) {
-//                        //System.out.println("Modified ArrayList : " + Dashboard.multiSeries);
+//                        ////System.out.println("Modified ArrayList : " + Dashboard.multiSeries);
 //                        try {
 //                            Thread.sleep(1000);
 //                        } catch (InterruptedException ex) {
-//                            //System.out.println(ex.getMessage());
+//                            ////System.out.println(ex.getMessage());
 //                        }
 //                    }
 
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     while (true) {
-                        //System.out.println("Series Map " + series);
+                        ////System.out.println("Series Map " + series);
                         //String jsonEmp = gson.toJson(multiSeries);
-                        //System.out.println("MultiSeries Json " + jsonEmp);
-                        //System.out.println("Advance Array " + advanceDrawArray);
+                        ////System.out.println("MultiSeries Json " + jsonEmp);
+                        ////System.out.println("Advance Array " + advanceDrawArray);
                         //calculateTotal();
 
                         try {
                             Thread.sleep(5000);
                             resetFinalTotal();
                         } catch (InterruptedException ex) {
-                            //System.out.println(ex.getMessage());
+                            ////System.out.println(ex.getMessage());
                         }
                     }
                 }
             };
             // t.start();
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
     private void BulkNumberWrite(int i, String p, javafx.scene.input.KeyEvent e) {
-        // //System.out.println(e.getKeyCode());
+        // ////System.out.println(e.getKeyCode());
         switch (e.getCode().toString()) {
 //            case 38:
 //
@@ -1285,7 +1286,7 @@ public class DashboardController {
                         //JOptionPane.showMessageDialog(this, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (Exception ex) {
-                    //System.out.println("B Number Error " + ex.getMessage());
+                    ////System.out.println("B Number Error " + ex.getMessage());
                 }
                 break;
         }
@@ -1293,7 +1294,7 @@ public class DashboardController {
     }
 
     private void BulkNumberWriteVartical(int i, String p, javafx.scene.input.KeyEvent e) {
-        System.out.println(e.getCode().toString());
+        //System.out.println(e.getCode().toString());
         switch (e.getCode().toString()) {
             case "UP":
                 int tempN = i - 10;
@@ -1358,7 +1359,7 @@ public class DashboardController {
                         JOptionPane.showMessageDialog(null, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (Exception ex) {
-                    System.out.println("NUmber only " + ex.getMessage());
+                    //System.out.println("NUmber only " + ex.getMessage());
                 }
                 break;
         }
@@ -1369,7 +1370,7 @@ public class DashboardController {
         try {
             int i = 0;
             while (i < 100) {
-                // //System.out.println("E_" + i);
+                // ////System.out.println("E_" + i);
                 TextField jf = jField.get("E_" + i);
                 jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
                 //jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;");
@@ -1378,7 +1379,7 @@ public class DashboardController {
                 i++;
             }
         } catch (Exception e) {
-            //System.out.println(e.getMessage());
+            ////System.out.println(e.getMessage());
         }
     }
 
@@ -1404,7 +1405,7 @@ public class DashboardController {
             jf.setPromptText("" + start);
 
             //jf.setForeground(Color.BLACK);
-            // //System.out.println("E_"+start);
+            // ////System.out.println("E_"+start);
             i++;
         }
     }
@@ -1475,7 +1476,7 @@ public class DashboardController {
         try {
 
             String data = httpAPI._jsonRequest("?r=updateGameRound", "");
-            //System.out.println(data);
+            ////System.out.println(data);
             JSONObject response = new JSONObject(data);
             buy.setDisable(false);
             id.setText("D_" + response.getString("id"));
@@ -1487,14 +1488,14 @@ public class DashboardController {
             interval = Integer.parseInt(response.getString("time"));
 
         } catch (JSONException ex) {
-            //System.out.println("Rest clock error " + ex.getMessage());
+            ////System.out.println("Rest clock error " + ex.getMessage());
         }
     }
 
     public void inisetClockCounter() {
         try {
             String data = httpAPI._jsonRequest("?r=updateGameRound", "");
-            //System.out.println("Draw Data " + data);
+            ////System.out.println("Draw Data " + data);
             JSONObject myResponse = new JSONObject(data);
             buy.setDisable(false);
             id.setText("D_" + myResponse.getString("id"));
@@ -1504,7 +1505,7 @@ public class DashboardController {
             dTime.setText(TimeFormats.timeConvert(strTime));
             closckDraw(myResponse.getString("time"));
         } catch (JSONException ex) {
-            //System.out.println("inisetClockCounter " + ex.getMessage());
+            ////System.out.println("inisetClockCounter " + ex.getMessage());
         }
     }
 
@@ -1514,12 +1515,12 @@ public class DashboardController {
         int period = 1000;
         timer = new Timer();
         interval = Integer.parseInt(secs);
-        ////System.out.println(secs);
+        //////System.out.println(secs);
         timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
-                ////System.out.println(formatSeconds(setInterval()));
+                //////System.out.println(formatSeconds(setInterval()));
                 drawClock.setText(formatSeconds(setInterval()));
 
             }
@@ -1540,13 +1541,13 @@ public class DashboardController {
                         @Override
                         public void run() {
                             try {
-                                //System.out.println("Clock Reset Thred sleep 2000");
+                                ////System.out.println("Clock Reset Thred sleep 2000");
                                 Thread.sleep(2000);
-                                //System.out.println("Start Updating Result Board");
+                                ////System.out.println("Start Updating Result Board");
                                 resultBoard("ALL");
-                                //System.out.println("END Updating Result Board");
+                                ////System.out.println("END Updating Result Board");
                             } catch (InterruptedException ex) {
-                                //System.out.println("Runnable Teror " + ex.getMessage());
+                                ////System.out.println("Runnable Teror " + ex.getMessage());
                             }
                         }
                     };
@@ -1597,9 +1598,9 @@ public class DashboardController {
                     sr = entry.getKey();
                     Map<String, ArrayList> tp = new HashMap<>();
                     tp = (Map<String, ArrayList>) entrys.getValue();
-                    ////System.out.println(tp);
+                    //////System.out.println(tp);
                     for (Map.Entry<String, ArrayList> num : tp.entrySet()) {
-                        ////System.out.println(num.getValue());
+                        //////System.out.println(num.getValue());
                         ArrayList<Map> number = num.getValue();
                         for (int i = 0; i < number.size(); i++) {
                             Map<String, String> numF = (number.get(i));
@@ -1619,13 +1620,13 @@ public class DashboardController {
                 final_Map.put(sr, qty);
                 qty = 0;
 
-                ////System.out.println("Key = " + entry.getKey()
+                //////System.out.println("Key = " + entry.getKey()
                 //    + ", Value = " + entry.getValue());
             }
-            ////System.out.println(Dashboard.final_Map);
-            ////System.out.println("total Qty: " + qty);
+            //////System.out.println(Dashboard.final_Map);
+            //////System.out.println("total Qty: " + qty);
             dispalyTotal();
-            ////System.out.println(Dashboard.multiSeries);
+            //////System.out.println(Dashboard.multiSeries);
 
         } catch (Exception ex) {
 
@@ -1704,14 +1705,14 @@ public class DashboardController {
                     String index = "" + p;
                     int tQty = 0;
                     int tPoint = 0;
-
+                    //System.out.println(index + "");
                     switch (NSystems.getText()) {
                         case "cross":
                             ArrayList<String> numb = cross(p);
                             String K;
                             for (String numb1 : numb) {
                                 K = numb1;
-                                // //System.out.println("Cross K " + K);
+                                // ////System.out.println("Cross K " + K);
                                 TextField temp = jField.get("E_" + K);
                                 if (Integer.parseInt(K) != p) {
                                     temp.setText(jf.getText());
@@ -1734,27 +1735,21 @@ public class DashboardController {
                                 TextField temp = jField.get("E_" + p);
                                 temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                                 jString.put("num", p + "");
-                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                String jsonEmp = gson.toJson(jString);
-                                ////System.out.println(jsonEmp);
-                                String data = httpAPI._jsonRequest("?r=fpNumber", jsonEmp);
-                                // //System.out.println(data);
-                                JSONObject myFixRep = new JSONObject(data);
 
-                                int so = 1;
-                                while (so <= myFixRep.length()) {
+                                int number[] = fpNumbers(p);
+                                for (int so : number) {
 
-                                    TextField temdp = jField.get("E_" + myFixRep.getString("" + so));
-                                    if (Integer.parseInt(myFixRep.getString("" + so)) != p) {
+                                    TextField temdp = jField.get("E_" + so);
+                                    if (so != p) {
                                         temdp.setText(jf.getText());
                                     }
                                     temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                                    setNumberMulti(myFixRep.getString("" + so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
+                                    setNumberMulti(String.valueOf(so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
 
                                     so++;
                                 }
-                            } catch (JSONException | NumberFormatException ex) {
-                                //System.out.println(ex.getMessage());
+                            } catch (NumberFormatException ex) {
+                                ////System.out.println(ex.getMessage());
                             }
                             break;
 
@@ -1798,26 +1793,22 @@ public class DashboardController {
                             TextField temp = jField.get("E_" + p);
                             temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                             jString.put("num", p + "");
-                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                            String jsonEmp = gson.toJson(jString);
-                            ////System.out.println(jsonEmp);
-                            String data = httpAPI._jsonRequest("?r=fpNumber", jsonEmp);
-                            ////System.out.println(data);
-                            JSONObject myFixResponNormal = new JSONObject(data);
-                            int so = 1;
-                            while (so <= myFixResponNormal.length()) {
 
-                                TextField temdp = jField.get("E_" + myFixResponNormal.getString("" + so));
-                                if (Integer.parseInt(myFixResponNormal.getString("" + so)) != p) {
+                            int number[] = fpNumbers(p);
+//                         
+                            for (int so : number) {
+
+                                TextField temdp = jField.get("E_" + so);
+                                if (so != p) {
                                     temdp.setText(jf.getText());
                                 }
                                 temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                                setNumber(myFixResponNormal.getString("" + so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText());
+                                setNumber(String.valueOf(so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText());
 
                                 so++;
                             }
-                        } catch (JSONException | NumberFormatException ex) {
-                            //System.out.println(ex.getMessage());
+                        } catch (NumberFormatException ex) {
+                            ////System.out.println(ex.getMessage());
                         }
                         break;
 
@@ -1840,16 +1831,16 @@ public class DashboardController {
         try {
             TextField temp;
             String MainSeries = seriesLable.getText();
-            // //System.out.println(Dashboard.series.get("1000-1900"));
+            // ////System.out.println(Dashboard.series.get("1000-1900"));
             Map<String, Map> subSeries = series.get(MainSeries);
-            ////System.out.println(subSeries.get("1000-1099"));
+            //////System.out.println(subSeries.get("1000-1099"));
             String s[] = B0.getText().split("-");
             Map<String, ArrayList> aMap = subSeries.get(s[0]);
             ArrayList<Map> aListMap = aMap.get(s[0]);
             for (Map aListMap1 : aListMap) {
                 Map<String, String> fi = aListMap1;
                 for (Map.Entry<String, String> entry : fi.entrySet()) {
-                    ////System.out.println(entry.getKey());
+                    //////System.out.println(entry.getKey());
                     temp = jField.get("E_" + entry.getKey());
                     temp.setText(entry.getValue());
                     temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
@@ -1857,7 +1848,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -1865,7 +1856,7 @@ public class DashboardController {
         try {
             for (int i = 1000; i <= 10990; i = i + 1000) {
                 int t = i + 900;
-                ////System.out.println("Q" + i + "_" + t);
+                //////System.out.println("Q" + i + "_" + t);
 //                TextField tm = totalField.get("Q" + i + "_" + t);
 //                tm.setText("");
 //                tm = totalField.get("A" + i + "_" + t);
@@ -1873,7 +1864,7 @@ public class DashboardController {
 
             }
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
 
     }
@@ -1901,47 +1892,71 @@ public class DashboardController {
         // String index = "" + p;
         ArrayList<String> num = new ArrayList<>();
         try {
+            //System.out.println("P " + p);
+
             int index = (((p / 10) + 1) * 10) - 1;
             int rightbottom = index - p; //bottom right difference
             int back = (p / 10) * 10;
             int leftbottom = p - back;//bottom left
-
+            //System.out.println("RightBottm " + rightbottom);
+            //System.out.println("leftbottom " + leftbottom);
+            int up = p / 10;
+            int down = 9 - up;
+            int ip = (p / 10) * 10;
+            int forword = (ip + 9) - p;
+            int backword = p - ip;
+            //System.out.println(forword);
+            //System.out.println(backword);
             num.add("" + p);
-            int K = p + 11;
+            int K = p;
             int s = 1;
-            while (K <= 99 && s <= rightbottom) {
-
-                num.add("" + K);
+            while (s <= forword) {
                 K = K + 11;
+                if (K <= 99) {
+                    num.add("" + K);
+                } else {
+                    break;
+                }
                 s++;
             }
-            K = p - 11;
+            K = p;
             s = 1;
-            while (K >= 0 && s <= rightbottom) {
 
-                num.add("" + K);
+            while (s <= backword) {
                 K = K - 11;
+                if (K >= 0) {
+                    num.add("" + K);
+                } else {
+                    break;
+                }
                 s++;
             }
-            K = p + 9;
+            K = p;
             s = 1;
-            while (K <= 99 && s <= leftbottom) {
-
-                num.add("" + K);
+            while (s <= backword) {
                 K = K + 9;
+                if (K <= 99) {
+                    num.add("" + K);
+                } else {
+                    break;
+                }
                 s++;
             }
-            K = p - 9;
+            K = p;
             s = 1;
-            while (K > 0 && s <= leftbottom) {
-
-                num.add("" + K);
+            while (s <= forword) {
                 K = K - 9;
+                if (K >= 0) {
+                    num.add("" + K);
+                } else {
+                    break;
+                }
+
                 s++;
             }
             //int rightbottom = last - p; //right difference
             //index = "" + p;
-            ////System.out.println(num);
+            //////System.out.println(num);
         } catch (Exception ex) {
 
         }
@@ -1962,7 +1977,7 @@ public class DashboardController {
                             jsonData.put("userid", userid.getText());
                             Gson gson = new GsonBuilder().setPrettyPrinting().create();
                             String jsonEmp = gson.toJson(jsonData);
-                            ////System.out.println(jsonEmp);
+                            //////System.out.println(jsonEmp);
                             String data = httpAPI._jsonRequest("?r=UpdateBalance", jsonEmp);
                             JSONObject myResponse = new JSONObject(data);
                             if (myResponse.getString("status").equals("1")) {
@@ -1972,7 +1987,7 @@ public class DashboardController {
                             }
                             //Thread.sleep(1000);
                         } catch (JSONException e) {
-                            //System.out.println("Balance Thread Error " + e.getMessage());
+                            ////System.out.println("Balance Thread Error " + e.getMessage());
                         }
                     }
                 };
@@ -1992,9 +2007,9 @@ public class DashboardController {
                 if (true) {
                     try {
                         runnableBalance();
-                        Thread.sleep(1000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
-                        //System.out.println("Balance Thread Error " + e.getMessage());
+                        ////System.out.println("Balance Thread Error " + e.getMessage());
                     }
                 }
             }
@@ -2064,7 +2079,7 @@ public class DashboardController {
         try {
             resetDashboard();
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2077,9 +2092,9 @@ public class DashboardController {
             finalMap.put("series", srs);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String jsonEmp = gson.toJson(finalMap);
-            ////System.out.println(jsonEmp);
+            //////System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
-            //System.out.println("Result" + Data);
+            ////System.out.println("Result" + Data);
             ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
             int ip = 0;
             int x = 8;
@@ -2089,7 +2104,7 @@ public class DashboardController {
             for (Map wPoint1 : wPoint) {
                 Map<String, String> dPoint = wPoint1;
                 int ks = 0;
-                ////System.out.println("Data \n" + dPoint);
+                //////System.out.println("Data \n" + dPoint);
                 String subSeries[] = null;
                 for (Map.Entry<String, String> finas : dPoint.entrySet()) {
                     if (finas.getKey().equals("series")) {
@@ -2110,7 +2125,7 @@ public class DashboardController {
                         int key = Integer.parseInt(finas.getKey());
                         int i = Integer.parseInt(subSeries[0]) + (100 * key);
                         int fl = i + Integer.parseInt(finas.getValue());
-                        ////System.out.println("" + fl);
+                        //////System.out.println("" + fl);
                         Label jLable = new Label(" " + fl + "");
                         jLable.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
                         jLable.setWrapText(true);
@@ -2148,7 +2163,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            //System.out.println("Erron Thread-8 " + ex.getMessage());
+            ////System.out.println("Erron Thread-8 " + ex.getMessage());
         }
 //        try {
 //            Thread t = new Thread() {
@@ -2161,7 +2176,7 @@ public class DashboardController {
 //            };
 //            t.start();
 //        } catch (Exception ex) {
-//            //System.out.println();
+//            ////System.out.println();
 //        }
     }
 
@@ -2230,7 +2245,7 @@ public class DashboardController {
 //                bg.add(jButtong);
 //                printerPanel.add(jButtong);
 
-            ////System.out.println("Printer = " + printerService.getName());
+            //////System.out.println("Printer = " + printerService.getName());
             //    }
         } catch (Exception ex) {
 
@@ -2548,13 +2563,15 @@ public class DashboardController {
                                 }
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonEmp = gson.toJson(adbR);
-                                //System.out.println(jsonEmp);
+                                ////System.out.println(jsonEmp);
 
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                System.out.println("Data \n" + Data);
+                                ////System.out.println("Data \n" + Data);
+                                resetAll();
+                                buy.setDisable(false);
                                 //get unitrid 
                                 Object obj = new JSONParser().parse(Data);
-                                System.out.println(obj);
+                                //System.out.println(obj);
                                 // typecasting obj to JSONObject 
                                 Map<String, String> joMap = (Map<String, String>) obj;
                                 //JSONObject jo = (JSONObject) obj;
@@ -2566,22 +2583,35 @@ public class DashboardController {
                                 adbPrint.put("action", "entry");
                                 //Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonPrint = gson.toJson(adbPrint);
-                                System.out.println(jsonPrint);
+                                //System.out.println(jsonPrint);
                                 Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
                                 Object obj2 = new JSONParser().parse(Data);
-                                System.out.println(obj);
+                                //System.out.println(obj);
                                 ArrayList<Map> aMap = (ArrayList<Map>) obj2;
                                 for (int i = 0; i < aMap.size(); i++) {
                                     Map<String, String> temP = aMap.get(i);
                                     adbPrint = new HashMap<>();
                                     adbPrint.put("game", temP.get("game"));
                                     adbPrint.put("own", userid.getText());
+                                    adbPrint.put("utrno", utrno);
                                     adbPrint.put("action", "subentry");
                                     //Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                     jsonPrint = gson.toJson(adbPrint);
-                                    System.out.println(jsonPrint);
-                                    Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                    msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                    ////System.out.println(jsonPrint);
+                                    final String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                    Thread tp = new Thread() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
+                                                Thread.sleep(1000);
+                                            } catch (Exception ex) {
+                                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+
+                                        }
+                                    };
+                                    tp.start();
 
                                 }
                                 //invoiceJSON iJ = new invoiceJSON();
@@ -2605,25 +2635,38 @@ public class DashboardController {
                                 finalMap.put("data", series);
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonEmp = gson.toJson(finalMap);
-                                System.out.println(jsonEmp);
-                                String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                System.out.println("Data \n" + Data);
+                                //System.out.println(jsonEmp);
+                                final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
+                                ////System.out.println("Data \n" + Data);
+                                resetAll();
+                                buy.setDisable(false);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
-                                msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                Thread tp = new Thread() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                            Thread.sleep(1000);
+                                            if (msg.equals("Success")) {
+
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, msg);
+                                            }
+                                        } catch (Exception ex) {
+                                            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+
+                                    }
+                                };
+                                tp.start();
                                 lastTransaction();
 
                             }
-                            if (msg.equals("Success")) {
 
-                            } else {
-                                JOptionPane.showMessageDialog(null, msg);
-                            }
                         }
 
-                        resetAll();
-                        buy.setDisable(false);
                     } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                        //System.out.println(ex.getMessage());
                     }
                 }
 
@@ -2647,7 +2690,7 @@ public class DashboardController {
     }
 
     private void keyRelease(javafx.scene.input.KeyEvent e, TextField jf, int p) {
-        //System.out.println(e.getText());
+        ////System.out.println(e.getText());
         switch (e.getCode().toString()) {
             case "DOWN"://down
                 int down = p + 10;
@@ -2706,7 +2749,7 @@ public class DashboardController {
         try {
             openSeries();
         } catch (Exception ex) {
-            //System.out.println("Seect Series Action Error " + ex.getMessage());
+            ////System.out.println("Seect Series Action Error " + ex.getMessage());
         }
     }
 
@@ -2733,7 +2776,7 @@ public class DashboardController {
                         stage.showAndWait();
                         loadSeries(multiMap);
                     } catch (IOException ex) {
-                        //System.out.println("Multi if Error " + ex.getMessage());
+                        ////System.out.println("Multi if Error " + ex.getMessage());
                     }
                 } else {
                     try {
@@ -2758,7 +2801,7 @@ public class DashboardController {
                         loadSeries(multiMap);
                         resetManualPlatSeleted();
                     } catch (IOException ex) {
-                        //System.out.println("Multi else Error " + ex.getMessage());
+                        ////System.out.println("Multi else Error " + ex.getMessage());
                     }
                 }
 
@@ -2772,7 +2815,7 @@ public class DashboardController {
 
     private void loadSeries(Map<String, String> multiMap) {
         try {
-            //System.out.println("Selected Series " + multiMap);
+            ////System.out.println("Selected Series " + multiMap);
             series.clear();
             multiSeries.clear();
             for (Map.Entry<String, String> entry : multiMap.entrySet()) {
@@ -2788,10 +2831,10 @@ public class DashboardController {
                 }
                 setMainSeries(entry.getValue());
             }
-            //System.out.println("Series " + series);
-            //System.out.println("MultiSeries " + multiSeries);
+            ////System.out.println("Series " + series);
+            ////System.out.println("MultiSeries " + multiSeries);
         } catch (Exception ex) {
-            //System.out.println("LoadSeris " + ex.getMessage());
+            ////System.out.println("LoadSeris " + ex.getMessage());
         }
     }
 
@@ -2801,7 +2844,7 @@ public class DashboardController {
             int i = 0;
             BulkNumberWrite(i, B_0.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2811,7 +2854,7 @@ public class DashboardController {
             int i = 1;
             BulkNumberWrite(i, B_1.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2821,7 +2864,7 @@ public class DashboardController {
             int i = 2;
             BulkNumberWrite(i, B_2.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2831,7 +2874,7 @@ public class DashboardController {
             int i = 3;
             BulkNumberWrite(i, B_3.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2841,7 +2884,7 @@ public class DashboardController {
             int i = 4;
             BulkNumberWrite(i, B_4.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2851,7 +2894,7 @@ public class DashboardController {
             int i = 5;
             BulkNumberWrite(i, B_5.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2861,7 +2904,7 @@ public class DashboardController {
             int i = 6;
             BulkNumberWrite(i, B_6.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2871,7 +2914,7 @@ public class DashboardController {
             int i = 7;
             BulkNumberWrite(i, B_7.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2881,7 +2924,7 @@ public class DashboardController {
             int i = 8;
             BulkNumberWrite(i, B_8.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2891,7 +2934,7 @@ public class DashboardController {
             int i = 9;
             BulkNumberWrite(i, B_9.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -2901,7 +2944,7 @@ public class DashboardController {
             int i = 0;
             BulkNumberWriteVartical(i, I_0.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2911,7 +2954,7 @@ public class DashboardController {
             int i = 10;
             BulkNumberWriteVartical(i, I_10.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2921,7 +2964,7 @@ public class DashboardController {
             int i = 20;
             BulkNumberWriteVartical(i, I_20.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2931,7 +2974,7 @@ public class DashboardController {
             int i = 30;
             BulkNumberWriteVartical(i, I_30.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2941,7 +2984,7 @@ public class DashboardController {
             int i = 40;
             BulkNumberWriteVartical(i, I_40.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2951,7 +2994,7 @@ public class DashboardController {
             int i = 50;
             BulkNumberWriteVartical(i, I_50.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2961,7 +3004,7 @@ public class DashboardController {
             int i = 60;
             BulkNumberWriteVartical(i, I_60.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2971,7 +3014,7 @@ public class DashboardController {
             int i = 70;
             BulkNumberWriteVartical(i, I_70.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2981,7 +3024,7 @@ public class DashboardController {
             int i = 80;
             BulkNumberWriteVartical(i, I_80.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -2991,7 +3034,7 @@ public class DashboardController {
             int i = 90;
             BulkNumberWriteVartical(i, I_90.getText(), event);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
+            ////System.out.println(ex.getMessage());// JOptionPane.showMessageDialog(this, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -3000,7 +3043,7 @@ public class DashboardController {
         try {
             openSeries();
         } catch (Exception ex) {
-            //System.out.println("Seect Series Action Error btn " + ex.getMessage());
+            ////System.out.println("Seect Series Action Error btn " + ex.getMessage());
         }
     }
 
@@ -3009,7 +3052,7 @@ public class DashboardController {
         try {
             openAdvance();
         } catch (Exception ex) {
-            //System.out.println("Seect Advance Action Error " + ex.getMessage());
+            ////System.out.println("Seect Advance Action Error " + ex.getMessage());
         }
     }
 
@@ -3035,7 +3078,7 @@ public class DashboardController {
 //            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                     themStyle(stage, root);
                     stage.showAndWait();
-                    System.out.println("Advance Selected Draw " + advanceDraw);
+                    //System.out.println("Advance Selected Draw " + advanceDraw);
                     advanceDrawArray = new ArrayList<>();
                     advanceDraw.entrySet().stream().forEach((entry) -> {
                         advanceDrawArray.add(entry.getValue());
@@ -3046,10 +3089,10 @@ public class DashboardController {
                     } else {
                         advance.setText("false");
                     }
-                    //System.out.println("AdvanceDrawArray " + advanceDrawArray);
+                    ////System.out.println("AdvanceDrawArray " + advanceDrawArray);
                     //loadSeries(multiMap);
                 } catch (Exception ex) {
-                    //System.out.println("Seect iit load Advance Action Error " + ex.getMessage());
+                    ////System.out.println("Seect iit load Advance Action Error " + ex.getMessage());
                 }
 
             };
@@ -3110,6 +3153,9 @@ public class DashboardController {
                     stage.setScene(new Scene(root));
                     stage.setTitle("Change Password");
                     stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(buy.getScene().getWindow());
+                    stage.getScene().getRoot().setEffect(new DropShadow());
                     //themStyle(stage, root);
                     stage.showAndWait();
 
@@ -3127,7 +3173,9 @@ public class DashboardController {
 
     public void themStyle(Stage stage, Parent root) {
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(buy.getScene().getWindow());
+        stage.getScene().getRoot().setEffect(new DropShadow());
         //stage.setFullScreen(true);
         stage.setResizable(false);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -3258,7 +3306,12 @@ public class DashboardController {
             stage.setWidth(bounds.getWidth());
             stage.setHeight(bounds.getHeight());
             stage.setScene(new Scene(root));
-            themStyle(stage, root);
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+            //stage.setFullScreen(true);
+            stage.setResizable(false);
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            //themStyle(stage, root);
             stage.setTitle("Login");
             stage.show();
             singout.getScene().getWindow().hide();
@@ -3283,16 +3336,16 @@ public class DashboardController {
                         finalMap.put("gameid", did[1]);
                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
                         String jsonEmp = gson.toJson(finalMap);
-                        ////System.out.println(jsonEmp);
+                        //////System.out.println(jsonEmp);
                         String data = httpAPI._jsonRequest("?r=checkWinner", jsonEmp);
-                        System.out.println(data);
+                        //System.out.println(data);
                         String msg = claimJSON.claimJSONPrint(data, printer.getText());
                         claimMessageBox(msg);
                         //JOptionPane.showMessageDialog(null, msg);
                         claimReader.setText("");
                         runnableBalance();
                     } catch (Exception ex) {
-                        //System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
+                        ////System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
                     }
                 }
 
@@ -3382,7 +3435,7 @@ public class DashboardController {
             int count = Integer.parseInt(custome.getText());
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
-                    //System.out.println("MultiSeries Array" + multiSeries);
+                    ////System.out.println("MultiSeries Array" + multiSeries);
                     for (int i = 0; i < multiSeries.size(); i++) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
@@ -3441,6 +3494,36 @@ public class DashboardController {
             runnableBalance();
             show = true;
         }
+    }
+
+    private int[] fpNumbers(int p) {
+        int[][] num = {
+            {10, 15, 60, 65, 1, 6, 51, 56},
+            {12, 18, 62, 67, 21, 26, 71, 76},
+            {13, 18, 63, 68, 31, 36, 81, 86},
+            {14, 19, 64, 69, 41, 46, 91, 96},
+            {20, 25, 70, 75, 2, 7, 52, 57},
+            {23, 28, 73, 78, 32, 37, 82, 87},
+            {24, 29, 74, 79, 42, 47, 92, 97},
+            {30, 35, 80, 85, 3, 8, 53, 58},
+            {34, 39, 84, 89, 43, 48, 93, 98},
+            {40, 45, 90, 95, 4, 9, 54, 59},
+            {11, 66, 16, 61},
+            {22, 26, 72, 77},
+            {33, 38, 83, 88},
+            {44, 49, 94, 99},
+            {55, 50, 0, 5}
+        };
+        int number[] = null;
+        for (int[] num1 : num) {
+            for (int element : num1) {
+                if (element == p) {
+                    number = num1;
+                    break;
+                }
+            }
+        }
+        return number;
     }
 
 }

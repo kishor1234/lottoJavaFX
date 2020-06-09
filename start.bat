@@ -1,1 +1,1 @@
-java -jar dist/RajLaxmi.jar
+java -jar dist/RajLaxmi.jar &

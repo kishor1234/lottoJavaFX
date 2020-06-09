@@ -30,6 +30,7 @@ import javafx.scene.text.Text;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * FXML Controller class
@@ -107,7 +108,7 @@ public class SingleTicketController {
                 adbPrint.put("amount", amount);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String jsonPrint = gson.toJson(adbPrint);
-                System.out.println(jsonPrint);
+                //System.out.println(jsonPrint);
                 String Data = httpAPI._jsonRequest("?r=singleTicketPrint", jsonPrint);
                 Object obj = new JSONParser().parse(Data);
                 JSONObject jo = (JSONObject) obj;
@@ -123,7 +124,7 @@ public class SingleTicketController {
 
             ticket_info.setItems(data_ticket);
         } catch (Exception ex) {
-            //System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());
         }
     }
 
@@ -134,49 +135,51 @@ public class SingleTicketController {
 
     @FXML
     private void onAcceptActionPrint(ActionEvent event) {
-        try {
-            int input = JOptionPane.showConfirmDialog(null, "Do you really want to Reprint ticket? it cause dublicat ticket");
-            if (input == 0) {
 
-                Map<String, String> adbPrint = new HashMap<>();
-                adbPrint.put("utrno", ticket);
-                adbPrint.put("own", owner);
-                adbPrint.put("action", "entry");
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                String jsonPrint = gson.toJson(adbPrint);
-                System.out.println(jsonPrint);
-                String Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                Object obj2 = new JSONParser().parse(Data);
-                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-                for (int i = 0; i < aMap.size(); i++) {
-                    Map<String, String> temP = aMap.get(i);
-                    adbPrint = new HashMap<>();
-                    adbPrint.put("game", temP.get("game"));
-                    adbPrint.put("own", owner);
-                    adbPrint.put("action", "subentry");
-                    //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    jsonPrint = gson.toJson(adbPrint);
-                    System.out.println(jsonPrint);
-                    Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                    String msgs = invoiceJSON.invoiceJSONPrint(Data, printer);
+        Thread printthread = new Thread() {
+            public void run() {
+                int input = JOptionPane.showConfirmDialog(null, "Do you really want to Reprint ticket? it cause dublicat ticket");
+                if (input == 0) {
 
+                    try {
+                        Map<String, String> adbPrint = new HashMap<>();
+                        adbPrint.put("utrno", ticket);
+                        adbPrint.put("own", owner);
+                        adbPrint.put("action", "entry");
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        String jsonPrint = gson.toJson(adbPrint);
+                        //System.out.println(jsonPrint);
+                        String Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                        Object obj2 = new JSONParser().parse(Data);
+                        ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                        for (int i = 0; i < aMap.size(); i++) {
+                            try {
+                                Map<String, String> temP = aMap.get(i);
+                                adbPrint = new HashMap<>();
+                                adbPrint.put("game", temP.get("game"));
+                                adbPrint.put("own", owner);
+                                adbPrint.put("utrno", ticket);
+                                adbPrint.put("action", "subentry");
+                                //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                jsonPrint = gson.toJson(adbPrint);
+                                //System.out.println(jsonPrint);
+                                Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                invoiceJSON.invoiceJSONPrint(Data, printer);
+                            } catch (Exception ex) {
+                                Logger.getLogger(SingleTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                        }
+                    } catch (ParseException ex) {
+                        Logger.getLogger(SingleTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ticket Repring Process cancel!");
                 }
-//                Map<String, String> data = new HashMap<>();
-//                data.put("trno", ticket);
-//                data.put("own", owner);
-//                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//                String jsonEmp = gson.toJson(data);
-//                String Data = httpAPI._jsonRequest("?r=reprintDesktopPrint", jsonEmp);
-//                //System.out.println("Data \n" + Data);
-//                // invoiceJSON.invoiceJSONPrint(Data,printer);
-//                String msg = invoiceJSON.invoiceJSONPrint(Data, printer);
-//                JOptionPane.showMessageDialog(null, msg);
-            } else {
-                JOptionPane.showMessageDialog(null, "Ticket Repring Process cancel!");
             }
-        } catch (Exception ex) {
-            Logger.getLogger(ReprintTicketController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        };
+        printthread.start();
     }
 
     @FXML

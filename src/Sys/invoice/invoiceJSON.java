@@ -10,7 +10,7 @@ package Sys.invoice;
  * @author asksoft
  */
 // Java program to read JSON from a file 
-import controller.DashboardController;
+import Sys.TimeFormats;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -31,48 +31,71 @@ public class invoiceJSON {
         // getting firstName and lastName 
         String status = (String) jo.get("status");
         String Msg = (String) jo.get("msg");
-        String Advance = (String) jo.get("advance");
+        String trno = (String) jo.get("trno");
         if (status.equals("1")) {
             String printPage = "";
 
             ArrayList<Map> ja = (ArrayList) jo.get("print");
             for (int i = 0; i < ja.size(); i++) {
                 Map<String, String> printMap = ja.get(i);
-                // //System.out.println("Print data "+printMap);
-                printPage += "Rajashreee Lottery\n";
-                printPage += "Draw ID:" + printMap.get("gametimeid") + "     Draw Time:" + printMap.get("gameendtime") + "\n\n";
-                printPage += "Num  qty  Num  qty  Num  qty  \n";
+                System.out.println("Print data " + printMap);
+                //printPage += "Rajashreee Lottery\n";
+                printPage += "Draw Time:" + TimeFormats.timeConvert(printMap.get("gameendtime")) + "\n";
+                printPage += "Num Qty Num Qty Num Qty ";
                 Map<String, ArrayList> printMapd = ja.get(i);
                 ArrayList<Map> point = printMapd.get("point");
                 int k = 1;
+                int limit = 1;
+                String numberTable = "";
+                String printPageFooter = "";
+                printPageFooter += "Total Quantity : " + printMap.get("totalpoint") + "\n";
+                printPageFooter += "Total Point    : " + printMap.get("amount") + "\n";
+                printPageFooter += "T.No. " + trno + "\n";
                 for (int j = 0; j < point.size(); j++) {
                     Map<String, String> dPoint = point.get(j);
 
                     for (Map.Entry<String, String> finas : dPoint.entrySet()) {
                         int val = Integer.parseInt(finas.getValue());
-                       
-                        for (int c = 0; c<val; c++) {
-                            if (k == 3) {
-                                printPage += "" + finas.getKey() + "  " + 1 + "\n";
-                                k = 0;
+
+                        for (int c = 0; c < val; c++) {
+                            if (limit == 57) {
+                                limit = 1;
+                                String dp = buildInvoice(numberTable, printPage, printPageFooter);
+                                System.out.println(dp);
+                                PrintInvoice.Sample(currentPrinter, dp, printMap.get("game"));
+                                numberTable = "";
+                                numberTable += " " + finas.getKey() + "  " + 1 + "  ";
+                                k = 2;
                             } else {
-                                printPage += "" + finas.getKey() + "  " + 1 + "  ";
+                                if (k == 3) {
+                                    numberTable += " " + finas.getKey() + "  " + 1 + "\n";
+                                    k = 0;
+                                } else {
+                                    numberTable += " " + finas.getKey() + "  " + 1 + "  ";
+                                }
+                                k++;
+                                limit++;
                             }
-                            k++;
                         }
+
                         //k++;
                         //printPage+="Num\tqty\tNum\tqty\tNum\tqty\t";
                         ////System.out.println(finas.getKey() + ":" + finas.getValue());
                     }
 
                 }
-                printPage += "\nTotal Quantity : " + printMap.get("totalpoint") + "\n";
-                printPage += "Total Point    : " + printMap.get("amount") + "\n\n";
-                printPage += "Invoice " + printMap.get("game") + "\n";
-                //printPage += invoiceJSON.getBarocde();
-                System.out.println(printPage);
-                PrintInvoice.Sample(currentPrinter, printPage, printMap.get("game"));
+                if (limit >= 1) {
+                    limit = 1;
+                    String dp = buildInvoice(numberTable, printPage, printPageFooter);
+                    System.out.println(dp);
+                    PrintInvoice.Sample(currentPrinter, dp, printMap.get("game"));
+                    numberTable = "";
+                    k = 0;
+                }
 
+                //printPage += invoiceJSON.getBarocde();
+                //System.out.println(printPage);
+                //PrintInvoice.Sample(currentPrinter, printPage, printMap.get("game"));
                 printPage = "";
             }
 
@@ -80,5 +103,9 @@ public class invoiceJSON {
 
         // iterating phoneNumbers 
         return Msg;
+    }
+
+    private static String buildInvoice(String numberTable, String printPage, String printPageFooter) {
+        return printPage + "\n" + numberTable + "\n" + printPageFooter;
     }
 }

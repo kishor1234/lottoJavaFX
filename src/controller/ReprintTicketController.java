@@ -28,7 +28,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -152,6 +154,7 @@ public class ReprintTicketController {
                     stage.setY(bounds.getMinY());
                     stage.setWidth(bounds.getWidth());
                     stage.setHeight(bounds.getHeight());
+
                     stage.setScene(new Scene(root));
                     themStyle(stage, root);
                     stage.showAndWait();
@@ -180,19 +183,11 @@ public class ReprintTicketController {
 
     private void themStyle(Stage stage, Parent root) {
         stage.initStyle(StageStyle.TRANSPARENT);
-            //stage.initStyle(StageStyle.UNDERDECORATED);
-
-        //grab your root here
-        root.setOnMousePressed((MouseEvent event1) -> {
-            xOffset = event1.getSceneX();
-            double yOffset = event1.getSceneY();
-        });
-
-        //move around here
-        root.setOnMouseDragged((MouseEvent event1) -> {
-            stage.setX(event1.getScreenX() - xOffset);
-            stage.setY(event1.getScreenY() - yOffset);
-        });
+        //stage.initStyle(StageStyle.UNDERDECORATED);
+        stage.initModality(Modality.WINDOW_MODAL);
+        // Specifies the owner Window (parent) for new window
+        stage.initOwner(close.getScene().getWindow());
+        stage.getScene().getRoot().setEffect(new DropShadow());
     }
 
 }
