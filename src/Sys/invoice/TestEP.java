@@ -5,12 +5,8 @@
  */
 package Sys.invoice;
 
-import com.github.anastaciocintra.escpos.EscPos;
-import com.github.anastaciocintra.output.PrinterOutputStream;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.print.PrintService;
+//import com.github.anastaciocintra.escpos.EscPos;
+//import com.github.anastaciocintra.output.PrinterOutputStream;
 
 /**
  *
@@ -19,23 +15,12 @@ import javax.print.PrintService;
 public class TestEP {
 
     public static void main(String args[]) {
-        PrinterOutputStream printerOutputStream = null;
-        try {
-            PrintService printService = PrinterOutputStream.getPrintServiceByName("Boomaga");
-            printerOutputStream = new PrinterOutputStream(printService);
-            EscPos escpos = new EscPos(printerOutputStream);
-            escpos.writeLF("Hello Wold");
-            escpos.feed(5);
-            //escpos.cut(EscPos.CutMode.FULL);
-            escpos.close();
-        } catch (IOException ex) {
-            Logger.getLogger(TestEP.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                printerOutputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(TestEP.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        PrinterOutputStream printerOutputStream = null;
+//        PrintService printService = PrinterOutputStream.getPrintServiceByName("Boomaga");
+//        printerOutputStream = new PrinterOutputStream(printService);
+//        EscPos escpos = new EscPos(printerOutputStream);
+//        escpos.writeLF("Hello Wold");
+//        escpos.feed(5);
+//        escpos.close();
     }
 }
