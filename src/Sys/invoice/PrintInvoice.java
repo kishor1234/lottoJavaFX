@@ -13,6 +13,11 @@ package Sys.invoice;
  * Use of this source code is governed by the MIT license that can be
  * found in the LICENSE file.
  */
+import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.escpos.EscPosConst;
+import com.github.anastaciocintra.escpos.Style;
+import com.github.anastaciocintra.escpos.barcode.BarCode;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -27,6 +32,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,91 +59,39 @@ public class PrintInvoice {
 
     public static void Sample(String printerName, String Data, String Barcode) {
 
+        // get the printer service by name passed on command line...
+        //this call is slow, try to use it only once and reuse the PrintService variable.
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
         try {
-            // get the printer service by name passed on command line...
-            //this call is slow, try to use it only once and reuse the PrintService variable.
-            //new code
+            escpos = new EscPos(new PrinterOutputStream(printService));
 
-            Document document = new Document(new Rectangle(PageSize.A4));
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Java4s_BarCode_128.pdf"));
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._3, Style.FontSize._3)
+                    .setJustification(EscPosConst.Justification.Center);
 
-            document.open();
-            float fntSize, lineSpacing;
-            fntSize = 6.7f;
-            lineSpacing = 10f;
-            String line = "10";
-            Paragraph p = new Paragraph(new Phrase(lineSpacing, line, FontFactory.getFont(FontFactory.COURIER, fntSize)));
-            Font f3 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
-            p = new Paragraph("RajLaxmi Lottery");
-            p.setFont(f3);
-            document.add(p);
-            f3 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
-            p = new Paragraph(Data);
-            p.setFont(f3);
-            document.add(p);
+            Style subtitle = new Style(escpos.getStyle())
+                    .setBold(true)
+                    .setUnderline(Style.Underline.OneDotThick);
+            Style bold = new Style(escpos.getStyle())
+                    .setBold(true);
+            
+            escpos.writeLF(title, "RajLaxmi Lottery")
+                    .feed(2);
+            escpos.writeLF(bold, Data)
+                    .feed(3);
+            //escpos.writeLF("barcode write HRI above");
+            //barcode.setHRIPosition(BarCode.BarCodeHRIPosition.AboveBarCode);
+            //escpos.feed(2);
+            BarCode barcode = new BarCode();
+            escpos.write(barcode, Barcode);
+            escpos.feed(3);
+            escpos.cut(EscPos.CutMode.FULL);
 
-            Barcode128 code128 = new Barcode128();
-            code128.setGenerateChecksum(true);
-            code128.setCode(Barcode);
-
-            document.add(code128.createImageWithBarcode(writer.getDirectContent(), null, null));
-            document.close();
-
-            //System.out.println("Document Generated...!!!!!!");
-            DocFlavor flavor = DocFlavor.BYTE_ARRAY.PDF;
-            PrintService[] services = PrintServiceLookup.lookupPrintServices(flavor, null);
-            PrintService ps = null;
-            for (PrintService printServiceName : services) {
-                if (printServiceName.getName().equals(printerName)) {
-                    ps = printServiceName;
-                    break;
-                }
-            }
-            DocPrintJob job = ps.createPrintJob();
-            job.addPrintJobListener(new PrintJobAdapter() {
-                public void printDataTransferCompleted(PrintJobEvent event) {
-                    //System.out.println("data transfer complete");
-                }
-
-                public void printJobNoMoreEvents(PrintJobEvent event) {
-                    //System.out.println("received no more events");
-                }
-            });
-            FileInputStream fis = new FileInputStream("Java4s_BarCode_128.pdf");
-            Doc doc = new SimpleDoc(fis, DocFlavor.INPUT_STREAM.AUTOSENSE, null);
-            // Doc doc=new SimpleDoc(fis, DocFlavor.INPUT_STREAM.JPEG, null);
-            PrintRequestAttributeSet attrib = new HashPrintRequestAttributeSet();
-            attrib.add(new Copies(1));
-            job.print(doc, attrib);
-            //end
-//            PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
-//            EscPos escpos;
-//            try {
-//                escpos = new EscPos(new PrinterOutputStream(printService));
-//
-//                Style title = new Style()
-//                        .setFontSize(Style.FontSize._3, Style.FontSize._3)
-//                        .setJustification(EscPosConst.Justification.Center);
-//
-//                Style subtitle = new Style(escpos.getStyle())
-//                        .setBold(true)
-//                        .setUnderline(Style.Underline.OneDotThick);
-//                Style bold = new Style(escpos.getStyle())
-//                        .setBold(true);
-//                BarCode barcode = new BarCode();
-//                escpos.writeLF(title, "RajLaxmi Lottery")
-//                        .feed(5);
-//                escpos.writeLF(bold, Data)
-//                        .feed(8);
-//                escpos.writeLF("barcode write HRI above");
-//                barcode.setHRIPosition(BarCode.BarCodeHRIPosition.AboveBarCode);
-//                escpos.feed(2);
-//                escpos.write(barcode, Barcode);
-//                escpos.feed(3);
-//                escpos.cut(EscPos.CutMode.FULL);
-//
-//                escpos.close();
-        } catch (FileNotFoundException | DocumentException | PrintException ex) {
+            escpos.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
             Logger.getLogger(PrintInvoice.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -144,18 +99,22 @@ public class PrintInvoice {
 
     public static void main(String[] args) {
         if (args.length != 1) {
-//            System.out.println("Usage: java -jar xyz.jar (\"printer name\")");
-//            System.out.println("Printer list to use:");
-//            String[] printServicesNames = PrinterOutputStream.getListPrintServicesNames();
-//            for (String printServiceName : printServicesNames) {
-//                System.out.println(printServiceName);
-//               
-//            }
-            //PrintInvoice.Sample("PDF", "TESTING", "123456");
+
+            //PrintInvoice.Sample("CUPS-BRF-Printer", "TESTING", "123456");
 
         }
 
         //System.exit(0);
+    }
+
+    public static PrintService findPrintService(String printerName, PrintService[] services) {
+        for (PrintService service : services) {
+            if (service.getName().equalsIgnoreCase(printerName)) {
+                return service;
+            }
+        }
+
+        return null;
     }
 
 }
