@@ -43,7 +43,8 @@ public class PrintInvoice {
 
             Style title = new Style()
                     .setFontSize(Style.FontSize._1, Style.FontSize._1)
-                    .setJustification(EscPosConst.Justification.Left_Default);
+                    .setJustification(EscPosConst.Justification.Left_Default)
+                    .setBold(true);
 
             Style subtitle = new Style(escpos.getStyle())
                     .setBold(true)
@@ -51,23 +52,28 @@ public class PrintInvoice {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
 
-            escpos.writeLF(title, "RajLaxmi Lottery").feed(2);
-            escpos.writeLF(bold, drDetails)
+            escpos.writeLF(title, "RajLaxmi Lottery")
+                    .writeLF(drDetails)
+                    .writeLF("Second Prize Amt: 180/-")
+                    .writeLF(bold, numberHeader)
+                    .writeLF(numberTable)
+                    .writeLF(bold, printPageFooter)
                     .feed(1);
-            escpos.writeLF(bold, numberHeader)
-                    .feed(2);
-            escpos.writeLF(numberTable)
-                    .feed(2);
-            escpos.writeLF(bold, printPageFooter)
-                    .feed(2);
 
             BarCode barcode = new BarCode();
-            barcode.setSystem(BarCode.BarCodeSystem.CODE93_Default);
+            barcode.setSystem(BarCode.BarCodeSystem.CODE39_A);
             barcode.setHRIPosition(BarCode.BarCodeHRIPosition.BelowBarCode);
             barcode.setBarCodeSize(3, 50);
             escpos.feed(1);
-            escpos.write(barcode, Barcode);
-            //escpos.feed(5);
+            escpos.write(barcode, Barcode).feed(1);
+
+            Style tt = new Style()
+                    .setJustification(EscPosConst.Justification.Left_Default)
+                    .setBold(true);
+
+            escpos.writeLF(tt, "For  Anmusement Only")
+                    .feed(1);
+            escpos.feed(5);
             escpos.cut(EscPos.CutMode.FULL);
 
             escpos.close();
@@ -82,7 +88,6 @@ public class PrintInvoice {
     public static void main(String[] args) {
         if (args.length != 1) {
 
-            
         }
 
         //System.exit(0);
