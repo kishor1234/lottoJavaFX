@@ -649,21 +649,24 @@ public class DashboardController {
         Thread t = new Thread() {
             @Override
             public void run() {
-                try {
-                    DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
-                    Date dobj = new Date();
-                    cDate.setText(f.format(dobj));
-                    while (true) {
-                        DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
-                        Date dateobj = new Date();
-                        //////System.out.println(df.format(dateobj));
-                        clockLabel.setText(df.format(dateobj));
-                        Thread.sleep(1000);
 
+                DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
+                Date dobj = new Date();
+                DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
+                
+                cDate.setText(f.format(dobj));
+                while (true) {
+                    //System.out.println(df.format(dateobj));
+                    Date dateobj = new Date();
+                    clockLabel.setText(df.format(dateobj));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        System.out.println(ex.getMessage());
                     }
-                } catch (InterruptedException ex) {
-                    ////System.out.println("ShowTimer error " + ex.getMessage());
+
                 }
+
             }
         };
         t.start();
@@ -1515,12 +1518,11 @@ public class DashboardController {
         int period = 1000;
         timer = new Timer();
         interval = Integer.parseInt(secs);
-        //////System.out.println(secs);
         timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
-                //////System.out.println(formatSeconds(setInterval()));
+
                 drawClock.setText(formatSeconds(setInterval()));
 
             }
@@ -1541,13 +1543,10 @@ public class DashboardController {
                         @Override
                         public void run() {
                             try {
-                                ////System.out.println("Clock Reset Thred sleep 2000");
                                 Thread.sleep(2000);
-                                ////System.out.println("Start Updating Result Board");
                                 resultBoard("ALL");
-                                ////System.out.println("END Updating Result Board");
                             } catch (InterruptedException ex) {
-                                ////System.out.println("Runnable Teror " + ex.getMessage());
+
                             }
                         }
                     };
@@ -1620,13 +1619,9 @@ public class DashboardController {
                 final_Map.put(sr, qty);
                 qty = 0;
 
-                //////System.out.println("Key = " + entry.getKey()
-                //    + ", Value = " + entry.getValue());
             }
-            //////System.out.println(Dashboard.final_Map);
-            //////System.out.println("total Qty: " + qty);
+
             dispalyTotal();
-            //////System.out.println(Dashboard.multiSeries);
 
         } catch (Exception ex) {
 
@@ -1893,13 +1888,13 @@ public class DashboardController {
         ArrayList<String> num = new ArrayList<>();
         try {
             //System.out.println("P " + p);
-
-            int index = (((p / 10) + 1) * 10) - 1;
-            int rightbottom = index - p; //bottom right difference
-            int back = (p / 10) * 10;
-            int leftbottom = p - back;//bottom left
-            //System.out.println("RightBottm " + rightbottom);
-            //System.out.println("leftbottom " + leftbottom);
+//
+//            int index = (((p / 10) + 1) * 10) - 1;
+//            int rightbottom = index - p; //bottom right difference
+//            int back = (p / 10) * 10;
+//            int leftbottom = p - back;//bottom left
+//            //System.out.println("RightBottm " + rightbottom);
+//            //System.out.println("leftbottom " + leftbottom);
             int up = p / 10;
             int down = 9 - up;
             int ip = (p / 10) * 10;
@@ -2064,6 +2059,7 @@ public class DashboardController {
                         calculateTotal();
                         resetManualPlatSeleted();
                         runnableBalance();
+                        messageRefreshThread();
 
                     }
                 };
@@ -2512,7 +2508,6 @@ public class DashboardController {
 
     @FXML
     private void ActionBuy(javafx.event.ActionEvent event) {
-        this.setMessageBar();
 
         try {
             Thread t = new Thread() {
@@ -2647,10 +2642,10 @@ public class DashboardController {
                                         try {
                                             msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                             Thread.sleep(1000);
-                                            if (msg.equals("Success")) {
+                                            if (!msg.equals("Success")) {
 
-                                            } else {
                                                 JOptionPane.showMessageDialog(null, msg);
+                                                buy.setDisable(false);
                                             }
                                         } catch (Exception ex) {
                                             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);

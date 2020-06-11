@@ -140,7 +140,7 @@ public class PrintInvoice1 {
     public static void main(String[] args) {
         if (args.length != 1) {
 
-            PrintInvoice.Sample("Boomaga", "TESTING", "123456");
+            //PrintInvoice.Sample("Boomaga", "TESTING", "123456");
 
         }
 

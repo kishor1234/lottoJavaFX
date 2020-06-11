@@ -5,6 +5,7 @@
  */
 package Sys.invoice;
 
+import Sys.TimeFormats;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,7 +16,7 @@ import org.json.simple.parser.JSONParser;
  */
 public class claimJSON {
 
-    public static String claimJSONPrint(String data,String printer) throws Exception {
+    public static String claimJSONPrint(String data, String printer) throws Exception {
         // parsing file "JSONExample.json" 
         Object obj = new JSONParser().parse(data);
         // typecasting obj to JSONObject 
@@ -28,30 +29,35 @@ public class claimJSON {
         //System.exit(0);
         if (status.equals("1")) {
             Map<String, String> wPoint = (Map<String, String>) jo.get("winPoint");
-            printPage += "Rajashreee Lottery\n";
-            printPage += "Wining Point's\n";
-            printPage += "Wining Ticke id : " + (String) jo.get("id");
-            printPage += "  Draw id : " + (String) jo.get("drawid") + "\n";
-            printPage += "Date: " + (String) jo.get("date") + "\n\n";
-            printPage += "Num    qty    Num    qty    Num    qty    \n";
+            // printPage += "RajLaxmi Lottery\n";
+//            String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "\n";
+//                String secondPrice = "Second Prize Amt: 180/- \n";
+//                String numberHeader = "Num Qty Num Qty Num Qty ";
+            String drDetails = "Wining Point's\n";
+            drDetails += "Wining Ticke id : " + (String) jo.get("id");
+            String secondPrice = "  Draw id : " + (String) jo.get("drawid") + "\n";
+            secondPrice += "Date: " + (String) jo.get("date") + "\n\n";
+            String numberHeader = "NUMBER QT NUMBER QT NUMBER QT";
             int k = 1;
             int sum = 0;
             for (Map.Entry<String, String> finas : wPoint.entrySet()) {
                 if (k == 3) {
-                    printPage += "" + finas.getKey() + "\t" + finas.getValue() + "\n";
+                    printPage += "RL" + finas.getKey() + " " + finas.getValue() + "\n";
                     k = 0;
                 } else {
-                    printPage += "" + finas.getKey() + "\t" + finas.getValue() + "\t";
+                    printPage += "RL" + finas.getKey() + " " + finas.getValue() + "  ";
                 }
                 sum = sum + Integer.parseInt(finas.getValue());
                 k++;
                 //printPage+="Num\tqty\tNum\tqty\tNum\tqty\t";
                 //System.out.println(finas.getKey() + ":" + finas.getValue());
             }
-            printPage += "\nTotal Quantity : " + sum + "\n";
-            printPage += "Wining point's    : " + jo.get("amount") + "\n\n";
+            String printPageFooter = "\nTotal Quantity : " + sum + "\n";
+            printPageFooter += "Wining point's    : " + jo.get("amount") + "\n\n";
             //System.out.println(printPage);
-            PrintInvoice.Sample(printer, printPage, (String) jo.get("id"));
+            PrintInvoice.Sample(printer, drDetails, secondPrice, numberHeader, printPage, printPageFooter, (String) jo.get("id"));
+
+            //PrintInvoice.Sample(printer, printPage, (String) jo.get("id"));
         }
         return Msg;
     }

@@ -10,13 +10,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1100.0" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane id="AnchorPane" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+            <VBox BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
+                  <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;">
                      <children>
                         <Pane fx:id="msgPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                            <VBox.margin>
@@ -25,7 +25,7 @@
                         </Pane>
                      </children>
                   </VBox>
-                  <HBox prefHeight="50.0" prefWidth="980.0" style="-fx-background-color: #FFFFFF; -fx-border-color: blue;">
+                  <HBox style="-fx-background-color: #FFFFFF; -fx-border-color: blue;">
                      <children>
                         <Button fx:id="b1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#opneAdvanceDrawSelecter" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="ADVANCE DRAW" HBox.hgrow="ALWAYS">
                            <font>
@@ -72,9 +72,9 @@
          <top>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                <children>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <HBox VBox.vgrow="ALWAYS">
                      <children>
-                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;">
+                        <Pane style="-fx-background-color: #FFFFFF;">
                            <children>
                               <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="10.0" layoutY="10.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -91,9 +91,9 @@
                               <Insets bottom="2.0" left="4.0" right="2.0" top="2.0" />
                            </padding>
                         </Pane>
-                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                        <VBox HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                              <HBox style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="170.0" HBox.hgrow="ALWAYS">
                                        <children>
@@ -147,7 +147,7 @@
                                     </ScrollPane>
                                  </children>
                               </HBox>
-                              <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                              <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionOnResultUpdate" style="-fx-background-color: #faf49a; -fx-border-color: #CCCCCC; -fx-border-radius: 5px;" text="Result Update">
                                        <font>
@@ -264,7 +264,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox prefHeight="62.0" prefWidth="780.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                              <HBox style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="110.0" HBox.hgrow="ALWAYS">
                                        <children>
@@ -276,7 +276,7 @@
                                           </Text>
                                        </children>
                                        <HBox.margin>
-                                          <Insets top="5.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </Pane>
                                     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
@@ -467,7 +467,7 @@
                                           </VBox>
                                        </children>
                                        <HBox.margin>
-                                          <Insets bottom="2.0" />
+                                          <Insets />
                                        </HBox.margin>
                                     </HBox>
                                  </children>
@@ -480,11 +480,11 @@
             </VBox>
          </top>
          <center>
-            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+            <BorderPane BorderPane.alignment="CENTER">
                <center>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                  <VBox BorderPane.alignment="CENTER">
                      <children>
-                        <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                        <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                  <children>
@@ -564,9 +564,9 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                        <HBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                              <VBox HBox.hgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
@@ -856,56 +856,56 @@
                                     <Insets />
                                  </HBox.margin>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                              <VBox nodeOrientation="LEFT_TO_RIGHT" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <HBox alignment="CENTER" layoutX="15.0" layoutY="303.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="B_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_0" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_0" alignment="CENTER" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_0" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_1" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_1" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_2" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_2" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_2" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_2" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_3" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_3" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_3" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_3" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_4" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_4" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_4" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_4" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_5" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_5" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_5" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_5" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_6" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_6" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_6" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_6" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_7" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_7" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_7" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_7" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_8" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_8" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_8" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_8" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="B_9" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionB_9" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="B_9" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_9" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" />
                                              </HBox.margin>
@@ -914,52 +914,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_0" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_2" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_2" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_3" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_3" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_4" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_4" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_5" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_5" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_6" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_6" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_7" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_7" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_8" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_8" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_9" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_9" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -971,52 +971,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_10" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_10" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_11" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_11" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_12" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_12" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_13" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_13" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_14" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_14" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_15" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_15" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_16" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_16" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_17" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_17" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_18" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_18" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_19" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_19" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1028,52 +1028,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="41.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_20" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_20" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_21" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_21" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_22" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_22" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_23" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_23" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_24" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_24" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_25" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_25" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_26" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_26" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_27" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_27" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_28" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_28" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_29" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_29" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1085,52 +1085,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="72.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_30" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_30" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_31" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_31" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_32" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_32" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_33" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_33" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_34" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_34" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_35" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_35" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_36" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_36" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_37" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_37" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_38" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_38" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_39" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_39" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1142,52 +1142,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="103.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_40" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_40" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_41" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_41" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_42" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_42" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_43" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_43" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_44" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_44" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_45" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_45" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_46" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_46" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_47" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_47" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_48" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_48" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_49" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_49" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1199,52 +1199,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_50" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_50" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_51" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_51" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_52" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_52" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_53" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_53" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_54" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_54" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_55" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_55" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_56" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_56" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_57" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_57" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_58" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_58" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_59" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_59" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1256,52 +1256,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="165.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_60" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_60" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_61" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_61" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_62" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_62" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_63" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_63" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_64" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_64" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_65" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_65" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_66" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_66" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_67" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_67" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_68" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_68" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_69" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_69" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1313,52 +1313,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="196.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_70" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_70" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_71" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_71" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_72" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_72" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_73" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_73" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_74" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_74" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_75" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_75" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_76" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_76" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_77" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_77" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_78" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_78" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_79" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_79" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1370,52 +1370,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="227.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_80" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_80" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_81" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_81" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_82" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_82" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_83" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_83" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_84" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_84" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_85" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_85" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_86" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_86" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_87" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_87" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_88" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_88" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_89" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_89" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1427,52 +1427,52 @@
                                     </HBox>
                                     <HBox alignment="CENTER" layoutX="10.0" layoutY="258.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <TextField fx:id="E_90" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_90" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_91" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_91" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_92" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_92" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_93" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_93" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_94" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_94" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_95" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_95" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_96" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_96" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_97" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_97" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_98" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_98" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField fx:id="E_99" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="E_99" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                              </HBox.margin>
@@ -1484,7 +1484,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="60.0" HBox.hgrow="ALWAYS">
+                              <VBox maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="60.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" VBox.vgrow="ALWAYS" />
                                     <TextField fx:id="I_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI0" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
@@ -1542,7 +1542,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                              <VBox prefWidth="100.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                        <children>
@@ -1780,6 +1780,6 @@
       </BorderPane>
    </children>
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
 </AnchorPane>
