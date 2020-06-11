@@ -543,9 +543,9 @@ public class DashboardController {
 //    }
     public void initParameter(JSONObject myRep, String printers) {
 
-        this.defaultPrinter = printers;
-        this.myResponse = myRep;
-        waits(this.myResponse, this.defaultPrinter);
+        defaultPrinter = printers;
+        myResponse = myRep;
+        waits(this.myResponse, defaultPrinter);
         resetDashboard();
     }
 
@@ -580,17 +580,45 @@ public class DashboardController {
                 jf.setAlignment(Pos.CENTER);
                 jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;-fx-border-width:2px;");
                 jf.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-                jf.setOnKeyPressed((e) -> {
+//                jf.setOnKeyPressed((e) -> {
+//                    jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+//                        if (event.getCode() == KeyCode.TAB) {
+//                            ////System.out.println("Tab pressed");
+//                            event.consume();
+//
+//                        } else if (event.getCode() == KeyCode.F2) {
+//                            System.out.println("Tab pressed F6");
+//                            claimReader.requestFocus();
+//                        } else if (event.getCode() == KeyCode.F6) {
+//                            System.out.println("Tab pressed F6");
+//                            javafx.event.ActionEvent et = null;
+//                            ActionBuy(et);
+//                        }
+//                    });
+//
+//                });
+
+                int p = i;
+                jf.setOnKeyReleased((e) -> {
                     jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                         if (event.getCode() == KeyCode.TAB) {
                             ////System.out.println("Tab pressed");
                             event.consume();
+
+                        } else if (event.getCode() == KeyCode.F2) {
+                            System.out.println("Tab pressed F6");
+                            claimReader.requestFocus();
+                        } else if (event.getCode() == KeyCode.F6) {
+                            System.out.println("Tab pressed F6");
+                            javafx.event.ActionEvent et = null;
+                            ActionBuy(et);
+                        } else {
+                            keyRelease(event, jf, p);
                         }
                     });
-                });
 
-                int p = i;
-                jf.setOnKeyReleased(e -> keyRelease(e, jf, p));
+                });
+                // jf.setOnKeyReleased(e -> );
 
             }
             selectDefaultSeries(0);
@@ -653,7 +681,7 @@ public class DashboardController {
                 DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
                 Date dobj = new Date();
                 DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
-                
+
                 cDate.setText(f.format(dobj));
                 while (true) {
                     //System.out.println(df.format(dateobj));
@@ -702,6 +730,19 @@ public class DashboardController {
             horizontalTextField.put("B_7", B_7);
             horizontalTextField.put("B_8", B_8);
             horizontalTextField.put("B_9", B_9);
+            Iterator<String> it = horizontalTextField.keySet().iterator();
+            while (it.hasNext()) {
+                String key = it.next();
+                TextField jf = horizontalTextField.get(key);
+                jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                    if (event.getCode() == KeyCode.F6) {
+                        System.out.println("Tab pressed F6");
+                        javafx.event.ActionEvent et = null;
+                        ActionBuy(et);
+
+                    }
+                });
+            }
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -747,6 +788,20 @@ public class DashboardController {
             varticalTextField.put("I_70", I_70);
             varticalTextField.put("I_80", I_80);
             varticalTextField.put("I_90", I_90);
+            Iterator<String> it = varticalTextField.keySet().iterator();
+            while (it.hasNext()) {
+                String key = it.next();
+                TextField jf = varticalTextField.get(key);
+                jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                    if (event.getCode() == KeyCode.F6) {
+                        System.out.println("Tab pressed F6");
+                        javafx.event.ActionEvent et = null;
+                        ActionBuy(et);
+
+                    }
+                });
+            }
+
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -866,13 +921,6 @@ public class DashboardController {
 
     public void messageRefreshThread() {
         try {
-//            Thread msgThread = new Thread() {
-//                @Override
-//                public void run() {
-//                    setMessageBar();
-//                }
-//            };
-//            msgThread.start();
             setMessageBar();
         } catch (Exception ex) {
 
@@ -913,8 +961,22 @@ public class DashboardController {
                     // Run the animation
                     timeline.play();
                 };
+                Thread run = new Thread() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            Platform.runLater(updater);
+                            try {
+                                Thread.sleep(40000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
 
-                Platform.runLater(updater);
+                    }
+                };
+                run.start();
+
             });
             threadMessageBar.start();
 
@@ -2073,7 +2135,13 @@ public class DashboardController {
 
     private void resetAll() {
         try {
-            resetDashboard();
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    resetDashboard();
+                }
+            };
+            t.start();
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -2680,7 +2748,7 @@ public class DashboardController {
         //msgPanel
         resultBoard("ALL");
         resetAll();
-        setMessageBar();
+        //setMessageBar();
 
     }
 
@@ -2801,8 +2869,14 @@ public class DashboardController {
                 }
 
             };
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
 
-            Platform.runLater(updater);
         });
         openThread.start();
 
@@ -3091,8 +3165,14 @@ public class DashboardController {
                 }
 
             };
-
-            Platform.runLater(updater);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+//            Platform.runLater(updater);
         });
         openThread.start();
 
@@ -3123,8 +3203,14 @@ public class DashboardController {
                     Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             };
-
-            Platform.runLater(updater);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+            //Platform.runLater(updater);
         });
         openThread.start();
 
@@ -3160,7 +3246,14 @@ public class DashboardController {
                 }
             };
 
-            Platform.runLater(updater);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+            //Platform.runLater(updater);
         });
         openThread.start();
 
@@ -3217,8 +3310,15 @@ public class DashboardController {
                 }
 
             };
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
 
-            Platform.runLater(updater);
+            //Platform.runLater(updater);
         });
         openThread.start();
     }
@@ -3232,11 +3332,10 @@ public class DashboardController {
                     Parent root = loader.load();
                     CancelpoupController Scl = loader.getController();
                     String drawid[] = id.getText().split("_");
+
                     Scl.initLoadData(userid.getText(), printer.getText(), drawid[1]);
                     Stage stage = new Stage();
                     stage.setTitle("Reprint Ticket");
-                    Screen screen = Screen.getPrimary();
-//                  
                     stage.setScene(new Scene(root));
                     themStyle(stage, root);
                     stage.showAndWait();
@@ -3244,12 +3343,18 @@ public class DashboardController {
 
                     lastTransaction();
                 } catch (IOException ex) {
-                    Logger.getLogger(DashboardController.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex.getMessage());
                 }
             };
 
-            Platform.runLater(updater);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+            //Platform.runLater(updater);
         });
         openThread.start();
 
@@ -3282,7 +3387,14 @@ public class DashboardController {
                 }
             };
 
-            Platform.runLater(updater);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+            // Platform.runLater(updater);
         });
         openThread.start();
 
@@ -3319,7 +3431,8 @@ public class DashboardController {
 
     @FXML
     private void barcodeAction(KeyEvent event) {
-        if ("ENTER".equals(event.getCode().toString())) {
+        // System.out.println(event.getText());
+        if ("ENTER".equals(event.getCode().toString()) && !"".equals(claimReader.getText())) {
             Thread t = new Thread() {
                 @Override
                 public void run() {
@@ -3365,7 +3478,14 @@ public class DashboardController {
                             }
                         };
 
-                        Platform.runLater(updater);
+                        Thread t = new Thread() {
+                            @Override
+                            public void run() {
+                                Platform.runLater(updater);
+                            }
+                        };
+                        t.start();
+                        //Platform.runLater(updater);
                     });
                     claimMessage.start();
 

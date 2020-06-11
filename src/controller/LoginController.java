@@ -92,7 +92,7 @@ public class LoginController implements Initializable {
         msg.setText("Authenticating... Please Wait!");
         Thread openThread = new Thread(() -> {
             Runnable updater = () -> {
-                 msg.setText("Authenticating... Please Wait!");
+                msg.setText("Authenticating... Please Wait!");
                 JsonObject person = new JsonObject();
                 person.addProperty("userid", userid.getText());
                 person.addProperty("password", password.getText());
@@ -118,10 +118,16 @@ public class LoginController implements Initializable {
                     ////System.out.println(ex.getMessage());
                 }
             };
-
-            Platform.runLater(updater);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+            //Platform.runLater(updater);
         });
-        
+
         openThread.start();
 
     }
