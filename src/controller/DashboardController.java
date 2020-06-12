@@ -580,45 +580,22 @@ public class DashboardController {
                 jf.setAlignment(Pos.CENTER);
                 jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;-fx-border-width:2px;");
                 jf.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-//                jf.setOnKeyPressed((e) -> {
-//                    jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-//                        if (event.getCode() == KeyCode.TAB) {
-//                            ////System.out.println("Tab pressed");
-//                            event.consume();
-//
-//                        } else if (event.getCode() == KeyCode.F2) {
-//                            System.out.println("Tab pressed F6");
-//                            claimReader.requestFocus();
-//                        } else if (event.getCode() == KeyCode.F6) {
-//                            System.out.println("Tab pressed F6");
-//                            javafx.event.ActionEvent et = null;
-//                            ActionBuy(et);
-//                        }
-//                    });
-//
-//                });
-
-                int p = i;
-                jf.setOnKeyReleased((e) -> {
+                jf.setOnKeyPressed((e) -> {
                     jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
                         if (event.getCode() == KeyCode.TAB) {
                             ////System.out.println("Tab pressed");
                             event.consume();
-
-                        } else if (event.getCode() == KeyCode.F2) {
-                            System.out.println("Tab pressed F6");
-                            claimReader.requestFocus();
                         } else if (event.getCode() == KeyCode.F6) {
                             System.out.println("Tab pressed F6");
                             javafx.event.ActionEvent et = null;
                             ActionBuy(et);
-                        } else {
-                            keyRelease(event, jf, p);
+                            event.consume();
                         }
                     });
-
                 });
-                // jf.setOnKeyReleased(e -> );
+
+                int p = i;
+                jf.setOnKeyReleased(e -> keyRelease(e, jf, p));
 
             }
             selectDefaultSeries(0);
@@ -2117,11 +2094,11 @@ public class DashboardController {
                             tf.setText("");
                         }
 
-                        lastTransaction();
+                        //lastTransaction();
                         calculateTotal();
                         resetManualPlatSeleted();
                         runnableBalance();
-                        messageRefreshThread();
+                        //messageRefreshThread();
 
                     }
                 };
@@ -2746,7 +2723,7 @@ public class DashboardController {
     @FXML
     private void Actionb2(javafx.event.ActionEvent event) {
         //msgPanel
-        resultBoard("ALL");
+        //resultBoard("ALL");
         resetAll();
         //setMessageBar();
 
@@ -3431,20 +3408,21 @@ public class DashboardController {
 
     @FXML
     private void barcodeAction(KeyEvent event) {
-        // System.out.println(event.getText());
-        if ("ENTER".equals(event.getCode().toString()) && !"".equals(claimReader.getText())) {
+        System.out.println("Event "+event.getText());
+        if ("-".equals(event.getText()) && !"".equals(claimReader.getText())) {
             Thread t = new Thread() {
                 @Override
                 public void run() {
                     try {
                         Map<String, String> finalMap = new HashMap<>();
-                        finalMap.put("id", claimReader.getText());
+                        String scanner[] = claimReader.getText().split("-");
+                        finalMap.put("id", scanner[0]);
                         finalMap.put("userid", userid.getText());
                         String did[] = id.getText().split("_");
                         finalMap.put("gameid", did[1]);
                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
                         String jsonEmp = gson.toJson(finalMap);
-                        //////System.out.println(jsonEmp);
+                        System.out.println(jsonEmp);
                         String data = httpAPI._jsonRequest("?r=checkWinner", jsonEmp);
                         //System.out.println(data);
                         String msg = claimJSON.claimJSONPrint(data, printer.getText());

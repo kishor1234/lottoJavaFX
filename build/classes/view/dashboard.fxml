@@ -36,6 +36,9 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="b2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Actionb2" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="REFRESH" HBox.hgrow="ALWAYS">
                                  <font>
@@ -44,6 +47,9 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="bSeries" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectSeriesActionbtn" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="SERIES" HBox.hgrow="ALWAYS">
                                  <font>
@@ -52,6 +58,9 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
                               <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
@@ -155,6 +164,9 @@
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                           <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                                              <children>
@@ -514,26 +526,41 @@
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="odd" layoutX="80.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionOdd" text="ODD">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="even" layoutX="145.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionEven" text="EVEN">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="cross" layoutX="393.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionCross" text="Cross Play">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="fixed" layoutX="506.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionFixed" text="Fixed Play">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <HBox.margin>
@@ -602,6 +629,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -613,6 +643,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -628,6 +661,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -639,6 +675,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -654,6 +693,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -665,6 +707,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -680,6 +725,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c3" style="-fx-background-color: #5ba36a;" text="02*03=0540" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -691,6 +739,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -706,6 +757,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c4" style="-fx-background-color: #d98d81;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -717,6 +771,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -732,6 +789,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c5" style="-fx-background-color: #b9b1e6;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -743,6 +803,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -758,6 +821,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c6" style="-fx-background-color: #ea9e7b;" text="02*10=1800" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -769,6 +835,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -784,6 +853,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c7" style="-fx-background-color: #a4cc5a;" text="02*20=3600" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -795,6 +867,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -810,6 +885,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c8" style="-fx-background-color: #c9bdaf;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -821,6 +899,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -836,6 +917,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c9" style="-fx-background-color: #17bcbd;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -847,6 +931,9 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -1763,6 +1850,9 @@
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                     </VBox>

@@ -42,8 +42,8 @@ public class invoiceJSON {
                 Map<String, String> printMap = ja.get(i);
                 //System.out.println("Print data " + printMap);
                 //printPage += "Rajashreee Lottery\n";
-                String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "\n";
-                String secondPrice = "Second Prize Amt: 180/- \n";
+                String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "";
+                String secondPrice = "Second Prize Amt: 180/- ";
                 String numberHeader = "NUMBER QT NUMBER QT NUMBER QT";
                 Map<String, ArrayList> printMapd = ja.get(i);
                 ArrayList<Map> point = printMapd.get("point");
@@ -51,7 +51,8 @@ public class invoiceJSON {
                 int limit = 1;
                 String numberTable = "";
                 String printPageFooter = "";
-                printPageFooter += "\n \nPer Ticket price .2.00\nTotal Quantity : " + printMap.get("totalpoint") + "\n";
+                printPageFooter += "Per Ticket price .2.00\n";
+                printPageFooter += "Total Quantity : " + printMap.get("totalpoint") + "\n";
                 printPageFooter += "Total Point    : " + printMap.get("amount") + "\n";
                 printPageFooter += "Total Quantity : " + trno + "\n";
                 for (int j = 0; j < point.size(); j++) {

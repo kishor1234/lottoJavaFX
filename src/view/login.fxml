@@ -12,46 +12,6 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="login" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
     <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="211.0" prefWidth="332.0" styleClass="white-border-2" BorderPane.alignment="CENTER">
-                  <children>
-                      <Pane prefHeight="37.0" prefWidth="200.0" styleClass="white-border-2">
-                          <children>
-                              <Label layoutX="6.0" layoutY="8.0" text="Software Version 1.0" textFill="WHITE">
-                                  <font>
-                                      <Font size="18.0" />
-                                  </font>
-                              </Label>
-                          </children>
-                      </Pane>
-                      <Label fx:id="msg" layoutX="14.0" layoutY="46.0" text="Error Message" textFill="#dd9b9b">
-                          <font>
-                              <Font name="System Bold" size="18.0" />
-                          </font>
-                      </Label>
-                      <Label layoutX="14.0" layoutY="73.0" text="Username" textFill="WHITE">
-                          <font>
-                              <Font name="System Bold" size="13.0" />
-                          </font>
-                      </Label>
-                      <Label layoutX="15.0" layoutY="108.0" text="Password" textFill="WHITE">
-                          <font>
-                              <Font name="System Bold" size="13.0" />
-                          </font>
-                      </Label>
-                      <TextField fx:id="userid" layoutX="100.0" layoutY="69.0" promptText="Username" />
-                      <PasswordField fx:id="password" layoutX="100.0" layoutY="103.0" promptText="Password" />
-                      <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login" />
-                  <TextField fx:id="defaultPrinter" disable="true" editable="false" layoutX="166.0" layoutY="140.0" prefHeight="25.0" prefWidth="106.0" promptText="Printer" />
-                  </children>
-                  <opaqueInsets>
-                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </opaqueInsets>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-              </Pane>
-         </center>
          <right>
               <VBox fx:id="printerBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                   <children>
@@ -114,6 +74,66 @@
          <left>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
          </left>
+         <center>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="67.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" layoutX="-4.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RajLaxmi Lottery">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Pane>
+                    <Pane styleClass="white-border-2" VBox.vgrow="ALWAYS">
+                        <children>
+                            <Pane prefHeight="37.0" prefWidth="200.0" styleClass="white-border-2">
+                                <children>
+                                    <Label layoutX="6.0" layoutY="8.0" text="Software Version 1.0" textFill="WHITE">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                            </Pane>
+                            <Label fx:id="msg" layoutX="14.0" layoutY="46.0" text="Error Message" textFill="#dd9b9b">
+                                <font>
+                                    <Font name="System Bold" size="18.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="14.0" layoutY="73.0" text="Username" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="13.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="15.0" layoutY="108.0" text="Password" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="13.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="userid" layoutX="100.0" layoutY="69.0" promptText="Username" />
+                            <PasswordField fx:id="password" layoutX="100.0" layoutY="103.0" promptText="Password" />
+                            <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login" />
+                        <TextField fx:id="defaultPrinter" disable="true" editable="false" layoutX="166.0" layoutY="140.0" prefHeight="25.0" prefWidth="106.0" promptText="Printer" />
+                        </children>
+                        <opaqueInsets>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                    </Pane>
+                  <Pane prefHeight="15.0" prefWidth="300.0" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </VBox>
+         </center>
       </BorderPane>
          
     </children>

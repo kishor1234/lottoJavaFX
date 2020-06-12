@@ -75,7 +75,7 @@ public class LoginController implements Initializable {
         // TODO
         msg.setText("");
         loadPrinter();
-        //defaultPrinter.setVisible(false);
+        defaultPrinter.setVisible(false);
 
     }
 

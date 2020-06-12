@@ -57,15 +57,15 @@ public class PrintInvoice {
                     .writeLF("Second Prize Amt: 180/-")
                     .writeLF(bold, numberHeader)
                     .writeLF(numberTable)
-                    .writeLF(bold, printPageFooter)
-                    .feed(1);
+                    .writeLF(bold, printPageFooter);
+            //.feed(1);
 
             BarCode barcode = new BarCode();
             barcode.setSystem(BarCode.BarCodeSystem.CODE39_A);
             barcode.setHRIPosition(BarCode.BarCodeHRIPosition.BelowBarCode);
             barcode.setBarCodeSize(3, 50);
             escpos.feed(1);
-            escpos.write(barcode, Barcode).feed(1);
+            escpos.write(barcode, Barcode+".").feed(1);
 
             Style tt = new Style()
                     .setJustification(EscPosConst.Justification.Left_Default)

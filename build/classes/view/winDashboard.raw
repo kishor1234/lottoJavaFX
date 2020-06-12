@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane id="AnchorPane" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -36,9 +43,6 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
                               </Button>
                               <Button fx:id="b2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Actionb2" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="REFRESH" HBox.hgrow="ALWAYS">
                                  <font>
@@ -47,9 +51,6 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
                               </Button>
                               <Button fx:id="bSeries" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectSeriesActionbtn" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="SERIES" HBox.hgrow="ALWAYS">
                                  <font>
@@ -58,9 +59,6 @@
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
                               </Button>
                               <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
                               <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
@@ -164,9 +162,6 @@
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
                                           </Button>
                                           <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
                                              <children>
@@ -526,41 +521,26 @@
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="OPEN_HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="odd" layoutX="80.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionOdd" text="ODD">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="OPEN_HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="even" layoutX="145.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionEven" text="EVEN">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="OPEN_HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="cross" layoutX="393.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionCross" text="Cross Play">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="OPEN_HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                                 <CheckBox fx:id="fixed" layoutX="506.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionFixed" text="Fixed Play">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="OPEN_HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <HBox.margin>
@@ -595,7 +575,7 @@
                               </HBox>
                               <HBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <VBox HBox.hgrow="ALWAYS">
+                                    <VBox minHeight="200.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                              <children>
@@ -629,9 +609,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -643,9 +620,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -661,9 +635,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -675,9 +646,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -693,9 +661,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -707,9 +672,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -725,9 +687,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c3" style="-fx-background-color: #5ba36a;" text="02*03=0540" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -739,9 +698,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -757,9 +713,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c4" style="-fx-background-color: #d98d81;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -771,9 +724,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -789,9 +739,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c5" style="-fx-background-color: #b9b1e6;" text="02*05=0900" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -803,9 +750,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -821,9 +765,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c6" style="-fx-background-color: #ea9e7b;" text="02*10=1800" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -835,9 +776,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -853,9 +791,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c7" style="-fx-background-color: #a4cc5a;" text="02*20=3600" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -867,9 +802,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -885,9 +817,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c8" style="-fx-background-color: #c9bdaf;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -899,9 +828,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -917,9 +843,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </Button>
                                                 <CheckBox fx:id="c9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c9" style="-fx-background-color: #17bcbd;" text="02*25=4500" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
@@ -931,9 +854,6 @@
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
                                                 </CheckBox>
                                              </children>
                                              <VBox.margin>
@@ -945,7 +865,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox nodeOrientation="LEFT_TO_RIGHT" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                                    <VBox minHeight="200.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <HBox alignment="CENTER" layoutX="15.0" layoutY="303.0" VBox.vgrow="ALWAYS">
                                              <children>
@@ -1573,7 +1493,7 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <VBox maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="60.0" HBox.hgrow="ALWAYS">
+                                    <VBox maxWidth="-Infinity" minHeight="200.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="60.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" VBox.vgrow="ALWAYS" />
                                           <TextField fx:id="I_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI0" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
@@ -1631,13 +1551,13 @@
                                           <Insets />
                                        </HBox.margin>
                                     </VBox>
-                                    <VBox prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                    <VBox minHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                          <HBox VBox.vgrow="ALWAYS">
                                              <children>
-                                                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                                <VBox HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="QTY" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="QTY" VBox.vgrow="ALWAYS">
+                                                      <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" promptText="QTY" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="QTY" VBox.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
@@ -1645,7 +1565,7 @@
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
                                                       </TextField>
-                                                      <TextField fx:id="Q1000_1900" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q1000_1900" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1653,7 +1573,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1661,7 +1581,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1669,7 +1589,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1677,7 +1597,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1685,7 +1605,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1693,7 +1613,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1701,7 +1621,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1709,7 +1629,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1717,7 +1637,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="Q10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="Q10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1725,7 +1645,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="totalqty" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="totalqty" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
@@ -1738,9 +1658,9 @@
                                                       <Insets />
                                                    </HBox.margin>
                                                 </VBox>
-                                                <VBox layoutX="10.0" layoutY="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                                <VBox layoutX="10.0" layoutY="15.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="AMT ₹ " style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="AMT ₹ " VBox.vgrow="ALWAYS">
+                                                      <TextField alignment="CENTER" maxHeight="-Infinity" minHeight="30.0" promptText="AMT ₹ " style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="AMT ₹ " VBox.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
@@ -1748,7 +1668,7 @@
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
                                                       </TextField>
-                                                      <TextField fx:id="A1000_1900" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A1000_1900" alignment="CENTER" editable="false" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1756,7 +1676,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1764,7 +1684,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1772,7 +1692,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1780,7 +1700,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1788,7 +1708,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1796,7 +1716,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1804,7 +1724,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1812,7 +1732,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1820,7 +1740,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="A10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="A10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <VBox.margin>
                                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                                                          </VBox.margin>
@@ -1828,7 +1748,7 @@
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField fx:id="totalamt" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                      <TextField fx:id="totalamt" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
@@ -1850,9 +1770,6 @@
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
                                           </Button>
                                        </children>
                                     </VBox>
@@ -1877,3 +1794,4 @@
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
 </AnchorPane>
+
