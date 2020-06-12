@@ -59,6 +59,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -518,6 +519,7 @@ public class DashboardController {
     private int totq;
     private int fin;
     private int tota;
+    private Map pevirous = new HashMap<>();
 
     //end
     /**
@@ -545,8 +547,23 @@ public class DashboardController {
 
         defaultPrinter = printers;
         myResponse = myRep;
-        waits(this.myResponse, defaultPrinter);
-        resetDashboard();
+        pevirous.put("last", new TextField(""));
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                waits(this.myResponse, defaultPrinter);
+                resetDashboard();
+            };
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    Platform.runLater(updater);
+                }
+            };
+            t.start();
+//            Platform.runLater(updater);
+        });
+        openThread.start();
+
     }
 
     public void waits(JSONObject myResponse, String printers) {
@@ -650,16 +667,15 @@ public class DashboardController {
     }
 
     private void showTimer() {
-
+        DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
+        Date dobj = new Date();
+        cDate.setText(f.format(dobj));
         Thread t = new Thread() {
             @Override
             public void run() {
 
-                DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
-                Date dobj = new Date();
                 DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
 
-                cDate.setText(f.format(dobj));
                 while (true) {
                     //System.out.println(df.format(dateobj));
                     Date dateobj = new Date();
@@ -2051,13 +2067,13 @@ public class DashboardController {
         Balance.start();
     }
 
+   
+
     public void resetDashboard() {
         Thread resetDB = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 Runnable updater = new Runnable() {
-
                     @Override
                     public void run() {
                         subSeriesNo.setText("");
@@ -2083,6 +2099,7 @@ public class DashboardController {
                             seriesLable.setText("1000-1900");
                             selectDefaultSeries(0);
                             selectSubSeries(B0);
+                            B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
                         }
                         if (multiSeries.size() >= 0) {
                             multiSeries.clear();
@@ -2094,11 +2111,11 @@ public class DashboardController {
                             tf.setText("");
                         }
 
-                        //lastTransaction();
+                        lastTransaction();
                         calculateTotal();
                         resetManualPlatSeleted();
                         runnableBalance();
-                        //messageRefreshThread();
+                        messageRefreshThread();
 
                     }
                 };
@@ -2133,9 +2150,9 @@ public class DashboardController {
             finalMap.put("series", srs);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String jsonEmp = gson.toJson(finalMap);
-            //////System.out.println(jsonEmp);
+            //System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
-            ////System.out.println("Result" + Data);
+            //System.out.println("Result" + Data);
             ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
             int ip = 0;
             int x = 8;
@@ -2168,12 +2185,13 @@ public class DashboardController {
                         int fl = i + Integer.parseInt(finas.getValue());
                         //////System.out.println("" + fl);
                         Label jLable = new Label(" " + fl + "");
-                        jLable.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
+                        jLable.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold;");
                         jLable.setWrapText(true);
                         jLable.setAlignment(Pos.CENTER);
                         jLable.setMaxWidth(Double.POSITIVE_INFINITY);
                         jLable.setMaxHeight(Double.POSITIVE_INFINITY);
-                        jLable.setTextFill(Color.web("#FFFFFF"));
+                        jLable.setTextFill(Color.web("#000000"));
+                        jLable.setAlignment(Pos.CENTER);
                         //jLable.setText("" + fl);
                         Pane p = new Pane();
                         HBox.setMargin(p, new Insets(1, 1, 1, 1));
@@ -2204,7 +2222,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            ////System.out.println("Erron Thread-8 " + ex.getMessage());
+            //System.out.println("Erron Thread-8 " + ex.getMessage());
         }
 //        try {
 //            Thread t = new Thread() {
@@ -2591,7 +2609,6 @@ public class DashboardController {
                                     data.put("drawid", advanceDraw.get("gametimeid"));
                                     data.put("totalqty", qt);
                                     data.put("totalamt", am);
-
                                     data.put("perPoint", "2");
                                     data.put("start", advanceDraw.get("gametime"));
                                     data.put("end", advanceDraw.get("gameendtime"));
@@ -2606,7 +2623,7 @@ public class DashboardController {
                                 ////System.out.println(jsonEmp);
 
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                ////System.out.println("Data \n" + Data);
+                                System.out.println("Data \n" + Data);
                                 resetAll();
                                 buy.setDisable(false);
                                 //get unitrid 
@@ -2614,48 +2631,55 @@ public class DashboardController {
                                 //System.out.println(obj);
                                 // typecasting obj to JSONObject 
                                 Map<String, String> joMap = (Map<String, String>) obj;
-                                //JSONObject jo = (JSONObject) obj;
-                                // getting firstName and lastName 
-                                String utrno = (String) joMap.get("print");
-                                Map<String, String> adbPrint = new HashMap<>();
-                                adbPrint.put("utrno", utrno);
-                                adbPrint.put("own", userid.getText());
-                                adbPrint.put("action", "entry");
-                                //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                String jsonPrint = gson.toJson(adbPrint);
-                                //System.out.println(jsonPrint);
-                                Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                Object obj2 = new JSONParser().parse(Data);
-                                //System.out.println(obj);
-                                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-                                for (int i = 0; i < aMap.size(); i++) {
-                                    Map<String, String> temP = aMap.get(i);
-                                    adbPrint = new HashMap<>();
-                                    adbPrint.put("game", temP.get("game"));
-                                    adbPrint.put("own", userid.getText());
+                                System.out.println(joMap);
+                                if (joMap.get("status").equals("1")) {
+
+                                    //JSONObject jo = (JSONObject) obj;
+                                    // getting firstName and lastName 
+                                    String utrno = (String) joMap.get("print");
+                                    Map<String, String> adbPrint = new HashMap<>();
                                     adbPrint.put("utrno", utrno);
-                                    adbPrint.put("action", "subentry");
+                                    adbPrint.put("own", userid.getText());
+                                    adbPrint.put("action", "entry");
                                     //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                    jsonPrint = gson.toJson(adbPrint);
-                                    ////System.out.println(jsonPrint);
-                                    final String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                    Thread tp = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
-                                                Thread.sleep(1000);
-                                            } catch (Exception ex) {
-                                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                    String jsonPrint = gson.toJson(adbPrint);
+                                    //System.out.println(jsonPrint);
+                                    Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                    Object obj2 = new JSONParser().parse(Data);
+                                    //System.out.println(obj);
+                                    ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                                    for (int i = 0; i < aMap.size(); i++) {
+                                        Map<String, String> temP = aMap.get(i);
+                                        adbPrint = new HashMap<>();
+                                        adbPrint.put("game", temP.get("game"));
+                                        adbPrint.put("own", userid.getText());
+                                        adbPrint.put("utrno", utrno);
+                                        adbPrint.put("action", "subentry");
+                                        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                        jsonPrint = gson.toJson(adbPrint);
+                                        ////System.out.println(jsonPrint);
+                                        String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                        System.out.println("[" + i + "]" + jsonPrint);
+                                        Thread tp = new Thread() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
+                                                    Thread.sleep(1000);
+                                                } catch (Exception ex) {
+                                                    Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
+
                                             }
+                                        };
+                                        tp.start();
 
-                                        }
-                                    };
-                                    tp.start();
-
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, joMap.get("msg"));
                                 }
-                                //invoiceJSON iJ = new invoiceJSON();
 
+                                //invoiceJSON iJ = new invoiceJSON();
                                 //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                 lastTransaction();
                             } else {
@@ -2731,8 +2755,13 @@ public class DashboardController {
 
     private void keyRelease(javafx.scene.input.KeyEvent e, TextField jf, int p) {
         ////System.out.println(e.getText());
+        TextField l = null;
         switch (e.getCode().toString()) {
             case "DOWN"://down
+                l = (TextField) pevirous.get("last");
+                if (l.getText().equals("")) {
+                    l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                }
                 int down = p + 10;
                 if (down < 100) {
                     TextField dwnjf = jField.get("E_" + down);
@@ -2740,27 +2769,44 @@ public class DashboardController {
                 }
                 break;
             case "UP"://up
+                l = (TextField) pevirous.get("last");
+                if (l.getText().equals("")) {
+                    l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                }
                 int up = p - 10;
-                if (up > 0) {
+                if (up >= 0) {
                     TextField dwnjf = jField.get("E_" + up);
                     dwnjf.requestFocus();
                 }
                 break;
             case "LEFT"://left
+                l = (TextField) pevirous.get("last");
+                if (l.getText().equals("")) {
+                    l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                }
                 int left = p - 1;
-                if (left > 0 && left < 100) {
+                if (left >= 0 && left < 100) {
                     TextField dwnjf = jField.get("E_" + left);
                     dwnjf.requestFocus();
                 }
                 break;
             case "RIGHT"://right
+                l = (TextField) pevirous.get("last");
+                if (l.getText().equals("")) {
+                    l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                }
                 int right = p + 1;
-                if (right > 0 && right < 100) {
+                if (right >= 0 && right < 100) {
                     TextField dwnjf = jField.get("E_" + right);
                     dwnjf.requestFocus();
                 }
                 break;
             default:
+                l = (TextField) pevirous.get("last");
+                if (l.getText().equals("")) {
+                    l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                }
+                pevirous.put("last", jf);
                 inputSystem(p, jf);
                 break;
         }
@@ -3408,7 +3454,7 @@ public class DashboardController {
 
     @FXML
     private void barcodeAction(KeyEvent event) {
-        System.out.println("Event "+event.getText());
+        System.out.println("Event " + event.getText());
         if ("-".equals(event.getText()) && !"".equals(claimReader.getText())) {
             Thread t = new Thread() {
                 @Override

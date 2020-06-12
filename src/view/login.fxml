@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -79,10 +81,13 @@
                <children>
                   <Pane prefHeight="67.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Text fill="WHITE" layoutX="-4.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RajLaxmi Lottery">
+                        <Text fill="WHITE" layoutX="-11.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="राजलक्ष्मी लॉटरी">
                            <font>
-                              <Font name="System Bold" size="30.0" />
+                              <Font name="System Bold" size="50.0" />
                            </font>
+                           <effect>
+                              <Reflection />
+                           </effect>
                         </Text>
                      </children>
                      <VBox.margin>
@@ -117,7 +122,10 @@
                             </Label>
                             <TextField fx:id="userid" layoutX="100.0" layoutY="69.0" promptText="Username" />
                             <PasswordField fx:id="password" layoutX="100.0" layoutY="103.0" promptText="Password" />
-                            <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login" />
+                            <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <TextField fx:id="defaultPrinter" disable="true" editable="false" layoutX="166.0" layoutY="140.0" prefHeight="25.0" prefWidth="106.0" promptText="Printer" />
                         </children>
                         <opaqueInsets>

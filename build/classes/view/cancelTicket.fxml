@@ -27,7 +27,10 @@
                      </font>
                   </Label>
                   <Pane prefHeight="30.0" prefWidth="381.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="close" mnemonicParsing="false" onAction="#closeWindo" style="-fx-background-color: #FF0000;" text="X" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="close" mnemonicParsing="false" onAction="#closeWindo" style="-fx-background-color: #FF0000;" text="X" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </HBox>
             <TableView fx:id="ticket_info" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/reprintticket.css" VBox.vgrow="ALWAYS">

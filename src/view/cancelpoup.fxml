@@ -48,12 +48,18 @@
             <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="25.0" prefWidth="259.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="action" mnemonicParsing="false" onAction="#AcceptAction" prefHeight="25.0" prefWidth="87.0" text="Accept" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="action" mnemonicParsing="false" onAction="#AcceptAction" prefHeight="25.0" prefWidth="87.0" text="Accept" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Pane prefWidth="20.0" HBox.hgrow="ALWAYS" />
                   <Button fx:id="close" mnemonicParsing="false" onAction="#CloseAction" prefHeight="25.0" prefWidth="92.0" text="Close" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets right="100.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Pane prefHeight="25.0" prefWidth="156.0" HBox.hgrow="ALWAYS" />
                </children>

@@ -54,7 +54,7 @@ public class ResultController {
         person.addProperty("series", series.getText());
         person.addProperty("gdate", gdate.getValue().toString());
         String jsonString = person.toString();
-        ////System.out.println(jsonString);
+        System.out.println(jsonString);
 
         try {
             String data = httpAPI._jsonRequest("?r=result", jsonString);
@@ -88,12 +88,12 @@ public class ResultController {
                 for (int k = 0; k <= 9; k++) {
                     int num = (Integer.parseInt(ss[0]) + (k * 100)) + Integer.parseInt(sData.get("" + k));
                     Label jLable = new Label(" " + num + "");
-                    jLable.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
+                    jLable.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold;");
                     jLable.setWrapText(true);
                     jLable.setAlignment(Pos.CENTER);
                     jLable.setMaxWidth(Double.POSITIVE_INFINITY);
                     jLable.setMaxHeight(Double.POSITIVE_INFINITY);
-                    jLable.setTextFill(Color.web("#FFFFFF"));
+                    jLable.setTextFill(Color.web("#000000"));
                     //jLable.setText("" + fl);
                     Pane p = new Pane();
                     HBox.setMargin(p, new Insets(5, 2, 2, 2));
