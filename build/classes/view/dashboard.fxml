@@ -1,0 +1,1889 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+   <children>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <BorderPane BorderPane.alignment="CENTER">
+               <bottom>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <Pane fx:id="msgPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Pane>
+                           </children>
+                        </VBox>
+                        <HBox style="-fx-background-color: #FFFFFF; -fx-border-color: blue;">
+                           <children>
+                              <Button fx:id="b1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#opneAdvanceDrawSelecter" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="ADVANCE DRAW" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="b2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Actionb2" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="REFRESH" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="bSeries" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectSeriesActionbtn" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="SERIES" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
+                              <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
+                              <Pane layoutX="278.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="claimReader" alignment="CENTER" onKeyPressed="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <ImageView fitHeight="48.0" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/mobile-phone-signal-strength.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </bottom>
+               <top>
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <Pane style="-fx-background-color: #FFFFFF;">
+                                 <children>
+                                    <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="10.0" layoutY="10.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/rjlx.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="28.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Amusement">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" left="4.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </Pane>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="170.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label layoutX="18.0" layoutY="6.0" text="RajaLaxmi Lottery">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Text fx:id="clockLabel" layoutX="37.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03:47:31: PM">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                                <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: #802b00;" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Text fx:id="lastDraw" fill="#d7cfcf" layoutX="32.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10:15 AM">
+                                                         <font>
+                                                            <Font name="System Bold" size="20.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #000000;" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label fx:id="userid" layoutX="80.0" layoutY="4.0" prefHeight="19.0" prefWidth="89.0" text="20200431" textAlignment="CENTER" textFill="#f2efef">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Text fx:id="id" fill="WHITE" layoutX="7.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D_50" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
+                                             <content>
+                                                <VBox fx:id="resultPane" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
+                                                   <opaqueInsets>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </opaqueInsets>
+                                                </VBox>
+                                             </content>
+                                          </ScrollPane>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionOnResultUpdate" style="-fx-background-color: #faf49a; -fx-border-color: #CCCCCC; -fx-border-radius: 5px;" text="Result Update">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                          <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="result" layoutX="19.0" layoutY="2.0" onMouseClicked="#showResultBoard" text="Result">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                          <Pane layoutX="274.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="operator" layoutX="11.0" layoutY="2.0" onMouseClicked="#operatorAction" text="Account">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                          <Pane layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="reprint" layoutX="16.0" layoutY="2.0" onMouseClicked="#reprintTicketAction" text="Reprint">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                          <Pane layoutX="466.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="cancel" layoutX="18.0" layoutY="2.0" onMouseClicked="#cancelTicketAction" text="Cancel">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                          <Pane layoutX="562.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="password" layoutX="10.0" layoutY="2.0" onMouseClicked="#actionChangePassword" text="Password">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                          <Pane layoutX="658.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="complaint" layoutX="8.0" layoutY="2.0" text="Complaint">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                          <Pane layoutX="719.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #8debed;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label fx:id="singout" layoutX="13.0" layoutY="2.0" onMouseClicked="#singoutAction" text="Sign Off" textFill="RED">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Label>
+                                             </children>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Pane>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="110.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="printer" alignment="CENTER" editable="false" layoutX="10.0" layoutY="31.0" prefHeight="25.0" prefWidth="91.0" />
+                                                <Text layoutX="21.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRINTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Pane>
+                                          <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="150.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Pane prefHeight="30.0" prefWidth="133.0" style="-fx-border-color: #000000;" VBox.vgrow="ALWAYS">
+                                                   <VBox.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Text fx:id="uid" layoutX="7.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name 20200431">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Text>
+                                                   </children>
+                                                </Pane>
+                                                <Pane prefHeight="28.0" prefWidth="150.0" style="-fx-border-color: #000000;" VBox.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Text fx:id="seriesLable" layoutX="36.0" layoutY="19.0" onMouseClicked="#selectSeriesAction" strokeType="OUTSIDE" strokeWidth="0.0" text="1000-1900">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Text>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </VBox.margin>
+                                                </Pane>
+                                             </children>
+                                          </VBox>
+                                          <HBox prefHeight="62.0" prefWidth="297.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Pane prefHeight="32.0" prefWidth="323.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="5.0" text="Time to Dr." textFill="#d82b2b">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane prefHeight="29.0" prefWidth="323.0">
+                                                         <children>
+                                                            <Text fx:id="drawClock" fill="RED" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:02:33" wrappingWidth="99.6005859375">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Pane prefHeight="32.0" prefWidth="323.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="5.0" text="Dr. Time" textFill="#d82b2b">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane prefHeight="29.0" prefWidth="323.0">
+                                                         <children>
+                                                            <Text fx:id="dTime" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03:16 PM">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Pane prefHeight="32.0" prefWidth="323.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="7.0" text="Dr. Date" textFill="#d82b2b">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane prefHeight="29.0" prefWidth="323.0">
+                                                         <children>
+                                                            <Label fx:id="cDate" alignment="CENTER" contentDisplay="CENTER" layoutX="-8.0" layoutY="4.0" text="05-01-2020">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="357.0" layoutY="11.0" prefHeight="200.0" prefWidth="60.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="5.0" text="Balance" textFill="#d82b2b">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Text fx:id="balance" layoutX="14.0" layoutY="19.0" onMouseClicked="#showandhide" strokeType="OUTSIDE" strokeWidth="0.0" text="*****">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="428.0" layoutY="11.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="5.0" text="Last Tr. No." textFill="#d82b2b">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Text fx:id="last" fill="#7c32eb" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticke">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="429.0" layoutY="11.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #000000;" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <Pane prefHeight="32.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="6.0" text="Last Sale Amt." textFill="#d82b2b">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="10.0" right="10.0" />
+                                                               </padding>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane prefHeight="29.0" prefWidth="323.0" VBox.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Text fx:id="lastamt" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rs. 00.00">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </Pane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </top>
+               <center>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Text fill="#e40f0f" strokeType="OUTSIDE" strokeWidth="0.0" text="RajLaxmi Weekly Lottery" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <HBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <CheckBox fx:id="multi" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionMulti" text="Multi">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                                <CheckBox fx:id="odd" layoutX="80.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionOdd" text="ODD">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                                <CheckBox fx:id="even" layoutX="145.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionEven" text="EVEN">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                                <CheckBox fx:id="cross" layoutX="393.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionCross" text="Cross Play">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                                <CheckBox fx:id="fixed" layoutX="506.0" layoutY="5.0" mnemonicParsing="false" onAction="#ActionFixed" text="Fixed Play">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="OPEN_HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Pane>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <TextField fx:id="custome" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="30.0" text="0" />
+                                          <TextField fx:id="end" alignment="TOP_RIGHT" layoutX="23.0" layoutY="10.0" prefHeight="30.0" prefWidth="30.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="162.0" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <children>
+                                          <TextField fx:id="start" prefHeight="25.0" prefWidth="35.0" />
+                                          <TextField fx:id="alls" prefHeight="25.0" prefWidth="41.0" promptText="alls" text="alls" />
+                                          <TextField fx:id="subSeriesNo" prefHeight="3.0" prefWidth="41.0" promptText="series" text="series" />
+                                          <TextField fx:id="NSystems" prefHeight="25.0" prefWidth="35.0" />
+                                          <TextField fx:id="advance" prefHeight="25.0" prefWidth="41.0" promptText="false" text="false" />
+                                          <TextField fx:id="CMulti" prefHeight="25.0" prefWidth="41.0" promptText="m" text="m" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox minHeight="200.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="85.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="Page Up | Down" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB0" prefWidth="94.0" text="1000-1099" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB1" prefWidth="94.0" text="1100-1199" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB2" prefWidth="94.0" text="1200-1299" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB3" prefWidth="100.0" text="1300-1399" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c3" style="-fx-background-color: #5ba36a;" text="02*03=0540" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB4" prefWidth="100.0" text="1400-1499" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c4" style="-fx-background-color: #d98d81;" text="02*05=0900" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB5" prefWidth="100.0" text="1500-1599" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c5" style="-fx-background-color: #b9b1e6;" text="02*05=0900" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB6" prefWidth="100.0" text="1600-1699" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c6" style="-fx-background-color: #ea9e7b;" text="02*10=1800" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB7" prefWidth="100.0" text="1700-1799" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c7" style="-fx-background-color: #a4cc5a;" text="02*20=3600" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB8" prefWidth="100.0" text="1800-1899" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c8" style="-fx-background-color: #c9bdaf;" text="02*25=4500" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button fx:id="B9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB9" prefWidth="100.0" text="1900-1999" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <CheckBox fx:id="c9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c9" style="-fx-background-color: #17bcbd;" text="02*25=4500" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                                   </padding>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </CheckBox>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox minHeight="200.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox alignment="CENTER" layoutX="15.0" layoutY="303.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="B_0" alignment="CENTER" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_0" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_1" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_2" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_2" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_3" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_3" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_4" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_4" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_5" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_5" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_6" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_6" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_7" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_7" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_8" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_8" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="B_9" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" onKeyReleased="#ActionB_9" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_0" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_1" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_2" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_3" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_4" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_5" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_6" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_7" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_8" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_9" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_10" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_11" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_12" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_13" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_14" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_15" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_16" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_17" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_18" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_19" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="41.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_20" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_21" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_22" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_23" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_24" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_25" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_26" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_27" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_28" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_29" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="72.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_30" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_31" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_32" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_33" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_34" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_35" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_36" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_37" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_38" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_39" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="103.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_40" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_41" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_42" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_43" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_44" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_45" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_46" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_47" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_48" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_49" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="134.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_50" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_51" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_52" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_53" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_54" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_55" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_56" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_57" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_58" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_59" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="165.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_60" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_61" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_62" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_63" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_64" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_65" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_66" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_67" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_68" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_69" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="196.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_70" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_71" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_72" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_73" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_74" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_75" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_76" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_77" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_78" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_79" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="227.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_80" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_81" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_82" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_83" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_84" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_85" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_86" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_87" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_88" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_89" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="258.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="E_90" alignment="CENTER" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_91" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_92" alignment="CENTER" layoutX="70.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_93" alignment="CENTER" layoutX="130.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_94" alignment="CENTER" layoutX="190.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_95" alignment="CENTER" layoutX="250.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_96" alignment="CENTER" layoutX="310.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_97" alignment="CENTER" layoutX="370.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_98" alignment="CENTER" layoutX="430.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="E_99" alignment="CENTER" layoutX="490.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
+                                                   <HBox.margin>
+                                                      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="-Infinity" minHeight="200.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="60.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" VBox.vgrow="ALWAYS" />
+                                          <TextField fx:id="I_0" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI0" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_10" alignment="CENTER" layoutX="11.0" layoutY="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI1" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_20" alignment="CENTER" layoutX="10.0" layoutY="46.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI2" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_30" alignment="CENTER" layoutX="10.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI3" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_40" alignment="CENTER" layoutX="10.0" layoutY="106.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI4" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_50" alignment="CENTER" layoutX="10.0" layoutY="136.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI5" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_60" alignment="CENTER" layoutX="10.0" layoutY="166.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI6" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_70" alignment="CENTER" layoutX="10.0" layoutY="196.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI7" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_80" alignment="CENTER" layoutX="10.0" layoutY="226.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI8" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="I_90" alignment="CENTER" layoutX="10.0" layoutY="256.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#ActionI9" style="-fx-border-color: #000000; -fx-background-color: #71e8f4; -fx-border-width: 2px;;" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox minHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" promptText="QTY" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="QTY" VBox.vgrow="ALWAYS">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <TextField fx:id="Q1000_1900" alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="Q10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="totalqty" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" style="-fx-background-color: #4cf09b; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <VBox layoutX="10.0" layoutY="15.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <TextField alignment="CENTER" maxHeight="-Infinity" minHeight="30.0" promptText="AMT ₹ " style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="AMT ₹ " VBox.vgrow="ALWAYS">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <TextField fx:id="A1000_1900" alignment="CENTER" editable="false" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A2000_2900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A3000_3900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A4000_4900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A5000_5900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A6000_6900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A7000_7900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A8000_8900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A9000_9900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="A10000_10900" alignment="CENTER" editable="false" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="totalamt" alignment="CENTER" editable="false" layoutX="11.0" layoutY="299.0" maxHeight="-Infinity" minHeight="30.0" style="-fx-background-color: #f4fea4; -fx-border-color: #000000; -fx-border-width: 2px;" VBox.vgrow="ALWAYS">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <Button fx:id="buy" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionBuy" style="-fx-background-color: red;" text="Buy[F6]" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                             <font>
+                                                <Font name="System Bold" size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</AnchorPane>

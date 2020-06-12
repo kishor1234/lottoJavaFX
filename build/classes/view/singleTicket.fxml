@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SingleTicketController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <VBox prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                     <top>
+                        <Text fx:id="msg" strokeType="OUTSIDE" strokeWidth="0.0" text="msg" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                     </top>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <center>
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
+                     </center>
+                     <left>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="Accept" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#onAcceptActionPrint" text="Accept">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </left>
+                     <right>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="cancel" mnemonicParsing="false" onAction="#CancelAction" text="Cancel">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </right>
+                  </BorderPane>
+               </children>
+            </VBox>
+         </bottom>
+         <top>
+            <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="184.0" text="Ticket Re-Printing" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="30.0" prefWidth="381.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="close" mnemonicParsing="false" onAction="#closeWindo" style="-fx-background-color: #FF0000;" text="X" textFill="WHITE" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <TableView fx:id="ticket_info" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="590.0" styleClass="ticket_info" stylesheets="@../css/singleticket.css" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="srno" prefWidth="60.0" style="-fx-alignment: CENTER;" styleClass="table-cell" text="Sr. no" />
+                <TableColumn fx:id="drDate" prefWidth="111.0" style="-fx-alignment: CENTER;" styleClass="table-cell" text="DrawDate" />
+                  <TableColumn fx:id="drTime" style="-fx-alignment: CENTER;" styleClass="table-cell" text="Draw Time" />
+                  <TableColumn fx:id="name" prefWidth="77.0" style="-fx-alignment: CENTER;" styleClass="table-cell" text="Lottery Name" />
+                  <TableColumn fx:id="mrp" prefWidth="100.0" style="-fx-alignment: CENTER;" styleClass="table-cell" text="MRP" />
+                  <TableColumn fx:id="digit" prefWidth="72.0" style="-fx-alignment: CENTER;" styleClass="table-cell" text="Digit" />
+                  <TableColumn fx:id="qty" prefWidth="89.0" style="-fx-alignment: CENTER;" styleClass="table-cell" text="Quantity" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
