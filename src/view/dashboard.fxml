@@ -342,7 +342,7 @@
                                                       </Pane>
                                                       <Pane prefHeight="29.0" prefWidth="323.0">
                                                          <children>
-                                                            <Text fx:id="drawClock" fill="RED" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:02:33" wrappingWidth="99.6005859375">
+                                                            <Text fx:id="drawClock" fill="RED" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00" wrappingWidth="99.6005859375">
                                                                <font>
                                                                   <Font name="System Bold" size="18.0" />
                                                                </font>

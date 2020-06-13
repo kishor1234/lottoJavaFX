@@ -25,7 +25,10 @@
                      </HBox.margin>
                   </Text>
                   <Pane HBox.hgrow="ALWAYS" />
-                  <Button fx:id="btn2" mnemonicParsing="false" onAction="#buttonClick" style="-fx-background-color: #FF0000;" text="X" textFill="#fcfafa" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btn2" mnemonicParsing="false" onAction="#buttonClick" style="-fx-background-color: #FF0000;" text="X" textFill="#fcfafa" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </HBox>
             <VBox fx:id="vboxpanel" prefHeight="376.0" prefWidth="516.0" VBox.vgrow="ALWAYS">

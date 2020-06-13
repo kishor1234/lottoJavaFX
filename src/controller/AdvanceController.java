@@ -165,9 +165,9 @@ public class AdvanceController {
         }
     }
 
-    void initLoadData(Map<String, Map> advanceDr) {
+    void initLoadData(Map<String, Map> advanceDr,String advanceDrawData) {
         advanceDraw = advanceDr;
-        fileData = httpAPI._jsonRequest("?r=advanceDraw", "");
+        fileData =advanceDrawData;// httpAPI._jsonRequest("?r=advanceDraw", "");
         loadAdvance();
     }
 

@@ -58,9 +58,9 @@ public class SeriesController {
         return aMap;
     }
 
-    void initLoadData(String multi, Map<String, String> oldMap) {
+    void initLoadData(String multi, Map<String, String> oldMap,String seriesStringData) {
         cbMap = new HashMap<>();
-        String fileData = httpAPI._jsonRequest("?r=loadSeries", "");
+        String fileData = seriesStringData;//httpAPI._jsonRequest("?r=loadSeries", "");
         //System.out.println(multi + " Series Load Data " + fileData);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         seriesData series = gson.fromJson(fileData, seriesData.class);

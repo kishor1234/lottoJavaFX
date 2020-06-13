@@ -8,7 +8,12 @@ package controller;
 import Sys.Report;
 import Sys.api.httpAPI;
 import Sys.invoice.PrinterService;
+import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.escpos.EscPosConst;
+import com.github.anastaciocintra.escpos.Style;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.google.gson.JsonObject;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import javafx.collections.FXCollections;
@@ -22,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javax.print.PrintService;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -113,7 +119,7 @@ public class OpratorController {
             String jsonString = person.toString();
             System.out.println(jsonString);
             data = httpAPI._jsonRequest("/?r=report", jsonString);
-            System.out.println(data);
+            //System.out.println(data);
             Object obj = new JSONParser().parse(data);
             JSONObject jo = (JSONObject) obj;
             netPT.setText(jo.get("totalNetPoint").toString());
@@ -136,17 +142,45 @@ public class OpratorController {
 
     @FXML
     private void printReport(ActionEvent event) {
-        String pMsg = "Sell Report\n"
-                + "Date on\n"
-                + "" + fdate.getValue() + "\n"
-                + "To\n"
-                + "" + tdate.getValue() + "\n"
-                + "TOTAL NET POINT : " + netPT.getText() + "\n"
-                + "TOTAL POINT : " + tpt.getText() + "\n"
-                + "WIN POINT: " + wpt.getText() + "\n"
-                + "NET PAYABLE : " + npt.getText() + "";
-        PrinterService printerService = new PrinterService();
-        printerService.printString(printer, pMsg);
+        String pMsdateg = ""
+                + "Date:"
+                + "" + fdate.getValue() + " "
+                + "To "
+                + "" + tdate.getValue() + "";
+        String sale = "Sale Point   : " + netPT.getText() + "";
+        String profit="Profit Point : " + tpt.getText() + "";
+        String win="Win Point    : " + wpt.getText() + "";
+        String net="Net Payable  : " + npt.getText() + "";
+
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printer);
+        EscPos escpos;
+        try {
+            escpos = new EscPos(new PrinterOutputStream(printService));
+
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._1, Style.FontSize._1)
+                    .setJustification(EscPosConst.Justification.Left_Default)
+                    .setBold(true);
+
+            Style subtitle = new Style(escpos.getStyle())
+                    .setBold(true)
+                    .setUnderline(Style.Underline.OneDotThick);
+            Style bold = new Style(escpos.getStyle())
+                    .setBold(true);
+
+            escpos.writeLF(title, "RajLaxmi Lottery")
+                    .writeLF(pMsdateg)
+                    .writeLF(sale)
+                    .writeLF(profit)
+                    .writeLF(win)
+                    .writeLF(bold,net)
+                    .feed(6);
+
+            escpos.cut(EscPos.CutMode.FULL);
+
+            escpos.close();
+        } catch (IOException | IllegalArgumentException ex) {
+        }
 
     }
 

@@ -520,6 +520,8 @@ public class DashboardController {
     private int fin;
     private int tota;
     private Map pevirous = new HashMap<>();
+    private String seriesStringData;
+    private String advanceDrawData;
 
     //end
     /**
@@ -626,6 +628,9 @@ public class DashboardController {
             setLabelColor();
             //loadPrinter();
             lastTransaction();
+            loadSeriesData();
+            loadAdvanceDraw();
+            System.out.println("DAta" + seriesStringData);
         } catch (Exception ex) {
             ////System.out.println("Error on initParameter " + ex.getMessage());
         }
@@ -679,11 +684,14 @@ public class DashboardController {
                 while (true) {
                     //System.out.println(df.format(dateobj));
                     Date dateobj = new Date();
-                    clockLabel.setText(df.format(dateobj));
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                        System.out.println(ex.getMessage());
+                    synchronized (this) {
+
+                        clockLabel.setText(df.format(dateobj));
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            System.out.println(ex.getMessage());
+                        }
                     }
 
                 }
@@ -924,51 +932,39 @@ public class DashboardController {
         try {
             Thread threadMessageBar = new Thread(() -> {
                 Runnable updater = () -> {
-                    msgPanel.getChildren().clear();
-                    String data = httpAPI._jsonRequest("?r=message", "");
-                    Text msg = new Text(data);
-                    msg.setFill(Color.RED);
+                    synchronized (this) {
+                        msgPanel.getChildren().clear();
+                        String data = httpAPI._jsonRequest("?r=message", "");
+                        Text msg = new Text(data);
+                        msg.setFill(Color.RED);
 //                    msg.setStrokeWidth(2);
 //                    msg.setStroke(Color.RED);
-                    msg.setTextOrigin(VPos.TOP);
-                    msg.setFont(Font.font(18));
-                    msgPanel.getChildren().add(msg);
-                    // Get the Width of the Scene and the Text
-                    double sceneWidth = msgPanel.getWidth();
-                    double textWidth = msg.getLayoutBounds().getWidth();
+                        msg.setTextOrigin(VPos.TOP);
+                        msg.setFont(Font.font(18));
+                        msgPanel.getChildren().add(msg);
+                        // Get the Width of the Scene and the Text
+                        double sceneWidth = msgPanel.getWidth();
+                        double textWidth = msg.getLayoutBounds().getWidth();
 
-                    // Define the Durations
-                    Duration startDuration = Duration.ZERO;
-                    Duration endDuration = Duration.seconds(40);
+                        // Define the Durations
+                        Duration startDuration = Duration.ZERO;
+                        Duration endDuration = Duration.seconds(40);
 
-                    // Create the start and end Key Frames
-                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
-                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
-                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), 0 * textWidth);
-                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
+                        // Create the start and end Key Frames
+                        KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
+                        KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
+                        KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), 0 * textWidth);
+                        KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
 
-                    // Create a Timeline
-                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
-                    // Let the animation run forever
-                    timeline.setCycleCount(Timeline.INDEFINITE);
-                    // Run the animation
-                    timeline.play();
-                };
-                Thread run = new Thread() {
-                    @Override
-                    public void run() {
-                        while (true) {
-                            Platform.runLater(updater);
-                            try {
-                                Thread.sleep(40000);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-
+                        // Create a Timeline
+                        Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+                        // Let the animation run forever
+                        timeline.setCycleCount(Timeline.INDEFINITE);
+                        // Run the animation
+                        timeline.play();
                     }
                 };
-                run.start();
+                Platform.runLater(updater);
 
             });
             threadMessageBar.start();
@@ -1254,24 +1250,24 @@ public class DashboardController {
 //                        }
 //                    }
 
-                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    while (true) {
-                        ////System.out.println("Series Map " + series);
-                        //String jsonEmp = gson.toJson(multiSeries);
-                        ////System.out.println("MultiSeries Json " + jsonEmp);
-                        ////System.out.println("Advance Array " + advanceDrawArray);
-                        //calculateTotal();
-
-                        try {
-                            Thread.sleep(5000);
-                            resetFinalTotal();
-                        } catch (InterruptedException ex) {
-                            ////System.out.println(ex.getMessage());
-                        }
-                    }
+//                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//                    while (true) {
+//                        System.out.println("Series Map " + series);
+//                        String jsonEmp = gson.toJson(multiSeries);
+//                        System.out.println("MultiSeries Json " + jsonEmp);
+//                        System.out.println("Advance Array " + advanceDrawArray);
+//                        calculateTotal();
+//
+//                        try {
+//                            Thread.sleep(1000);
+//                            //resetFinalTotal();
+//                        } catch (InterruptedException ex) {
+//                            ////System.out.println(ex.getMessage());
+//                        }
+//                    }
                 }
             };
-            // t.start();
+//            t.start();
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -1543,7 +1539,13 @@ public class DashboardController {
             String strTime = response.getString("etime");
 
             dTime.setText(TimeFormats.timeConvert(strTime));
-            interval = Integer.parseInt(response.getString("time"));
+            int time = 1;
+            if (Integer.parseInt(response.getString("time")) < 0) {
+                time = Integer.parseInt(response.getString("time"));
+                interval = time;//Integer.parseInt(response.getString("time"));
+            }
+            
+            loadAdvanceDraw();
 
         } catch (JSONException ex) {
             ////System.out.println("Rest clock error " + ex.getMessage());
@@ -1553,15 +1555,21 @@ public class DashboardController {
     public void inisetClockCounter() {
         try {
             String data = httpAPI._jsonRequest("?r=updateGameRound", "");
-            ////System.out.println("Draw Data " + data);
+            System.out.println("Draw Data " + data);
             JSONObject myResponse = new JSONObject(data);
             buy.setDisable(false);
             id.setText("D_" + myResponse.getString("id"));
             start.setText(myResponse.getString("stime"));
             end.setText(myResponse.getString("etime"));
+
             String strTime = myResponse.getString("etime");
             dTime.setText(TimeFormats.timeConvert(strTime));
-            closckDraw(myResponse.getString("time"));
+            int time = 0;
+            if (Integer.parseInt(myResponse.getString("time")) > 0) {
+                time = Integer.parseInt(myResponse.getString("time"));
+                closckDraw(String.valueOf(time));
+            }
+
         } catch (JSONException ex) {
             ////System.out.println("inisetClockCounter " + ex.getMessage());
         }
@@ -1577,8 +1585,9 @@ public class DashboardController {
 
             @Override
             public void run() {
-
-                drawClock.setText(formatSeconds(setInterval()));
+                synchronized (drawClock) {
+                    drawClock.setText(formatSeconds(setInterval()));
+                }
 
             }
         }, delay, period);
@@ -1600,6 +1609,7 @@ public class DashboardController {
                             try {
                                 Thread.sleep(2000);
                                 resultBoard("ALL");
+
                             } catch (InterruptedException ex) {
 
                             }
@@ -2067,8 +2077,6 @@ public class DashboardController {
         Balance.start();
     }
 
-   
-
     public void resetDashboard() {
         Thread resetDB = new Thread(new Runnable() {
             @Override
@@ -2116,7 +2124,8 @@ public class DashboardController {
                         resetManualPlatSeleted();
                         runnableBalance();
                         messageRefreshThread();
-
+                        resetEvenOdd();
+                        // loadSeries(multiMap);
                     }
                 };
                 //resetClock();
@@ -2125,6 +2134,67 @@ public class DashboardController {
 
         });
         resetDB.start();
+
+    }
+
+    public void resetBuy() {
+        Thread resetDB = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Runnable updater = new Runnable() {
+                    @Override
+                    public void run() {
+                        subSeriesNo.setText("");
+                        alls.setText("false");
+                        CMulti.setText("");
+                        NSystems.setText("");
+                        //multi.setSelected(false);
+                        cross.setSelected(false);
+                        odd.setSelected(false);
+                        even.setSelected(false);
+                        fixed.setSelected(false);
+                        totalamt.setText("");
+                        totalqty.setText("");
+                        //advance.setText("false");
+                        //advanceDraw.clear();
+                        //advanceDrawArray.clear();
+                        //selectSubSeries(B0);
+                        selectAll("#FFFFFF");
+                        resetVarticalInput();
+                        resetHorizontalInput();
+                        if (series.size() >= 0) {
+                            series.clear();
+                            //    seriesLable.setText("1000-1900");
+                            //    selectDefaultSeries(0);
+                            selectSubSeries(B0);
+                            B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
+                        }
+//                        if (multiSeries.size() >= 0) {
+//                            multiSeries.clear();
+//                        }
+                        Iterator<String> it = totalField.keySet().iterator();       //keyset is a method  
+                        while (it.hasNext()) {
+                            String key = (String) it.next();
+                            TextField tf = totalField.get(key);
+                            tf.setText("");
+                        }
+
+                        lastTransaction();
+                        calculateTotal();
+                        resetManualPlatSeleted();
+                        runnableBalance();
+                        messageRefreshThread();
+                        resetEvenOdd();
+                        loadSeries(multiMap);
+                    }
+                };
+                //resetClock();
+                Platform.runLater(updater);
+            }
+
+        });
+        resetDB.start();
+
     }
 
     private void resetAll() {
@@ -2150,7 +2220,7 @@ public class DashboardController {
             finalMap.put("series", srs);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String jsonEmp = gson.toJson(finalMap);
-            //System.out.println(jsonEmp);
+            System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
             //System.out.println("Result" + Data);
             ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
@@ -2222,7 +2292,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            //System.out.println("Erron Thread-8 " + ex.getMessage());
+            System.out.println("Erron Thread-8 " + ex.getMessage());
         }
 //        try {
 //            Thread t = new Thread() {
@@ -2624,7 +2694,10 @@ public class DashboardController {
 
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
                                 System.out.println("Data \n" + Data);
-                                resetAll();
+                                //Map<String, Map> advanTemp = advanceDraw;
+                                resetBuy();
+
+                                // loadAdvanceArray(advanTemp);
                                 buy.setDisable(false);
                                 //get unitrid 
                                 Object obj = new JSONParser().parse(Data);
@@ -2702,7 +2775,10 @@ public class DashboardController {
                                 //System.out.println(jsonEmp);
                                 final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
                                 //System.out.println("Data \n" + Data);
-                                resetAll();
+                                //Map<String, Map> advanTemp = advanceDraw;
+                                resetBuy();
+                                //loadSeries(multiMap);
+                                //loadAdvanceArray(advanTemp);
                                 buy.setDisable(false);
                                 //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
                                 Thread tp = new Thread() {
@@ -2847,7 +2923,7 @@ public class DashboardController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
                         Parent root = loader.load();
                         SeriesController Scl = loader.getController();
-                        Scl.initLoadData("multi", multiMap);
+                        Scl.initLoadData("multi", multiMap, seriesStringData);
                         Stage stage = new Stage();
                         Screen screen = Screen.getPrimary();
                         Rectangle2D bounds = screen.getVisualBounds();
@@ -2869,7 +2945,7 @@ public class DashboardController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
                         Parent root = loader.load();
                         SeriesController SC = loader.getController();
-                        SC.initLoadData("single", multiMap);
+                        SC.initLoadData("single", multiMap, seriesStringData);
 
                         //Show scene 2 in new window
                         Stage stage = new Stage();
@@ -3155,7 +3231,7 @@ public class DashboardController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/advance.fxml"));
                     Parent root = loader.load();
                     AdvanceController Scl = loader.getController();
-                    Scl.initLoadData(advanceDraw);
+                    Scl.initLoadData(advanceDraw, advanceDrawData);
                     Stage stage = new Stage();
                     stage.setTitle("Select Advance Draw");
                     Screen screen = Screen.getPrimary();
@@ -3170,17 +3246,9 @@ public class DashboardController {
 //            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                     themStyle(stage, root);
                     stage.showAndWait();
+                    loadAdvanceArray(advanceDraw);
                     //System.out.println("Advance Selected Draw " + advanceDraw);
-                    advanceDrawArray = new ArrayList<>();
-                    advanceDraw.entrySet().stream().forEach((entry) -> {
-                        advanceDrawArray.add(entry.getValue());
-                    });
 
-                    if (!advanceDrawArray.isEmpty()) {
-                        advance.setText("true");
-                    } else {
-                        advance.setText("false");
-                    }
                     ////System.out.println("AdvanceDrawArray " + advanceDrawArray);
                     //loadSeries(multiMap);
                 } catch (Exception ex) {
@@ -3638,7 +3706,7 @@ public class DashboardController {
     private int[] fpNumbers(int p) {
         int[][] num = {
             {10, 15, 60, 65, 1, 6, 51, 56},
-            {12, 18, 62, 67, 21, 26, 71, 76},
+            {12, 17, 62, 67, 21, 26, 71, 76},
             {13, 18, 63, 68, 31, 36, 81, 86},
             {14, 19, 64, 69, 41, 46, 91, 96},
             {20, 25, 70, 75, 2, 7, 52, 57},
@@ -3663,6 +3731,40 @@ public class DashboardController {
             }
         }
         return number;
+    }
+
+    public void resetEvenOdd() {
+        int i = 0;
+        while (i < 100) {
+            TextField temp = jField.get("E_" + i);
+            temp.setDisable(false);
+            i++;
+        }
+    }
+
+    public void loadSeriesData() {
+        seriesStringData = httpAPI._jsonRequest("?r=loadSeries", "");
+    }
+
+    public void loadAdvanceDraw() {
+        advanceDrawData = httpAPI._jsonRequest("?r=advanceDraw", "");
+    }
+
+    private void loadAdvanceArray(Map<String, Map> advanceDraw) {
+        try {
+            advanceDrawArray = new ArrayList<>();
+            advanceDraw.entrySet().stream().forEach((entry) -> {
+                advanceDrawArray.add(entry.getValue());
+            });
+
+            if (!advanceDrawArray.isEmpty()) {
+                advance.setText("true");
+            } else {
+                advance.setText("false");
+            }
+        } catch (Exception ex) {
+
+        }
     }
 
 }

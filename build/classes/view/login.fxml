@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -77,18 +80,24 @@
          <center>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="67.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Text fill="WHITE" layoutX="49.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="राजलक्ष्मी लॉटरी">
-                           <font>
-                              <Font name="System Bold" size="30.0" />
-                           </font>
-                        </Text>
+                        <ImageView fitHeight="96.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/rjlx.png" />
+                           </image>
+                        </ImageView>
+                        <Pane prefHeight="67.0" prefWidth="280.0">
+                           <children>
+                              <Text fill="WHITE" layoutX="11.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="राजलक्ष्मी लॉटरी">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Pane>
+                  </HBox>
                     <Pane styleClass="white-border-2" VBox.vgrow="ALWAYS">
                         <children>
                             <Pane prefHeight="37.0" prefWidth="200.0" styleClass="white-border-2">
@@ -117,7 +126,10 @@
                             </Label>
                             <TextField fx:id="userid" layoutX="100.0" layoutY="69.0" promptText="Username" />
                             <PasswordField fx:id="password" layoutX="100.0" layoutY="103.0" promptText="Password" />
-                            <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login" />
+                            <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <TextField fx:id="defaultPrinter" disable="true" editable="false" layoutX="166.0" layoutY="140.0" prefHeight="25.0" prefWidth="106.0" promptText="Printer" />
                         </children>
                         <opaqueInsets>

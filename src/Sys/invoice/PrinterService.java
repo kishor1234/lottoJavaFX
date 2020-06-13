@@ -5,13 +5,14 @@ package Sys.invoice;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author asksoft
  */
-
-
+import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.escpos.EscPosConst;
+import com.github.anastaciocintra.escpos.Style;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -31,105 +32,106 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
 public class PrinterService implements Printable {
-	
-	public List<String> getPrinters(){
-		
-		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-		PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-		
-		PrintService printServices[] = PrintServiceLookup.lookupPrintServices(
-				flavor, pras);
-		
-		List<String> printerList = new ArrayList<String>();
-		for(PrintService printerService: printServices){
-			printerList.add( printerService.getName());
-		}
-		
-		return printerList;
-	}
 
-	@Override
-	public int print(Graphics g, PageFormat pf, int page)
-			throws PrinterException {
-		if (page > 0) { /* We have only one page, and 'page' is zero-based */
-			return NO_SUCH_PAGE;
-		}
+    public List<String> getPrinters() {
 
-		/*
-		 * User (0,0) is typically outside the imageable area, so we must
-		 * translate by the X and Y values in the PageFormat to avoid clipping
-		 */
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.translate(pf.getImageableX(), pf.getImageableY());
-		/* Now we perform our rendering */
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
 
-		g.setFont(new Font("Roman", 0, 8));
-		g.drawString("Hello world !", 0, 10);
+        PrintService printServices[] = PrintServiceLookup.lookupPrintServices(
+                flavor, pras);
 
-		return PAGE_EXISTS;
-	}
+        List<String> printerList = new ArrayList<String>();
+        for (PrintService printerService : printServices) {
+            printerList.add(printerService.getName());
+        }
 
-	public void printString(String printerName, String text) {
-		
-		// find the printService of name printerName
-		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-		PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+        return printerList;
+    }
 
-		PrintService printService[] = PrintServiceLookup.lookupPrintServices(
-				flavor, pras);
-		PrintService service = findPrintService(printerName, printService);
+    @Override
+    public int print(Graphics g, PageFormat pf, int page)
+            throws PrinterException {
+        if (page > 0) { /* We have only one page, and 'page' is zero-based */
 
-		DocPrintJob job = service.createPrintJob();
+            return NO_SUCH_PAGE;
+        }
 
-		try {
+        /*
+         * User (0,0) is typically outside the imageable area, so we must
+         * translate by the X and Y values in the PageFormat to avoid clipping
+         */
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.translate(pf.getImageableX(), pf.getImageableY());
+        /* Now we perform our rendering */
 
-			byte[] bytes;
+        g.setFont(new Font("Roman", 0, 8));
+        g.drawString("Hello world !", 0, 10);
 
-			// important for umlaut chars
-			bytes = text.getBytes("CP437");
+        return PAGE_EXISTS;
+    }
 
-			Doc doc = new SimpleDoc(bytes, flavor, null);
+    public void printString(String printerName, String text) {
 
-			
-			job.print(doc, null);
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try {
+            escpos = new EscPos(new PrinterOutputStream(printService));
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            Style title = new Style()
+                    .setFontSize(Style.FontSize._1, Style.FontSize._1)
+                    .setJustification(EscPosConst.Justification.Left_Default)
+                    .setBold(true);
 
-	}
+            Style subtitle = new Style(escpos.getStyle())
+                    .setBold(true)
+                    .setUnderline(Style.Underline.OneDotThick);
+            Style bold = new Style(escpos.getStyle())
+                    .setBold(true);
 
-	public void printBytes(String printerName, byte[] bytes) {
-		
-		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-		PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            escpos.writeLF(title, "RajLaxmi Lottery")
+                    .writeLF(text)
+                    .feed(1);
 
-		PrintService printService[] = PrintServiceLookup.lookupPrintServices(
-				flavor, pras);
-		PrintService service = findPrintService(printerName, printService);
+            escpos.cut(EscPos.CutMode.FULL);
 
-		DocPrintJob job = service.createPrintJob();
+            escpos.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
 
-		try {
+        }
+    }
 
-			Doc doc = new SimpleDoc(bytes, flavor, null);
+    public void printBytes(String printerName, byte[] bytes) {
 
-			job.print(doc, null);
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private PrintService findPrintService(String printerName,
-			PrintService[] services) {
-		for (PrintService service : services) {
-			if (service.getName().equalsIgnoreCase(printerName)) {
-				return service;
-			}
-		}
+        PrintService printService[] = PrintServiceLookup.lookupPrintServices(
+                flavor, pras);
+        PrintService service = findPrintService(printerName, printService);
 
-		return null;
-	}
+        DocPrintJob job = service.createPrintJob();
+
+        try {
+
+            Doc doc = new SimpleDoc(bytes, flavor, null);
+
+            job.print(doc, null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private PrintService findPrintService(String printerName,
+            PrintService[] services) {
+        for (PrintService service : services) {
+            if (service.getName().equalsIgnoreCase(printerName)) {
+                return service;
+            }
+        }
+
+        return null;
+    }
 }

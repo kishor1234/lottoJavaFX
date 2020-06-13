@@ -28,11 +28,17 @@
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button fx:id="close" mnemonicParsing="false" onMouseClicked="#closeAction" style="-fx-background-color: #FF0000;" text="X" textFill="#ebe2e2" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>
@@ -68,6 +74,9 @@
                <HBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
       </HBox>
