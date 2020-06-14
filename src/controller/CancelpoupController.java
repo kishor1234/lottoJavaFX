@@ -12,12 +12,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -53,13 +52,17 @@ public class CancelpoupController {
         data.put("enterydate", dtf.format(now));
         data.put("own", own);
         data.put("utrno", utrno);
-        
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonEmp = gson.toJson(data);
-        System.out.println("Cancel Data "+jsonEmp);
+        System.out.println("Cancel Data " + jsonEmp);
         String Data = httpAPI._jsonRequest("?r=cancelTicket", jsonEmp);
-        System.out.println(Data);
-        action.getScene().getWindow().hide();
+        if (Data != null) {
+            System.out.println(Data);
+            action.getScene().getWindow().hide();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+        }
     }
 
     @FXML
@@ -81,21 +84,25 @@ public class CancelpoupController {
             String jsonEmp = gson.toJson(finalMap);
             System.out.println(jsonEmp);
             String Data = httpAPI._jsonRequest("?r=getCancelLimit", jsonEmp);
-            System.out.println("Data \n" + Data);
-            //{"status":"1","message":"Success","limit":"5","utrno":"9536257"}
-            Object obj = new JSONParser().parse(Data);
-            JSONObject jo = (JSONObject) obj;
-            if ("1".equals(jo.get("status"))) {
-                this.utrno = (String) jo.get("utrno");
-                last.setText("Please cancel last cash Memoo/Invoice (T.No " + this.utrno + ")");
-                info.setText("I hereby req. uset for cancellation of the same and indernmety for any misuse of the side cancelled\nCash Invoice");
+            if (Data != null) {
+                System.out.println("Data \n" + Data);
+                //{"status":"1","message":"Success","limit":"5","utrno":"9536257"}
+                Object obj = new JSONParser().parse(Data);
+                JSONObject jo = (JSONObject) obj;
+                if ("1".equals(jo.get("status"))) {
+                    this.utrno = (String) jo.get("utrno");
+                    last.setText("Please cancel last cash Memoo/Invoice (T.No " + this.utrno + ")");
+                    info.setText("I hereby req. uset for cancellation of the same and indernmety for any misuse of the side cancelled\nCash Invoice");
+                } else {
+                    last.setText((String) jo.get("message"));
+                    action.setVisible(false);
+                }
             } else {
-                last.setText((String) jo.get("message"));
-                action.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
             }
 
         } catch (ParseException ex) {
-            Logger.getLogger(CancelpoupController.class.getName()).log(Level.SEVERE, null, ex);
+            httpAPI.erLog.write(ex);
         }
 
     }

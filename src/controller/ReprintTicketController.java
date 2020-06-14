@@ -8,12 +8,11 @@ package controller;
 import Sys.Ticket;
 import Sys.api.httpAPI;
 import com.google.gson.JsonObject;
+import java.awt.HeadlessException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,12 +28,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * FXML Controller class
@@ -61,8 +61,8 @@ public class ReprintTicketController {
 
     @FXML
     private Button close;
-    private double xOffset = 0;
-    private double yOffset = 0;
+    private final double xOffset = 0;
+    private final double yOffset = 0;
     @FXML
     private TableColumn<Ticket, String> utrno;
     @FXML
@@ -111,28 +111,32 @@ public class ReprintTicketController {
             String jsonString = person.toString();
             System.out.println(jsonString);
             String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
-            System.out.println(data);
-            Object obj = new JSONParser().parse(data);
-            ArrayList<Map> aMap = (ArrayList<Map>) obj;
-            //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+            if (data != null) {
+                System.out.println(data);
+                Object obj = new JSONParser().parse(data);
+                ArrayList<Map> aMap = (ArrayList<Map>) obj;
+                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
 
-            aMap.stream().forEach((aMap1) -> {
-                if ("0".equals((aMap1.get("active").toString()))) {
-                    Button btn = new Button("Already Cancel");
+                aMap.stream().forEach((aMap1) -> {
+                    if ("0".equals((aMap1.get("active").toString()))) {
+                        Button btn = new Button("Already Cancel");
 
-                    data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
+                        data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
 
-                } else {
-                    Button btn = new Button("Reprint");
-                    btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString()));
-                    data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
+                    } else {
+                        Button btn = new Button("Reprint");
+                        btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString()));
+                        data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
 
-                }
-            });
+                    }
+                });
 
-            ticket_info.setItems(data_ticket);
-        } catch (Exception ex) {
-
+                ticket_info.setItems(data_ticket);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+            }
+        } catch (ParseException | HeadlessException ex) {
+            httpAPI.erLog.write(ex);
         }
     }
 
@@ -159,7 +163,7 @@ public class ReprintTicketController {
                     themStyle(stage, root);
                     stage.showAndWait();
                 } catch (Exception ex) {
-                    Logger.getLogger(ReprintTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                    httpAPI.erLog.write(ex);
                 }
 
             };

@@ -5,6 +5,7 @@
  */
 package Sys.api;
 
+import Sys.errorLog;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -24,11 +25,12 @@ public class httpAPI {
 
     public static String api_url = "http://api.omlotto.com/";
     //public static String api_url = "http://api.newloto.lcl/";
+    public static errorLog erLog = new errorLog();
 
     public static void main(String[] args) {
         Map params = new LinkedHashMap<>();
         params.put("action", "adminBalance");
-       // String data = httpAPI._jsonRequest("?r=CAddUser", params);
+        // String data = httpAPI._jsonRequest("?r=CAddUser", params);
         // System.out.println(data);
     }
 
@@ -63,6 +65,7 @@ public class httpAPI {
             //System.out.println(response);
         } catch (Exception ex) {
 
+            erLog.write(ex);
         }
         return null;
     }
@@ -93,8 +96,8 @@ public class httpAPI {
             }
             return response.toString();
 
-        } catch (Exception ex) {
-
+        } catch (Exception e) {
+            erLog.write(e);
         }
         return null;
     }

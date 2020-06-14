@@ -8,6 +8,7 @@ package controller;
 import Sys.TimeFormats;
 import Sys.api.httpAPI;
 import com.google.gson.JsonObject;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Map;
 import javafx.event.ActionEvent;
@@ -27,7 +28,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javax.swing.JOptionPane;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * FXML Controller class
@@ -58,61 +61,65 @@ public class ResultController {
 
         try {
             String data = httpAPI._jsonRequest("?r=result", jsonString);
-            Object obj = new JSONParser().parse(data);
-            ArrayList<Map> aMap = (ArrayList<Map>) obj;
-            aMap.stream().forEach((aMap1) -> {
-                Map<String, String> sData = aMap1;
-                VBox mainVBox = new VBox();//main VBox
-                mainVBox.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY)));
-                mainVBox.setStyle("-fx-border-color: #000000;");
-                VBox.setMargin(mainVBox, new Insets(5, 2, 2, 2));
-                HBox hBox1 = new HBox();
-                HBox hBox2 = new HBox();
-                Label drID = new Label("Draw");
-                drID.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
-                hBox1.setAlignment(Pos.BASELINE_LEFT);
-                drID.setMaxWidth(Double.POSITIVE_INFINITY);
-                drID.setMaxHeight(Double.POSITIVE_INFINITY);
+            if (data != null) {
+                Object obj = new JSONParser().parse(data);
+                ArrayList<Map> aMap = (ArrayList<Map>) obj;
+                aMap.stream().forEach((aMap1) -> {
+                    Map<String, String> sData = aMap1;
+                    VBox mainVBox = new VBox();//main VBox
+                    mainVBox.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY)));
+                    mainVBox.setStyle("-fx-border-color: #000000;");
+                    VBox.setMargin(mainVBox, new Insets(5, 2, 2, 2));
+                    HBox hBox1 = new HBox();
+                    HBox hBox2 = new HBox();
+                    Label drID = new Label("Draw");
+                    drID.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
+                    hBox1.setAlignment(Pos.BASELINE_LEFT);
+                    drID.setMaxWidth(Double.POSITIVE_INFINITY);
+                    drID.setMaxHeight(Double.POSITIVE_INFINITY);
 
-                HBox.setHgrow(drID, Priority.ALWAYS);
-                Label drTime = new Label(TimeFormats.timeConvert(sData.get("gameetime")));
-                drTime.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
-                drTime.setMaxWidth(Double.POSITIVE_INFINITY);
-                drTime.setMaxHeight(Double.POSITIVE_INFINITY);
-                HBox.setHgrow(drTime, Priority.ALWAYS);
-                hBox1.getChildren().add(drID);
-                hBox1.getChildren().add(drTime);
-                mainVBox.getChildren().add(hBox1);
-                HBox rtable = new HBox();
-                String ss[] = sData.get("series").split("-");
-                for (int k = 0; k <= 9; k++) {
-                    int num = (Integer.parseInt(ss[0]) + (k * 100)) + Integer.parseInt(sData.get("" + k));
-                    Label jLable = new Label(" " + num + "");
-                    jLable.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold;");
-                    jLable.setWrapText(true);
-                    jLable.setAlignment(Pos.CENTER);
-                    jLable.setMaxWidth(Double.POSITIVE_INFINITY);
-                    jLable.setMaxHeight(Double.POSITIVE_INFINITY);
-                    jLable.setTextFill(Color.web("#000000"));
-                    //jLable.setText("" + fl);
-                    Pane p = new Pane();
-                    HBox.setMargin(p, new Insets(5, 2, 2, 2));
-                    p.setStyle("-fx-background-color: " + ColorArray[k] + ";");
-                    p.setBackground(new Background(new BackgroundFill(Color.web(ColorArray[k]), CornerRadii.EMPTY, Insets.EMPTY)));
-                    p.setPrefSize(100, 30);
-                    p.setStyle("-fx-border-color: #000000;");
+                    HBox.setHgrow(drID, Priority.ALWAYS);
+                    Label drTime = new Label(TimeFormats.timeConvert(sData.get("gameetime")));
+                    drTime.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
+                    drTime.setMaxWidth(Double.POSITIVE_INFINITY);
+                    drTime.setMaxHeight(Double.POSITIVE_INFINITY);
+                    HBox.setHgrow(drTime, Priority.ALWAYS);
+                    hBox1.getChildren().add(drID);
+                    hBox1.getChildren().add(drTime);
+                    mainVBox.getChildren().add(hBox1);
+                    HBox rtable = new HBox();
+                    String ss[] = sData.get("series").split("-");
+                    for (int k = 0; k <= 9; k++) {
+                        int num = (Integer.parseInt(ss[0]) + (k * 100)) + Integer.parseInt(sData.get("" + k));
+                        Label jLable = new Label(" " + num + "");
+                        jLable.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold;");
+                        jLable.setWrapText(true);
+                        jLable.setAlignment(Pos.CENTER);
+                        jLable.setMaxWidth(Double.POSITIVE_INFINITY);
+                        jLable.setMaxHeight(Double.POSITIVE_INFINITY);
+                        jLable.setTextFill(Color.web("#000000"));
+                        //jLable.setText("" + fl);
+                        Pane p = new Pane();
+                        HBox.setMargin(p, new Insets(5, 2, 2, 2));
+                        p.setStyle("-fx-background-color: " + ColorArray[k] + ";");
+                        p.setBackground(new Background(new BackgroundFill(Color.web(ColorArray[k]), CornerRadii.EMPTY, Insets.EMPTY)));
+                        p.setPrefSize(100, 30);
+                        p.setStyle("-fx-border-color: #000000;");
 
-                    p.getChildren().add(jLable);
-                    rtable.getChildren().add(p);
+                        p.getChildren().add(jLable);
+                        rtable.getChildren().add(p);
 
-                }
-                hBox2.getChildren().add(rtable);
-                mainVBox.getChildren().add(hBox2);
-                resultPan.getChildren().add(mainVBox);
-            });
+                    }
+                    hBox2.getChildren().add(rtable);
+                    mainVBox.getChildren().add(hBox2);
+                    resultPan.getChildren().add(mainVBox);
+                });
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+            }
 
-        } catch (Exception ex) {
-
+        } catch (ParseException | HeadlessException ex) {
+            httpAPI.erLog.write(ex);
         }
     }
 

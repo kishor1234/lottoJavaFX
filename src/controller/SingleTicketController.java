@@ -96,35 +96,39 @@ public class SingleTicketController {
             String jsonString = person.toString();
             String data = httpAPI._jsonRequest("/?r=singleTicketPrint", jsonString);
             //get unitrid 
-            Object obj2 = new JSONParser().parse(data);
-            Map<String, String> adbPrint = new HashMap<>();
-            ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-            for (int i = 0; i < aMap.size(); i++) {
-                Map<String, String> temP = aMap.get(i);
-                adbPrint = new HashMap<>();
-                adbPrint.put("trno", temP.get("trno"));
-                adbPrint.put("own", owner);
-                adbPrint.put("action", "subentry");
-                adbPrint.put("amount", amount);
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                String jsonPrint = gson.toJson(adbPrint);
-                //System.out.println(jsonPrint);
-                String Data = httpAPI._jsonRequest("?r=singleTicketPrint", jsonPrint);
-                Object obj = new JSONParser().parse(Data);
-                JSONObject jo = (JSONObject) obj;
-                String status = (String) jo.get("status");
-                msg.setText((String) jo.get("msg"));
-                ArrayList<Map> aMap2 = (ArrayList<Map>) jo.get("point");
-                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-                aMap2.stream().forEach((aMap1) -> {
-                    data_ticket.add(new SingleTicket(aMap1.get("srno").toString(), aMap1.get("drDate").toString(), aMap1.get("drTime").toString(), aMap1.get("name").toString(), aMap1.get("mrp").toString(), aMap1.get("digit").toString(), aMap1.get("qty").toString()));
-                });
-            }
-            //
+            if (data != null) {
+                Object obj2 = new JSONParser().parse(data);
+                Map<String, String> adbPrint = new HashMap<>();
+                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                for (Map aMap3 : aMap) {
+                    Map<String, String> temP = aMap3;
+                    adbPrint = new HashMap<>();
+                    adbPrint.put("trno", temP.get("trno"));
+                    adbPrint.put("own", owner);
+                    adbPrint.put("action", "subentry");
+                    adbPrint.put("amount", amount);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    String jsonPrint = gson.toJson(adbPrint);
+                    //System.out.println(jsonPrint);
+                    String Data = httpAPI._jsonRequest("?r=singleTicketPrint", jsonPrint);
+                    Object obj = new JSONParser().parse(Data);
+                    JSONObject jo = (JSONObject) obj;
+                    //String status = (String) jo.get("status");
+                    msg.setText((String) jo.get("msg"));
+                    ArrayList<Map> aMap2 = (ArrayList<Map>) jo.get("point");
+                    //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+                    aMap2.stream().forEach((aMap1) -> {
+                        data_ticket.add(new SingleTicket(aMap1.get("srno").toString(), aMap1.get("drDate").toString(), aMap1.get("drTime").toString(), aMap1.get("name").toString(), aMap1.get("mrp").toString(), aMap1.get("digit").toString(), aMap1.get("qty").toString()));
+                    });
+                }
+                //
 
-            ticket_info.setItems(data_ticket);
+                ticket_info.setItems(data_ticket);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+            }
         } catch (Exception ex) {
-            ////System.out.println(ex.getMessage());
+            httpAPI.erLog.write(ex);
         }
     }
 
@@ -150,28 +154,31 @@ public class SingleTicketController {
                         String jsonPrint = gson.toJson(adbPrint);
                         //System.out.println(jsonPrint);
                         String Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                        Object obj2 = new JSONParser().parse(Data);
-                        ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-                        for (int i = 0; i < aMap.size(); i++) {
-                            try {
-                                Map<String, String> temP = aMap.get(i);
-                                adbPrint = new HashMap<>();
-                                adbPrint.put("game", temP.get("game"));
-                                adbPrint.put("own", owner);
-                                adbPrint.put("utrno", ticket);
-                                adbPrint.put("action", "subentry");
-                                //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                jsonPrint = gson.toJson(adbPrint);
-                                //System.out.println(jsonPrint);
-                                Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                invoiceJSON.invoiceJSONPrint(Data, printer);
-                            } catch (Exception ex) {
-                                Logger.getLogger(SingleTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                        if (Data != null) {
+                            Object obj2 = new JSONParser().parse(Data);
+                            ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                            for (Map aMap1 : aMap) {
+                                try {
+                                    Map<String, String> temP = aMap1;
+                                    adbPrint = new HashMap<>();
+                                    adbPrint.put("game", temP.get("game"));
+                                    adbPrint.put("own", owner);
+                                    adbPrint.put("utrno", ticket);
+                                    adbPrint.put("action", "subentry");
+                                    //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                    jsonPrint = gson.toJson(adbPrint);
+                                    //System.out.println(jsonPrint);
+                                    Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                    invoiceJSON.invoiceJSONPrint(Data, printer);
+                                }catch (Exception ex) {
+                                    httpAPI.erLog.write(ex);
+                                }
                             }
-                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
                         }
                     } catch (ParseException ex) {
-                        Logger.getLogger(SingleTicketController.class.getName()).log(Level.SEVERE, null, ex);
+                        httpAPI.erLog.write(ex);
                     }
 
                 } else {

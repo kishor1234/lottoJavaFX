@@ -103,17 +103,19 @@ public class LoginController implements Initializable {
 
                 try {
                     String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-                    System.out.println(data);
-                    JSONObject myResponse = new JSONObject(data);
-                    int status = Integer.parseInt(myResponse.getString("status"));
+                    if (data != null) {
+                        JSONObject myResponse = new JSONObject(data);
+                        int status = Integer.parseInt(myResponse.getString("status"));
 
-                    if (status == 1) {
-                        msg.setText(myResponse.getString("message"));
-                        switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
+                        if (status == 1) {
+                            msg.setText(myResponse.getString("message"));
+                            switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
+                        } else {
+                            msg.setText(myResponse.getString("message"));
+                        }
                     } else {
-                        msg.setText(myResponse.getString("message"));
+                        msg.setText("Please check your internet connection!");
                     }
-
                 } catch (JSONException | NumberFormatException ex) {
                     ////System.out.println(ex.getMessage());
                 }

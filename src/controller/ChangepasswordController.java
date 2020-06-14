@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,17 +51,21 @@ public class ChangepasswordController {
         String jsonEmp = gson.toJson(jString);
         try {
             String data = httpAPI._jsonRequest("?r=gameChangePassword", jsonEmp);
-            JSONObject myResponse = new JSONObject(data);
-            int status = Integer.parseInt(myResponse.getString("status"));
-            if (status == 1) {
-                msg.setText(myResponse.getString("message"));
+            if (data != null) {
+                JSONObject myResponse = new JSONObject(data);
+                int status = Integer.parseInt(myResponse.getString("status"));
+                if (status == 1) {
+                    msg.setText(myResponse.getString("message"));
+                } else {
+                    msg.setText(myResponse.getString("message"));
+                }
+                old_password.setText("");
+                new_password.setText("");
             } else {
-                msg.setText(myResponse.getString("message"));
+                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
             }
-            old_password.setText("");
-            new_password.setText("");
         } catch (JSONException | NumberFormatException ex) {
-            //System.out.println(ex.getMessage());
+            httpAPI.erLog.write(ex);
         }
     }
 

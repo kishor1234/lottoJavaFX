@@ -104,18 +104,22 @@ public class CancelTicketController {
             person.addProperty("own", owner);
             String jsonString = person.toString();
             String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
-            Object obj = new JSONParser().parse(data);
-            ArrayList<Map> aMap = (ArrayList<Map>) obj;
-            //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-            aMap.stream().forEach((aMap1) -> {
-                Button btn = new Button("Cancel");
-                btn.setOnAction(e -> cancelTicket(aMap1.get("ticket").toString()));
-                //data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
-            });
+            if (data != null) {
+                Object obj = new JSONParser().parse(data);
+                ArrayList<Map> aMap = (ArrayList<Map>) obj;
+                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+                aMap.stream().forEach((aMap1) -> {
+                    Button btn = new Button("Cancel");
+                    btn.setOnAction(e -> cancelTicket(aMap1.get("ticket").toString()));
+                    //data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
+                });
 
-            ticket_info.setItems(data_ticket);
+                ticket_info.setItems(data_ticket);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+            }
         } catch (Exception ex) {
-
+            httpAPI.erLog.write(ex);
         }
     }
 
@@ -134,17 +138,21 @@ public class CancelTicketController {
                 String jsonEmp = gson.toJson(data);
                 String Data = httpAPI._jsonRequest("?r=cancelTicket", jsonEmp);
                 //System.out.println(Data);
-                Object obj = new JSONParser().parse(Data);
-                JSONObject jo = (JSONObject) obj;
-                String msg = (String) jo.get("message");
-                JOptionPane.showMessageDialog(null, "Cancle " + msg);
-                reloadTable();
+                if (Data != null) {
+                    Object obj = new JSONParser().parse(Data);
+                    JSONObject jo = (JSONObject) obj;
+                    String msg = (String) jo.get("message");
+                    JOptionPane.showMessageDialog(null, "Cancle " + msg);
+                    reloadTable();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Ticket Deleteing Process cancel!");
             }
 
         } catch (HeadlessException | ParseException ex) {
-            Logger.getLogger(ReprintTicketController.class.getName()).log(Level.SEVERE, null, ex);
+            httpAPI.erLog.write(ex);
         }
     }
 

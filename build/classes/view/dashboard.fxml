@@ -593,7 +593,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                              <HBox alignment="TOP_CENTER" minHeight="300.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <VBox HBox.hgrow="ALWAYS">
                                        <children>

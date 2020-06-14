@@ -86,8 +86,7 @@ public class AdvanceController {
             //System.out.println("Selected Advance Draw "+advanceDraw);
 
         } catch (JsonSyntaxException | NumberFormatException ex) {
-            // JOptionPane.showMessageDialog(null, ex.getMessage(), "Error Message Box", JOptionPane.ERROR_MESSAGE);
-
+             httpAPI.erLog.write(ex);
         }
     }
 
@@ -119,7 +118,7 @@ public class AdvanceController {
                     }
 
                 } catch (Exception ex) {
-                    // System.out.println("Msg " + ex.getMessage());
+                     httpAPI.erLog.write(ex);
                 }
                 adCheck.put(ks + "", checkbox);
                 checkbox.setOnAction(e -> adCheckBoxAction(checkbox, temp));
@@ -141,7 +140,7 @@ public class AdvanceController {
             drawpan.getChildren().add(hbC);
             max.setText(ks + "");
         } catch (JsonSyntaxException | NumberFormatException ex) {
-            //System.out.println("Advance Error " + ex.getMessage());
+             httpAPI.erLog.write(ex);
         }
     }
 

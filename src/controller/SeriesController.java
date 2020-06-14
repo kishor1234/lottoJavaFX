@@ -58,7 +58,7 @@ public class SeriesController {
         return aMap;
     }
 
-    void initLoadData(String multi, Map<String, String> oldMap,String seriesStringData) {
+    void initLoadData(String multi, Map<String, String> oldMap, String seriesStringData) {
         cbMap = new HashMap<>();
         String fileData = seriesStringData;//httpAPI._jsonRequest("?r=loadSeries", "");
         //System.out.println(multi + " Series Load Data " + fileData);
@@ -145,7 +145,7 @@ public class SeriesController {
                             }
                         }
                     } catch (Exception ex) {
-
+                        httpAPI.erLog.write(ex);
                     }
 
                     checkbox.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 13));
