@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Series or Multipule Munber" HBox.hgrow="ALWAYS">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Series or Multipule Number" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

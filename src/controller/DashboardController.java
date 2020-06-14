@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Sys.Sereis.seriesData;
 import Sys.SeriesClass;
 import Sys.TimeFormats;
 import Sys.api.httpAPI;
@@ -68,6 +69,7 @@ import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * FXML Controller class
@@ -606,7 +608,7 @@ public class DashboardController {
                         } else if (event.getCode() == KeyCode.F6) {
                             System.out.println("Tab pressed F6");
                             javafx.event.ActionEvent et = null;
-                            ActionBuy(et);
+                            //ActionBuy(et);
                             event.consume();
                         }
                     });
@@ -738,7 +740,7 @@ public class DashboardController {
                     if (event.getCode() == KeyCode.F6) {
                         System.out.println("Tab pressed F6");
                         javafx.event.ActionEvent et = null;
-                        ActionBuy(et);
+                        //ActionBuy(et);
 
                     }
                 });
@@ -796,7 +798,7 @@ public class DashboardController {
                     if (event.getCode() == KeyCode.F6) {
                         System.out.println("Tab pressed F6");
                         javafx.event.ActionEvent et = null;
-                        ActionBuy(et);
+                        //ActionBuy(et);
 
                     }
                 });
@@ -1548,7 +1550,7 @@ public class DashboardController {
                 }
 
                 loadAdvanceDraw();
-
+                messageRefreshThread();
             } else {
                 JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
             }
@@ -1618,8 +1620,9 @@ public class DashboardController {
                         @Override
                         public void run() {
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(1000);
                                 resultBoard("ALL");
+                                interval--;
 
                             } catch (InterruptedException ex) {
 
@@ -2139,7 +2142,7 @@ public class DashboardController {
                         calculateTotal();
                         resetManualPlatSeleted();
                         runnableBalance();
-                        messageRefreshThread();
+
                         resetEvenOdd();
                         // loadSeries(multiMap);
                         buy.setDisable(false);
@@ -2172,37 +2175,72 @@ public class DashboardController {
                         fixed.setSelected(false);
                         totalamt.setText("");
                         totalqty.setText("");
-                        //advance.setText("false");
-                        //advanceDraw.clear();
-                        //advanceDrawArray.clear();
-                        //selectSubSeries(B0);
-                        selectAll("#FFFFFF");
-                        resetVarticalInput();
-                        resetHorizontalInput();
-                        if (series.size() >= 0) {
-                            series.clear();
-                            //    seriesLable.setText("1000-1900");
-                            //    selectDefaultSeries(0);
-                            selectSubSeries(B0);
-                            B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
-                        }
-//                        if (multiSeries.size() >= 0) {
-//                            multiSeries.clear();
-//                        }
-                        Iterator<String> it = totalField.keySet().iterator();       //keyset is a method  
-                        while (it.hasNext()) {
-                            String key = (String) it.next();
-                            TextField tf = totalField.get(key);
-                            tf.setText("");
-                        }
+                        if (advance.getText().equals("true")) {
+                            //advance.setText("false");
+                            //advanceDraw.clear();
+                            //advanceDrawArray.clear();
+                            //selectSubSeries(B0);
+                            if (multi.isSelected()) {
+                                resetAll();
+                            } else {
+                                if (series.size() >= 0) {
+                                    series.clear();
+                                }
+                                if (multiSeries.size() >= 0) {
+                                    multiSeries.clear();
+                                }
+                                selectAll("#FFFFFF");
+                                resetVarticalInput();
+                                resetHorizontalInput();
 
-                        lastTransaction();
-                        calculateTotal();
-                        resetManualPlatSeleted();
-                        runnableBalance();
-                        messageRefreshThread();
-                        resetEvenOdd();
-                        loadSeries(multiMap);
+                                loadSeries(multiMap);
+                                System.out.println(multiMap);
+                            }
+                        } else {
+                            if (multi.isSelected()) {
+                                resetAll();
+                            } else {
+                                advance.setText("false");
+                                selectAll("#FFFFFF");
+                                resetVarticalInput();
+                                resetHorizontalInput();
+                                if (series.size() >= 0) {
+                                    series.clear();
+
+                                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                    seriesData series = gson.fromJson(seriesStringData, seriesData.class);
+                                    ArrayList<Map> test = series.getProperties();
+                                    Iterator<Map> itr = test.iterator();
+                                    while (itr.hasNext()) {
+                                        Map<String, String> temp = itr.next();
+                                        if (seriesLable.getText().equals(temp.get("series"))) {
+                                            selectDefaultSeries(Integer.parseInt(temp.get("id")) - 1);
+                                            seriesLable.setText(temp.get("series"));
+                                        }
+                                    }
+
+                                    selectSubSeries(B0);
+                                    B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
+                                }
+                                if (multiSeries.size() >= 0) {
+                                    multiSeries.clear();
+                                }
+
+                                Iterator<String> it = totalField.keySet().iterator();       //keyset is a method  
+                                while (it.hasNext()) {
+                                    String key = (String) it.next();
+                                    TextField tf = totalField.get(key);
+                                    tf.setText("");
+                                }
+
+                                lastTransaction();
+                                calculateTotal();
+                                resetManualPlatSeleted();
+                                runnableBalance();
+                                messageRefreshThread();
+                                resetEvenOdd();
+                            }
+                        }
                     }
                 };
                 //resetClock();
@@ -2784,6 +2822,7 @@ public class DashboardController {
                                         JOptionPane.showMessageDialog(null, joMap.get("msg"));
                                     }
                                 } else {
+                                    buy.setDisable(false);
                                     JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                 }
 
@@ -2837,13 +2876,14 @@ public class DashboardController {
                                     tp.start();
                                     lastTransaction();
                                 } else {
+                                    buy.setDisable(false);
                                     JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                 }
                             }
 
                         }
 
-                    } catch (Exception ex) {
+                    } catch (NumberFormatException | HeadlessException | ParseException ex) {
                         //System.out.println(ex.getMessage());
                     }
                 }
@@ -2863,6 +2903,7 @@ public class DashboardController {
         //msgPanel
         //resultBoard("ALL");
         resetAll();
+        resetClock();
         //setMessageBar();
 
     }
