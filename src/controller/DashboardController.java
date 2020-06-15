@@ -2904,6 +2904,7 @@ public class DashboardController {
         //resultBoard("ALL");
         resetAll();
         resetClock();
+        showTimer();
         //setMessageBar();
 
     }

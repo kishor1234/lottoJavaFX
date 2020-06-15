@@ -28,7 +28,7 @@
             </HBox>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                <children>
-                  <Text fx:id="msg" layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="559.3359375">
+                  <Text fx:id="msg" layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="559.3359375">
                      <font>
                         <Font name="System Bold" size="40.0" />
                      </font>
