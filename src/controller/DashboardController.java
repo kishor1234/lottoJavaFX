@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -679,20 +681,33 @@ public class DashboardController {
         Thread t = new Thread() {
             @Override
             public void run() {
-
-                DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
-
+//
+//                DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
+//                Date dateobj = new Date();
                 while (true) {
                     //System.out.println(df.format(dateobj));
-                    Date dateobj = new Date();
-                    synchronized (this) {
 
-                        clockLabel.setText(df.format(dateobj));
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ex) {
-                            System.out.println(ex.getMessage());
+                    synchronized (this) {
+                        Calendar cal = new GregorianCalendar();
+                        int hour = cal.get(Calendar.HOUR);
+                        int min = cal.get(Calendar.MINUTE);
+                        int sec = cal.get(Calendar.SECOND);
+
+                        int AM_PM = cal.get(Calendar.AM_PM);
+                        String Am_Pm = "";
+                        if (AM_PM == 1) {
+
+                            Am_Pm = "PM";
+                        } else {
+                            Am_Pm = "AM";
                         }
+                        clockLabel.setText("" + hour + ":" + min + ":" + sec + " " + Am_Pm);
+
+//                        try {
+//                            Thread.sleep(1000);
+//                        } catch (InterruptedException ex) {
+//                            System.out.println(ex.getMessage());
+//                        }
                     }
 
                 }
