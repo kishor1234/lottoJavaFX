@@ -24,11 +24,13 @@ public class ClaimController {
 
     void initLoadData(String msgg) {
         msg.setText(msgg);
+        System.gc();
     }
 
     @FXML
     private void actionClose(ActionEvent event) {
         close.getScene().getWindow().hide();
+        System.gc();
     }
 
     /**

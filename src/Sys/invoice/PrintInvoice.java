@@ -65,7 +65,7 @@ public class PrintInvoice {
             barcode.setHRIPosition(BarCode.BarCodeHRIPosition.BelowBarCode);
             barcode.setBarCodeSize(2, 50);
             escpos.feed(1);
-            escpos.write(barcode, Barcode+"-").feed(1);
+            escpos.write(barcode, Barcode + "-").feed(1);
 
             Style tt = new Style()
                     .setJustification(EscPosConst.Justification.Left_Default)
@@ -82,7 +82,7 @@ public class PrintInvoice {
         } catch (IOException ex) {
             Logger.getLogger(PrintInvoice.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        System.gc();
     }
 
     public static void main(String[] args) {

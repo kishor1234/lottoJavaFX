@@ -93,6 +93,7 @@ public class AdvanceController {
     @FXML
     private void closeAction(ActionEvent event) {
         button.getScene().getWindow().hide();
+        System.gc();
     }
 
     public void loadAdvance() {

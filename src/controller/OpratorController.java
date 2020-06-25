@@ -7,7 +7,6 @@ package controller;
 
 import Sys.Report;
 import Sys.api.httpAPI;
-import Sys.invoice.PrinterService;
 import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.escpos.EscPosConst;
 import com.github.anastaciocintra.escpos.Style;
@@ -107,6 +106,7 @@ public class OpratorController {
         winPoint.setCellValueFactory(new PropertyValueFactory<>("winPoint"));
         netPayable.setCellValueFactory(new PropertyValueFactory<>("netPayable"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        System.gc();
     }
 
     private void loadData() {
@@ -145,6 +145,7 @@ public class OpratorController {
         } catch (ParseException | HeadlessException ex) {
             httpAPI.erLog.write(ex);
         }
+        System.gc();
     }
 
     @FXML
@@ -189,7 +190,7 @@ public class OpratorController {
         } catch (IOException | IllegalArgumentException ex) {
             httpAPI.erLog.write(ex);
         }
-
+        System.gc();
     }
 
     @FXML
@@ -207,6 +208,7 @@ public class OpratorController {
     @FXML
     private void closeAction(MouseEvent event) {
         close.getScene().getWindow().hide();
+        System.gc();
     }
 
 }

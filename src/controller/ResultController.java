@@ -121,6 +121,7 @@ public class ResultController {
         } catch (ParseException | HeadlessException ex) {
             httpAPI.erLog.write(ex);
         }
+        System.gc();
     }
 
     @FXML
@@ -134,6 +135,7 @@ public class ResultController {
     @FXML
     private void actionBTNClose(MouseEvent event) {
         btnClose.getScene().getWindow().hide();
+        System.gc();
     }
 
     /**

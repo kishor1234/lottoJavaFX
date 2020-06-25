@@ -90,6 +90,7 @@ public class ReprintTicketController {
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         action.setCellValueFactory(new PropertyValueFactory<>("action"));
         actionCols();
+        System.gc();
     }
 
     private void actionCols() {
@@ -138,6 +139,7 @@ public class ReprintTicketController {
         } catch (ParseException | HeadlessException ex) {
             httpAPI.erLog.write(ex);
         }
+        System.gc();
     }
 
     private void reprintTicket(String ticket, String amount) {//ticket=utrno
@@ -165,10 +167,11 @@ public class ReprintTicketController {
                 } catch (Exception ex) {
                     httpAPI.erLog.write(ex);
                 }
-
+                System.gc();
             };
 
             Platform.runLater(updater);
+            System.gc();
         });
         openThread.start();
     }
@@ -183,6 +186,7 @@ public class ReprintTicketController {
     @FXML
     private void closeWindo(ActionEvent event) {
         close.getScene().getWindow().hide();
+        System.gc();
     }
 
     private void themStyle(Stage stage, Parent root) {

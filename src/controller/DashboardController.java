@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -562,10 +563,12 @@ public class DashboardController {
                 @Override
                 public void run() {
                     Platform.runLater(updater);
+
                 }
+
             };
             t.start();
-//            Platform.runLater(updater);
+            //            Platform.runLater(updater);
         });
         openThread.start();
 
@@ -634,6 +637,7 @@ public class DashboardController {
             loadSeriesData();
             loadAdvanceDraw();
             System.out.println("DAta" + seriesStringData);
+            System.gc();
         } catch (Exception ex) {
             ////System.out.println("Error on initParameter " + ex.getMessage());
         }
@@ -678,6 +682,7 @@ public class DashboardController {
         DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
         Date dobj = new Date();
         cDate.setText(f.format(dobj));
+        clockLabel.setText(f.format(dobj));
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -714,7 +719,7 @@ public class DashboardController {
 
             }
         };
-        t.start();
+        // t.start();
         //////System.out.println();
     }
 
@@ -1635,8 +1640,9 @@ public class DashboardController {
                         @Override
                         public void run() {
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
                                 resultBoard("ALL");
+                                System.gc();
                                 interval--;
 
                             } catch (InterruptedException ex) {
@@ -1644,12 +1650,14 @@ public class DashboardController {
                             }
                         }
                     };
+                    System.gc();
                     resetClock();
                     Platform.runLater(updater);
                 }
 
             });
             timClock.start();
+            System.out.println(timClock.getName() + "Thread name");
         }
         return --interval;
     }
@@ -2273,6 +2281,7 @@ public class DashboardController {
                 @Override
                 public void run() {
                     resetDashboard();
+                    System.gc();
                 }
             };
             t.start();
@@ -2825,7 +2834,7 @@ public class DashboardController {
                                                         msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
                                                         Thread.sleep(1000);
                                                     } catch (Exception ex) {
-                                                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                                        System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
                                                     }
 
                                                 }
@@ -2844,6 +2853,7 @@ public class DashboardController {
                                 //invoiceJSON iJ = new invoiceJSON();
                                 //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                 lastTransaction();
+                                //System.gc();
                             } else {
                                 Map<String, Map> finalMap = new HashMap<>();
                                 Map<String, String> data = new HashMap<>();
@@ -2883,13 +2893,15 @@ public class DashboardController {
                                                     buy.setDisable(false);
                                                 }
                                             } catch (Exception ex) {
-                                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                                System.out.println("Threade Exerpiton line 2891 " + ex.getMessage());
                                             }
 
                                         }
                                     };
+
                                     tp.start();
                                     lastTransaction();
+
                                 } else {
                                     buy.setDisable(false);
                                     JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
@@ -2897,20 +2909,24 @@ public class DashboardController {
                             }
 
                         }
-
+                        System.gc();
                     } catch (NumberFormatException | HeadlessException | ParseException ex) {
                         //System.out.println(ex.getMessage());
+                        System.gc();
                     }
+                    System.gc();
                 }
 
             };
             buy.setDisable(true);
+            System.gc();
             t.start();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Exception message " + ex.getMessage());
 
         }
+        System.gc();
     }
 
     @FXML
@@ -2920,6 +2936,7 @@ public class DashboardController {
         resetAll();
         resetClock();
         showTimer();
+        System.gc();
         //setMessageBar();
 
     }

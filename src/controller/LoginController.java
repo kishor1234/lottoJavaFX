@@ -124,6 +124,7 @@ public class LoginController implements Initializable {
                 @Override
                 public void run() {
                     Platform.runLater(updater);
+                    System.gc();
                 }
             };
             t.start();
@@ -186,6 +187,7 @@ public class LoginController implements Initializable {
             printerBox.getChildren().add(printerButton);
 
         }
+        System.gc();
     }
 
     private void setDefaultPrinter(String name) {
@@ -230,6 +232,7 @@ public class LoginController implements Initializable {
 
             stage.show();
             btnLogin.getScene().getWindow().hide();
+            System.gc();
             //loadSeries(multiMap);
         } catch (Exception ex) {
             ////System.out.println("Switching Scan View  Error " + ex.getMessage());

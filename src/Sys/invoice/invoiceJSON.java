@@ -102,6 +102,7 @@ public class invoiceJSON {
                 //System.out.println(printPage);
                 //PrintInvoice.Sample(currentPrinter, printPage, printMap.get("game"));
                 printPage = "";
+                System.gc();
             }
 
         }

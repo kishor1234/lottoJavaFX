@@ -63,11 +63,13 @@ public class CancelpoupController {
         } else {
             JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
         }
+        System.gc();
     }
 
     @FXML
     private void CloseAction(ActionEvent event) {
         close.getScene().getWindow().hide();
+        System.gc();
     }
 
     void initLoadData(String own, String printer, String drawid) {
@@ -104,7 +106,7 @@ public class CancelpoupController {
         } catch (ParseException ex) {
             httpAPI.erLog.write(ex);
         }
-
+        System.gc();
     }
 
 }
