@@ -54,7 +54,8 @@ public class invoiceJSON {
                 printPageFooter += "Per Ticket price .2.00\n";
                 printPageFooter += "Total Quantity : " + printMap.get("totalpoint") + "\n";
                 printPageFooter += "Total Point    : " + printMap.get("amount") + "\n";
-                printPageFooter += "Total Quantity : " + trno + "\n";
+                printPageFooter += "Total Tr No.   : " + trno + "\n";
+                printPageFooter += "Barcode No.    : " + printMap.get("game") + "-\n";
                 for (int j = 0; j < point.size(); j++) {
                     Map<String, String> dPoint = point.get(j);
 

@@ -153,7 +153,7 @@
           <TableColumn fx:id="srno" maxWidth="2000.0" prefWidth="100.0" text="Sr.No" />
           <TableColumn fx:id="userid" prefWidth="34.0" text="User id" />
             <TableColumn fx:id="game" prefWidth="75.0" text="Game" />
-            <TableColumn fx:id="ticketno" maxWidth="7000.0" prefWidth="75.0" text="Ticket No" />
+            <TableColumn fx:id="ticketno" maxWidth="7000.0" prefWidth="75.0" text="Transcation No" />
             <TableColumn fx:id="drawid" maxWidth="3000.0" prefWidth="75.0" text="Draw id" />
             <TableColumn fx:id="netPoint" prefWidth="75.0" text="Net Point" />
             <TableColumn fx:id="discountPer" prefWidth="75.0" text="Discount %" />

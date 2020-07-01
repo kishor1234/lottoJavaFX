@@ -85,12 +85,15 @@
                      <children>
                         <HBox VBox.vgrow="ALWAYS">
                            <children>
-                              <Pane style="-fx-background-color: #FFFFFF;">
+                              <Pane style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
                                  <children>
                                     <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="10.0" layoutY="10.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/rjlx.png" />
                                        </image>
+                                       <viewport>
+                                          <Rectangle2D width="50.0" />
+                                       </viewport>
                                     </ImageView>
                                     <Text layoutX="28.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Amusement">
                                        <font>
@@ -599,7 +602,7 @@
                                        <children>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="85.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="78.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -610,13 +613,16 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="Page Up | Down" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="allSelect" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#allSelectAction" style="-fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="SELECT ALL " textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Label>
                                              </children>
                                              <VBox.margin>
@@ -625,7 +631,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Button fx:id="B0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB0" prefWidth="94.0" text="1000-1099" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="B0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB0" prefWidth="100.0" text="1000-1099" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -636,7 +642,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01-0180" HBox.hgrow="ALWAYS">
+                                                <CheckBox fx:id="c0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c0" style="-fx-background-color: #d485c2;" text="02*01=0180" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -657,7 +663,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Button fx:id="B1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB1" prefWidth="94.0" text="1100-1199" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="B1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB1" prefWidth="100.0" text="1100-1199" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -668,7 +674,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01-0180" HBox.hgrow="ALWAYS">
+                                                <CheckBox fx:id="c1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c1" style="-fx-background-color: #82b47e;" text="02*01=0180" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -689,7 +695,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Button fx:id="B2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB2" prefWidth="94.0" text="1200-1299" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="B2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionB2" prefWidth="100.0" text="1200-1299" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -700,7 +706,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02-0360" HBox.hgrow="ALWAYS">
+                                                <CheckBox fx:id="c2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#action_c2" style="-fx-background-color: #7ab4e8;" text="02*02=0360" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
