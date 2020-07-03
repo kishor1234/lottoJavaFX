@@ -529,9 +529,9 @@ public class DashboardController {
     @FXML
     private Label allSelect;
     private Integer perPoint = 2;
-
+    public String mybalance = "";
     private boolean allCheckSelect = false;
-    private int[] allCheckNo = {1, 1, 2, 3, 5, 5, 10, 20, 25, 25};
+    private int[] allCheckNo = {25, 20, 10, 5, 5, 3, 2, 1, 1, 25};
 
     //end
     /**
@@ -557,26 +557,32 @@ public class DashboardController {
 //    }
     public void initParameter(JSONObject myRep, String printers) {
 
-        defaultPrinter = printers;
-        myResponse = myRep;
-        pevirous.put("last", new TextField(""));
-        Thread openThread = new Thread(() -> {
-            Runnable updater = () -> {
-                waits(this.myResponse, defaultPrinter);
-                resetDashboard();
-            };
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                defaultPrinter = printers;
+                myResponse = myRep;
+                pevirous.put("last", new TextField(""));
+                Thread openThread = new Thread(() -> {
+                    Runnable updater = () -> {
+                        waits(myResponse, defaultPrinter);
+                        resetDashboard();
+                    };
+                    Thread t = new Thread() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(updater);
 
-                }
+                        }
 
-            };
-            t.start();
-            //            Platform.runLater(updater);
-        });
-        openThread.start();
+                    };
+                    t.start();
+                    //            Platform.runLater(updater);
+                });
+                openThread.start();
+            }
+        };
+        t.start();
 
     }
 
@@ -975,46 +981,52 @@ public class DashboardController {
 
     public void setMessageBar() {
         try {
-            Thread threadMessageBar = new Thread(() -> {
-                Runnable updater = () -> {
-                    synchronized (this) {
-                        msgPanel.getChildren().clear();
-                        String data = httpAPI._jsonRequest("?r=message", "");
-                        if (data != null) {
-                            Text msg = new Text(data);
-                            msg.setFill(Color.RED);
+            Thread msThread = new Thread() {
+                @Override
+                public void run() {
+                    Thread threadMessageBar = new Thread(() -> {
+                        Runnable updater = () -> {
+                            synchronized (this) {
+                                msgPanel.getChildren().clear();
+                                String data = httpAPI._jsonRequest("?r=message", "");
+                                if (data != null) {
+                                    Text msg = new Text(data);
+                                    msg.setFill(Color.RED);
 //                    msg.setStrokeWidth(2);
 //                    msg.setStroke(Color.RED);
-                            msg.setTextOrigin(VPos.TOP);
-                            msg.setFont(Font.font(18));
-                            msgPanel.getChildren().add(msg);
-                            // Get the Width of the Scene and the Text
-                            double sceneWidth = msgPanel.getWidth();
-                            double textWidth = msg.getLayoutBounds().getWidth();
+                                    msg.setTextOrigin(VPos.TOP);
+                                    msg.setFont(Font.font(18));
+                                    msgPanel.getChildren().add(msg);
+                                    // Get the Width of the Scene and the Text
+                                    double sceneWidth = msgPanel.getWidth();
+                                    double textWidth = msg.getLayoutBounds().getWidth();
 
-                            // Define the Durations
-                            Duration startDuration = Duration.ZERO;
-                            Duration endDuration = Duration.seconds(40);
+                                    // Define the Durations
+                                    Duration startDuration = Duration.ZERO;
+                                    Duration endDuration = Duration.seconds(40);
 
-                            // Create the start and end Key Frames
-                            KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
-                            KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
-                            KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), 0 * textWidth);
-                            KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
+                                    // Create the start and end Key Frames
+                                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
+                                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
+                                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), 0 * textWidth);
+                                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
 
-                            // Create a Timeline
-                            Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
-                            // Let the animation run forever
-                            timeline.setCycleCount(Timeline.INDEFINITE);
-                            // Run the animation
-                            timeline.play();
-                        }
-                    }
-                };
-                Platform.runLater(updater);
+                                    // Create a Timeline
+                                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+                                    // Let the animation run forever
+                                    timeline.setCycleCount(Timeline.INDEFINITE);
+                                    // Run the animation
+                                    timeline.play();
+                                }
+                            }
+                        };
+                        Platform.runLater(updater);
 
-            });
-            threadMessageBar.start();
+                    });
+                    threadMessageBar.start();
+                }
+            };
+            msThread.start();
 
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
@@ -1053,7 +1065,7 @@ public class DashboardController {
             String s[] = subSeries.split("-");
             tempSubSeries.put(s[0], aMap);
             mainSeries.put(s[0], tempSubSeries);
-            //////System.out.println(mainSeries);
+            // System.out.println("Test " + mainSeries);
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -1318,10 +1330,11 @@ public class DashboardController {
                         String jsonEmp = gson.toJson(multiSeries);
                         System.out.println("MultiSeries Json " + jsonEmp);
                         System.out.println("Advance Array " + advanceDrawArray);
-                        calculateTotal();
+                        //calculateTotal();
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(5000);
+                            //  System.gc();
                             //resetFinalTotal();
                         } catch (InterruptedException ex) {
                             ////System.out.println(ex.getMessage());
@@ -1329,7 +1342,7 @@ public class DashboardController {
                     }
                 }
             };
-            //t.start();
+            // t.start();
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -1609,7 +1622,7 @@ public class DashboardController {
                 }
 
                 loadAdvanceDraw();
-                messageRefreshThread();
+                // messageRefreshThread();
             } else {
                 JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
             }
@@ -1775,7 +1788,7 @@ public class DashboardController {
             int finalQty = 0;
             int finalAmt = 0;
 
-            //Dashboard.ResttotalField();
+            ResttotalField();
             for (Map.Entry<String, Integer> entry : final_Map.entrySet()) {
                 String newString = entry.getKey().replace("-", "_");
                 TextField qtyField = totalField.get("Q" + newString);
@@ -1802,24 +1815,28 @@ public class DashboardController {
             }
 
         } catch (Exception edx) {
-
+            System.out.println("ResttotalField(); " + edx.getMessage());
         }
     }
 
     public void ResttotalField() {
-        int i = 1;
+        try {
+            int i = 1;
 
-        while (i <= 10) {
-            int tstart = 1000 * i;
-            int tend = tstart * 900;
-            String newString = tstart + "_" + tend;
-            TextField qtyField = totalField.get("Q" + newString);
-            qtyField.setText("");
-            TextField amtField = totalField.get("A" + newString);
-            amtField.setText("");
-            totalqty.setText("");
-            totalamt.setText("");
-            i++;
+            while (i <= 10) {
+                int tstart = 1000 * i;
+                int tend = tstart + 900;
+                String newString = tstart + "_" + tend;
+                TextField qtyField = totalField.get("Q" + newString);
+                qtyField.setText("");
+                TextField amtField = totalField.get("A" + newString);
+                amtField.setText("");
+                totalqty.setText("");
+                totalamt.setText("");
+                i++;
+            }
+        } catch (Exception ex) {
+
         }
     }
 
@@ -2118,6 +2135,7 @@ public class DashboardController {
                             String data = httpAPI._jsonRequest("?r=UpdateBalance", jsonEmp);
                             if (data != null) {
                                 JSONObject myResponse = new JSONObject(data);
+                                mybalance = myResponse.getString("balance");
                                 if (myResponse.getString("status").equals("1")) {
                                     balance.setText(myResponse.getString("balance"));
                                 } else {
@@ -2351,7 +2369,7 @@ public class DashboardController {
                                 calculateTotal();
                                 resetManualPlatSeleted();
                                 runnableBalance();
-                                messageRefreshThread();
+                                //messageRefreshThread();
                                 resetEvenOdd();
                             }
                         }
@@ -3718,7 +3736,7 @@ public class DashboardController {
                     themStyle(stage, root);
                     stage.setTitle("Reprint Ticket");
                     stage.showAndWait();
-                    operator.setDisable(true);
+                    operator.setDisable(false);
                 } catch (IOException ex) {
                     Logger.getLogger(DashboardController.class
                             .getName()).log(Level.SEVERE, null, ex);
@@ -3890,37 +3908,46 @@ public class DashboardController {
 
     private void singleDrawPlatSelected(Button B0, CheckBox c0) {
         try {
-//            this.setDefauldButtonColor();
-            //B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
-//            this.selectSubSeries(B0);
-//            this.getPreviousNumber(B0);
-//            resetVarticalInput();
-//            resetHorizontalInput();
-//            alls.setText("false");
-//           // buttonClickResetCheckOption();
-
             int count = Integer.parseInt(custome.getText());
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
                     ////System.out.println("MultiSeries Array" + multiSeries);
-                    for (int i = 0; i < multiSeries.size(); i++) {
+                    for (String multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
                         //
                         int Default = 1000;
-                        String mult[] = multiSeries.get(i).split("-");
+                        String[] mult = multiSerie.split("-");
                         String bSplit[] = B0.getText().split("-");
                         int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
                         int second = first + 99;
                         String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
-                        setSubSeries(cTxt, multiSeries.get(i));
+                        setSubSeries(cTxt, multiSerie);
                     }
                 } else {
                     setSubSeries(B0.getText(), seriesLable.getText());
                 }
                 count++;
             } else {
-                unsetSubSeries(B0.getText(), seriesLable.getText());
+                if (multi.isSelected()) {
+                    ////System.out.println("MultiSeries Array" + multiSeries);
+                    for (String multiSerie : multiSeries) {
+                        //i got form button text emx 1000-1099 but my series is 3000-3900
+                        //1100+3000-1000=3100
+                        //
+                        int Default = 1000;
+                        String[] mult = multiSerie.split("-");
+                        String bSplit[] = B0.getText().split("-");
+                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int second = first + 99;
+                        String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
+                        unsetSubSeries(cTxt, multiSerie);
+                        //count--;
+                    }
+                } else {
+                    unsetSubSeries(B0.getText(), seriesLable.getText());
+
+                }
                 count--;
             }
             custome.setText(String.valueOf(count));
@@ -3954,13 +3981,20 @@ public class DashboardController {
 
     @FXML
     private void showandhide(MouseEvent event) {
-        if (show) {
-            balance.setText("*****");
-            show = false;
-        } else {
-            runnableBalance();
-            show = true;
-        }
+        Thread showandhidebalance = new Thread() {
+            @Override
+            public void run() {
+                if (show) {
+                    balance.setText("*****");
+                    show = false;
+                } else {
+                    balance.setText(mybalance);
+                    show = true;
+                }
+                System.gc();
+            }
+        };
+        showandhidebalance.start();
     }
 
     private int[] fpNumbers(int p) {
@@ -3976,7 +4010,7 @@ public class DashboardController {
             {34, 39, 84, 89, 43, 48, 93, 98},
             {40, 45, 90, 95, 4, 9, 54, 59},
             {11, 66, 16, 61},
-            {22, 26, 72, 77},
+            {22, 27, 72, 77},
             {33, 38, 83, 88},
             {44, 49, 94, 99},
             {55, 50, 0, 5}
@@ -4046,12 +4080,27 @@ public class DashboardController {
                 singleAllDrPlatSelected(button, check);
             }
             selectAll("#FFFFFF");
-            subSeriesNo.setText("");
+
+//            c0.setSelected(true);
+//            //custome.setText("1");
+//            singleAllDrPlatSelected(B0, c0);
+//            
+//            this.setDefauldButtonColor();
+            B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
+//            this.selectSubSeries(B0);
+//            this.getPreviousNumber(B0);
+//            resetVarticalInput();
+//            resetHorizontalInput();
+//            alls.setText("false");
+//            buttonClickResetCheckOption();
+            calculateTotal();
             allCheckSelect = false;
+
+            custome.setText(String.valueOf(0));
         } else {
             alls.setText("true");
             selectAll("#00FFFF");
-            custome.setText(String.valueOf(0));
+
             //resetManualPlatSeleted();
             subSeriesNo.setText(seriesLable.getText());
             for (int i = 0; i < 10; i++) {
@@ -4064,6 +4113,8 @@ public class DashboardController {
             }
             perPoint = 2;
             allCheckSelect = true;
+            calculateTotal();
+            //custome.setText(String.valueOf(0));
         }
     }
 
@@ -4082,24 +4133,42 @@ public class DashboardController {
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
                     ////System.out.println("MultiSeries Array" + multiSeries);
-                    for (int i = 0; i < multiSeries.size(); i++) {
+                    for (String multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
                         //
                         int Default = 1000;
-                        String mult[] = multiSeries.get(i).split("-");
+                        String[] mult = multiSerie.split("-");
                         String bSplit[] = B0.getText().split("-");
                         int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
                         int second = first + 99;
                         String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
-                        setSubSeries(cTxt, multiSeries.get(i));
+                        setSubSeries(cTxt, multiSerie);
                     }
                 } else {
                     setSubSeries(B0.getText(), seriesLable.getText());
                 }
                 count++;
             } else {
-                unsetSubSeries(B0.getText(), seriesLable.getText());
+                if (multi.isSelected()) {
+                    ////System.out.println("MultiSeries Array" + multiSeries);
+                    for (String multiSerie : multiSeries) {
+                        //i got form button text emx 1000-1099 but my series is 3000-3900
+                        //1100+3000-1000=3100
+                        //
+                        int Default = 1000;
+                        String[] mult = multiSerie.split("-");
+                        String bSplit[] = B0.getText().split("-");
+                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int second = first + 99;
+                        String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
+                        unsetSubSeries(cTxt, multiSerie);
+                        //count--;
+                    }
+                } else {
+                    unsetSubSeries(B0.getText(), seriesLable.getText());
+
+                }
                 count--;
             }
             custome.setText(String.valueOf(count));

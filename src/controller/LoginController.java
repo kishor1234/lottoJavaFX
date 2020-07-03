@@ -90,48 +90,49 @@ public class LoginController implements Initializable {
     @FXML
     private void login(ActionEvent event) {
         msg.setText("Authenticating... Please Wait!");
-        Thread openThread = new Thread(() -> {
-            Runnable updater = () -> {
-                msg.setText("Authenticating... Please Wait!");
-                JsonObject person = new JsonObject();
-                person.addProperty("userid", userid.getText());
-                person.addProperty("password", password.getText());
-                //person.addProperty("printer", defaultPrinter.getText());
-                person.addProperty("device", SystemInfo.getSystemName());
-                String jsonString = person.toString();
-                System.out.println(jsonString);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Thread openThread = new Thread(() -> {
+                    Runnable updater = () -> {
+                        msg.setText("Authenticating... Please Wait!");
+                        JsonObject person = new JsonObject();
+                        person.addProperty("userid", userid.getText());
+                        person.addProperty("password", password.getText());
+                        //person.addProperty("printer", defaultPrinter.getText());
+                        person.addProperty("device", SystemInfo.getSystemName());
+                        String jsonString = person.toString();
+                        System.out.println(jsonString);
 
-                try {
-                    String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-                    if (data != null) {
-                        JSONObject myResponse = new JSONObject(data);
-                        int status = Integer.parseInt(myResponse.getString("status"));
+                        try {
+                            String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
+                            if (data != null) {
+                                JSONObject myResponse = new JSONObject(data);
+                                int status = Integer.parseInt(myResponse.getString("status"));
 
-                        if (status == 1) {
-                            msg.setText(myResponse.getString("message"));
-                            switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
-                        } else {
-                            msg.setText(myResponse.getString("message"));
+                                if (status == 1) {
+                                    msg.setText(myResponse.getString("message"));
+                                    switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
+                                } else {
+                                    msg.setText(myResponse.getString("message"));
+                                }
+                            } else {
+                                msg.setText("Please check your internet connection!");
+                            }
+                        } catch (JSONException | NumberFormatException ex) {
+                            ////System.out.println(ex.getMessage());
                         }
-                    } else {
-                        msg.setText("Please check your internet connection!");
-                    }
-                } catch (JSONException | NumberFormatException ex) {
-                    ////System.out.println(ex.getMessage());
-                }
-            };
-            Thread t = new Thread() {
-                @Override
-                public void run() {
+                    };
                     Platform.runLater(updater);
                     System.gc();
-                }
-            };
-            t.start();
-            //Platform.runLater(updater);
-        });
+                    
+                    //Platform.runLater(updater);
+                });
 
-        openThread.start();
+                openThread.start();
+            }
+        };
+        t.start();
 
     }
 
