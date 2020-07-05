@@ -1670,7 +1670,7 @@ public class DashboardController {
 
             @Override
             public void run() {
-                synchronized (drawClock) {
+                synchronized (this) {
                     drawClock.setText(formatSeconds(setInterval()));
                 }
 
@@ -1683,33 +1683,29 @@ public class DashboardController {
             buy.setDisable(true);
         }
         if (interval == 1) {
-            Thread timClock = new Thread(new Runnable() {
-
+            Thread clock = new Thread() {
                 @Override
                 public void run() {
-                    Runnable updater = new Runnable() {
-
-                        @Override
-                        public void run() {
+                    Thread timClock = new Thread(() -> {
+                        Runnable updater = () -> {
                             try {
                                 Thread.sleep(2000);
                                 resultBoard("ALL");
                                 System.gc();
                                 interval--;
-
                             } catch (InterruptedException ex) {
-
+                                System.out.println(ex.getMessage() + "Thread name");
                             }
-                        }
-                    };
-                    System.gc();
-                    resetClock();
-                    Platform.runLater(updater);
+                        };
+                        System.gc();
+                        resetClock();
+                        Platform.runLater(updater);
+                    });
+                    timClock.start();
+                    System.out.println(timClock.getName() + "Thread name");
                 }
-
-            });
-            timClock.start();
-            System.out.println(timClock.getName() + "Thread name");
+            };
+            clock.start();
         }
         return --interval;
     }
