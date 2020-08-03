@@ -7,6 +7,7 @@ package controller;
 
 import Sys.SystemInfo;
 import Sys.api.httpAPI;
+import com.github.anastaciocintra.output.PrinterOutputStream;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,7 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.print.PrintService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +46,7 @@ import org.json.JSONObject;
  * @author asksoft
  */
 public class LoginController implements Initializable {
-
+    
     @FXML
     private TextField userid;
     @FXML
@@ -56,7 +58,7 @@ public class LoginController implements Initializable {
     @FXML
     private Label msg;
     public static LoginController lc = new LoginController();
-
+    
     public static TextField staticDefaultPrinter;
     @FXML
     private Label pf;
@@ -64,7 +66,7 @@ public class LoginController implements Initializable {
     private double yOffset = 0;
     @FXML
     private Button btnLogin;
-
+    
     private Map<String, Button> pButton = new HashMap<>();
 
     /**
@@ -75,10 +77,12 @@ public class LoginController implements Initializable {
         // TODO
         msg.setText("");
         loadPrinter();
-        defaultPrinter.setVisible(false);
-
+        defaultPrinter.setVisible(true);
+        PrintService printService = PrinterOutputStream.getDefaultPrintService();
+        defaultPrinter.setText(printService.getName());
+        
     }
-
+    
     public static void setPrinter(String printer) {
         try {
             lc.defaultPrinter.setText(printer);
@@ -86,7 +90,7 @@ public class LoginController implements Initializable {
             ////System.out.println(ex.getMessage());
         }
     }
-
+    
     @FXML
     private void login(ActionEvent event) {
         msg.setText("Authenticating... Please Wait!");
@@ -103,13 +107,13 @@ public class LoginController implements Initializable {
                         person.addProperty("device", SystemInfo.getSystemName());
                         String jsonString = person.toString();
                         System.out.println(jsonString);
-
+                        
                         try {
                             String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
                             if (data != null) {
                                 JSONObject myResponse = new JSONObject(data);
                                 int status = Integer.parseInt(myResponse.getString("status"));
-
+                                
                                 if (status == 1) {
                                     msg.setText(myResponse.getString("message"));
                                     switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
@@ -125,23 +129,23 @@ public class LoginController implements Initializable {
                     };
                     Platform.runLater(updater);
                     System.gc();
-                    
+
                     //Platform.runLater(updater);
                 });
-
+                
                 openThread.start();
             }
         };
         t.start();
-
+        
     }
-
+    
     @FXML
     private void disconnectGame(MouseEvent event) {
         //close.getScene().getWindow().hide();
         System.exit(0);
     }
-
+    
     @FXML
     private void restartGame(MouseEvent event) {
         Runtime runtime = Runtime.getRuntime();
@@ -152,13 +156,13 @@ public class LoginController implements Initializable {
             } else {
                 Process proc = runtime.exec("sudo reboot");
             }
-
+            
         } catch (IOException ex) {
-
+            
         }
         System.exit(0);
     }
-
+    
     @FXML
     private void shutdownGame(MouseEvent event) {
         Runtime runtime = Runtime.getRuntime();
@@ -174,23 +178,23 @@ public class LoginController implements Initializable {
         }
         System.exit(0);
     }
-
+    
     private void loadPrinter() {
-        ObservableSet<Printer> printers = Printer.getAllPrinters();
-
-        for (Printer printer : printers) {
-            defaultPrinter.setText(printer.getName());
-            Button printerButton = new Button(printer.getName());
-            pButton.put(printer.getName(), printerButton);
-            printerButton.setMaxSize(100, 200);
-            printerButton.setStyle("-fx-background-color: #42f58a;-fx-border-color:#FFFFFF; ");
-            printerButton.setOnAction(e -> setDefaultPrinter(printer.getName()));
-            printerBox.getChildren().add(printerButton);
-
-        }
+//        ObservableSet<Printer> printers = Printer.getAllPrinters();
+//        
+//        for (Printer printer : printers) {
+//            defaultPrinter.setText(printer.getName());
+//            Button printerButton = new Button(printer.getName());
+//            pButton.put(printer.getName(), printerButton);
+//            printerButton.setMaxSize(100, 200);
+//            printerButton.setStyle("-fx-background-color: #42f58a;-fx-border-color:#FFFFFF; ");
+//            printerButton.setOnAction(e -> setDefaultPrinter(printer.getName()));
+//            printerBox.getChildren().add(printerButton);
+//            
+//        }
         System.gc();
     }
-
+    
     private void setDefaultPrinter(String name) {
         defaultPrinter.setText(name);
         Iterator<String> it = pButton.keySet().iterator();
@@ -205,13 +209,13 @@ public class LoginController implements Initializable {
                 printerButton.setMaxSize(100, 200);
                 printerButton.setStyle("-fx-background-color: #42f58a;-fx-border-color:#FFFFFF; ");
             }
-
+            
         }
     }
-
+    
     private void switchScenView(String fxml, DashboardController dashboardController, JSONObject myResponse, ActionEvent event) {
         try {
-
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             DashboardController Scl = loader.getController();
@@ -224,13 +228,13 @@ public class LoginController implements Initializable {
             stage.setWidth(bounds.getWidth());
             stage.setHeight(bounds.getHeight());
             stage.setScene(new Scene(root));
-
-//            stage.setMaximized(true);
-//            stage.setFullScreen(true);
-//            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.setMaximized(true);
+            //stage.setFullScreen(true);
+            //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             themStyle(stage, root);
             stage.setTitle("Series");
-
+            stage.toFront();
+            
             stage.show();
             btnLogin.getScene().getWindow().hide();
             System.gc();
@@ -239,14 +243,15 @@ public class LoginController implements Initializable {
             ////System.out.println("Switching Scan View  Error " + ex.getMessage());
         }
     }
-
+    
     public void themStyle(Stage stage, Parent root) {
-        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initStyle(StageStyle.UNDECORATED);
         //stage.initStyle(StageStyle.UNDERDECORATED);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        //stage.setFullScreen(true);
-        stage.setResizable(false);
+//        stage.initModality(Modality.APPLICATION_MODAL);
+
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        //stage.setFullScreen(true);
+        //stage.setResizable(false);
         //grab your root here
 //        root.setOnMousePressed((MouseEvent event1) -> {
 //            xOffset = event1.getSceneX();
@@ -259,7 +264,7 @@ public class LoginController implements Initializable {
 //            stage.setY(event1.getScreenY() - yOffset);
 //        });
     }
-
+    
     @FXML
     private void test(MouseEvent event) {
 //        try {
@@ -281,5 +286,5 @@ public class LoginController implements Initializable {
 //                    .getName()).log(Level.SEVERE, null, ex);
 //        }
     }
-
+    
 }

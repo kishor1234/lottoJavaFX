@@ -100,9 +100,9 @@
                   </HBox>
                     <Pane styleClass="white-border-2" VBox.vgrow="ALWAYS">
                         <children>
-                            <Pane prefHeight="37.0" prefWidth="213.0" styleClass="white-border-2">
+                            <Pane prefHeight="37.0" prefWidth="200.0" styleClass="white-border-2">
                                 <children>
-                                    <Label layoutX="6.0" layoutY="8.0" text="Software Version 1.0.1" textFill="WHITE">
+                                    <Label layoutX="6.0" layoutY="8.0" text="Software Version 1.0" textFill="WHITE">
                                         <font>
                                             <Font size="18.0" />
                                         </font>

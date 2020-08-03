@@ -35,6 +35,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -1662,16 +1663,18 @@ public class DashboardController {
 
     public void closckDraw(String secs) {
 
-        int delay = 1000;
+        int delay = 0;
         int period = 1000;
+        System.gc();
         timer = new Timer();
         interval = Integer.parseInt(secs);
         timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
-                synchronized (this) {
+                synchronized (drawClock.getText()) {
                     drawClock.setText(formatSeconds(setInterval()));
+                    System.gc();
                 }
 
             }
@@ -1681,32 +1684,26 @@ public class DashboardController {
     private int setInterval() {
         if (interval == 10) {
             buy.setDisable(true);
+            System.gc();
         }
-        if (interval == 1) {
+        if (interval == -1) {
             Thread clock = new Thread() {
                 @Override
                 public void run() {
-                    Thread timClock = new Thread(() -> {
-                        Runnable updater = () -> {
-                            try {
-                                Thread.sleep(2000);
-                                resultBoard("ALL");
-                                System.gc();
-                                interval--;
-                            } catch (InterruptedException ex) {
-                                System.out.println(ex.getMessage() + "Thread name");
-                            }
-                        };
+                    try {
+                        //Thread.sleep(2000);
+                        resultBoard("ALL");
                         System.gc();
-                        resetClock();
-                        Platform.runLater(updater);
-                    });
-                    timClock.start();
-                    System.out.println(timClock.getName() + "Thread name");
+                        interval--;
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage() + "Thread name");
+                    }
                 }
             };
             clock.start();
+            System.gc();
         }
+        System.gc();
         return --interval;
     }
 
@@ -1998,7 +1995,7 @@ public class DashboardController {
             }
 
         } catch (Exception ex) {
-            ////System.out.println(ex.getMessage());
+            ////System.out.println(ex.getMessage());-fx-prompt-text-fill:#474a48;
         }
     }
 
@@ -2361,14 +2358,16 @@ public class DashboardController {
                                     tf.setText("");
                                 }
 
-                                lastTransaction();
-                                calculateTotal();
-                                resetManualPlatSeleted();
-                                runnableBalance();
-                                //messageRefreshThread();
-                                resetEvenOdd();
                             }
                         }
+                        //selectSubSeries(B0);
+                        lastTransaction();
+                        calculateTotal();
+                        resetManualPlatSeleted();
+                        runnableBalance();
+                        //messageRefreshThread();
+                        resetEvenOdd();
+                        resetAll();
                     }
                 };
                 //resetClock();
@@ -2399,87 +2398,101 @@ public class DashboardController {
 
     public void resultBoard(String srs) {
         try {
-            resultPane.getChildren().removeAll(resultPane.getChildren());
-            Map<String, String> finalMap = new HashMap<>();
-            String ids[] = id.getText().split("_");
-            finalMap.put("drawid", ids[1]);
-            finalMap.put("series", srs);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String jsonEmp = gson.toJson(finalMap);
-            System.out.println(jsonEmp);
-            String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
-            System.out.println("Result" + Data);
-            if (Data != null) {
-                ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
-                int ip = 0;
-                int x = 8;
-                int y = 5;
-                int a = 67;
-                int b = 29;
-                for (Map wPoint1 : wPoint) {
-                    Map<String, String> dPoint = wPoint1;
-                    int ks = 0;
-                    //////System.out.println("Data \n" + dPoint);
-                    String subSeries[] = null;
-                    for (Map.Entry<String, String> finas : dPoint.entrySet()) {
-                        if (finas.getKey().equals("series")) {
-                            subSeries = finas.getValue().split("-");
-                        }
-                    }
-                    HBox resutSeBox = new HBox();
-                    resutSeBox.setMaxWidth(Double.POSITIVE_INFINITY);
-                    resutSeBox.setMaxHeight(Double.POSITIVE_INFINITY);
+            Thread timClock = new Thread(() -> {
+                Runnable updater = () -> {
+                    try {
+                        resultPane.getChildren().removeAll(resultPane.getChildren());
+                        Map<String, String> finalMap = new HashMap<>();
+                        String ids[] = id.getText().split("_");
+                        finalMap.put("drawid", ids[1]);
+                        finalMap.put("series", srs);
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        String jsonEmp = gson.toJson(finalMap);
+                        System.out.println(jsonEmp);
+                        String Data = httpAPI._jsonRequest("?r=singleResult", jsonEmp);
+                        System.out.println("Result" + Data);
+                        if (Data != null) {
+                            ArrayList<Map> wPoint = singleResult.singleResultJSONPrint(Data);
+                            int ip = 0;
+                            int x = 8;
+                            int y = 5;
+                            int a = 67;
+                            int b = 29;
+                            for (Map wPoint1 : wPoint) {
+                                Map<String, String> dPoint = wPoint1;
+                                int ks = 0;
+                                //////System.out.println("Data \n" + dPoint);
+                                String subSeries[] = null;
+                                for (Map.Entry<String, String> finas : dPoint.entrySet()) {
+                                    if (finas.getKey().equals("series")) {
+                                        subSeries = finas.getValue().split("-");
+                                    }
+                                }
+                                HBox resutSeBox = new HBox();
+                                resutSeBox.setMaxWidth(Double.POSITIVE_INFINITY);
+                                resutSeBox.setMaxHeight(Double.POSITIVE_INFINITY);
 
-                    for (Map.Entry<String, String> finas : dPoint.entrySet()) {
-                        if (finas.getKey().equals("gameetime")) {
-                            lastDraw.setText(TimeFormats.timeConvert(finas.getValue()));
-                            //subSeries = finas.getValue().split("-");
-                        } else if (finas.getKey().equals("series")) {
-                            //subSeries = finas.getValue().split("-");
-                        } else {
-                            int key = Integer.parseInt(finas.getKey());
-                            int i = Integer.parseInt(subSeries[0]) + (100 * key);
-                            int fl = i + Integer.parseInt(finas.getValue());
-                            //////System.out.println("" + fl);
-                            Label jLable = new Label(" " + fl + "");
-                            jLable.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold;");
-                            jLable.setWrapText(true);
-                            jLable.setAlignment(Pos.CENTER);
-                            jLable.setMaxWidth(Double.POSITIVE_INFINITY);
-                            jLable.setMaxHeight(Double.POSITIVE_INFINITY);
-                            jLable.setTextFill(Color.web("#000000"));
-                            jLable.setAlignment(Pos.CENTER);
-                            //jLable.setText("" + fl);
-                            Pane p = new Pane();
-                            HBox.setMargin(p, new Insets(1, 1, 1, 1));
-                            p.setStyle("-fx-background-color: " + ColorArray[ip] + ";");
-                            p.setBackground(new Background(new BackgroundFill(Color.web(ColorArray[ip]), CornerRadii.EMPTY, Insets.EMPTY)));
-                            p.setPrefSize(90, 30);
-                            p.setStyle("-fx-border-color: #000000;");
+                                for (Map.Entry<String, String> finas : dPoint.entrySet()) {
+                                    if (finas.getKey().equals("gameetime")) {
+                                        lastDraw.setText(TimeFormats.timeConvert(finas.getValue()));
+                                        //subSeries = finas.getValue().split("-");
+                                    } else if (finas.getKey().equals("series")) {
+                                        //subSeries = finas.getValue().split("-");
+                                    } else {
+                                        int key = Integer.parseInt(finas.getKey());
+                                        int i = Integer.parseInt(subSeries[0]) + (100 * key);
+                                        int fl = i + Integer.parseInt(finas.getValue());
+                                        //////System.out.println("" + fl);
+                                        Label jLable = new Label(" " + fl + "");
+                                        jLable.setStyle("-fx-font-size: 18pt; -fx-font-weight: bold;");
+                                        jLable.setWrapText(true);
+                                        jLable.setAlignment(Pos.CENTER);
+                                        jLable.setMaxWidth(Double.POSITIVE_INFINITY);
+                                        jLable.setMaxHeight(Double.POSITIVE_INFINITY);
+                                        jLable.setTextFill(Color.web("#000000"));
+                                        jLable.setAlignment(Pos.CENTER);
+                                        //jLable.setText("" + fl);
+                                        Pane p = new Pane();
+                                        HBox.setMargin(p, new Insets(1, 1, 1, 1));
+                                        p.setStyle("-fx-background-color: " + ColorArray[ip] + ";");
+                                        p.setBackground(new Background(new BackgroundFill(Color.web(ColorArray[ip]), CornerRadii.EMPTY, Insets.EMPTY)));
+                                        p.setPrefSize(90, 30);
+                                        p.setStyle("-fx-border-color: #000000;");
 
-                            p.getChildren().add(jLable);
-                            resutSeBox.getChildren().add(p);
+                                        p.getChildren().add(jLable);
+                                        resutSeBox.getChildren().add(p);
 
-                            if (ip == 9) {
-                                y = 30 + y;
-                                x = 8;
-                                ip = -1;
-                                resultPane.getChildren().add(resutSeBox);
-                                resutSeBox = new HBox();
-                            } else {
-                                x = 68 + x;
-                                //break;
+                                        if (ip == 9) {
+                                            y = 30 + y;
+                                            x = 8;
+                                            ip = -1;
+                                            resultPane.getChildren().add(resutSeBox);
+                                            resutSeBox = new HBox();
+                                        } else {
+                                            x = 68 + x;
+                                            //break;
+                                        }
+                                        ip++;
+
+                                        ks++;
+
+                                    }
+                                }
                             }
-                            ip++;
-
-                            ks++;
-
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                         }
+                    } catch (InterruptedException ex) {
+                        System.out.println(ex.getMessage() + "Thread name");
+                    } catch (Exception ex) {
+                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
-            }
+                };
+                System.gc();
+                resetClock();
+                Platform.runLater(updater);
+            });
+            timClock.start();
 
         } catch (Exception ex) {
             System.out.println("Erron Thread-8 " + ex.getMessage());
@@ -3188,6 +3201,7 @@ public class DashboardController {
                         stage.showAndWait();
                         loadSeries(multiMap);
                         bSeries.setDisable(false);
+
                     } catch (IOException ex) {
                         ////System.out.println("Multi if Error " + ex.getMessage());
                     }
@@ -3608,22 +3622,26 @@ public class DashboardController {
     }
 
     public void themStyle(Stage stage, Parent root) {
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(buy.getScene().getWindow());
-        stage.getScene().getRoot().setEffect(new DropShadow());
-        //stage.setFullScreen(true);
-        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initModality(Modality.APPLICATION_MODAL);
+        // Specifies the owner Window (parent) for new window
+        //stage.initOwner(close.getScene().getWindow());
+        //stage.getScene().getRoot().setEffect(new DropShadow());
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            //stage.initStyle(StageStyle.UNDERDECORATED);
-
-        //grab your root here
+        stage.toFront();
+//        stage.setMaximized(false);
+//        stage.setFullScreen(true);
+//
+//        stage.setResizable(false);
+//            stage.initStyle(StageStyle.UNDERDECORATED);
+//
+//        grab your root here
 //        root.setOnMousePressed((MouseEvent event1) -> {
 //            xOffset = event1.getSceneX();
 //            yOffset = event1.getSceneY();
 //        });
-//
-//        //move around here
+
+        //move around here
 //        root.setOnMouseDragged((MouseEvent event1) -> {
 //            stage.setX(event1.getScreenX() - xOffset);
 //            stage.setY(event1.getScreenY() - yOffset);
@@ -3766,11 +3784,11 @@ public class DashboardController {
             stage.setHeight(bounds.getHeight());
             stage.setScene(new Scene(root));
             stage.initStyle(StageStyle.TRANSPARENT);
-
+            
             //stage.setFullScreen(true);
-            stage.setResizable(false);
+            //stage.setResizable(false);
             stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            //themStyle(stage, root);
+            themStyle(stage, root);
             stage.setTitle("Login");
             stage.show();
             singout.getScene().getWindow().hide();

@@ -28,7 +28,9 @@ public class Start extends Application {
         stage.setHeight(bounds.getHeight());
         stage.setFullScreenExitHint("WelCome");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        stage.setFullScreen(true);
+        stage.toFront();
+        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.setFullScreen(true);
         
         themStyle(stage, root);
         stage.show();
