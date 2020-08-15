@@ -16,17 +16,16 @@
          <center>
             <BorderPane BorderPane.alignment="CENTER">
                <bottom>
-                  <VBox BorderPane.alignment="CENTER">
+                  <VBox fx:id="msgPanel" alignment="CENTER" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
                      <children>
-                        <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;">
-                           <children>
-                              <Pane fx:id="msgPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </Pane>
-                           </children>
-                        </VBox>
+                        <Text fx:id="msgs" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Text>
                         <HBox style="-fx-background-color: #FFFFFF; -fx-border-color: blue;">
                            <children>
                               <Button fx:id="b1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#opneAdvanceDrawSelecter" prefWidth="150.0" style="-fx-background-color: #99ff99;" text="ADVANCE DRAW" HBox.hgrow="ALWAYS">
@@ -62,8 +61,8 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Pane layoutX="11.0" layoutY="11.0" prefHeight="47.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
-                              <Pane layoutX="174.0" layoutY="11.0" prefHeight="52.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
+                              <Pane layoutX="11.0" layoutY="11.0" prefWidth="154.0" HBox.hgrow="ALWAYS" />
+                              <Pane layoutX="174.0" layoutY="11.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
                               <Pane layoutX="278.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                               <TextField fx:id="claimReader" alignment="CENTER" onKeyPressed="#barcodeAction" prefHeight="30.0" prefWidth="245.0" promptText="Barcode" style="-fx-border-color: #000000; -fx-border-width: 2px;" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
@@ -150,14 +149,18 @@
                                                 </Pane>
                                              </children>
                                           </VBox>
-                                          <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
-                                             <content>
-                                                <VBox fx:id="resultPane" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
-                                                   <opaqueInsets>
-                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                   </opaqueInsets>
-                                                </VBox>
-                                             </content>
+                                          <ScrollPane prefHeight="100.0" HBox.hgrow="ALWAYS">
+                                            <content>
+                                              <AnchorPane>
+                                                   <children>
+                                                      <VBox fx:id="resultPane" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
+                                                         <opaqueInsets>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </opaqueInsets>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
                                           </ScrollPane>
                                        </children>
                                     </HBox>
@@ -605,7 +608,7 @@
                                        <children>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                              <children>
-                                                <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="78.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
+                                                <Button fx:id="BALL" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ActionAll" prefWidth="55.0" style="-fx-background-color: #faf49a; -fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="ALL" HBox.hgrow="ALWAYS">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -616,7 +619,7 @@
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Button>
-                                                <Label fx:id="allSelect" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#allSelectAction" style="-fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="Multi Number" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                                <Label fx:id="allSelect" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#allSelectAction" style="-fx-border-color: #000000;" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" text="Market play" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
@@ -1649,7 +1652,7 @@
                                              <children>
                                                 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="QTY" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="QTY" VBox.vgrow="ALWAYS">
+                                                      <TextField alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="QTY" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="QTY" VBox.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
@@ -1752,7 +1755,7 @@
                                                 </VBox>
                                                 <VBox layoutX="10.0" layoutY="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <TextField alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="AMT ₹ " style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="AMT ₹ " VBox.vgrow="ALWAYS">
+                                                      <TextField alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="AMT ₹ " style="-fx-background-color: #FFFFFF; -fx-border-color: #FFFFFF;" text="AMT ₹ " VBox.vgrow="ALWAYS">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>

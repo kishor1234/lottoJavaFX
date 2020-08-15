@@ -44,17 +44,17 @@ public class Start extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
             //stage.initStyle(StageStyle.UNDERDECORATED);
 
-        //grab your root here
-        root.setOnMousePressed((MouseEvent event1) -> {
-            xOffset = event1.getSceneX();
-            yOffset = event1.getSceneY();
-        });
-
-        //move around here
-        root.setOnMouseDragged((MouseEvent event1) -> {
-            stage.setX(event1.getScreenX() - xOffset);
-            stage.setY(event1.getScreenY() - yOffset);
-        });
+//        //grab your root here
+//        root.setOnMousePressed((MouseEvent event1) -> {
+//            xOffset = event1.getSceneX();
+//            yOffset = event1.getSceneY();
+//        });
+//
+//        //move around here
+//        root.setOnMouseDragged((MouseEvent event1) -> {
+//            stage.setX(event1.getScreenX() - xOffset);
+//            stage.setY(event1.getScreenY() - yOffset);
+//        });
     }
 
 }

@@ -20,9 +20,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -31,17 +29,14 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -464,7 +459,7 @@ public class DashboardController {
     public ArrayList<String> multiSeries = new ArrayList<>();//multi series option
     public ArrayList<Map> advanceDrawArray = new ArrayList<>();//multi series option
     public Map<String, Map> advanceDraw = new HashMap<>();//multi series option
-    int interval;
+    public int interval = 0;
     Timer timer;
     public Map<String, Integer> final_Map;
     public Map<String, TextField> totalField = new HashMap<>();
@@ -494,8 +489,7 @@ public class DashboardController {
     public String defaultPrinter;
     public String ColorArray[] = new String[]{"#d485c2", "#82b47e", "#7ab4e8", "#5ba36a", "#d98d81", "#b9b1e6", "#ea9e7b", "#a4cc5a", "#c9bdaf", "#17bcbd"};
     public Map<String, String> multiMap = new HashMap<>();
-    @FXML
-    private Pane msgPanel;
+    //private Pane msgPanel;
     @FXML
     private Text lastDraw;
     @FXML
@@ -533,6 +527,10 @@ public class DashboardController {
     public String mybalance = "";
     private boolean allCheckSelect = false;
     private int[] allCheckNo = {25, 20, 10, 5, 5, 3, 2, 1, 1, 25};
+    @FXML
+    private Text msgs;
+    @FXML
+    private VBox msgPanel;
 
     //end
     /**
@@ -557,34 +555,21 @@ public class DashboardController {
 //        }
 //    }
     public void initParameter(JSONObject myRep, String printers) {
+        try {
+            defaultPrinter = printers;
+            myResponse = myRep;
+            pevirous.put("last", new TextField(""));
+            Thread openThread = new Thread(() -> {
+                Runnable updater = () -> {
+                    waits(myResponse, defaultPrinter);
+                    resetDashboard();
+                };
+                Platform.runLater(updater);
+            });
+            openThread.start();
+        } catch (Exception ex) {
 
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                defaultPrinter = printers;
-                myResponse = myRep;
-                pevirous.put("last", new TextField(""));
-                Thread openThread = new Thread(() -> {
-                    Runnable updater = () -> {
-                        waits(myResponse, defaultPrinter);
-                        resetDashboard();
-                    };
-                    Thread t = new Thread() {
-                        @Override
-                        public void run() {
-                            Platform.runLater(updater);
-
-                        }
-
-                    };
-                    t.start();
-                    //            Platform.runLater(updater);
-                });
-                openThread.start();
-            }
-        };
-        t.start();
-
+        }
     }
 
     public void waits(JSONObject myResponse, String printers) {
@@ -604,7 +589,8 @@ public class DashboardController {
             mapButton();
             mapCheckBox();
             mapJTextField();
-            runNSOutput();
+            inisetClockCounter();
+            //runNSOutput();
             //this.setLocationRelativeTo(null);
             messageRefreshThread();
             mapVarticalTextField();
@@ -641,7 +627,7 @@ public class DashboardController {
             selectSubSeries(B0);
             setDefaultColorOfInputPoitBox();
             showTimer();
-            inisetClockCounter();
+            //inisetClockCounter();
             setTotalField();
             updateBalance();
             resultBoard("ALL");
@@ -659,17 +645,26 @@ public class DashboardController {
 
     //custome code Start from here
     public void selectDefaultSeries(int i) {
-        ArrayList<String> temp = new ArrayList<>();
-        temp = SeriesClass.series.get(i);
+        Thread thread = new Thread(() -> {
+            Runnable updater = () -> {
+                synchronized (DashboardController.this) {
+                    ArrayList<String> temp;
+                    temp = SeriesClass.series.get(i);
 
-        Iterator litr = temp.listIterator();
-        int k = 0;
-        while (litr.hasNext()) {
-            Button jbutton = buttonMap.get("B" + k);
-            jbutton.setText((String) litr.next());
-            k++;
-        }
-        setMainSeries(seriesLable.getText());
+                    Iterator litr = temp.listIterator();
+                    int k = 0;
+                    while (litr.hasNext()) {
+                        Button jbutton = buttonMap.get("B" + k);
+                        jbutton.setText((String) litr.next());
+                        k++;
+                    }
+                    setMainSeries(seriesLable.getText());
+                }
+            };
+            Platform.runLater(updater);
+        });
+        thread.start();
+
     }
 
     public void selectDefaultSeriesMulti(int i) {
@@ -697,58 +692,52 @@ public class DashboardController {
         Date dobj = new Date();
         cDate.setText(f.format(dobj));
         clockLabel.setText(f.format(dobj));
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-//
-//                DateFormat df = new SimpleDateFormat("hh:mm:ss aa");
-//                Date dateobj = new Date();
-                while (true) {
-                    //System.out.println(df.format(dateobj));
-
-                    synchronized (this) {
-                        Calendar cal = new GregorianCalendar();
-                        int hour = cal.get(Calendar.HOUR);
-                        int min = cal.get(Calendar.MINUTE);
-                        int sec = cal.get(Calendar.SECOND);
-
-                        int AM_PM = cal.get(Calendar.AM_PM);
-                        String Am_Pm = "";
-                        if (AM_PM == 1) {
-
-                            Am_Pm = "PM";
-                        } else {
-                            Am_Pm = "AM";
-                        }
-                        clockLabel.setText("" + hour + ":" + min + ":" + sec + " " + Am_Pm);
-
-//                        try {
-//                            Thread.sleep(1000);
-//                        } catch (InterruptedException ex) {
-//                            System.out.println(ex.getMessage());
+//        Thread t = new Thread() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    synchronized (this) {
+//                        Calendar cal = new GregorianCalendar();
+//                        int hour = cal.get(Calendar.HOUR);
+//                        int min = cal.get(Calendar.MINUTE);
+//                        int sec = cal.get(Calendar.SECOND);
+//                        int AM_PM = cal.get(Calendar.AM_PM);
+//                        String Am_Pm = "";
+//                        if (AM_PM == 1) {
+//                            Am_Pm = "PM";
+//                        } else {
+//                            Am_Pm = "AM";
 //                        }
-                    }
-
-                }
-
-            }
-        };
+//                        clockLabel.setText("" + hour + ":" + min + ":" + sec + " " + Am_Pm);
+//                    }
+//
+//                }
+//
+//            }
+//        };
         // t.start();
-        //////System.out.println();
+
     }
 
     private void mapButton() {
         try {
-            buttonMap.put("B0", B0);
-            buttonMap.put("B1", B1);
-            buttonMap.put("B2", B2);
-            buttonMap.put("B3", B3);
-            buttonMap.put("B4", B4);
-            buttonMap.put("B5", B5);
-            buttonMap.put("B6", B6);
-            buttonMap.put("B7", B7);
-            buttonMap.put("B8", B8);
-            buttonMap.put("B9", B9);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    buttonMap.put("B0", B0);
+                    buttonMap.put("B1", B1);
+                    buttonMap.put("B2", B2);
+                    buttonMap.put("B3", B3);
+                    buttonMap.put("B4", B4);
+                    buttonMap.put("B5", B5);
+                    buttonMap.put("B6", B6);
+                    buttonMap.put("B7", B7);
+                    buttonMap.put("B8", B8);
+                    buttonMap.put("B9", B9);
+                }
+            };
+            t.start();
+
         } catch (Exception ex) {
 
         }
@@ -756,16 +745,23 @@ public class DashboardController {
 
     private void mapCheckBox() {
         try {
-            checkBoxMap.put("c0", c0);
-            checkBoxMap.put("c1", c1);
-            checkBoxMap.put("c2", c2);
-            checkBoxMap.put("c3", c3);
-            checkBoxMap.put("c4", c4);
-            checkBoxMap.put("c5", c5);
-            checkBoxMap.put("c6", c6);
-            checkBoxMap.put("c7", c7);
-            checkBoxMap.put("c8", c8);
-            checkBoxMap.put("c9", c9);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    checkBoxMap.put("c0", c0);
+                    checkBoxMap.put("c1", c1);
+                    checkBoxMap.put("c2", c2);
+                    checkBoxMap.put("c3", c3);
+                    checkBoxMap.put("c4", c4);
+                    checkBoxMap.put("c5", c5);
+                    checkBoxMap.put("c6", c6);
+                    checkBoxMap.put("c7", c7);
+                    checkBoxMap.put("c8", c8);
+                    checkBoxMap.put("c9", c9);
+                }
+            };
+            t.start();
+
         } catch (Exception ex) {
 
         }
@@ -773,29 +769,37 @@ public class DashboardController {
 
     private void mapHorizontalTextField() {
         try {
-            horizontalTextField.put("B_0", B_0);
-            horizontalTextField.put("B_1", B_1);
-            horizontalTextField.put("B_2", B_2);
-            horizontalTextField.put("B_3", B_3);
-            horizontalTextField.put("B_4", B_4);
-            horizontalTextField.put("B_5", B_5);
-            horizontalTextField.put("B_6", B_6);
-            horizontalTextField.put("B_7", B_7);
-            horizontalTextField.put("B_8", B_8);
-            horizontalTextField.put("B_9", B_9);
-            Iterator<String> it = horizontalTextField.keySet().iterator();
-            while (it.hasNext()) {
-                String key = it.next();
-                TextField jf = horizontalTextField.get(key);
-                jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                    if (event.getCode() == KeyCode.F6) {
-                        System.out.println("Tab pressed F6");
-                        javafx.event.ActionEvent et = null;
-                        //ActionBuy(et);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
 
-                    }
-                });
-            }
+                    horizontalTextField.put("B_0", B_0);
+                    horizontalTextField.put("B_1", B_1);
+                    horizontalTextField.put("B_2", B_2);
+                    horizontalTextField.put("B_3", B_3);
+                    horizontalTextField.put("B_4", B_4);
+                    horizontalTextField.put("B_5", B_5);
+                    horizontalTextField.put("B_6", B_6);
+                    horizontalTextField.put("B_7", B_7);
+                    horizontalTextField.put("B_8", B_8);
+                    horizontalTextField.put("B_9", B_9);
+
+                }
+            };
+            t.start();
+//            Iterator<String> it = horizontalTextField.keySet().iterator();
+//            while (it.hasNext()) {
+//                String key = it.next();
+//                TextField jf = horizontalTextField.get(key);
+//                jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+//                    if (event.getCode() == KeyCode.F6) {
+//                        System.out.println("Tab pressed F6");
+//                        javafx.event.ActionEvent et = null;
+//                        //ActionBuy(et);
+//
+//                    }
+//                });
+//            }
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -803,26 +807,33 @@ public class DashboardController {
 
     public void setTotalField() {
         try {
-            totalField.put("Q1000_1900", Q1000_1900);
-            totalField.put("A1000_1900", A1000_1900);
-            totalField.put("Q2000_2900", Q2000_2900);
-            totalField.put("A2000_2900", A2000_2900);
-            totalField.put("Q3000_3900", Q3000_3900);
-            totalField.put("A3000_3900", A3000_3900);
-            totalField.put("Q4000_4900", Q4000_4900);
-            totalField.put("A4000_4900", A4000_4900);
-            totalField.put("Q5000_5900", Q5000_5900);
-            totalField.put("A5000_5900", A5000_5900);
-            totalField.put("Q6000_6900", Q6000_6900);
-            totalField.put("A6000_6900", A6000_6900);
-            totalField.put("Q7000_7900", Q7000_7900);
-            totalField.put("A7000_7900", A7000_7900);
-            totalField.put("Q8000_8900", Q8000_8900);
-            totalField.put("A8000_8900", A8000_8900);
-            totalField.put("Q9000_9900", Q9000_9900);
-            totalField.put("A9000_9900", A9000_9900);
-            totalField.put("Q10000_10900", Q10000_10900);
-            totalField.put("A10000_10900", A10000_10900);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+
+                    totalField.put("Q1000_1900", Q1000_1900);
+                    totalField.put("A1000_1900", A1000_1900);
+                    totalField.put("Q2000_2900", Q2000_2900);
+                    totalField.put("A2000_2900", A2000_2900);
+                    totalField.put("Q3000_3900", Q3000_3900);
+                    totalField.put("A3000_3900", A3000_3900);
+                    totalField.put("Q4000_4900", Q4000_4900);
+                    totalField.put("A4000_4900", A4000_4900);
+                    totalField.put("Q5000_5900", Q5000_5900);
+                    totalField.put("A5000_5900", A5000_5900);
+                    totalField.put("Q6000_6900", Q6000_6900);
+                    totalField.put("A6000_6900", A6000_6900);
+                    totalField.put("Q7000_7900", Q7000_7900);
+                    totalField.put("A7000_7900", A7000_7900);
+                    totalField.put("Q8000_8900", Q8000_8900);
+                    totalField.put("A8000_8900", A8000_8900);
+                    totalField.put("Q9000_9900", Q9000_9900);
+                    totalField.put("A9000_9900", A9000_9900);
+                    totalField.put("Q10000_10900", Q10000_10900);
+                    totalField.put("A10000_10900", A10000_10900);
+                }
+            };
+            t.start();
 
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
@@ -831,29 +842,35 @@ public class DashboardController {
 
     private void mapVarticalTextField() {
         try {
-            varticalTextField.put("I_0", I_0);
-            varticalTextField.put("I_10", I_10);
-            varticalTextField.put("I_20", I_20);
-            varticalTextField.put("I_30", I_30);
-            varticalTextField.put("I_40", I_40);
-            varticalTextField.put("I_50", I_50);
-            varticalTextField.put("I_60", I_60);
-            varticalTextField.put("I_70", I_70);
-            varticalTextField.put("I_80", I_80);
-            varticalTextField.put("I_90", I_90);
-            Iterator<String> it = varticalTextField.keySet().iterator();
-            while (it.hasNext()) {
-                String key = it.next();
-                TextField jf = varticalTextField.get(key);
-                jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                    if (event.getCode() == KeyCode.F6) {
-                        System.out.println("Tab pressed F6");
-                        javafx.event.ActionEvent et = null;
-                        //ActionBuy(et);
-
-                    }
-                });
-            }
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    varticalTextField.put("I_0", I_0);
+                    varticalTextField.put("I_10", I_10);
+                    varticalTextField.put("I_20", I_20);
+                    varticalTextField.put("I_30", I_30);
+                    varticalTextField.put("I_40", I_40);
+                    varticalTextField.put("I_50", I_50);
+                    varticalTextField.put("I_60", I_60);
+                    varticalTextField.put("I_70", I_70);
+                    varticalTextField.put("I_80", I_80);
+                    varticalTextField.put("I_90", I_90);
+                }
+            };
+            t.start();
+//            Iterator<String> it = varticalTextField.keySet().iterator();
+//            while (it.hasNext()) {
+//                String key = it.next();
+//                TextField jf = varticalTextField.get(key);
+//                jf.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+//                    if (event.getCode() == KeyCode.F6) {
+//                        System.out.println("Tab pressed F6");
+//                        javafx.event.ActionEvent et = null;
+//                        //ActionBuy(et);
+//
+//                    }
+//                });
+//            }
 
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
@@ -862,106 +879,113 @@ public class DashboardController {
 
     private void mapJTextField() {
         try {
-            jField.put("E_0", E_0);
-            jField.put("E_1", E_1);
-            jField.put("E_2", E_2);
-            jField.put("E_3", E_3);
-            jField.put("E_4", E_4);
-            jField.put("E_5", E_5);
-            jField.put("E_6", E_6);
-            jField.put("E_7", E_7);
-            jField.put("E_8", E_8);
-            jField.put("E_9", E_9);
-            jField.put("E_10", E_10);
-            jField.put("E_11", E_11);
-            jField.put("E_12", E_12);
-            jField.put("E_13", E_13);
-            jField.put("E_14", E_14);
-            jField.put("E_15", E_15);
-            jField.put("E_16", E_16);
-            jField.put("E_17", E_17);
-            jField.put("E_18", E_18);
-            jField.put("E_19", E_19);
-            jField.put("E_20", E_20);
-            jField.put("E_21", E_21);
-            jField.put("E_22", E_22);
-            jField.put("E_23", E_23);
-            jField.put("E_24", E_24);
-            jField.put("E_25", E_25);
-            jField.put("E_26", E_26);
-            jField.put("E_27", E_27);
-            jField.put("E_28", E_28);
-            jField.put("E_29", E_29);
-            jField.put("E_30", E_30);
-            jField.put("E_31", E_31);
-            jField.put("E_32", E_32);
-            jField.put("E_33", E_33);
-            jField.put("E_34", E_34);
-            jField.put("E_35", E_35);
-            jField.put("E_36", E_36);
-            jField.put("E_37", E_37);
-            jField.put("E_38", E_38);
-            jField.put("E_39", E_39);
-            jField.put("E_40", E_40);
-            jField.put("E_41", E_41);
-            jField.put("E_42", E_42);
-            jField.put("E_43", E_43);
-            jField.put("E_44", E_44);
-            jField.put("E_45", E_45);
-            jField.put("E_46", E_46);
-            jField.put("E_47", E_47);
-            jField.put("E_48", E_48);
-            jField.put("E_49", E_49);
-            jField.put("E_50", E_50);
-            jField.put("E_51", E_51);
-            jField.put("E_52", E_52);
-            jField.put("E_53", E_53);
-            jField.put("E_54", E_54);
-            jField.put("E_55", E_55);
-            jField.put("E_56", E_56);
-            jField.put("E_57", E_57);
-            jField.put("E_58", E_58);
-            jField.put("E_59", E_59);
-            jField.put("E_60", E_60);
-            jField.put("E_61", E_61);
-            jField.put("E_62", E_62);
-            jField.put("E_63", E_63);
-            jField.put("E_64", E_64);
-            jField.put("E_65", E_65);
-            jField.put("E_66", E_66);
-            jField.put("E_67", E_67);
-            jField.put("E_68", E_68);
-            jField.put("E_69", E_69);
-            jField.put("E_70", E_70);
-            jField.put("E_71", E_71);
-            jField.put("E_72", E_72);
-            jField.put("E_73", E_73);
-            jField.put("E_74", E_74);
-            jField.put("E_75", E_75);
-            jField.put("E_76", E_76);
-            jField.put("E_77", E_77);
-            jField.put("E_78", E_78);
-            jField.put("E_79", E_79);
-            jField.put("E_80", E_80);
-            jField.put("E_81", E_81);
-            jField.put("E_82", E_82);
-            jField.put("E_83", E_83);
-            jField.put("E_84", E_84);
-            jField.put("E_85", E_85);
-            jField.put("E_86", E_86);
-            jField.put("E_87", E_87);
-            jField.put("E_88", E_88);
-            jField.put("E_89", E_89);
-            jField.put("E_90", E_90);
-            jField.put("E_91", E_91);
-            jField.put("E_92", E_92);
-            jField.put("E_93", E_93);
-            jField.put("E_94", E_94);
-            jField.put("E_95", E_95);
-            jField.put("E_96", E_96);
-            jField.put("E_97", E_97);
-            jField.put("E_98", E_98);
-            jField.put("E_99", E_99);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    jField.put("E_0", E_0);
+                    jField.put("E_1", E_1);
+                    jField.put("E_2", E_2);
+                    jField.put("E_3", E_3);
+                    jField.put("E_4", E_4);
+                    jField.put("E_5", E_5);
+                    jField.put("E_6", E_6);
+                    jField.put("E_7", E_7);
+                    jField.put("E_8", E_8);
+                    jField.put("E_9", E_9);
+                    jField.put("E_10", E_10);
+                    jField.put("E_11", E_11);
+                    jField.put("E_12", E_12);
+                    jField.put("E_13", E_13);
+                    jField.put("E_14", E_14);
+                    jField.put("E_15", E_15);
+                    jField.put("E_16", E_16);
+                    jField.put("E_17", E_17);
+                    jField.put("E_18", E_18);
+                    jField.put("E_19", E_19);
+                    jField.put("E_20", E_20);
+                    jField.put("E_21", E_21);
+                    jField.put("E_22", E_22);
+                    jField.put("E_23", E_23);
+                    jField.put("E_24", E_24);
+                    jField.put("E_25", E_25);
+                    jField.put("E_26", E_26);
+                    jField.put("E_27", E_27);
+                    jField.put("E_28", E_28);
+                    jField.put("E_29", E_29);
+                    jField.put("E_30", E_30);
+                    jField.put("E_31", E_31);
+                    jField.put("E_32", E_32);
+                    jField.put("E_33", E_33);
+                    jField.put("E_34", E_34);
+                    jField.put("E_35", E_35);
+                    jField.put("E_36", E_36);
+                    jField.put("E_37", E_37);
+                    jField.put("E_38", E_38);
+                    jField.put("E_39", E_39);
+                    jField.put("E_40", E_40);
+                    jField.put("E_41", E_41);
+                    jField.put("E_42", E_42);
+                    jField.put("E_43", E_43);
+                    jField.put("E_44", E_44);
+                    jField.put("E_45", E_45);
+                    jField.put("E_46", E_46);
+                    jField.put("E_47", E_47);
+                    jField.put("E_48", E_48);
+                    jField.put("E_49", E_49);
+                    jField.put("E_50", E_50);
+                    jField.put("E_51", E_51);
+                    jField.put("E_52", E_52);
+                    jField.put("E_53", E_53);
+                    jField.put("E_54", E_54);
+                    jField.put("E_55", E_55);
+                    jField.put("E_56", E_56);
+                    jField.put("E_57", E_57);
+                    jField.put("E_58", E_58);
+                    jField.put("E_59", E_59);
+                    jField.put("E_60", E_60);
+                    jField.put("E_61", E_61);
+                    jField.put("E_62", E_62);
+                    jField.put("E_63", E_63);
+                    jField.put("E_64", E_64);
+                    jField.put("E_65", E_65);
+                    jField.put("E_66", E_66);
+                    jField.put("E_67", E_67);
+                    jField.put("E_68", E_68);
+                    jField.put("E_69", E_69);
+                    jField.put("E_70", E_70);
+                    jField.put("E_71", E_71);
+                    jField.put("E_72", E_72);
+                    jField.put("E_73", E_73);
+                    jField.put("E_74", E_74);
+                    jField.put("E_75", E_75);
+                    jField.put("E_76", E_76);
+                    jField.put("E_77", E_77);
+                    jField.put("E_78", E_78);
+                    jField.put("E_79", E_79);
+                    jField.put("E_80", E_80);
+                    jField.put("E_81", E_81);
+                    jField.put("E_82", E_82);
+                    jField.put("E_83", E_83);
+                    jField.put("E_84", E_84);
+                    jField.put("E_85", E_85);
+                    jField.put("E_86", E_86);
+                    jField.put("E_87", E_87);
+                    jField.put("E_88", E_88);
+                    jField.put("E_89", E_89);
+                    jField.put("E_90", E_90);
+                    jField.put("E_91", E_91);
+                    jField.put("E_92", E_92);
+                    jField.put("E_93", E_93);
+                    jField.put("E_94", E_94);
+                    jField.put("E_95", E_95);
+                    jField.put("E_96", E_96);
+                    jField.put("E_97", E_97);
+                    jField.put("E_98", E_98);
+                    jField.put("E_99", E_99);
+                }
+            };
+            t.start();
+
         } catch (Exception ex) {
 
         }
@@ -982,52 +1006,61 @@ public class DashboardController {
 
     public void setMessageBar() {
         try {
-            Thread msThread = new Thread() {
-                @Override
-                public void run() {
-                    Thread threadMessageBar = new Thread(() -> {
-                        Runnable updater = () -> {
-                            synchronized (this) {
-                                msgPanel.getChildren().clear();
-                                String data = httpAPI._jsonRequest("?r=message", "");
-                                if (data != null) {
-                                    Text msg = new Text(data);
-                                    msg.setFill(Color.RED);
-//                    msg.setStrokeWidth(2);
-//                    msg.setStroke(Color.RED);
-                                    msg.setTextOrigin(VPos.TOP);
-                                    msg.setFont(Font.font(18));
-                                    msgPanel.getChildren().add(msg);
-                                    // Get the Width of the Scene and the Text
-                                    double sceneWidth = msgPanel.getWidth();
-                                    double textWidth = msg.getLayoutBounds().getWidth();
+            Thread threadMessageBar = new Thread(() -> {
+                Runnable updater = () -> {
+                    synchronized (this) {
+                        //msgPanel.getChildren().clear();
+                        String data = httpAPI._jsonRequest("?r=message", "");
+                        if (data != null) {
+                            //Text msg = new Text(data);
+                            msgs.setText(data);
+                            msgs.setFill(Color.RED);
+                            //flashing msg
+                            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.8), msgs);
+                            fadeTransition.setFromValue(1.0);
+                            fadeTransition.setToValue(0.0);
+                            fadeTransition.setCycleCount(Animation.INDEFINITE);
+                            fadeTransition.play();
+                            //end
+//                          msgs.setFont(Font.font(25));
+                            // Set up a Translate Transition for the Text object
+//                            TranslateTransition trans = new TranslateTransition(Duration.seconds(10), msgs);
+//                            trans.setFromX(msgPanel.getWidth());
+//                            trans.setToX(-1.0 * msgs.getLayoutBounds().getWidth());
+//                            // Let the animation run forever
+//                            trans.setCycleCount(TranslateTransition.INDEFINITE);
+//                            // Reverse direction on alternating cycles
+//                            trans.setAutoReverse(true);
+//                            // Play the Animation
+//                            trans.play();
+                            //msgPanel.getChildren().add(msgs);
+                            // Get the Width of the Scene and the Text
+//                            double sceneWidth = msgPanel.getWidth();
+//                            double textWidth = msgs.getLayoutBounds().getWidth();
+//
+//                            // Define the Durations
+//                            Duration startDuration = Duration.ZERO;
+//                            Duration endDuration = Duration.seconds(50);
+//
+//                            // Create the start and end Key Frames
+//                            KeyValue startKeyValue = new KeyValue(msgs.translateXProperty(), sceneWidth);
+//                            KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
+//                            KeyValue endKeyValue = new KeyValue(msgs.translateXProperty(), 0 * textWidth);
+//                            KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
+//
+//                            // Create a Timeline
+//                            Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
+//                            // Let the animation run forever
+//                            timeline.setCycleCount(Timeline.INDEFINITE);
+//                            // Run the animation
+//                            timeline.play();
+                        }
+                    }
+                };
+                Platform.runLater(updater);
 
-                                    // Define the Durations
-                                    Duration startDuration = Duration.ZERO;
-                                    Duration endDuration = Duration.seconds(40);
-
-                                    // Create the start and end Key Frames
-                                    KeyValue startKeyValue = new KeyValue(msg.translateXProperty(), sceneWidth);
-                                    KeyFrame startKeyFrame = new KeyFrame(startDuration, startKeyValue);
-                                    KeyValue endKeyValue = new KeyValue(msg.translateXProperty(), 0 * textWidth);
-                                    KeyFrame endKeyFrame = new KeyFrame(endDuration, endKeyValue);
-
-                                    // Create a Timeline
-                                    Timeline timeline = new Timeline(startKeyFrame, endKeyFrame);
-                                    // Let the animation run forever
-                                    timeline.setCycleCount(Timeline.INDEFINITE);
-                                    // Run the animation
-                                    timeline.play();
-                                }
-                            }
-                        };
-                        Platform.runLater(updater);
-
-                    });
-                    threadMessageBar.start();
-                }
-            };
-            msThread.start();
+            });
+            threadMessageBar.start();
 
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
@@ -1343,7 +1376,7 @@ public class DashboardController {
                     }
                 }
             };
-            // t.start();
+            t.start();
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
@@ -1498,22 +1531,26 @@ public class DashboardController {
 
     public final void setDefaultColorOfInputPoitBox() {
         try {
-            int i = 0;
-            while (i < 100) {
-                // ////System.out.println("E_" + i);
-                TextField jf = jField.get("E_" + i);
-                jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
-                //jf.setStyle("-fx-border-width:2px;-fx-border-color:#000000;");
-                //jf.setBackground(Color.WHITE);
-                //jf.setFont(new java.awt.Font("Ubuntu", 1, 15));
-                i++;
-            }
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    int i = 0;
+                    while (i < 100) {
+                        TextField jf = jField.get("E_" + i);
+                        jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                        i++;
+                    }
+                }
+            };
+            t.start();
+
         } catch (Exception e) {
             ////System.out.println(e.getMessage());
         }
     }
 
     private void selectSubSeries(Button B0) {
+
         String btxt = B0.getText();
         subSeriesNo.setText(btxt);
         if (checkSubSeries(btxt, seriesLable.getText())) {
@@ -1524,18 +1561,13 @@ public class DashboardController {
 
         String s[] = btxt.split("-");
 
-        int end = Integer.parseInt(s[1]);
+        int ends = Integer.parseInt(s[1]);
         int i = 0;
-        for (int start = Integer.parseInt(s[0]); start <= end; start++) {
+        for (int starts = Integer.parseInt(s[0]); starts <= ends; starts++) {
             TextField jf = jField.get("E_" + i);
-            //jf.setForeground(Color.GRAY);
-            //jf.setBackground(Color.white);
             jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
             jf.setText("");
-            jf.setPromptText("" + start);
-
-            //jf.setForeground(Color.BLACK);
-            // ////System.out.println("E_"+start);
+            jf.setPromptText("" + starts);
             i++;
         }
     }
@@ -1606,7 +1638,7 @@ public class DashboardController {
         try {
 
             String data = httpAPI._jsonRequest("?r=updateGameRound", "");
-            ////System.out.println(data);
+            System.out.println("Reset Clock " + data);
             if (data != null) {
                 JSONObject response = new JSONObject(data);
                 buy.setDisable(false);
@@ -1672,37 +1704,53 @@ public class DashboardController {
 
             @Override
             public void run() {
-                synchronized (drawClock.getText()) {
-                    drawClock.setText(formatSeconds(setInterval()));
-                    System.gc();
-                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (drawClock.getText()) {
+                            drawClock.setText(formatSeconds(setInterval()));
+                            System.gc();
+                        }
+                    }
+                });
 
             }
         }, delay, period);
     }
 
     private int setInterval() {
+
         if (interval == 10) {
             buy.setDisable(true);
             System.gc();
         }
-        if (interval == -1) {
+        if (interval == 1) {
             Thread clock = new Thread() {
                 @Override
                 public void run() {
-                    try {
-                        //Thread.sleep(2000);
-                        resultBoard("ALL");
-                        System.gc();
-                        interval--;
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage() + "Thread name");
-                    }
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                resultBoard("ALL");
+                                System.gc();
+                                interval--;
+                            } catch (Exception ex) {
+                                System.out.println(ex.getMessage() + "Thread name");
+                            }
+                        }
+                    });
+
                 }
             };
             clock.start();
             System.gc();
         }
+        if (interval <= 0) {
+            interval = 0;
+            resetClock();
+        }
+
         System.gc();
         return --interval;
     }
@@ -2157,14 +2205,13 @@ public class DashboardController {
         Thread Balance = new Thread() {
             @Override
             public void run() {
-                if (true) {
-                    try {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
                         runnableBalance();
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        ////System.out.println("Balance Thread Error " + e.getMessage());
                     }
-                }
+                });
+
             }
         };
         Balance.start();
@@ -2242,7 +2289,7 @@ public class DashboardController {
                         advance.setText("false");
                         advanceDraw.clear();
                         advanceDrawArray.clear();
-                        selectSubSeries(B0);
+                        //selectSubSeries(B0);
                         selectAll("#FFFFFF");
                         resetVarticalInput();
                         resetHorizontalInput();
@@ -2251,7 +2298,7 @@ public class DashboardController {
                             seriesLable.setText("1000-1900");
                             selectDefaultSeries(0);
                             selectSubSeries(B0);
-                            B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
+                            //B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
                         }
                         if (multiSeries.size() >= 0) {
                             multiSeries.clear();
@@ -2345,7 +2392,7 @@ public class DashboardController {
                                     }
 
                                     selectSubSeries(B0);
-                                    B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
+                                    //B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
                                 }
                                 if (multiSeries.size() >= 0) {
                                     multiSeries.clear();
@@ -2367,7 +2414,7 @@ public class DashboardController {
                         runnableBalance();
                         //messageRefreshThread();
                         resetEvenOdd();
-                        resetAll();
+                        //resetAll();
                     }
                 };
                 //resetClock();
@@ -2398,7 +2445,9 @@ public class DashboardController {
 
     public void resultBoard(String srs) {
         try {
+            resetClock();
             Thread timClock = new Thread(() -> {
+
                 Runnable updater = () -> {
                     try {
                         resultPane.getChildren().removeAll(resultPane.getChildren());
@@ -2489,7 +2538,7 @@ public class DashboardController {
                     }
                 };
                 System.gc();
-                resetClock();
+                //resetClock();
                 Platform.runLater(updater);
             });
             timClock.start();
@@ -2585,22 +2634,33 @@ public class DashboardController {
     }
 
     public void lastTransaction() {
-        try {
-            Map<String, String> finalMap = new HashMap<>();
-            finalMap.put("userid", userid.getText());
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String finalData = gson.toJson(finalMap);
-            String data = httpAPI._jsonRequest("?r=lastTransaction", finalData);
-            if (data != null) {
-                JSONObject myrep = new JSONObject(data);
-                last.setText(myrep.getString("last"));
-                lastamt.setText("Rs. " + myrep.getString("lastamt"));
-            } else {
-                JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
-            }
-        } catch (Exception ex) {
 
-        }
+        Thread thread = new Thread(() -> {
+            Runnable updater = () -> {
+                synchronized (DashboardController.this) {
+                    try {
+                        Map<String, String> finalMap = new HashMap<>();
+                        finalMap.put("userid", userid.getText());
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        String finalData = gson.toJson(finalMap);
+                        String data = httpAPI._jsonRequest("?r=lastTransaction", finalData);
+                        if (data != null) {
+                            JSONObject myrep = new JSONObject(data);
+                            last.setText(myrep.getString("last"));
+                            lastamt.setText("Rs. " + myrep.getString("lastamt"));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                        }
+                    } catch (JSONException | HeadlessException ex) {
+
+                    }
+                }
+            };
+            Platform.runLater(updater);
+
+        });
+        thread.start();
+
     }
 
     //public String ColorArray[] = new String[]{"#ED5DE2", "#46B0D8", "#74CDEF", "#F3F4A5", "#A5E87B", "#ED5DE2", "#46B0D8", "#74CDEF", "#F3F4A5", "#A5E87B"};
@@ -2897,14 +2957,14 @@ public class DashboardController {
                                 }
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonEmp = gson.toJson(adbR);
-                                ////System.out.println(jsonEmp);
+                                System.out.println(jsonEmp);
 
                                 String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
                                 if (Data != null) {
                                     System.out.println("Data \n" + Data);
                                     //Map<String, Map> advanTemp = advanceDraw;
-                                    resetBuy();
-
+                                    //resetBuy();
+                                    resetDashboard();
                                     // loadAdvanceArray(advanTemp);
                                     buy.setDisable(false);
                                     //get unitrid 
@@ -2924,7 +2984,7 @@ public class DashboardController {
                                         adbPrint.put("action", "entry");
                                         //Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                         String jsonPrint = gson.toJson(adbPrint);
-                                        //System.out.println(jsonPrint);
+                                        System.out.println(jsonPrint);
                                         Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
                                         if (Data == null) {
                                             JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
@@ -2941,7 +3001,7 @@ public class DashboardController {
                                             adbPrint.put("action", "subentry");
                                             //Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                             jsonPrint = gson.toJson(adbPrint);
-                                            ////System.out.println(jsonPrint);
+                                            System.out.println(jsonPrint);
                                             String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
                                             if (da == null) {
                                                 JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
@@ -2990,13 +3050,14 @@ public class DashboardController {
                                 finalMap.put("data", series);
                                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                                 String jsonEmp = gson.toJson(finalMap);
-                                //System.out.println(jsonEmp);
+                                System.out.println(jsonEmp);
                                 final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
                                 //System.out.println("Data \n" + Data);
                                 //Map<String, Map> advanTemp = advanceDraw;
                                 if (Data != null) {
                                     resetBuy();
-                                    //loadSeries(multiMap);
+                                    //resetAll();
+//loadSeries(multiMap);
                                     //loadAdvanceArray(advanTemp);
                                     buy.setDisable(false);
                                     //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
@@ -3005,7 +3066,7 @@ public class DashboardController {
                                         public void run() {
                                             try {
                                                 msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
-                                                Thread.sleep(1000);
+                                                //Thread.sleep(1000);
                                                 if (!msg.equals("Success")) {
 
                                                     JOptionPane.showMessageDialog(null, msg);
@@ -3030,9 +3091,6 @@ public class DashboardController {
                         }
                         System.gc();
                     } catch (NumberFormatException | HeadlessException | ParseException ex) {
-                        //System.out.println(ex.getMessage());
-                        System.gc();
-                    } catch (Exception ex) {
                         Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.gc();
@@ -3234,13 +3292,7 @@ public class DashboardController {
                 }
 
             };
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
 
         });
         openThread.start();
@@ -3262,6 +3314,7 @@ public class DashboardController {
                     selectSubSeries(B0);
                 } else {
                     selectDefaultSeriesMulti(0);
+                    selectSubSeries(B0);
                 }
                 setMainSeries(entry.getValue());
             }
@@ -3524,13 +3577,7 @@ public class DashboardController {
                 }
 
             };
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
 //            Platform.runLater(updater);
         });
         openThread.start();
@@ -3563,13 +3610,7 @@ public class DashboardController {
                     Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             };
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
             //Platform.runLater(updater);
         });
         openThread.start();
@@ -3608,13 +3649,7 @@ public class DashboardController {
                 }
             };
 
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
             //Platform.runLater(updater);
         });
         openThread.start();
@@ -3677,13 +3712,7 @@ public class DashboardController {
                 }
 
             };
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
 
             //Platform.runLater(updater);
         });
@@ -3716,13 +3745,7 @@ public class DashboardController {
                 }
             };
 
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
             //Platform.runLater(updater);
         });
         openThread.start();
@@ -3757,13 +3780,7 @@ public class DashboardController {
                 }
             };
 
-            Thread t = new Thread() {
-                @Override
-                public void run() {
-                    Platform.runLater(updater);
-                }
-            };
-            t.start();
+            Platform.runLater(updater);
             // Platform.runLater(updater);
         });
         openThread.start();
@@ -3784,7 +3801,7 @@ public class DashboardController {
             stage.setHeight(bounds.getHeight());
             stage.setScene(new Scene(root));
             stage.initStyle(StageStyle.TRANSPARENT);
-            
+
             //stage.setFullScreen(true);
             //stage.setResizable(false);
             stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
@@ -3973,7 +3990,7 @@ public class DashboardController {
     private void resetManualPlatSeleted() {
         try {
             custome.setText(String.valueOf(0));
-            c0.setSelected(true);
+            c0.setSelected(false);
             c1.setSelected(false);
             c2.setSelected(false);
             c3.setSelected(false);

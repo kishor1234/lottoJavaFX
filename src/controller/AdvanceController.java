@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -86,7 +87,7 @@ public class AdvanceController {
             //System.out.println("Selected Advance Draw "+advanceDraw);
 
         } catch (JsonSyntaxException | NumberFormatException ex) {
-             httpAPI.erLog.write(ex);
+            httpAPI.erLog.write(ex);
         }
     }
 
@@ -119,9 +120,9 @@ public class AdvanceController {
                     }
 
                 } catch (Exception ex) {
-                     httpAPI.erLog.write(ex);
+                    httpAPI.erLog.write(ex);
                 }
-                adCheck.put(ks + "", checkbox);
+
                 checkbox.setOnAction(e -> adCheckBoxAction(checkbox, temp));
                 //checkbox.setStyle("-fx-margin: 2em 2em 2em 2em ;");
                 checkbox.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 13));
@@ -129,6 +130,7 @@ public class AdvanceController {
                 //checkbox.setOnAction(e -> setaMapMultiple(checkbox, temp)); //.setOnAction(e -> aMap.put("" + sr, temp.get("series")));
                 HBox.setMargin(checkbox, new Insets(5, 5, 5, 5));
                 checkbox.setEffect(shadow);
+                adCheck.put(ks + "", checkbox);
                 hbC.getChildren().add(checkbox);
                 if (i == 7) {
                     drawpan.getChildren().add(hbC);
@@ -139,9 +141,67 @@ public class AdvanceController {
                 ks++;
             }
             drawpan.getChildren().add(hbC);
+            hbC = new HBox();
+            Button clearAll = new Button("Clear");
+            clearAll.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 13));
+            clearAll.setStyle("-fx-background-color:#ffe014; -fx-spacing: 5; -fx-border-width: 0; -fx-padding: 10 10 10 10; -fx-border-color:yellow;-fx-background-radius:3; -fx-border-radius:3;");
+            clearAll.setOnAction(e -> {
+
+                Thread thread = new Thread(() -> {
+                    Runnable updater = () -> {
+                        synchronized (AdvanceController.this) {
+                            AdvanceData seriess = gson.fromJson(fileData, AdvanceData.class);
+                            ArrayList<Map> clearTest = seriess.getProperties();
+                            Iterator<Map> clearitr = clearTest.iterator();
+
+                            while (clearitr.hasNext()) {
+                                try {
+                                    Map<String, String> temp = clearitr.next();
+                                    advanceDraw.remove(temp.get("id"));
+                                } catch (Exception ex) {
+                                    //httpAPI.erLog.write(ex);
+
+                                }
+
+                            }
+
+                            for (int k = 0; k <= adCheck.size(); k++) {
+                                try {
+                                    CheckBox jsk = adCheck.get(k + "");
+                                    jsk.setSelected(false);
+                                    //adCheck.remove(k + "");
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                            }
+                        }
+                    };
+                    Platform.runLater(updater);
+
+                });
+                thread.start();
+            }
+            ); //.setOnAction(e -> aMap.put("" + sr, temp.get("series")));
+            clearAll.setMaxWidth(200);
+            clearAll.setMinWidth(100);
+            HBox.setMargin(clearAll, new Insets(5, 5, 5, 5));
+            clearAll.setEffect(shadow);
+            hbC.getChildren().add(clearAll);
+            Button close = new Button("Close");
+            close.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 13));
+            close.setStyle("-fx-background-color:#ffe014; -fx-spacing: 5; -fx-border-width: 0; -fx-padding: 10 10 10 10; -fx-border-color:yellow;-fx-background-radius:3; -fx-border-radius:3;");
+            close.setOnAction(e -> {
+                button.getScene().getWindow().hide();
+            }); //.setOnAction(e -> aMap.put("" + sr, temp.get("series")));
+            close.setMaxWidth(200);
+            close.setMinWidth(100);
+            HBox.setMargin(close, new Insets(5, 5, 5, 5));
+            close.setEffect(shadow);
+            hbC.getChildren().add(close);
+            drawpan.getChildren().add(hbC);
             max.setText(ks + "");
         } catch (JsonSyntaxException | NumberFormatException ex) {
-             httpAPI.erLog.write(ex);
+            httpAPI.erLog.write(ex);
         }
     }
 
@@ -165,9 +225,9 @@ public class AdvanceController {
         }
     }
 
-    void initLoadData(Map<String, Map> advanceDr,String advanceDrawData) {
+    void initLoadData(Map<String, Map> advanceDr, String advanceDrawData) {
         advanceDraw = advanceDr;
-        fileData =advanceDrawData;// httpAPI._jsonRequest("?r=advanceDraw", "");
+        fileData = advanceDrawData;// httpAPI._jsonRequest("?r=advanceDraw", "");
         loadAdvance();
     }
 

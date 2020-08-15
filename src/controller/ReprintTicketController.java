@@ -83,14 +83,32 @@ public class ReprintTicketController {
 // srno, ticket, amount, drawid, drawtime, date
 
     private void intiCols() {
-        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
-        utrno.setCellValueFactory(new PropertyValueFactory<>("utrno"));
-        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        userid.setCellValueFactory(new PropertyValueFactory<>("userid"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        action.setCellValueFactory(new PropertyValueFactory<>("action"));
-        actionCols();
-        System.gc();
+        Thread resetDB = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Runnable updater = new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
+                            utrno.setCellValueFactory(new PropertyValueFactory<>("utrno"));
+                            amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+                            userid.setCellValueFactory(new PropertyValueFactory<>("userid"));
+                            date.setCellValueFactory(new PropertyValueFactory<>("date"));
+                            action.setCellValueFactory(new PropertyValueFactory<>("action"));
+                            actionCols();
+                            System.gc();
+                        } catch (Exception ex) {
+                        }
+                    }
+                };
+                //resetClock();
+                Platform.runLater(updater);
+            }
+
+        });
+        resetDB.start();
+
     }
 
     private void actionCols() {

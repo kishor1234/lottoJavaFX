@@ -46,7 +46,7 @@ import org.json.JSONObject;
  * @author asksoft
  */
 public class LoginController implements Initializable {
-    
+
     @FXML
     private TextField userid;
     @FXML
@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
     @FXML
     private Label msg;
     public static LoginController lc = new LoginController();
-    
+
     public static TextField staticDefaultPrinter;
     @FXML
     private Label pf;
@@ -66,7 +66,7 @@ public class LoginController implements Initializable {
     private double yOffset = 0;
     @FXML
     private Button btnLogin;
-    
+
     private Map<String, Button> pButton = new HashMap<>();
 
     /**
@@ -80,9 +80,9 @@ public class LoginController implements Initializable {
         defaultPrinter.setVisible(true);
         PrintService printService = PrinterOutputStream.getDefaultPrintService();
         defaultPrinter.setText(printService.getName());
-        
+
     }
-    
+
     public static void setPrinter(String printer) {
         try {
             lc.defaultPrinter.setText(printer);
@@ -90,62 +90,56 @@ public class LoginController implements Initializable {
             ////System.out.println(ex.getMessage());
         }
     }
-    
+
     @FXML
     private void login(ActionEvent event) {
         msg.setText("Authenticating... Please Wait!");
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                Thread openThread = new Thread(() -> {
-                    Runnable updater = () -> {
-                        msg.setText("Authenticating... Please Wait!");
-                        JsonObject person = new JsonObject();
-                        person.addProperty("userid", userid.getText());
-                        person.addProperty("password", password.getText());
-                        //person.addProperty("printer", defaultPrinter.getText());
-                        person.addProperty("device", SystemInfo.getSystemName());
-                        String jsonString = person.toString();
-                        System.out.println(jsonString);
-                        
-                        try {
-                            String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-                            if (data != null) {
-                                JSONObject myResponse = new JSONObject(data);
-                                int status = Integer.parseInt(myResponse.getString("status"));
-                                
-                                if (status == 1) {
-                                    msg.setText(myResponse.getString("message"));
-                                    switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
-                                } else {
-                                    msg.setText(myResponse.getString("message"));
-                                }
-                            } else {
-                                msg.setText("Please check your internet connection!");
-                            }
-                        } catch (JSONException | NumberFormatException ex) {
-                            ////System.out.println(ex.getMessage());
-                        }
-                    };
-                    Platform.runLater(updater);
-                    System.gc();
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                msg.setText("Authenticating... Please Wait!");
+                JsonObject person = new JsonObject();
+                person.addProperty("userid", userid.getText());
+                person.addProperty("password", password.getText());
+                //person.addProperty("printer", defaultPrinter.getText());
+                person.addProperty("device", SystemInfo.getSystemName());
+                String jsonString = person.toString();
+                System.out.println(jsonString);
 
-                    //Platform.runLater(updater);
-                });
-                
-                openThread.start();
-            }
-        };
-        t.start();
-        
+                try {
+                    String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
+                    if (data != null) {
+                        JSONObject myResponse = new JSONObject(data);
+                        int status = Integer.parseInt(myResponse.getString("status"));
+
+                        if (status == 1) {
+                            msg.setText(myResponse.getString("message"));
+                            switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
+                        } else {
+                            msg.setText(myResponse.getString("message"));
+                        }
+                    } else {
+                        msg.setText("Please check your internet connection!");
+                    }
+                } catch (JSONException | NumberFormatException ex) {
+                    ////System.out.println(ex.getMessage());
+                }
+            };
+            Platform.runLater(updater);
+            System.gc();
+
+            //Platform.runLater(updater);
+        });
+
+        openThread.start();
+
     }
-    
+
     @FXML
     private void disconnectGame(MouseEvent event) {
         //close.getScene().getWindow().hide();
         System.exit(0);
     }
-    
+
     @FXML
     private void restartGame(MouseEvent event) {
         Runtime runtime = Runtime.getRuntime();
@@ -156,13 +150,13 @@ public class LoginController implements Initializable {
             } else {
                 Process proc = runtime.exec("sudo reboot");
             }
-            
+
         } catch (IOException ex) {
-            
+
         }
         System.exit(0);
     }
-    
+
     @FXML
     private void shutdownGame(MouseEvent event) {
         Runtime runtime = Runtime.getRuntime();
@@ -178,7 +172,7 @@ public class LoginController implements Initializable {
         }
         System.exit(0);
     }
-    
+
     private void loadPrinter() {
 //        ObservableSet<Printer> printers = Printer.getAllPrinters();
 //        
@@ -194,7 +188,7 @@ public class LoginController implements Initializable {
 //        }
         System.gc();
     }
-    
+
     private void setDefaultPrinter(String name) {
         defaultPrinter.setText(name);
         Iterator<String> it = pButton.keySet().iterator();
@@ -209,13 +203,13 @@ public class LoginController implements Initializable {
                 printerButton.setMaxSize(100, 200);
                 printerButton.setStyle("-fx-background-color: #42f58a;-fx-border-color:#FFFFFF; ");
             }
-            
+
         }
     }
-    
+
     private void switchScenView(String fxml, DashboardController dashboardController, JSONObject myResponse, ActionEvent event) {
         try {
-            
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             DashboardController Scl = loader.getController();
@@ -229,62 +223,28 @@ public class LoginController implements Initializable {
             stage.setHeight(bounds.getHeight());
             stage.setScene(new Scene(root));
             stage.setMaximized(true);
-            //stage.setFullScreen(true);
-            //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             themStyle(stage, root);
-            stage.setTitle("Series");
+            stage.setTitle("Dashboard");
             stage.toFront();
-            
+
             stage.show();
             btnLogin.getScene().getWindow().hide();
-            System.gc();
+            //System.gc();
             //loadSeries(multiMap);
         } catch (Exception ex) {
             ////System.out.println("Switching Scan View  Error " + ex.getMessage());
         }
     }
-    
+
     public void themStyle(Stage stage, Parent root) {
         stage.initStyle(StageStyle.UNDECORATED);
-        //stage.initStyle(StageStyle.UNDERDECORATED);
-//        stage.initModality(Modality.APPLICATION_MODAL);
-
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-        //stage.setFullScreen(true);
-        //stage.setResizable(false);
-        //grab your root here
-//        root.setOnMousePressed((MouseEvent event1) -> {
-//            xOffset = event1.getSceneX();
-//            yOffset = event1.getSceneY();
-//        });
-//
-//        //move around here
-//        root.setOnMouseDragged((MouseEvent event1) -> {
-//            stage.setX(event1.getScreenX() - xOffset);
-//            stage.setY(event1.getScreenY() - yOffset);
-//        });
+
     }
-    
+
     @FXML
     private void test(MouseEvent event) {
-//        try {
-//            defaultPrinter.setVisible(true);
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
-//            Parent root = loader.load();
-//            SeriesController sc = loader.getController();
-//           // sc.initLoadData("PDF");
-//
-//            //Show scene 2 in new window            
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.setTitle("Second Window");
-//            // stage.setOnHidden(evt -> defaultPrinter.setText(sc.getText()));
-//            stage.show();
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(LoginController.class
-//                    .getName()).log(Level.SEVERE, null, ex);
-//        }
+//    
     }
-    
+
 }
