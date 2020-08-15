@@ -3363,6 +3363,7 @@ public class DashboardController {
     private void loadSeries(Map<String, String> multiMap) {
         try {
             ////System.out.println("Selected Series " + multiMap);
+            setDefauldButtonColor();
             series.clear();
             multiSeries.clear();
             for (Map.Entry<String, String> entry : multiMap.entrySet()) {
