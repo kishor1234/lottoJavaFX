@@ -84,7 +84,7 @@
                      <children>
                         <HBox VBox.vgrow="ALWAYS">
                            <children>
-                              <Pane style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
+                              <Pane minHeight="150.0" minWidth="150.0" style="-fx-background-color: #FFFFFF;" HBox.hgrow="ALWAYS">
                                  <children>
                                     <ImageView fitHeight="208.0" fitWidth="169.0" layoutX="10.0" layoutY="10.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -108,7 +108,7 @@
                                  <children>
                                     <HBox style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="170.0" HBox.hgrow="ALWAYS">
+                                          <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="170.0" prefWidth="170.0" HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" VBox.vgrow="ALWAYS">
                                                    <children>
@@ -507,7 +507,7 @@
                      <center>
                         <VBox BorderPane.alignment="CENTER">
                            <children>
-                              <HBox alignment="TOP_CENTER" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
+                              <HBox alignment="TOP_CENTER" maxHeight="30.0" style="-fx-background-color: #FFFFFF;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                        <children>

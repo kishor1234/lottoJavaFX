@@ -16,8 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -72,66 +71,90 @@ public class SingleTicketController {
      * Initializes the controller class.
      */
     private void initColom() {
-        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
-        drDate.setCellValueFactory(new PropertyValueFactory<>("drDate"));
-        drTime.setCellValueFactory(new PropertyValueFactory<>("drTime"));
-        name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        mrp.setCellValueFactory(new PropertyValueFactory<>("mrp"));
-        digit.setCellValueFactory(new PropertyValueFactory<>("digit"));
-        qty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-        System.gc();
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
+                        drDate.setCellValueFactory(new PropertyValueFactory<>("drDate"));
+                        drTime.setCellValueFactory(new PropertyValueFactory<>("drTime"));
+                        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+                        mrp.setCellValueFactory(new PropertyValueFactory<>("mrp"));
+                        digit.setCellValueFactory(new PropertyValueFactory<>("digit"));
+                        qty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+                        System.gc();
+                    }
+                });
+            }
+        };
+        t.start();
+
     }
 
     private void loadData() {
-        try {
-            //Button button;
-            ObservableList<SingleTicket> data_ticket = FXCollections.observableArrayList();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
-            String cdata = dtf.format(now);
-            JsonObject person = new JsonObject();
-            person.addProperty("utrno", ticket);
-            person.addProperty("own", owner);
-            person.addProperty("action", "entry");
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            //Button button;
+                            ObservableList<SingleTicket> data_ticket = FXCollections.observableArrayList();
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            LocalDateTime now = LocalDateTime.now();
+                            String cdata = dtf.format(now);
+                            JsonObject person = new JsonObject();
+                            person.addProperty("utrno", ticket);
+                            person.addProperty("own", owner);
+                            person.addProperty("action", "entry");
 
-            String jsonString = person.toString();
-            String data = httpAPI._jsonRequest("/?r=singleTicketPrint", jsonString);
-            //get unitrid 
-            if (data != null) {
-                Object obj2 = new JSONParser().parse(data);
-                Map<String, String> adbPrint = new HashMap<>();
-                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-                for (Map aMap3 : aMap) {
-                    Map<String, String> temP = aMap3;
-                    adbPrint = new HashMap<>();
-                    adbPrint.put("trno", temP.get("trno"));
-                    adbPrint.put("own", owner);
-                    adbPrint.put("action", "subentry");
-                    adbPrint.put("amount", amount);
-                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    String jsonPrint = gson.toJson(adbPrint);
-                    //System.out.println(jsonPrint);
-                    String Data = httpAPI._jsonRequest("?r=singleTicketPrint", jsonPrint);
-                    Object obj = new JSONParser().parse(Data);
-                    JSONObject jo = (JSONObject) obj;
-                    //String status = (String) jo.get("status");
-                    msg.setText((String) jo.get("msg"));
-                    ArrayList<Map> aMap2 = (ArrayList<Map>) jo.get("point");
-                    //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-                    aMap2.stream().forEach((aMap1) -> {
-                        data_ticket.add(new SingleTicket(aMap1.get("srno").toString(), aMap1.get("drDate").toString(), aMap1.get("drTime").toString(), aMap1.get("name").toString(), aMap1.get("mrp").toString(), aMap1.get("digit").toString(), aMap1.get("qty").toString()));
-                    });
-                }
-                //
+                            String jsonString = person.toString();
+                            String data = httpAPI._jsonRequest("/?r=singleTicketPrint", jsonString);
+                            //get unitrid 
+                            if (data != null) {
+                                Object obj2 = new JSONParser().parse(data);
+                                Map<String, String> adbPrint = new HashMap<>();
+                                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                                for (Map aMap3 : aMap) {
+                                    Map<String, String> temP = aMap3;
+                                    adbPrint = new HashMap<>();
+                                    adbPrint.put("trno", temP.get("trno"));
+                                    adbPrint.put("own", owner);
+                                    adbPrint.put("action", "subentry");
+                                    adbPrint.put("amount", amount);
+                                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                    String jsonPrint = gson.toJson(adbPrint);
+                                    //System.out.println(jsonPrint);
+                                    String Data = httpAPI._jsonRequest("?r=singleTicketPrint", jsonPrint);
+                                    Object obj = new JSONParser().parse(Data);
+                                    JSONObject jo = (JSONObject) obj;
+                                    //String status = (String) jo.get("status");
+                                    msg.setText((String) jo.get("msg"));
+                                    ArrayList<Map> aMap2 = (ArrayList<Map>) jo.get("point");
+                                    //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+                                    aMap2.stream().forEach((aMap1) -> {
+                                        data_ticket.add(new SingleTicket(aMap1.get("srno").toString(), aMap1.get("drDate").toString(), aMap1.get("drTime").toString(), aMap1.get("name").toString(), aMap1.get("mrp").toString(), aMap1.get("digit").toString(), aMap1.get("qty").toString()));
+                                    });
+                                }
+                                //
 
-                ticket_info.setItems(data_ticket);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                                ticket_info.setItems(data_ticket);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                            }
+                        } catch (Exception ex) {
+                            httpAPI.erLog.write(ex);
+                        }
+                        System.gc();
+                    }
+                });
             }
-        } catch (Exception ex) {
-            httpAPI.erLog.write(ex);
-        }
-        System.gc();
+        };
+        t.start();
+
     }
 
     @FXML
@@ -173,7 +196,7 @@ public class SingleTicketController {
                                     //System.out.println(jsonPrint);
                                     Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
                                     invoiceJSON.invoiceJSONPrint(Data, printer);
-                                }catch (Exception ex) {
+                                } catch (Exception ex) {
                                     httpAPI.erLog.write(ex);
                                 }
                             }

@@ -117,47 +117,59 @@ public class ReprintTicketController {
     }
 
     private void loadData() {
-        try {
-            //Button button;
-            ObservableList<Ticket> data_ticket = FXCollections.observableArrayList();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
-            String cdata = dtf.format(now);
-            JsonObject person = new JsonObject();
-            person.addProperty("enterydate", cdata);
-            //person.addProperty("game", ticket);
-            person.addProperty("userid", owner);
-            String jsonString = person.toString();
-            System.out.println(jsonString);
-            String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
-            if (data != null) {
-                System.out.println(data);
-                Object obj = new JSONParser().parse(data);
-                ArrayList<Map> aMap = (ArrayList<Map>) obj;
-                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            //Button button;
+                            ObservableList<Ticket> data_ticket = FXCollections.observableArrayList();
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            LocalDateTime now = LocalDateTime.now();
+                            String cdata = dtf.format(now);
+                            JsonObject person = new JsonObject();
+                            person.addProperty("enterydate", cdata);
+                            //person.addProperty("game", ticket);
+                            person.addProperty("userid", owner);
+                            String jsonString = person.toString();
+                            System.out.println(jsonString);
+                            String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
+                            if (data != null) {
+                                System.out.println(data);
+                                Object obj = new JSONParser().parse(data);
+                                ArrayList<Map> aMap = (ArrayList<Map>) obj;
+                                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
 
-                aMap.stream().forEach((aMap1) -> {
-                    if ("0".equals((aMap1.get("active").toString()))) {
-                        Button btn = new Button("Already Cancel");
+                                aMap.stream().forEach((aMap1) -> {
+                                    if ("0".equals((aMap1.get("active").toString()))) {
+                                        Button btn = new Button("Already Cancel");
 
-                        data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
+                                        data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
 
-                    } else {
-                        Button btn = new Button("Reprint");
-                        btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString()));
-                        data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
+                                    } else {
+                                        Button btn = new Button("Reprint");
+                                        btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString()));
+                                        data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
 
+                                    }
+                                });
+
+                                ticket_info.setItems(data_ticket);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                            }
+                        } catch (ParseException | HeadlessException ex) {
+                            httpAPI.erLog.write(ex);
+                        }
+                        System.gc();
                     }
                 });
-
-                ticket_info.setItems(data_ticket);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
             }
-        } catch (ParseException | HeadlessException ex) {
-            httpAPI.erLog.write(ex);
-        }
-        System.gc();
+        };
+        t.start();
+
     }
 
     private void reprintTicket(String ticket, String amount) {//ticket=utrno

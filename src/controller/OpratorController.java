@@ -16,6 +16,7 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,58 +95,82 @@ public class OpratorController {
      */
 // srno,userid,game,ticketno,drawid,netPoint,discountPer,discountPoint,finalPoint,winPoint,netPayable,date;
     private void intiCols() {
-        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
-        userid.setCellValueFactory(new PropertyValueFactory<>("userid"));
-        game.setCellValueFactory(new PropertyValueFactory<>("game"));
-        ticketno.setCellValueFactory(new PropertyValueFactory<>("ticketno"));
-        drawid.setCellValueFactory(new PropertyValueFactory<>("drawid"));
-        netPoint.setCellValueFactory(new PropertyValueFactory<>("netPoint"));
-        discountPer.setCellValueFactory(new PropertyValueFactory<>("discountPer"));
-        discountPoint.setCellValueFactory(new PropertyValueFactory<>("discountPoint"));
-        finalPoint.setCellValueFactory(new PropertyValueFactory<>("finalPoint"));
-        winPoint.setCellValueFactory(new PropertyValueFactory<>("winPoint"));
-        netPayable.setCellValueFactory(new PropertyValueFactory<>("netPayable"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        System.gc();
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
+                        userid.setCellValueFactory(new PropertyValueFactory<>("userid"));
+                        game.setCellValueFactory(new PropertyValueFactory<>("game"));
+                        ticketno.setCellValueFactory(new PropertyValueFactory<>("ticketno"));
+                        drawid.setCellValueFactory(new PropertyValueFactory<>("drawid"));
+                        netPoint.setCellValueFactory(new PropertyValueFactory<>("netPoint"));
+                        discountPer.setCellValueFactory(new PropertyValueFactory<>("discountPer"));
+                        discountPoint.setCellValueFactory(new PropertyValueFactory<>("discountPoint"));
+                        finalPoint.setCellValueFactory(new PropertyValueFactory<>("finalPoint"));
+                        winPoint.setCellValueFactory(new PropertyValueFactory<>("winPoint"));
+                        netPayable.setCellValueFactory(new PropertyValueFactory<>("netPayable"));
+                        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+                        System.gc();
+                    }
+                });
+            }
+        };
+        t.start();
+
     }
 
     private void loadData() {
-        try {
-            //Button button;
-            data_info.getItems().clear();
-            ObservableList<Report> dt_ticket = FXCollections.observableArrayList();
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            //Button button;
+                            data_info.getItems().clear();
+                            ObservableList<Report> dt_ticket = FXCollections.observableArrayList();
 
-            JsonObject person = new JsonObject();
-            person.addProperty("fdate", fdate.getValue().toString());
-            person.addProperty("tdate", tdate.getValue().toString());
-            person.addProperty("userid", owner);
-            String jsonString = person.toString();
-            System.out.println(jsonString);
-            data = httpAPI._jsonRequest("/?r=report", jsonString);
-            //System.out.println(data);
-            if (data != null) {
-                Object obj = new JSONParser().parse(data);
-                JSONObject jo = (JSONObject) obj;
-                netPT.setText(jo.get("totalNetPoint").toString());
-                tpt.setText(jo.get("totalPoint").toString());
-                wpt.setText(jo.get("wintPoint").toString());
-                npt.setText(jo.get("netPayble").toString());
+                            JsonObject person = new JsonObject();
+                            person.addProperty("fdate", fdate.getValue().toString());
+                            person.addProperty("tdate", tdate.getValue().toString());
+                            person.addProperty("userid", owner);
+                            String jsonString = person.toString();
+                            System.out.println(jsonString);
+                            data = httpAPI._jsonRequest("/?r=report", jsonString);
+                            //System.out.println(data);
+                            if (data != null) {
+                                Object obj = new JSONParser().parse(data);
+                                JSONObject jo = (JSONObject) obj;
+                                netPT.setText(jo.get("totalNetPoint").toString());
+                                tpt.setText(jo.get("totalPoint").toString());
+                                wpt.setText(jo.get("wintPoint").toString());
+                                npt.setText(jo.get("netPayble").toString());
 
-                ArrayList<Map> dataArray = (ArrayList<Map>) jo.get("data");
-                for (Map dataArray1 : dataArray) {
-                    Map<String, String> aMap1 = dataArray1;
-                    System.out.println("Data " + aMap1);
-                    dt_ticket.add(new Report(aMap1.get("id"), aMap1.get("userid"), aMap1.get("game"), aMap1.get("ticket"), aMap1.get("drawid"), aMap1.get("netPoint"), aMap1.get("discountPer"), aMap1.get("discountPoint"), aMap1.get("finalPoint"), aMap1.get("winAmount"), aMap1.get("netPayble"), aMap1.get("date")));
-                }
+                                ArrayList<Map> dataArray = (ArrayList<Map>) jo.get("data");
+                                for (Map dataArray1 : dataArray) {
+                                    Map<String, String> aMap1 = dataArray1;
+                                    System.out.println("Data " + aMap1);
+                                    dt_ticket.add(new Report(aMap1.get("id"), aMap1.get("userid"), aMap1.get("game"), aMap1.get("ticket"), aMap1.get("drawid"), aMap1.get("netPoint"), aMap1.get("discountPer"), aMap1.get("discountPoint"), aMap1.get("finalPoint"), aMap1.get("winAmount"), aMap1.get("netPayble"), aMap1.get("date")));
+                                }
 
-                data_info.setItems(dt_ticket);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                                data_info.setItems(dt_ticket);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                            }
+                        } catch (ParseException | HeadlessException ex) {
+                            httpAPI.erLog.write(ex);
+                        }
+                        System.gc();
+                    }
+                });
             }
-        } catch (ParseException | HeadlessException ex) {
-            httpAPI.erLog.write(ex);
-        }
-        System.gc();
+        };
+        t.start();
+
     }
 
     @FXML

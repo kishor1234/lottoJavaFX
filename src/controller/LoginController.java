@@ -16,13 +16,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
-import javafx.print.Printer;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,7 +30,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -75,11 +72,22 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        msg.setText("");
-        loadPrinter();
-        defaultPrinter.setVisible(true);
-        PrintService printService = PrinterOutputStream.getDefaultPrintService();
-        defaultPrinter.setText(printService.getName());
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        msg.setText("");
+                        loadPrinter();
+                        defaultPrinter.setVisible(true);
+                        PrintService printService = PrinterOutputStream.getDefaultPrintService();
+                        defaultPrinter.setText(printService.getName());
+                    }
+                });
+            }
+        };
+        t.start();
 
     }
 
@@ -94,43 +102,48 @@ public class LoginController implements Initializable {
     @FXML
     private void login(ActionEvent event) {
         msg.setText("Authenticating... Please Wait!");
-        Thread openThread = new Thread(() -> {
-            Runnable updater = () -> {
-                msg.setText("Authenticating... Please Wait!");
-                JsonObject person = new JsonObject();
-                person.addProperty("userid", userid.getText());
-                person.addProperty("password", password.getText());
-                //person.addProperty("printer", defaultPrinter.getText());
-                person.addProperty("device", SystemInfo.getSystemName());
-                String jsonString = person.toString();
-                System.out.println(jsonString);
+        btnLogin.setDisable(true);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        msg.setText("Authenticating... Please Wait!");
+                        JsonObject person = new JsonObject();
+                        person.addProperty("userid", userid.getText());
+                        person.addProperty("password", password.getText());
+                        //person.addProperty("printer", defaultPrinter.getText());
+                        person.addProperty("device", SystemInfo.getSystemName());
+                        String jsonString = person.toString();
+                        System.out.println(jsonString);
 
-                try {
-                    String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
-                    if (data != null) {
-                        JSONObject myResponse = new JSONObject(data);
-                        int status = Integer.parseInt(myResponse.getString("status"));
+                        try {
+                            String data = httpAPI._jsonRequest("?r=gamelogin", jsonString);
+                            if (data != null) {
+                                JSONObject myResponse = new JSONObject(data);
+                                int status = Integer.parseInt(myResponse.getString("status"));
 
-                        if (status == 1) {
-                            msg.setText(myResponse.getString("message"));
-                            switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
-                        } else {
-                            msg.setText(myResponse.getString("message"));
+                                if (status == 1) {
+                                    msg.setText(myResponse.getString("message"));
+                                    btnLogin.setDisable(false);
+                                    switchScenView("/view/dashboard.fxml", new DashboardController(), myResponse, event);
+                                } else {
+                                    btnLogin.setDisable(false);
+                                    msg.setText(myResponse.getString("message"));
+                                }
+                            } else {
+                                msg.setText("Please check your internet connection!");
+                            }
+                        } catch (JSONException | NumberFormatException ex) {
+                            ////System.out.println(ex.getMessage());
                         }
-                    } else {
-                        msg.setText("Please check your internet connection!");
+                        System.gc();
                     }
-                } catch (JSONException | NumberFormatException ex) {
-                    ////System.out.println(ex.getMessage());
-                }
-            };
-            Platform.runLater(updater);
-            System.gc();
-
-            //Platform.runLater(updater);
-        });
-
-        openThread.start();
+                });
+            }
+        };
+        t.start();
 
     }
 

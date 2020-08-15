@@ -16,8 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,14 +76,26 @@ public class CancelTicketController {
 // srno, ticket, amount, drawid, drawtime, date
 
     private void intiCols() {
-        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
-        ticket.setCellValueFactory(new PropertyValueFactory<>("ticket"));
-        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        drawid.setCellValueFactory(new PropertyValueFactory<>("drawid"));
-        drawtime.setCellValueFactory(new PropertyValueFactory<>("drawtime"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        action.setCellValueFactory(new PropertyValueFactory<>("action"));
-        actionCols();
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        srno.setCellValueFactory(new PropertyValueFactory<>("srno"));
+                        ticket.setCellValueFactory(new PropertyValueFactory<>("ticket"));
+                        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+                        drawid.setCellValueFactory(new PropertyValueFactory<>("drawid"));
+                        drawtime.setCellValueFactory(new PropertyValueFactory<>("drawtime"));
+                        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+                        action.setCellValueFactory(new PropertyValueFactory<>("action"));
+                        actionCols();
+                    }
+                });
+            }
+        };
+        t.start();
+
     }
 
     private void actionCols() {
@@ -93,34 +104,47 @@ public class CancelTicketController {
     }
 
     private void loadData() {
-        try {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
             //Button button;
-            data_ticket = FXCollections.observableArrayList();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
-            String cdata = dtf.format(now);
-            JsonObject person = new JsonObject();
-            person.addProperty("enterydate", cdata);
-            person.addProperty("own", owner);
-            String jsonString = person.toString();
-            String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
-            if (data != null) {
-                Object obj = new JSONParser().parse(data);
-                ArrayList<Map> aMap = (ArrayList<Map>) obj;
-                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
-                aMap.stream().forEach((aMap1) -> {
-                    Button btn = new Button("Cancel");
-                    btn.setOnAction(e -> cancelTicket(aMap1.get("ticket").toString()));
-                    //data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
-                });
 
-                ticket_info.setItems(data_ticket);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                            data_ticket = FXCollections.observableArrayList();
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            LocalDateTime now = LocalDateTime.now();
+                            String cdata = dtf.format(now);
+                            JsonObject person = new JsonObject();
+                            person.addProperty("enterydate", cdata);
+                            person.addProperty("own", owner);
+                            String jsonString = person.toString();
+                            String data = httpAPI._jsonRequest("/?r=datewiseTicket", jsonString);
+                            if (data != null) {
+                                Object obj = new JSONParser().parse(data);
+                                ArrayList<Map> aMap = (ArrayList<Map>) obj;
+                                //{"date":"2020-05-30","amount":"2.00","ticket":"ask5ed1f5e98ff72","drawtime":"11:30:00","srno":1,"drawid":"6"}
+                                aMap.stream().forEach((aMap1) -> {
+                                    Button btn = new Button("Cancel");
+                                    btn.setOnAction(e -> cancelTicket(aMap1.get("ticket").toString()));
+                                    //data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("ticket").toString(), aMap1.get("amount").toString(), aMap1.get("drawid").toString(), aMap1.get("drawtime").toString(), aMap1.get("date").toString(), btn));
+                                });
+
+                                ticket_info.setItems(data_ticket);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
+                            }
+                        } catch (Exception ex) {
+                            httpAPI.erLog.write(ex);
+                        }
+                    }
+                });
             }
-        } catch (Exception ex) {
-            httpAPI.erLog.write(ex);
-        }
+        };
+        t.start();
+
     }
 
     private void cancelTicket(String ticket) {

@@ -555,21 +555,27 @@ public class DashboardController {
 //        }
 //    }
     public void initParameter(JSONObject myRep, String printers) {
-        try {
-            defaultPrinter = printers;
-            myResponse = myRep;
-            pevirous.put("last", new TextField(""));
-            Thread openThread = new Thread(() -> {
-                Runnable updater = () -> {
-                    waits(myResponse, defaultPrinter);
-                    resetDashboard();
-                };
-                Platform.runLater(updater);
-            });
-            openThread.start();
-        } catch (Exception ex) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            defaultPrinter = printers;
+                            myResponse = myRep;
+                            pevirous.put("last", new TextField(""));
+                            waits(myResponse, defaultPrinter);
+                            resetDashboard();
+                        } catch (Exception ex) {
 
-        }
+                        }
+                    }
+                });
+            }
+        };
+        t.start();
+
     }
 
     public void waits(JSONObject myResponse, String printers) {
@@ -724,16 +730,22 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-                    buttonMap.put("B0", B0);
-                    buttonMap.put("B1", B1);
-                    buttonMap.put("B2", B2);
-                    buttonMap.put("B3", B3);
-                    buttonMap.put("B4", B4);
-                    buttonMap.put("B5", B5);
-                    buttonMap.put("B6", B6);
-                    buttonMap.put("B7", B7);
-                    buttonMap.put("B8", B8);
-                    buttonMap.put("B9", B9);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            buttonMap.put("B0", B0);
+                            buttonMap.put("B1", B1);
+                            buttonMap.put("B2", B2);
+                            buttonMap.put("B3", B3);
+                            buttonMap.put("B4", B4);
+                            buttonMap.put("B5", B5);
+                            buttonMap.put("B6", B6);
+                            buttonMap.put("B7", B7);
+                            buttonMap.put("B8", B8);
+                            buttonMap.put("B9", B9);
+                        }
+                    });
+
                 }
             };
             t.start();
@@ -748,16 +760,22 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-                    checkBoxMap.put("c0", c0);
-                    checkBoxMap.put("c1", c1);
-                    checkBoxMap.put("c2", c2);
-                    checkBoxMap.put("c3", c3);
-                    checkBoxMap.put("c4", c4);
-                    checkBoxMap.put("c5", c5);
-                    checkBoxMap.put("c6", c6);
-                    checkBoxMap.put("c7", c7);
-                    checkBoxMap.put("c8", c8);
-                    checkBoxMap.put("c9", c9);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            checkBoxMap.put("c0", c0);
+                            checkBoxMap.put("c1", c1);
+                            checkBoxMap.put("c2", c2);
+                            checkBoxMap.put("c3", c3);
+                            checkBoxMap.put("c4", c4);
+                            checkBoxMap.put("c5", c5);
+                            checkBoxMap.put("c6", c6);
+                            checkBoxMap.put("c7", c7);
+                            checkBoxMap.put("c8", c8);
+                            checkBoxMap.put("c9", c9);
+                        }
+                    });
+
                 }
             };
             t.start();
@@ -772,17 +790,21 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-
-                    horizontalTextField.put("B_0", B_0);
-                    horizontalTextField.put("B_1", B_1);
-                    horizontalTextField.put("B_2", B_2);
-                    horizontalTextField.put("B_3", B_3);
-                    horizontalTextField.put("B_4", B_4);
-                    horizontalTextField.put("B_5", B_5);
-                    horizontalTextField.put("B_6", B_6);
-                    horizontalTextField.put("B_7", B_7);
-                    horizontalTextField.put("B_8", B_8);
-                    horizontalTextField.put("B_9", B_9);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            horizontalTextField.put("B_0", B_0);
+                            horizontalTextField.put("B_1", B_1);
+                            horizontalTextField.put("B_2", B_2);
+                            horizontalTextField.put("B_3", B_3);
+                            horizontalTextField.put("B_4", B_4);
+                            horizontalTextField.put("B_5", B_5);
+                            horizontalTextField.put("B_6", B_6);
+                            horizontalTextField.put("B_7", B_7);
+                            horizontalTextField.put("B_8", B_8);
+                            horizontalTextField.put("B_9", B_9);
+                        }
+                    });
 
                 }
             };
@@ -810,27 +832,32 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            totalField.put("Q1000_1900", Q1000_1900);
+                            totalField.put("A1000_1900", A1000_1900);
+                            totalField.put("Q2000_2900", Q2000_2900);
+                            totalField.put("A2000_2900", A2000_2900);
+                            totalField.put("Q3000_3900", Q3000_3900);
+                            totalField.put("A3000_3900", A3000_3900);
+                            totalField.put("Q4000_4900", Q4000_4900);
+                            totalField.put("A4000_4900", A4000_4900);
+                            totalField.put("Q5000_5900", Q5000_5900);
+                            totalField.put("A5000_5900", A5000_5900);
+                            totalField.put("Q6000_6900", Q6000_6900);
+                            totalField.put("A6000_6900", A6000_6900);
+                            totalField.put("Q7000_7900", Q7000_7900);
+                            totalField.put("A7000_7900", A7000_7900);
+                            totalField.put("Q8000_8900", Q8000_8900);
+                            totalField.put("A8000_8900", A8000_8900);
+                            totalField.put("Q9000_9900", Q9000_9900);
+                            totalField.put("A9000_9900", A9000_9900);
+                            totalField.put("Q10000_10900", Q10000_10900);
+                            totalField.put("A10000_10900", A10000_10900);
+                        }
+                    });
 
-                    totalField.put("Q1000_1900", Q1000_1900);
-                    totalField.put("A1000_1900", A1000_1900);
-                    totalField.put("Q2000_2900", Q2000_2900);
-                    totalField.put("A2000_2900", A2000_2900);
-                    totalField.put("Q3000_3900", Q3000_3900);
-                    totalField.put("A3000_3900", A3000_3900);
-                    totalField.put("Q4000_4900", Q4000_4900);
-                    totalField.put("A4000_4900", A4000_4900);
-                    totalField.put("Q5000_5900", Q5000_5900);
-                    totalField.put("A5000_5900", A5000_5900);
-                    totalField.put("Q6000_6900", Q6000_6900);
-                    totalField.put("A6000_6900", A6000_6900);
-                    totalField.put("Q7000_7900", Q7000_7900);
-                    totalField.put("A7000_7900", A7000_7900);
-                    totalField.put("Q8000_8900", Q8000_8900);
-                    totalField.put("A8000_8900", A8000_8900);
-                    totalField.put("Q9000_9900", Q9000_9900);
-                    totalField.put("A9000_9900", A9000_9900);
-                    totalField.put("Q10000_10900", Q10000_10900);
-                    totalField.put("A10000_10900", A10000_10900);
                 }
             };
             t.start();
@@ -845,16 +872,22 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-                    varticalTextField.put("I_0", I_0);
-                    varticalTextField.put("I_10", I_10);
-                    varticalTextField.put("I_20", I_20);
-                    varticalTextField.put("I_30", I_30);
-                    varticalTextField.put("I_40", I_40);
-                    varticalTextField.put("I_50", I_50);
-                    varticalTextField.put("I_60", I_60);
-                    varticalTextField.put("I_70", I_70);
-                    varticalTextField.put("I_80", I_80);
-                    varticalTextField.put("I_90", I_90);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            varticalTextField.put("I_0", I_0);
+                            varticalTextField.put("I_10", I_10);
+                            varticalTextField.put("I_20", I_20);
+                            varticalTextField.put("I_30", I_30);
+                            varticalTextField.put("I_40", I_40);
+                            varticalTextField.put("I_50", I_50);
+                            varticalTextField.put("I_60", I_60);
+                            varticalTextField.put("I_70", I_70);
+                            varticalTextField.put("I_80", I_80);
+                            varticalTextField.put("I_90", I_90);
+                        }
+                    });
+
                 }
             };
             t.start();
@@ -1534,12 +1567,18 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-                    int i = 0;
-                    while (i < 100) {
-                        TextField jf = jField.get("E_" + i);
-                        jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
-                        i++;
-                    }
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            int i = 0;
+                            while (i < 100) {
+                                TextField jf = jField.get("E_" + i);
+                                jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                                i++;
+                            }
+                        }
+                    });
+
                 }
             };
             t.start();
@@ -2915,184 +2954,200 @@ public class DashboardController {
 
                 @Override
                 public void run() {
-                    try {
-                        String qt = totalqty.getText();
-                        String am = totalamt.getText();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                String qt = totalqty.getText();
+                                String am = totalamt.getText();
 
-                        if (qt.equals("") && am.equals("")) {
-                            qt = "0";
-                            am = "0";
-                        }
-                        if (Integer.parseInt(qt) <= 0 && Integer.parseInt(am) <= 0) {
-                            JOptionPane.showMessageDialog(null, "Please fill lottry point");
-
-                        } else {
-
-                            if (advance.getText().equals("true")) {
-                                Map<String, Map> adbR = new HashMap<>();
-                                Map<String, String> dat = new HashMap<>();
-                                dat.put("adtotalqty", totalqty.getText());
-                                dat.put("adtotalamt", totalamt.getText());
-                                dat.put("advance", "true");
-                                dat.put("userid", userid.getText());
-                                adbR.put("main", dat);
-                                for (int i = 0; i < advanceDrawArray.size(); i++) {
-                                    qt = String.valueOf(totq);
-                                    am = String.valueOf(tota);
-                                    Map<String, String> advanceDraw = advanceDrawArray.get(i);
-                                    Map<String, Map> finalMap = new HashMap<>();
-                                    Map<String, String> data = new HashMap<>();
-                                    data.put("userid", userid.getText());
-                                    data.put("drawid", advanceDraw.get("gametimeid"));
-                                    data.put("totalqty", qt);
-                                    data.put("totalamt", am);
-                                    data.put("perPoint", "2");
-                                    data.put("start", advanceDraw.get("gametime"));
-                                    data.put("end", advanceDraw.get("gameendtime"));
-                                    data.put("ip", "127.0.0.1");
-                                    finalMap.put("basic", data);
-                                    finalMap.put("data", series);
-                                    adbR.put(String.valueOf(i), finalMap);
-
+                                if (qt.equals("") && am.equals("")) {
+                                    qt = "0";
+                                    am = "0";
                                 }
-                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                String jsonEmp = gson.toJson(adbR);
-                                System.out.println(jsonEmp);
+                                if (Integer.parseInt(qt) <= 0 && Integer.parseInt(am) <= 0) {
+                                    JOptionPane.showMessageDialog(null, "Please fill lottry point");
 
-                                String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                if (Data != null) {
-                                    System.out.println("Data \n" + Data);
-                                    //Map<String, Map> advanTemp = advanceDraw;
-                                    //resetBuy();
-                                    resetDashboard();
-                                    // loadAdvanceArray(advanTemp);
-                                    buy.setDisable(false);
-                                    //get unitrid 
-                                    Object obj = new JSONParser().parse(Data);
-                                    //System.out.println(obj);
-                                    // typecasting obj to JSONObject 
-                                    Map<String, String> joMap = (Map<String, String>) obj;
-                                    System.out.println(joMap);
-                                    if (joMap.get("status").equals("1")) {
+                                } else {
 
-                                        //JSONObject jo = (JSONObject) obj;
-                                        // getting firstName and lastName 
-                                        String utrno = (String) joMap.get("print");
-                                        Map<String, String> adbPrint = new HashMap<>();
-                                        adbPrint.put("utrno", utrno);
-                                        adbPrint.put("own", userid.getText());
-                                        adbPrint.put("action", "entry");
-                                        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                        String jsonPrint = gson.toJson(adbPrint);
-                                        System.out.println(jsonPrint);
-                                        Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                        if (Data == null) {
+                                    if (advance.getText().equals("true")) {
+                                        Map<String, Map> adbR = new HashMap<>();
+                                        Map<String, String> dat = new HashMap<>();
+                                        dat.put("adtotalqty", totalqty.getText());
+                                        dat.put("adtotalamt", totalamt.getText());
+                                        dat.put("advance", "true");
+                                        dat.put("userid", userid.getText());
+                                        adbR.put("main", dat);
+                                        for (int i = 0; i < advanceDrawArray.size(); i++) {
+                                            qt = String.valueOf(totq);
+                                            am = String.valueOf(tota);
+                                            Map<String, String> advanceDraw = advanceDrawArray.get(i);
+                                            Map<String, Map> finalMap = new HashMap<>();
+                                            Map<String, String> data = new HashMap<>();
+                                            data.put("userid", userid.getText());
+                                            data.put("drawid", advanceDraw.get("gametimeid"));
+                                            data.put("totalqty", qt);
+                                            data.put("totalamt", am);
+                                            data.put("perPoint", "2");
+                                            data.put("start", advanceDraw.get("gametime"));
+                                            data.put("end", advanceDraw.get("gameendtime"));
+                                            data.put("ip", "127.0.0.1");
+                                            finalMap.put("basic", data);
+                                            finalMap.put("data", series);
+                                            adbR.put(String.valueOf(i), finalMap);
+
+                                        }
+                                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                        String jsonEmp = gson.toJson(adbR);
+                                        System.out.println(jsonEmp);
+
+                                        String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
+                                        if (Data != null) {
+                                            System.out.println("Data \n" + Data);
+                                            //Map<String, Map> advanTemp = advanceDraw;
+                                            //resetBuy();
+                                            resetDashboard();
+                                            // loadAdvanceArray(advanTemp);
+                                            buy.setDisable(false);
+                                            //get unitrid 
+                                            Object obj = new JSONParser().parse(Data);
+                                            //System.out.println(obj);
+                                            // typecasting obj to JSONObject 
+                                            Map<String, String> joMap = (Map<String, String>) obj;
+                                            System.out.println(joMap);
+                                            if (joMap.get("status").equals("1")) {
+
+                                                //JSONObject jo = (JSONObject) obj;
+                                                // getting firstName and lastName 
+                                                String utrno = (String) joMap.get("print");
+                                                Map<String, String> adbPrint = new HashMap<>();
+                                                adbPrint.put("utrno", utrno);
+                                                adbPrint.put("own", userid.getText());
+                                                adbPrint.put("action", "entry");
+                                                //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                                String jsonPrint = gson.toJson(adbPrint);
+                                                System.out.println(jsonPrint);
+                                                Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                                if (Data == null) {
+                                                    JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                                                }
+                                                Object obj2 = new JSONParser().parse(Data);
+                                                //System.out.println(obj);
+                                                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                                                for (int i = 0; i < aMap.size(); i++) {
+                                                    Map<String, String> temP = aMap.get(i);
+                                                    adbPrint = new HashMap<>();
+                                                    adbPrint.put("game", temP.get("game"));
+                                                    adbPrint.put("own", userid.getText());
+                                                    adbPrint.put("utrno", utrno);
+                                                    adbPrint.put("action", "subentry");
+                                                    //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                                    jsonPrint = gson.toJson(adbPrint);
+                                                    System.out.println(jsonPrint);
+                                                    String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                                    if (da == null) {
+                                                        JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                                                    }
+                                                    System.out.println("[" + i + "]" + jsonPrint);
+                                                    Thread tp = new Thread() {
+                                                        @Override
+                                                        public void run() {
+                                                            Platform.runLater(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    try {
+                                                                        msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
+                                                                        Thread.sleep(1000);
+                                                                    } catch (Exception ex) {
+                                                                        System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
+                                                                    }
+                                                                }
+                                                            });
+
+                                                        }
+                                                    };
+                                                    tp.start();
+                                                }
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, joMap.get("msg"));
+                                            }
+                                        } else {
+                                            buy.setDisable(false);
                                             JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                         }
-                                        Object obj2 = new JSONParser().parse(Data);
-                                        //System.out.println(obj);
-                                        ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-                                        for (int i = 0; i < aMap.size(); i++) {
-                                            Map<String, String> temP = aMap.get(i);
-                                            adbPrint = new HashMap<>();
-                                            adbPrint.put("game", temP.get("game"));
-                                            adbPrint.put("own", userid.getText());
-                                            adbPrint.put("utrno", utrno);
-                                            adbPrint.put("action", "subentry");
-                                            //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                            jsonPrint = gson.toJson(adbPrint);
-                                            System.out.println(jsonPrint);
-                                            String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                            if (da == null) {
-                                                JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
-                                            }
-                                            System.out.println("[" + i + "]" + jsonPrint);
+
+                                        //invoiceJSON iJ = new invoiceJSON();
+                                        //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                        lastTransaction();
+                                        //System.gc();
+                                    } else {
+                                        Map<String, Map> finalMap = new HashMap<>();
+                                        Map<String, String> data = new HashMap<>();
+                                        data.put("userid", userid.getText());
+                                        String did[] = id.getText().split("_");
+                                        data.put("drawid", did[1]);
+                                        data.put("totalqty", totalqty.getText());
+                                        data.put("totalamt", totalamt.getText());
+                                        data.put("perPoint", "2");
+                                        data.put("advance", "false");
+                                        data.put("start", start.getText());
+                                        data.put("end", end.getText());
+                                        data.put("ip", "127.0.0.1");
+                                        finalMap.put("main", data);
+                                        finalMap.put("data", series);
+                                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                        String jsonEmp = gson.toJson(finalMap);
+                                        System.out.println(jsonEmp);
+                                        final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
+                                        //System.out.println("Data \n" + Data);
+                                        //Map<String, Map> advanTemp = advanceDraw;
+                                        if (Data != null) {
+                                            resetBuy();
+                                            //resetAll();
+//loadSeries(multiMap);
+                                            //loadAdvanceArray(advanTemp);
+                                            buy.setDisable(false);
+                                            //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
                                             Thread tp = new Thread() {
                                                 @Override
                                                 public void run() {
-                                                    try {
-                                                        msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
-                                                        Thread.sleep(1000);
-                                                    } catch (Exception ex) {
-                                                        System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
-                                                    }
+                                                    Platform.runLater(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            try {
+                                                                msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                                                //Thread.sleep(1000);
+                                                                if (!msg.equals("Success")) {
+
+                                                                    JOptionPane.showMessageDialog(null, msg);
+                                                                    buy.setDisable(false);
+                                                                }
+                                                            } catch (Exception ex) {
+                                                                System.out.println("Threade Exerpiton line 2891 " + ex.getMessage());
+                                                            }
+                                                        }
+                                                    });
 
                                                 }
                                             };
+
                                             tp.start();
+                                            lastTransaction();
+
+                                        } else {
+                                            buy.setDisable(false);
+                                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                         }
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, joMap.get("msg"));
                                     }
-                                } else {
-                                    buy.setDisable(false);
-                                    JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+
                                 }
-
-                                //invoiceJSON iJ = new invoiceJSON();
-                                //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
-                                lastTransaction();
-                                //System.gc();
-                            } else {
-                                Map<String, Map> finalMap = new HashMap<>();
-                                Map<String, String> data = new HashMap<>();
-                                data.put("userid", userid.getText());
-                                String did[] = id.getText().split("_");
-                                data.put("drawid", did[1]);
-                                data.put("totalqty", totalqty.getText());
-                                data.put("totalamt", totalamt.getText());
-                                data.put("perPoint", "2");
-                                data.put("advance", "false");
-                                data.put("start", start.getText());
-                                data.put("end", end.getText());
-                                data.put("ip", "127.0.0.1");
-                                finalMap.put("main", data);
-                                finalMap.put("data", series);
-                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                String jsonEmp = gson.toJson(finalMap);
-                                System.out.println(jsonEmp);
-                                final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                //System.out.println("Data \n" + Data);
-                                //Map<String, Map> advanTemp = advanceDraw;
-                                if (Data != null) {
-                                    resetBuy();
-                                    //resetAll();
-//loadSeries(multiMap);
-                                    //loadAdvanceArray(advanTemp);
-                                    buy.setDisable(false);
-                                    //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
-                                    Thread tp = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            try {
-                                                msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
-                                                //Thread.sleep(1000);
-                                                if (!msg.equals("Success")) {
-
-                                                    JOptionPane.showMessageDialog(null, msg);
-                                                    buy.setDisable(false);
-                                                }
-                                            } catch (Exception ex) {
-                                                System.out.println("Threade Exerpiton line 2891 " + ex.getMessage());
-                                            }
-
-                                        }
-                                    };
-
-                                    tp.start();
-                                    lastTransaction();
-
-                                } else {
-                                    buy.setDisable(false);
-                                    JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
-                                }
+                                System.gc();
+                            } catch (NumberFormatException | HeadlessException | ParseException ex) {
+                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
                         }
-                        System.gc();
-                    } catch (NumberFormatException | HeadlessException | ParseException ex) {
-                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    });
+
                     System.gc();
                     buy.setDisable(false);
                 }
@@ -3116,11 +3171,17 @@ public class DashboardController {
         Thread reset = new Thread() {
             @Override
             public void run() {
-                resetAll();
-                resetClock();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        resetAll();
+                        resetClock();
 //              showTimer();
-                System.gc();
-                b2.setDisable(false);
+                        System.gc();
+                        b2.setDisable(false);
+                    }
+                });
+
             }
         };
         b2.setDisable(true);
@@ -3823,30 +3884,36 @@ public class DashboardController {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-                    try {
-                        Map<String, String> finalMap = new HashMap<>();
-                        String scanner[] = claimReader.getText().split("-");
-                        finalMap.put("id", scanner[0]);
-                        finalMap.put("userid", userid.getText());
-                        String did[] = id.getText().split("_");
-                        finalMap.put("gameid", did[1]);
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        String jsonEmp = gson.toJson(finalMap);
-                        System.out.println(jsonEmp);
-                        String data = httpAPI._jsonRequest("?r=checkWinner", jsonEmp);
-                        //System.out.println(data);
-                        if (data != null) {
-                            String msg = claimJSON.claimJSONPrint(data, printer.getText());
-                            claimMessageBox(msg);
-                            //JOptionPane.showMessageDialog(null, msg);
-                            claimReader.setText("");
-                            runnableBalance();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Map<String, String> finalMap = new HashMap<>();
+                                String scanner[] = claimReader.getText().split("-");
+                                finalMap.put("id", scanner[0]);
+                                finalMap.put("userid", userid.getText());
+                                String did[] = id.getText().split("_");
+                                finalMap.put("gameid", did[1]);
+                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                String jsonEmp = gson.toJson(finalMap);
+                                System.out.println(jsonEmp);
+                                String data = httpAPI._jsonRequest("?r=checkWinner", jsonEmp);
+                                //System.out.println(data);
+                                if (data != null) {
+                                    String msg = claimJSON.claimJSONPrint(data, printer.getText());
+                                    claimMessageBox(msg);
+                                    //JOptionPane.showMessageDialog(null, msg);
+                                    claimReader.setText("");
+                                    runnableBalance();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                                }
+                            } catch (Exception ex) {
+                                ////System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
+                            }
                         }
-                    } catch (Exception ex) {
-                        ////System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
-                    }
+                    });
+
                 }
 
                 private void claimMessageBox(String msg) {
@@ -3870,14 +3937,7 @@ public class DashboardController {
                             }
                         };
 
-                        Thread t = new Thread() {
-                            @Override
-                            public void run() {
-                                Platform.runLater(updater);
-                            }
-                        };
-                        t.start();
-                        //Platform.runLater(updater);
+                        Platform.runLater(updater);
                     });
                     claimMessage.start();
 
@@ -4015,14 +4075,20 @@ public class DashboardController {
         Thread showandhidebalance = new Thread() {
             @Override
             public void run() {
-                if (show) {
-                    balance.setText("*****");
-                    show = false;
-                } else {
-                    balance.setText(mybalance);
-                    show = true;
-                }
-                System.gc();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (show) {
+                            balance.setText("*****");
+                            show = false;
+                        } else {
+                            balance.setText(mybalance);
+                            show = true;
+                        }
+                        System.gc();
+                    }
+                });
+
             }
         };
         showandhidebalance.start();
