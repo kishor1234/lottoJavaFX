@@ -44,6 +44,18 @@
                               </Label>
                           </center>
                       </BorderPane>
+                  <BorderPane layoutX="22.0" layoutY="22.0">
+                     <center>
+                        <Label text="System" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </center>
+                  </BorderPane>
                       <BorderPane HBox.hgrow="ALWAYS">
                           <center>
                               <Label onMouseClicked="#restartGame" text="Restart" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -102,7 +114,7 @@
                         <children>
                             <Pane prefHeight="37.0" prefWidth="213.0" styleClass="white-border-2">
                                 <children>
-                                    <Label layoutX="6.0" layoutY="8.0" text="Software Version 1.0.1" textFill="WHITE">
+                                    <Label layoutX="6.0" layoutY="8.0" text="Software Version 1.0.2" textFill="WHITE">
                                         <font>
                                             <Font size="18.0" />
                                         </font>

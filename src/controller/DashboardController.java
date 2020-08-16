@@ -643,7 +643,7 @@ public class DashboardController {
             loadSeriesData();
             loadAdvanceDraw();
             System.out.println("DAta" + seriesStringData);
-            System.gc();
+
         } catch (Exception ex) {
             ////System.out.println("Error on initParameter " + ex.getMessage());
         }
@@ -1401,7 +1401,7 @@ public class DashboardController {
 
                         try {
                             Thread.sleep(5000);
-                            //  System.gc();
+                            //  
                             //resetFinalTotal();
                         } catch (InterruptedException ex) {
                             ////System.out.println(ex.getMessage());
@@ -1736,7 +1736,7 @@ public class DashboardController {
 
         int delay = 0;
         int period = 1000;
-        System.gc();
+
         timer = new Timer();
         interval = Integer.parseInt(secs);
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -1748,7 +1748,7 @@ public class DashboardController {
                     public void run() {
                         synchronized (drawClock.getText()) {
                             drawClock.setText(formatSeconds(setInterval()));
-                            System.gc();
+
                         }
                     }
                 });
@@ -1758,12 +1758,12 @@ public class DashboardController {
     }
 
     private int setInterval() {
-
+        System.gc();
         if (interval == 10) {
             buy.setDisable(true);
-            System.gc();
+
         }
-        if (interval == 1) {
+        if (interval == 0) {
             Thread clock = new Thread() {
                 @Override
                 public void run() {
@@ -1772,7 +1772,7 @@ public class DashboardController {
                         public void run() {
                             try {
                                 resultBoard("ALL");
-                                System.gc();
+
                                 interval--;
                             } catch (Exception ex) {
                                 System.out.println(ex.getMessage() + "Thread name");
@@ -1783,14 +1783,13 @@ public class DashboardController {
                 }
             };
             clock.start();
-            System.gc();
+
         }
         if (interval <= 0) {
-            interval = 0;
-            resetClock();
+            interval = 1;
+            //resetClock();
         }
 
-        System.gc();
         return --interval;
     }
 
@@ -2473,7 +2472,6 @@ public class DashboardController {
                     resetDashboard();
 
                     //resetDashboarWPRF();
-                    System.gc();
                 }
             };
             t.start();
@@ -2576,7 +2574,7 @@ public class DashboardController {
                         Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 };
-                System.gc();
+
                 //resetClock();
                 Platform.runLater(updater);
             });
@@ -3057,7 +3055,7 @@ public class DashboardController {
                                                                 public void run() {
                                                                     try {
                                                                         msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
-                                                                        Thread.sleep(1000);
+                                                                        //Thread.sleep(1000);
                                                                     } catch (Exception ex) {
                                                                         System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
                                                                     }
@@ -3079,7 +3077,7 @@ public class DashboardController {
                                         //invoiceJSON iJ = new invoiceJSON();
                                         //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                         lastTransaction();
-                                        //System.gc();
+                                        //
                                     } else {
                                         Map<String, Map> finalMap = new HashMap<>();
                                         Map<String, String> data = new HashMap<>();
@@ -3141,27 +3139,26 @@ public class DashboardController {
                                     }
 
                                 }
-                                System.gc();
+
                             } catch (NumberFormatException | HeadlessException | ParseException ex) {
                                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     });
 
-                    System.gc();
                     buy.setDisable(false);
                 }
 
             };
             buy.setDisable(true);
-            System.gc();
+
             t.start();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Exception message " + ex.getMessage());
 
         }
-        System.gc();
+
     }
 
     @FXML
@@ -3177,7 +3174,7 @@ public class DashboardController {
                         resetAll();
                         resetClock();
 //              showTimer();
-                        System.gc();
+
                         b2.setDisable(false);
                     }
                 });
@@ -3197,7 +3194,7 @@ public class DashboardController {
 //                            
 //                            resetClock();
 //                           // showTimer();
-//                            System.gc();
+//                            
 //                        } catch (Exception ex) {
 //                        }
 //                        //buy.setDisable(false);
@@ -3320,7 +3317,7 @@ public class DashboardController {
                         stage.showAndWait();
                         loadSeries(multiMap);
                         bSeries.setDisable(false);
-
+                        calculateTotal();
                     } catch (IOException ex) {
                         ////System.out.println("Multi if Error " + ex.getMessage());
                     }
@@ -3347,6 +3344,7 @@ public class DashboardController {
                         loadSeries(multiMap);
                         resetManualPlatSeleted();
                         bSeries.setDisable(false);
+                        calculateTotal();
                     } catch (IOException ex) {
                         ////System.out.println("Multi else Error " + ex.getMessage());
                     }
@@ -3632,6 +3630,7 @@ public class DashboardController {
                     loadAdvanceArray(advanceDraw);
                     //System.out.println("Advance Selected Draw " + advanceDraw);
                     b1.setDisable(false);
+                    calculateTotal();
                     ////System.out.println("AdvanceDrawArray " + advanceDrawArray);
                     //loadSeries(multiMap);
                 } catch (Exception ex) {
@@ -4086,7 +4085,7 @@ public class DashboardController {
                             balance.setText(mybalance);
                             show = true;
                         }
-                        System.gc();
+
                     }
                 });
 

@@ -29,6 +29,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -65,6 +66,8 @@ public class LoginController implements Initializable {
     private Button btnLogin;
 
     private Map<String, Button> pButton = new HashMap<>();
+    @FXML
+    private AnchorPane content;
 
     /**
      * Initializes the controller class.
@@ -138,7 +141,7 @@ public class LoginController implements Initializable {
                         } catch (JSONException | NumberFormatException ex) {
                             ////System.out.println(ex.getMessage());
                         }
-                        System.gc();
+                        
                     }
                 });
             }
@@ -199,7 +202,7 @@ public class LoginController implements Initializable {
 //            printerBox.getChildren().add(printerButton);
 //            
 //        }
-        System.gc();
+        
     }
 
     private void setDefaultPrinter(String name) {
@@ -242,7 +245,7 @@ public class LoginController implements Initializable {
 
             stage.show();
             btnLogin.getScene().getWindow().hide();
-            //System.gc();
+            //
             //loadSeries(multiMap);
         } catch (Exception ex) {
             ////System.out.println("Switching Scan View  Error " + ex.getMessage());

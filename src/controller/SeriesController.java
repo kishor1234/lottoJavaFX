@@ -53,7 +53,7 @@ public class SeriesController {
             aMap.put("0", "1000-1900");
         }
         btn2.getScene().getWindow().hide();
-        System.gc();
+        
     }
 
     Map<String, String> getText() {
@@ -203,7 +203,7 @@ public class SeriesController {
                                 break;
                         }
 
-                        System.gc();
+                        
 
                     }
                 });
@@ -222,14 +222,14 @@ public class SeriesController {
             aMap.remove("" + sr);
             //System.out.println("Remove " + sr + "" + aMap);
         }
-        System.gc();
+        
     }
 
     private void buttonSelect(Map<String, String> temp, Button button) {
         int sr = Integer.parseInt(temp.get("id")) - 1;
         aMap.put("" + sr, temp.get("series"));
         button.getScene().getWindow().hide();
-        System.gc();
+        
 
     }
 

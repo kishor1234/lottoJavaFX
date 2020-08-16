@@ -84,7 +84,7 @@ public class SingleTicketController {
                         mrp.setCellValueFactory(new PropertyValueFactory<>("mrp"));
                         digit.setCellValueFactory(new PropertyValueFactory<>("digit"));
                         qty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-                        System.gc();
+                        
                     }
                 });
             }
@@ -148,7 +148,7 @@ public class SingleTicketController {
                         } catch (Exception ex) {
                             httpAPI.erLog.write(ex);
                         }
-                        System.gc();
+                        
                     }
                 });
             }
@@ -160,7 +160,7 @@ public class SingleTicketController {
     @FXML
     private void closeWindo(ActionEvent event) {
         close.getScene().getWindow().hide();
-        System.gc();
+        
     }
 
     @FXML
@@ -210,7 +210,7 @@ public class SingleTicketController {
                 } else {
                     JOptionPane.showMessageDialog(null, "Ticket Repring Process cancel!");
                 }
-                System.gc();
+                
             }
         };
         printthread.start();

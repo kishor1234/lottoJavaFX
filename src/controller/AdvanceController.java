@@ -94,7 +94,7 @@ public class AdvanceController {
     @FXML
     private void closeAction(ActionEvent event) {
         button.getScene().getWindow().hide();
-        System.gc();
+
     }
 
     public void loadAdvance() {
@@ -114,13 +114,14 @@ public class AdvanceController {
                 Map<String, String> temp = itr.next();
                 CheckBox checkbox = new CheckBox(String.format("%02d", Integer.parseInt(temp.get("id"))) + "[" + temp.get("etime") + "]");
                 try {
+
                     if (!advanceDraw.get(temp.get("id")).isEmpty()) {
                         //System.out.println(advanceDraw);
                         checkbox.setSelected(true);
                     }
 
                 } catch (Exception ex) {
-                    httpAPI.erLog.write(ex);
+                    
                 }
 
                 checkbox.setOnAction(e -> adCheckBoxAction(checkbox, temp));
@@ -171,7 +172,7 @@ public class AdvanceController {
                                     jsk.setSelected(false);
                                     //adCheck.remove(k + "");
                                 } catch (Exception ex) {
-                                    System.out.println(ex.getMessage());
+                                    //System.out.println(ex.getMessage());
                                 }
                             }
                         }
