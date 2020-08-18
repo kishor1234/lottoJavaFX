@@ -2061,28 +2061,40 @@ public class DashboardController {
     }
 
     private void getPreviousNumber(Button B0) {
-        try {
-            TextField temp;
-            String MainSeries = seriesLable.getText();
-            // ////System.out.println(Dashboard.series.get("1000-1900"));
-            Map<String, Map> subSeries = series.get(MainSeries);
-            //////System.out.println(subSeries.get("1000-1099"));
-            String s[] = B0.getText().split("-");
-            Map<String, ArrayList> aMap = subSeries.get(s[0]);
-            ArrayList<Map> aListMap = aMap.get(s[0]);
-            for (Map aListMap1 : aListMap) {
-                Map<String, String> fi = aListMap1;
-                for (Map.Entry<String, String> entry : fi.entrySet()) {
-                    //////System.out.println(entry.getKey());
-                    temp = jField.get("E_" + entry.getKey());
-                    temp.setText(entry.getValue());
-                    temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                }
-            }
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            TextField temp;
+                            String MainSeries = seriesLable.getText();
+                            // ////System.out.println(Dashboard.series.get("1000-1900"));
+                            Map<String, Map> subSeries = series.get(MainSeries);
+                            //////System.out.println(subSeries.get("1000-1099"));
+                            String s[] = B0.getText().split("-");
+                            Map<String, ArrayList> aMap = subSeries.get(s[0]);
+                            ArrayList<Map> aListMap = aMap.get(s[0]);
+                            for (Map aListMap1 : aListMap) {
+                                Map<String, String> fi = aListMap1;
+                                for (Map.Entry<String, String> entry : fi.entrySet()) {
+                                    //////System.out.println(entry.getKey());
+                                    temp = jField.get("E_" + entry.getKey());
+                                    temp.setText(entry.getValue());
+                                    temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
+                                }
+                            }
 
-        } catch (Exception ex) {
-            ////System.out.println(ex.getMessage());-fx-prompt-text-fill:#474a48;
-        }
+                        } catch (Exception ex) {
+                            ////System.out.println(ex.getMessage());-fx-prompt-text-fill:#474a48;
+                        }
+                    }
+                });
+            }
+        };
+        t.start();
+
     }
 
     public void resetFinalTotal() {
@@ -2947,6 +2959,7 @@ public class DashboardController {
     private void ActionBuy(javafx.event.ActionEvent event) {
 
         try {
+            buy.setDisable(true);
             Thread t = new Thread() {
                 String msg = "";
 
@@ -3150,8 +3163,6 @@ public class DashboardController {
                 }
 
             };
-            buy.setDisable(true);
-
             t.start();
 
         } catch (Exception ex) {
