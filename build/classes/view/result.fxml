@@ -21,7 +21,14 @@
                   <Insets top="5.0" />
                </HBox.margin>
             </Text>
-            <Pane prefHeight="30.0" prefWidth="508.0" HBox.hgrow="ALWAYS" />
+            <Pane prefHeight="30.0" prefWidth="508.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Text fx:id="series" fill="WHITE" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000-1900">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
             <Button fx:id="btnClose" mnemonicParsing="false" onAction="#Close" onMouseClicked="#actionBTNClose" style="-fx-background-color: #FF0000;" text="X" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
@@ -42,14 +49,11 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Text fx:id="series" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="1000-1900" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
+            <ComboBox fx:id="cseries" onAction="#selectSeries" prefWidth="150.0" promptText="Series" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
-            </Text>
+            </ComboBox>
             <Label text="Draw Date" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

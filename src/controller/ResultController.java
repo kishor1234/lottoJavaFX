@@ -5,18 +5,26 @@
  */
 package controller;
 
+import Sys.Sereis.seriesData;
 import Sys.TimeFormats;
 import Sys.api.httpAPI;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -39,7 +47,7 @@ import org.json.simple.parser.ParseException;
  * @author asksoft
  */
 public class ResultController {
-
+    
     @FXML
     private Text series;
     @FXML
@@ -48,9 +56,11 @@ public class ResultController {
     private VBox resultPan;
     @FXML
     private Button btnClose;
-
+    
     public String ColorArray[] = new String[]{"#d485c2", "#82b47e", "#7ab4e8", "#5ba36a", "#d98d81", "#b9b1e6", "#ea9e7b", "#a4cc5a", "#c9bdaf", "#17bcbd"};
-
+    @FXML
+    private ComboBox<String> cseries;
+    
     @FXML
     private void getResult(ActionEvent event) {
         Thread t = new Thread() {
@@ -68,7 +78,7 @@ public class ResultController {
                             person.addProperty("gdate", gdate.getValue().toString());
                             String jsonString = person.toString();
                             System.out.println(jsonString);
-
+                            
                             try {
                                 String data = httpAPI._jsonRequest("?r=result", jsonString);
                                 if (data != null) {
@@ -87,7 +97,7 @@ public class ResultController {
                                         hBox1.setAlignment(Pos.BASELINE_LEFT);
                                         drID.setMaxWidth(Double.POSITIVE_INFINITY);
                                         drID.setMaxHeight(Double.POSITIVE_INFINITY);
-
+                                        
                                         HBox.setHgrow(drID, Priority.ALWAYS);
                                         Label drTime = new Label(TimeFormats.timeConvert(sData.get("gameetime")));
                                         drTime.setStyle("-fx-font-size: 15pt; -fx-font-weight: bold;");
@@ -115,10 +125,10 @@ public class ResultController {
                                             p.setBackground(new Background(new BackgroundFill(Color.web(ColorArray[k]), CornerRadii.EMPTY, Insets.EMPTY)));
                                             p.setPrefSize(100, 30);
                                             p.setStyle("-fx-border-color: #000000;");
-
+                                            
                                             p.getChildren().add(jLable);
                                             rtable.getChildren().add(p);
-
+                                            
                                         }
                                         hBox2.getChildren().add(rtable);
                                         mainVBox.getChildren().add(hBox2);
@@ -127,32 +137,58 @@ public class ResultController {
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Please check internet Connection.. Remote Host not connected");
                                 }
-
+                                
                             } catch (ParseException | HeadlessException ex) {
                                 httpAPI.erLog.write(ex);
                             }
                         }
-
+                        
                     }
                 });
             }
         };
         t.start();
-
+        
     }
-
+    
     @FXML
     private void Close(ActionEvent event) {
     }
-
-    void initLoadData(String multi, String text) {
+    
+    void initLoadData(String multi, String text, String seriesStringData) {
         series.setText(text);
+        loadSeries(seriesStringData);
+        
     }
-
+    
+    void loadSeries(String seriesStringData) {
+        try {
+            String fileData = seriesStringData;
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            seriesData gameSeries = gson.fromJson(fileData, seriesData.class);
+            ArrayList<String> seriesList = new ArrayList<>();
+            ArrayList<Map> test = gameSeries.getProperties();
+            Iterator<Map> itr = test.iterator();
+            while (itr.hasNext()) {
+                Map<String, String> temp = itr.next();
+                seriesList.add(temp.get("series"));
+            }
+            
+            cseries.getItems().addAll(seriesList);
+        } catch (Exception ex) {
+            
+        }
+    }
+    
     @FXML
     private void actionBTNClose(MouseEvent event) {
         btnClose.getScene().getWindow().hide();
-
+        
+    }
+    
+    @FXML
+    private void selectSeries(ActionEvent event) {
+        series.setText(cseries.getValue());
     }
 
     /**

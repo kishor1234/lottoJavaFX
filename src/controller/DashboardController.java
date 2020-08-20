@@ -47,6 +47,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -2956,110 +2957,172 @@ public class DashboardController {
     }
 
     @FXML
-    private void ActionBuy(javafx.event.ActionEvent event) {
-
+    private void ActionBuy(MouseEvent event) {
         try {
-            buy.setDisable(true);
-            Thread t = new Thread() {
-                String msg = "";
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+                if (event.getClickCount() > 1) {
+                    System.out.println("Double clicked");
+                } else {
+                    buy.setDisable(true);
+                    Thread t = new Thread() {
+                        String msg = "";
 
-                @Override
-                public void run() {
-                    Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                String qt = totalqty.getText();
-                                String am = totalamt.getText();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        String qt = totalqty.getText();
+                                        String am = totalamt.getText();
 
-                                if (qt.equals("") && am.equals("")) {
-                                    qt = "0";
-                                    am = "0";
-                                }
-                                if (Integer.parseInt(qt) <= 0 && Integer.parseInt(am) <= 0) {
-                                    JOptionPane.showMessageDialog(null, "Please fill lottry point");
-
-                                } else {
-
-                                    if (advance.getText().equals("true")) {
-                                        Map<String, Map> adbR = new HashMap<>();
-                                        Map<String, String> dat = new HashMap<>();
-                                        dat.put("adtotalqty", totalqty.getText());
-                                        dat.put("adtotalamt", totalamt.getText());
-                                        dat.put("advance", "true");
-                                        dat.put("userid", userid.getText());
-                                        adbR.put("main", dat);
-                                        for (int i = 0; i < advanceDrawArray.size(); i++) {
-                                            qt = String.valueOf(totq);
-                                            am = String.valueOf(tota);
-                                            Map<String, String> advanceDraw = advanceDrawArray.get(i);
-                                            Map<String, Map> finalMap = new HashMap<>();
-                                            Map<String, String> data = new HashMap<>();
-                                            data.put("userid", userid.getText());
-                                            data.put("drawid", advanceDraw.get("gametimeid"));
-                                            data.put("totalqty", qt);
-                                            data.put("totalamt", am);
-                                            data.put("perPoint", "2");
-                                            data.put("start", advanceDraw.get("gametime"));
-                                            data.put("end", advanceDraw.get("gameendtime"));
-                                            data.put("ip", "127.0.0.1");
-                                            finalMap.put("basic", data);
-                                            finalMap.put("data", series);
-                                            adbR.put(String.valueOf(i), finalMap);
-
+                                        if (qt.equals("") && am.equals("")) {
+                                            qt = "0";
+                                            am = "0";
                                         }
-                                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                        String jsonEmp = gson.toJson(adbR);
-                                        System.out.println(jsonEmp);
+                                        if (Integer.parseInt(qt) <= 0 && Integer.parseInt(am) <= 0) {
+                                            JOptionPane.showMessageDialog(null, "Please fill lottry point");
 
-                                        String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                        if (Data != null) {
-                                            System.out.println("Data \n" + Data);
-                                            //Map<String, Map> advanTemp = advanceDraw;
-                                            //resetBuy();
-                                            resetDashboard();
-                                            // loadAdvanceArray(advanTemp);
-                                            buy.setDisable(false);
-                                            //get unitrid 
-                                            Object obj = new JSONParser().parse(Data);
-                                            //System.out.println(obj);
-                                            // typecasting obj to JSONObject 
-                                            Map<String, String> joMap = (Map<String, String>) obj;
-                                            System.out.println(joMap);
-                                            if (joMap.get("status").equals("1")) {
+                                        } else {
 
-                                                //JSONObject jo = (JSONObject) obj;
-                                                // getting firstName and lastName 
-                                                String utrno = (String) joMap.get("print");
-                                                Map<String, String> adbPrint = new HashMap<>();
-                                                adbPrint.put("utrno", utrno);
-                                                adbPrint.put("own", userid.getText());
-                                                adbPrint.put("action", "entry");
-                                                //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                                String jsonPrint = gson.toJson(adbPrint);
-                                                System.out.println(jsonPrint);
-                                                Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                                if (Data == null) {
+                                            if (advance.getText().equals("true")) {
+                                                Map<String, Map> adbR = new HashMap<>();
+                                                Map<String, String> dat = new HashMap<>();
+                                                dat.put("adtotalqty", totalqty.getText());
+                                                dat.put("adtotalamt", totalamt.getText());
+                                                dat.put("advance", "true");
+                                                dat.put("userid", userid.getText());
+                                                adbR.put("main", dat);
+                                                for (int i = 0; i < advanceDrawArray.size(); i++) {
+                                                    qt = String.valueOf(totq);
+                                                    am = String.valueOf(tota);
+                                                    Map<String, String> advanceDraw = advanceDrawArray.get(i);
+                                                    Map<String, Map> finalMap = new HashMap<>();
+                                                    Map<String, String> data = new HashMap<>();
+                                                    data.put("userid", userid.getText());
+                                                    data.put("drawid", advanceDraw.get("gametimeid"));
+                                                    data.put("totalqty", qt);
+                                                    data.put("totalamt", am);
+                                                    data.put("perPoint", "2");
+                                                    data.put("start", advanceDraw.get("gametime"));
+                                                    data.put("end", advanceDraw.get("gameendtime"));
+                                                    data.put("ip", "127.0.0.1");
+                                                    finalMap.put("basic", data);
+                                                    finalMap.put("data", series);
+                                                    adbR.put(String.valueOf(i), finalMap);
+
+                                                }
+                                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                                String jsonEmp = gson.toJson(adbR);
+                                                System.out.println(jsonEmp);
+
+                                                String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
+                                                if (Data != null) {
+                                                    System.out.println("Data \n" + Data);
+                                                    //Map<String, Map> advanTemp = advanceDraw;
+                                                    //resetBuy();
+                                                    resetDashboard();
+                                                    // loadAdvanceArray(advanTemp);
+                                                    buy.setDisable(false);
+                                                    //get unitrid 
+                                                    Object obj = new JSONParser().parse(Data);
+                                                    //System.out.println(obj);
+                                                    // typecasting obj to JSONObject 
+                                                    Map<String, String> joMap = (Map<String, String>) obj;
+                                                    System.out.println(joMap);
+                                                    if (joMap.get("status").equals("1")) {
+
+                                                        //JSONObject jo = (JSONObject) obj;
+                                                        // getting firstName and lastName 
+                                                        String utrno = (String) joMap.get("print");
+                                                        Map<String, String> adbPrint = new HashMap<>();
+                                                        adbPrint.put("utrno", utrno);
+                                                        adbPrint.put("own", userid.getText());
+                                                        adbPrint.put("action", "entry");
+                                                        //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                                        String jsonPrint = gson.toJson(adbPrint);
+                                                        System.out.println(jsonPrint);
+                                                        Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                                        if (Data == null) {
+                                                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                                                        }
+                                                        Object obj2 = new JSONParser().parse(Data);
+                                                        //System.out.println(obj);
+                                                        ArrayList<Map> aMap = (ArrayList<Map>) obj2;
+                                                        for (int i = 0; i < aMap.size(); i++) {
+                                                            Map<String, String> temP = aMap.get(i);
+                                                            adbPrint = new HashMap<>();
+                                                            adbPrint.put("game", temP.get("game"));
+                                                            adbPrint.put("own", userid.getText());
+                                                            adbPrint.put("utrno", utrno);
+                                                            adbPrint.put("action", "subentry");
+                                                            //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                                            jsonPrint = gson.toJson(adbPrint);
+                                                            System.out.println(jsonPrint);
+                                                            String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
+                                                            if (da == null) {
+                                                                JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+                                                            }
+                                                            System.out.println("[" + i + "]" + jsonPrint);
+                                                            Thread tp = new Thread() {
+                                                                @Override
+                                                                public void run() {
+                                                                    Platform.runLater(new Runnable() {
+                                                                        @Override
+                                                                        public void run() {
+                                                                            try {
+                                                                                msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
+                                                                                //Thread.sleep(1000);
+                                                                            } catch (Exception ex) {
+                                                                                System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
+                                                                            }
+                                                                        }
+                                                                    });
+
+                                                                }
+                                                            };
+                                                            tp.start();
+                                                        }
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(null, joMap.get("msg"));
+                                                    }
+                                                } else {
+                                                    buy.setDisable(false);
                                                     JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                                 }
-                                                Object obj2 = new JSONParser().parse(Data);
-                                                //System.out.println(obj);
-                                                ArrayList<Map> aMap = (ArrayList<Map>) obj2;
-                                                for (int i = 0; i < aMap.size(); i++) {
-                                                    Map<String, String> temP = aMap.get(i);
-                                                    adbPrint = new HashMap<>();
-                                                    adbPrint.put("game", temP.get("game"));
-                                                    adbPrint.put("own", userid.getText());
-                                                    adbPrint.put("utrno", utrno);
-                                                    adbPrint.put("action", "subentry");
-                                                    //Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                                    jsonPrint = gson.toJson(adbPrint);
-                                                    System.out.println(jsonPrint);
-                                                    String da = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                                    if (da == null) {
-                                                        JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
-                                                    }
-                                                    System.out.println("[" + i + "]" + jsonPrint);
+
+                                                //invoiceJSON iJ = new invoiceJSON();
+                                                //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                                lastTransaction();
+                                                //
+                                            } else {
+                                                Map<String, Map> finalMap = new HashMap<>();
+                                                Map<String, String> data = new HashMap<>();
+                                                data.put("userid", userid.getText());
+                                                String did[] = id.getText().split("_");
+                                                data.put("drawid", did[1]);
+                                                data.put("totalqty", totalqty.getText());
+                                                data.put("totalamt", totalamt.getText());
+                                                data.put("perPoint", "2");
+                                                data.put("advance", "false");
+                                                data.put("start", start.getText());
+                                                data.put("end", end.getText());
+                                                data.put("ip", "127.0.0.1");
+                                                finalMap.put("main", data);
+                                                finalMap.put("data", series);
+                                                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                                                String jsonEmp = gson.toJson(finalMap);
+                                                System.out.println(jsonEmp);
+                                                final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
+                                                //System.out.println("Data \n" + Data);
+                                                //Map<String, Map> advanTemp = advanceDraw;
+                                                if (Data != null) {
+                                                    resetBuy();
+                                                    //resetAll();
+//loadSeries(multiMap);
+                                                    //loadAdvanceArray(advanTemp);
+                                                    buy.setDisable(false);
+                                                    //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
                                                     Thread tp = new Thread() {
                                                         @Override
                                                         public void run() {
@@ -3067,103 +3130,46 @@ public class DashboardController {
                                                                 @Override
                                                                 public void run() {
                                                                     try {
-                                                                        msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
+                                                                        msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
                                                                         //Thread.sleep(1000);
+                                                                        if (!msg.equals("Success")) {
+
+                                                                            JOptionPane.showMessageDialog(null, msg);
+                                                                            buy.setDisable(false);
+                                                                        }
                                                                     } catch (Exception ex) {
-                                                                        System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
+                                                                        System.out.println("Threade Exerpiton line 2891 " + ex.getMessage());
                                                                     }
                                                                 }
                                                             });
 
                                                         }
                                                     };
+
                                                     tp.start();
+                                                    lastTransaction();
+
+                                                } else {
+                                                    buy.setDisable(false);
+                                                    JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                                 }
-                                            } else {
-                                                JOptionPane.showMessageDialog(null, joMap.get("msg"));
                                             }
-                                        } else {
-                                            buy.setDisable(false);
-                                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
+
                                         }
 
-                                        //invoiceJSON iJ = new invoiceJSON();
-                                        //msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
-                                        lastTransaction();
-                                        //
-                                    } else {
-                                        Map<String, Map> finalMap = new HashMap<>();
-                                        Map<String, String> data = new HashMap<>();
-                                        data.put("userid", userid.getText());
-                                        String did[] = id.getText().split("_");
-                                        data.put("drawid", did[1]);
-                                        data.put("totalqty", totalqty.getText());
-                                        data.put("totalamt", totalamt.getText());
-                                        data.put("perPoint", "2");
-                                        data.put("advance", "false");
-                                        data.put("start", start.getText());
-                                        data.put("end", end.getText());
-                                        data.put("ip", "127.0.0.1");
-                                        finalMap.put("main", data);
-                                        finalMap.put("data", series);
-                                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                                        String jsonEmp = gson.toJson(finalMap);
-                                        System.out.println(jsonEmp);
-                                        final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                        //System.out.println("Data \n" + Data);
-                                        //Map<String, Map> advanTemp = advanceDraw;
-                                        if (Data != null) {
-                                            resetBuy();
-                                            //resetAll();
-//loadSeries(multiMap);
-                                            //loadAdvanceArray(advanTemp);
-                                            buy.setDisable(false);
-                                            //invoiceJSON.invoiceJSONPrint(Data,printer.getText());
-                                            Thread tp = new Thread() {
-                                                @Override
-                                                public void run() {
-                                                    Platform.runLater(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            try {
-                                                                msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
-                                                                //Thread.sleep(1000);
-                                                                if (!msg.equals("Success")) {
-
-                                                                    JOptionPane.showMessageDialog(null, msg);
-                                                                    buy.setDisable(false);
-                                                                }
-                                                            } catch (Exception ex) {
-                                                                System.out.println("Threade Exerpiton line 2891 " + ex.getMessage());
-                                                            }
-                                                        }
-                                                    });
-
-                                                }
-                                            };
-
-                                            tp.start();
-                                            lastTransaction();
-
-                                        } else {
-                                            buy.setDisable(false);
-                                            JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
-                                        }
+                                    } catch (NumberFormatException | HeadlessException | ParseException ex) {
+                                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
                                     }
-
                                 }
+                            });
 
-                            } catch (NumberFormatException | HeadlessException | ParseException ex) {
-                                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            buy.setDisable(false);
                         }
-                    });
 
-                    buy.setDisable(false);
+                    };
+                    t.start();
                 }
-
-            };
-            t.start();
+            }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Exception message " + ex.getMessage());
@@ -3313,6 +3319,7 @@ public class DashboardController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/series.fxml"));
                         Parent root = loader.load();
                         SeriesController Scl = loader.getController();
+                        System.out.println("Series " + seriesStringData);
                         Scl.initLoadData("multi", multiMap, seriesStringData);
                         Stage stage = new Stage();
                         Screen screen = Screen.getPrimary();
@@ -3663,7 +3670,7 @@ public class DashboardController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/result.fxml"));
                     Parent root = loader.load();
                     ResultController Scl = loader.getController();
-                    Scl.initLoadData("multi", seriesLable.getText());
+                    Scl.initLoadData("multi", seriesLable.getText(), seriesStringData);
                     Stage stage = new Stage();
                     Screen screen = Screen.getPrimary();
                     Rectangle2D bounds = screen.getVisualBounds();
