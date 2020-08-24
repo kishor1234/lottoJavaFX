@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -1383,6 +1384,7 @@ public class DashboardController {
 
                 @Override
                 public void run() {
+
 //                    while (true) {
 //                        ////System.out.println("Modified ArrayList : " + Dashboard.multiSeries);
 //                        try {
@@ -1391,17 +1393,32 @@ public class DashboardController {
 //                            ////System.out.println(ex.getMessage());
 //                        }
 //                    }
-
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     while (true) {
+//                        for (Map.Entry<String, Map> e : series.entrySet()) {
+//                            //System.out.println(e.getKey() + " ===> " + e.getValue());
+//                            Map<String, ArrayList> test = e.getValue();
+//                            for (Map.Entry<String, ArrayList> e1 : test.entrySet()) {
+//                                //System.out.println(e1.getKey() + " ==> " + e1.getValue());
+//                                String sr = e1.getKey();
+//                                Map<String, ArrayList> tp = (Map<String, ArrayList>) e1.getValue();
+//                                for (Map.Entry<String, ArrayList> num : tp.entrySet()) {
+//                                    System.out.println(num.getKey() + " => " + num.getValue());
+//                                }
+//                            }
+//                        }
                         System.out.println("Series Map " + series);
-                        String jsonEmp = gson.toJson(multiSeries);
+                        //Map<String, Map> sortedMap = new TreeMap<String, Map>(series);
+                        String jsonEmp = gson.toJson(series);
+                        System.out.println("Sort Series Map " + jsonEmp);
+                        jsonEmp = gson.toJson(series);
+                        //System.out.println(tempSubSeries);
                         System.out.println("MultiSeries Json " + jsonEmp);
                         System.out.println("Advance Array " + advanceDrawArray);
                         //calculateTotal();
 
                         try {
-                            Thread.sleep(5000);
+                            Thread.sleep(2000);
                             //  
                             //resetFinalTotal();
                         } catch (InterruptedException ex) {
@@ -1829,8 +1846,7 @@ public class DashboardController {
                 Map<String, ArrayList> test = entry.getValue();
                 for (Map.Entry<String, ArrayList> entrys : test.entrySet()) {
                     sr = entry.getKey();
-                    Map<String, ArrayList> tp = new HashMap<>();
-                    tp = (Map<String, ArrayList>) entrys.getValue();
+                    Map<String, ArrayList> tp = (Map<String, ArrayList>) entrys.getValue();
                     //////System.out.println(tp);
                     for (Map.Entry<String, ArrayList> num : tp.entrySet()) {
                         //////System.out.println(num.getValue());
@@ -2963,6 +2979,7 @@ public class DashboardController {
                 if (event.getClickCount() > 1) {
                     System.out.println("Double clicked");
                 } else {
+                    calculateTotal();
                     buy.setDisable(true);
                     Thread t = new Thread() {
                         String msg = "";
@@ -3114,7 +3131,7 @@ public class DashboardController {
                                                 String jsonEmp = gson.toJson(finalMap);
                                                 System.out.println(jsonEmp);
                                                 final String Data = httpAPI._jsonRequest("?r=invoice", jsonEmp);
-                                                //System.out.println("Data \n" + Data);
+                                                System.out.println("Data \n" + Data);
                                                 //Map<String, Map> advanTemp = advanceDraw;
                                                 if (Data != null) {
                                                     resetBuy();
@@ -4015,12 +4032,25 @@ public class DashboardController {
         singleDrawPlatSelected(B9, c9);
     }
 
+    public void copyoldpatti() {
+        try {
+            for (int i = 0; i < 100; i++) {
+                TextField jf = jField.get("E_" + i);
+                if (!"".equals(jf.getText())) {
+                    inputSystem(i, jf);
+                }
+            }
+        } catch (Exception ex) {
+
+        }
+    }
+
     private void singleDrawPlatSelected(Button B0, CheckBox c0) {
         try {
             int count = Integer.parseInt(custome.getText());
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
-                    ////System.out.println("MultiSeries Array" + multiSeries);
+                    System.out.println("MultiSeries Arrayss" + multiSeries);
                     for (String multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
@@ -4060,9 +4090,11 @@ public class DashboardController {
                 count--;
             }
             custome.setText(String.valueOf(count));
+            calculateTotal();
         } catch (Exception ex) {
 
         }
+        copyoldpatti();
     }
 
     private void resetManualPlatSeleted() {
@@ -4085,6 +4117,7 @@ public class DashboardController {
 
     private void buttonClickResetCheckOption() {
         resetManualPlatSeleted();
+        calculateTotal();
 
     }
 

@@ -14,6 +14,7 @@ import Sys.TimeFormats;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -43,9 +44,12 @@ public class invoiceJSON {
                 //System.out.println("Print data " + printMap);
                 //printPage += "Rajashreee Lottery\n";
                 String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "";
+                System.out.println(drDetails);
                 String secondPrice = "Second Prize Amt: 180/- ";
+                System.out.println(secondPrice);
                 String numberHeader = "NUMBER QT NUMBER QT NUMBER QT";
-                Map<String, ArrayList> printMapd = ja.get(i);
+                System.out.println(numberHeader);
+                Map<String, ArrayList> printMapd = new TreeMap<>(ja.get(i));
                 ArrayList<Map> point = printMapd.get("point");
                 int k = 1;
                 int limit = 1;
@@ -57,7 +61,7 @@ public class invoiceJSON {
                 printPageFooter += "Total Tr No.   : " + trno + "\n";
                 printPageFooter += "Barcode No.    : " + printMap.get("game") + "-\n";
                 for (int j = 0; j < point.size(); j++) {
-                    Map<String, String> dPoint = point.get(j);
+                    Map<String, String> dPoint = new TreeMap<>(point.get(j));
 
                     for (Map.Entry<String, String> finas : dPoint.entrySet()) {
                         int val = Integer.parseInt(finas.getValue());
@@ -89,6 +93,8 @@ public class invoiceJSON {
                     }
 
                 }
+                System.out.println(numberTable);
+                System.out.println(printPageFooter);
                 if (limit >= 1) {
                     limit = 1;
 //                    String dp = buildInvoice(numberTable, printPage, printPageFooter);
@@ -98,7 +104,7 @@ public class invoiceJSON {
                     numberTable = "";
                     k = 0;
                 }
-
+                
                 //printPage += invoiceJSON.getBarocde();
                 //System.out.println(printPage);
                 //PrintInvoice.Sample(currentPrinter, printPage, printMap.get("game"));

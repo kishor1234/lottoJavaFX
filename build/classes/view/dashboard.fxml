@@ -149,7 +149,7 @@
                                                 </Pane>
                                              </children>
                                           </VBox>
-                                          <ScrollPane prefHeight="100.0" HBox.hgrow="ALWAYS">
+                                          <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="100.0" HBox.hgrow="ALWAYS">
                                             <content>
                                               <AnchorPane>
                                                    <children>
