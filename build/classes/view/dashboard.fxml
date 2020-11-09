@@ -112,7 +112,7 @@
                                              <children>
                                                 <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" styleClass="yellow-bg" stylesheets="@../css/dashboard.css" VBox.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label layoutX="18.0" layoutY="6.0" text="RajaLaxmi Lottery">
+                                                      <Label layoutX="18.0" layoutY="6.0" text="Samruddhi Lottery ">
                                                          <font>
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
@@ -511,7 +511,7 @@
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Text fill="#e40f0f" strokeType="OUTSIDE" strokeWidth="0.0" text="RajLaxmi Weekly Lottery" HBox.hgrow="ALWAYS">
+                                          <Text fill="#e40f0f" strokeType="OUTSIDE" strokeWidth="0.0" text="Samruddhi Weekly Lottery" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>

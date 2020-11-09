@@ -17,16 +17,12 @@ import com.google.gson.GsonBuilder;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -77,6 +73,8 @@ import org.json.simple.parser.ParseException;
  * @author asksoft
  */
 public class DashboardController {
+
+    private boolean process = true;
 
     @FXML
     public Text clockLabel;
@@ -457,13 +455,13 @@ public class DashboardController {
     String text;
     int Option;
     int Speed;
-    public Map<String, Map> series = new HashMap<>();
-    public ArrayList<String> multiSeries = new ArrayList<>();//multi series option
+    public Map<Integer, Map> series = new HashMap<>();//old String
+    public ArrayList<Integer> multiSeries = new ArrayList<>();//old String multi series option
     public ArrayList<Map> advanceDrawArray = new ArrayList<>();//multi series option
     public Map<String, Map> advanceDraw = new HashMap<>();//multi series option
     public int interval = 0;
     Timer timer;
-    public Map<String, Integer> final_Map;
+    public Map<Integer, Integer> final_Map;//old String
     public Map<String, TextField> totalField = new HashMap<>();
     public String placeholder = "";
     @FXML
@@ -490,7 +488,7 @@ public class DashboardController {
     public JSONObject myResponse;
     public String defaultPrinter;
     public String ColorArray[] = new String[]{"#d485c2", "#82b47e", "#7ab4e8", "#5ba36a", "#d98d81", "#b9b1e6", "#ea9e7b", "#a4cc5a", "#c9bdaf", "#17bcbd"};
-    public Map<String, String> multiMap = new HashMap<>();
+    public Map<Integer, String> multiMap = new HashMap<>();//both String old
     //private Pane msgPanel;
     @FXML
     private Text lastDraw;
@@ -526,7 +524,7 @@ public class DashboardController {
     @FXML
     private Label allSelect;
     private Integer perPoint = 2;
-    public String mybalance = "";
+    public float mybalance = 0;
     private boolean allCheckSelect = false;
     private int[] allCheckNo = {25, 20, 10, 5, 5, 3, 2, 1, 1, 25};
     @FXML
@@ -570,7 +568,7 @@ public class DashboardController {
                             waits(myResponse, defaultPrinter);
                             resetDashboard();
                         } catch (Exception ex) {
-
+                            System.out.println("TestException  " + ex.getMessage());
                         }
                     }
                 });
@@ -597,14 +595,22 @@ public class DashboardController {
             mapButton();
             mapCheckBox();
             mapJTextField();
-            inisetClockCounter();
+            loadSeriesData();
+            loadAdvanceDraw();
+
+            //inisetClockCounter();
             //runNSOutput();
             //this.setLocationRelativeTo(null);
             messageRefreshThread();
             mapVarticalTextField();
             mapHorizontalTextField();
+            selectDefaultSeries(0);
+            selectSubSeries(B0);
+            setDefaultColorOfInputPoitBox();
             //JSONObject myResponse = new JSONObject(data);
             ////System.out.println("User ID " + myResponse.getString("userid"));
+            cDate.setText(myResponse.getString("cdate"));
+            clockLabel.setText(myResponse.getString("cdate"));
             userid.setText(myResponse.getString("userid"));
             id.setText(myResponse.getString("id"));
             uid.setText(myResponse.getString("name") + " " + myResponse.getString("userid"));
@@ -631,23 +637,19 @@ public class DashboardController {
                 jf.setOnKeyReleased(e -> keyRelease(e, jf, p));
 
             }
-            selectDefaultSeries(0);
-            selectSubSeries(B0);
-            setDefaultColorOfInputPoitBox();
+
             showTimer();
-            //inisetClockCounter();
+            inisetClockCounter();
             setTotalField();
             updateBalance();
             resultBoard("ALL");
             setLabelColor();
             //loadPrinter();
             lastTransaction();
-            loadSeriesData();
-            loadAdvanceDraw();
             System.out.println("DAta" + seriesStringData);
 
         } catch (Exception ex) {
-            ////System.out.println("Error on initParameter " + ex.getMessage());
+            System.out.println("Error on initParameter " + ex.getMessage());
         }
     }
 
@@ -666,7 +668,8 @@ public class DashboardController {
                         jbutton.setText((String) litr.next());
                         k++;
                     }
-                    setMainSeries(seriesLable.getText());
+                    String ss[] = seriesLable.getText().split("-");
+                    setMainSeries(Integer.parseInt(ss[0]));
                 }
             };
             Platform.runLater(updater);
@@ -696,10 +699,10 @@ public class DashboardController {
     }
 
     private void showTimer() {
-        DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
-        Date dobj = new Date();
-        cDate.setText(f.format(dobj));
-        clockLabel.setText(f.format(dobj));
+//        DateFormat f = new SimpleDateFormat("dd-MM-YYYY");
+//        Date dobj = new Date();
+//        cDate.setText(f.format(dobj));
+//        clockLabel.setText(f.format(dobj));
 //        Thread t = new Thread() {
 //            @Override
 //            public void run() {
@@ -1102,75 +1105,80 @@ public class DashboardController {
         }
     }
 
-    public void setMainSeries(String Series) {
-        Map<String, Map> tempSeries = new HashMap<>();
+    public void setMainSeries(int Series) {
+        Map<Integer, Map> tempSeries = new HashMap<>();
         series.put(Series, tempSeries);
     }
 
-    public void removeMainSeries(String Series) {
+    public void removeMainSeries(int Series) {
         //Map<String, Map> tempSeries = new HashMap<>();
         series.remove(Series);
     }
 
-    private void unsetSubSeries(String subSeries, String Main) {
+    private void unsetSubSeries(int subSeries, int Main) {
         try {
-            Map<String, Map> mainSeries = series.get(Main);//get Main   
-            Map<String, ArrayList> tempSubSeries = new HashMap<>();
+            Map<Integer, Map> mainSeries = series.get(Main);//get Main   
+            Map<Integer, ArrayList> tempSubSeries = new HashMap<>();
             ArrayList<Map> aMap = new ArrayList<>();
-            String s[] = subSeries.split("-");
-            tempSubSeries.remove(s[0]);
-            mainSeries.remove(s[0]);
+            //String s[] = subSeries.split("-");
+            tempSubSeries.remove(subSeries);
+            mainSeries.remove(subSeries);
             //////System.out.println(mainSeries);
         } catch (Exception ex) {
             ////System.out.println(ex.getMessage());
         }
     }
 
-    public void setSubSeries(String subSeries, String Main) {//Mian=1000-1900
+    public void setSubSeries(int subSeries, int Main) {//Mian=1000-1900
         try {
-            Map<String, Map> mainSeries = series.get(Main);//get Main   
-            Map<String, ArrayList> tempSubSeries = new HashMap<>();
+            Map<Integer, Map> mainSeries = series.get(Main);//get Main   
+            Map<Integer, ArrayList> tempSubSeries = new HashMap<>();
             ArrayList<Map> aMap = new ArrayList<>();
-            String s[] = subSeries.split("-");
-            tempSubSeries.put(s[0], aMap);
-            mainSeries.put(s[0], tempSubSeries);
-            // System.out.println("Test " + mainSeries);
+            // String s[] = subSeries.split("-");
+            tempSubSeries.put(subSeries, aMap);
+            mainSeries.put(subSeries, tempSubSeries);
+            System.out.println("Test " + mainSeries);
         } catch (Exception ex) {
-            ////System.out.println(ex.getMessage());
+            System.out.println("1142 Error " + ex.getMessage());
         }
 
     }
+//setNumber(index, value, seriesLable.getText(), Integer.parseInt(subSeriesNo.getText()));
 
-    public final void setNumber(String index, String value, String Main, String Sub) {
+    public final void setNumber(int index, int value, String Mains, int Sub, String state) {
         try {
-            if (!isNumeric(value)) {
-                value = "0";
+            String m[] = Mains.split("-");
+            int Main = Integer.parseInt(m[0]);
+            if (!isNumeric(value + "")) {
+                value = 0;
             }
             // Map<String, Map> mainSeries = Dashboard.series.get(Main);//Main
-            String ss[] = Sub.split("-");
+            int nt=100;
+            if(alls.getText().equals("true")){
+                nt=1000;
+            }
+            Integer ss[] = {Sub, (Sub + nt)};
             //int cno = 0;
-            for (int s = Integer.parseInt(ss[0]); s <= Integer.parseInt(ss[1]); s = s + 100) {
-                Map<String, Map> mainSeries = series.get(Main);//Main
-                String sp = s + "";
-
-                //////System.out.println(Dashboard.series);
+            for (int s = ss[0]; s <ss[1]; s = s + 100) {
+                Map<Integer, Map> mainSeries = series.get(Main);//Main
+                // String sp = s + "";
                 if (Integer.parseInt(custome.getText()) > 0) {
                     int cno = 0;
-                    for (Map.Entry<String, Map> mainSer : mainSeries.entrySet()) {
+                    for (Map.Entry<Integer, Map> mainSer : mainSeries.entrySet()) {
                         //keyor sp ==3100 example
-                        String tempValue = value;
+                        Integer tempValue = value;
                         if (allCheckSelect) {
-                            value = "" + Integer.parseInt(value) * allCheckNo[cno];
+                            value = value * allCheckNo[cno];
                             cno++;
                         }
-                        Map<String, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
+                        Map<Integer, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
                         ArrayList<Map> aMap = tempSubSeries.get(mainSer.getKey());//Array
                         boolean flag = false;
                         for (int i = 0; i < aMap.size(); ++i) {
-                            Map<String, String> numberTemp = aMap.get(i);
-                            for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                            Map<Integer, Integer> numberTemp = aMap.get(i);
+                            for (Map.Entry<Integer, Integer> finas : numberTemp.entrySet()) {
                                 if (finas.getKey().equals(index)) {
-                                    if (Integer.parseInt(value) <= 0) {
+                                    if (value <= 0) {
                                         numberTemp.remove(finas.getKey());
                                     } else {
                                         numberTemp.replace(finas.getKey(), value);
@@ -1181,8 +1189,8 @@ public class DashboardController {
 
                         }
                         if (!flag) {
-                            Map<String, String> number = new HashMap<>();
-                            if (Integer.parseInt(value) > 0) {
+                            Map<Integer, Integer> number = new HashMap<>();
+                            if (value > 0) {
                                 number.put(index, value);
                                 aMap.add(number);
                             }
@@ -1193,17 +1201,17 @@ public class DashboardController {
                     }
 
                 } else {
-                    if (mainSeries.get(sp) == null) {
-                        setSubSeries(sp, Main);
+                    if (mainSeries.get(s) == null) {
+                        setSubSeries(s, Main);
                     }
-                    Map<String, ArrayList> tempSubSeries = mainSeries.get(sp);//Sub
-                    ArrayList<Map> aMap = tempSubSeries.get(sp);//Array
+                    Map<Integer, ArrayList> tempSubSeries = mainSeries.get(s);//Sub
+                    ArrayList<Map> aMap = tempSubSeries.get(s);//Array
                     boolean flag = false;
                     for (int i = 0; i < aMap.size(); ++i) {
-                        Map<String, String> numberTemp = aMap.get(i);
-                        for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                        Map<Integer, Integer> numberTemp = aMap.get(i);
+                        for (Map.Entry<Integer, Integer> finas : numberTemp.entrySet()) {
                             if (finas.getKey().equals(index)) {
-                                if (Integer.parseInt(value) <= 0) {
+                                if (value <= 0) {
                                     numberTemp.remove(finas.getKey());
                                 } else {
                                     numberTemp.replace(finas.getKey(), value);
@@ -1214,8 +1222,8 @@ public class DashboardController {
 
                     }
                     if (!flag) {
-                        Map<String, String> number = new HashMap<>();
-                        if (Integer.parseInt(value) > 0) {
+                        Map<Integer, Integer> number = new HashMap<>();
+                        if (value > 0) {
                             number.put(index, value);
                             aMap.add(number);
                         }
@@ -1229,26 +1237,26 @@ public class DashboardController {
 //            aMap.add(number);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            System.out.println(ex.getLocalizedMessage() + "" + ex.getMessage());
         }
 
     }
 
-    public final void setNumberMulti(String index, String value, String Main, String Sub, String state) {
+    public final void setNumberMulti(int index, int value, int Main, int Sub, String state) {
         try {
-            if (!isNumeric(value)) {
-                value = "0";
+            if (!isNumeric(value + "")) {
+                value = 0;
             }
-            for (String serie : multiSeries) {//{1000-1900,....}
+            for (Integer serie : multiSeries) {//{1000-1900,....}
                 if (state.equals("true")) {
-                    String ss[] = serie.split("-");
+                    Integer ss[] = {serie, (serie + 900)};
                     int cno = 0;
-                    for (int s = Integer.parseInt(ss[0]); s <= Integer.parseInt(ss[1]); s = s + 100) {
-                        Map<String, Map> mainSeries = series.get(serie);//Main
-                        String sp = s + "";
-                        String tempValue = value;
+                    for (int s = ss[0]; s <= ss[1]; s = s + 100) {
+                        Map<Integer, Map> mainSeries = series.get(serie);//Main
+                        int sp = s;
+                        int tempValue = value;
                         if (allCheckSelect) {
-                            value = "" + Integer.parseInt(value) * allCheckNo[cno];
+                            value = value * allCheckNo[cno];
                             cno++;
                         }
                         ////System.out.println("MainSeries" + mainSeries);
@@ -1256,14 +1264,14 @@ public class DashboardController {
                             setSubSeries(sp, serie);
                         }
 
-                        Map<String, ArrayList> tempSubSeries = mainSeries.get(sp);//Sub
+                        Map<Integer, ArrayList> tempSubSeries = mainSeries.get(sp);//Sub
                         ArrayList<Map> aMap = tempSubSeries.get(sp);//Array
                         boolean flag = false;
                         for (int i = 0; i < aMap.size(); ++i) {
-                            Map<String, String> numberTemp = aMap.get(i);
-                            for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                            Map<Integer, Integer> numberTemp = aMap.get(i);
+                            for (Map.Entry<Integer, Integer> finas : numberTemp.entrySet()) {
                                 if (finas.getKey().equals(index)) {
-                                    if (Integer.parseInt(value) <= 0) {
+                                    if (value <= 0) {
                                         numberTemp.remove(finas.getKey());
                                     } else {
                                         numberTemp.replace(finas.getKey(), value);
@@ -1274,8 +1282,8 @@ public class DashboardController {
 
                         }
                         if (!flag) {
-                            Map<String, String> number = new HashMap<>();
-                            if (Integer.parseInt(value) > 0) {
+                            Map<Integer, Integer> number = new HashMap<>();
+                            if (value > 0) {
                                 number.put(index, value);
                                 aMap.add(number);
                             }
@@ -1283,23 +1291,23 @@ public class DashboardController {
                         value = tempValue;
                     }
                 } else {
-                    ////System.out.println(serie);
-                    String ss[] = Sub.split("-");//subseries
-                    // ////System.out.println(ss);
-                    String ser[] = serie.split("-");//selected main
-                    Map<String, Map> mainSeries = series.get(serie);//Main
-                    int sp = Integer.parseInt(ss[0]) + Integer.parseInt(ser[0]) - 1000;
+                    System.out.println(serie);
+                    Integer ss[] = {serie, (serie + 900)};
+                    System.out.println(ss);
+                    //String ser[] = serie;//selected main
+                    Map<Integer, Map> mainSeries = series.get(serie);//Main
+                    int sp = ss[0] + serie - 1000;
                     if (Integer.parseInt(custome.getText()) > 0) {
-                        for (Map.Entry<String, Map> mainSer : mainSeries.entrySet()) {
+                        for (Map.Entry<Integer, Map> mainSer : mainSeries.entrySet()) {
                             //keyor sp ==3100 example
-                            Map<String, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
+                            Map<Integer, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
                             ArrayList<Map> aMap = tempSubSeries.get(mainSer.getKey());//Array
                             boolean flag = false;
                             for (int i = 0; i < aMap.size(); ++i) {
-                                Map<String, String> numberTemp = aMap.get(i);
-                                for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                                Map<Integer, Integer> numberTemp = aMap.get(i);
+                                for (Map.Entry<Integer, Integer> finas : numberTemp.entrySet()) {
                                     if (finas.getKey().equals(index)) {
-                                        if (Integer.parseInt(value) <= 0) {
+                                        if (value <= 0) {
                                             numberTemp.remove(finas.getKey());
                                         } else {
                                             numberTemp.replace(finas.getKey(), value);
@@ -1310,8 +1318,8 @@ public class DashboardController {
 
                             }
                             if (!flag) {
-                                Map<String, String> number = new HashMap<>();
-                                if (Integer.parseInt(value) > 0) {
+                                Map<Integer, Integer> number = new HashMap<>();
+                                if (value > 0) {
                                     number.put(index, value);
                                     aMap.add(number);
                                 }
@@ -1321,17 +1329,17 @@ public class DashboardController {
                         }
 
                     } else {
-                        if (mainSeries.get("" + sp) == null) {
-                            setSubSeries("" + sp, serie);
+                        if (mainSeries.get(sp) == null) {
+                            setSubSeries(sp, serie);
                         }
-                        Map<String, ArrayList> tempSubSeries = mainSeries.get("" + sp);//Sub
-                        ArrayList<Map> aMap = tempSubSeries.get("" + sp);//Array
+                        Map<Integer, ArrayList> tempSubSeries = mainSeries.get(sp);//Sub
+                        ArrayList<Map> aMap = tempSubSeries.get(sp);//Array
                         boolean flag = false;
                         for (int i = 0; i < aMap.size(); ++i) {
-                            Map<String, String> numberTemp = aMap.get(i);
-                            for (Map.Entry<String, String> finas : numberTemp.entrySet()) {
+                            Map<Integer, Integer> numberTemp = aMap.get(i);
+                            for (Map.Entry<Integer, Integer> finas : numberTemp.entrySet()) {
                                 if (finas.getKey().equals(index)) {
-                                    if (Integer.parseInt(value) <= 0) {
+                                    if (value <= 0) {
                                         numberTemp.remove(finas.getKey());
                                     } else {
                                         numberTemp.replace(finas.getKey(), value);
@@ -1342,18 +1350,19 @@ public class DashboardController {
 
                         }
                         if (!flag) {
-                            Map<String, String> number = new HashMap<>();
-                            if (Integer.parseInt(value) > 0) {
+                            Map<Integer, Integer> number = new HashMap<>();
+                            if (value > 0) {
                                 number.put(index, value);
                                 aMap.add(number);
+                                System.out.println("Ogg 0sSplit[0]"+aMap);
                             }
                         }
                     }
                 }
             }
 
-        } catch (Exception ex) {
-            ////System.out.println(ex.getMessage());
+        } catch (NumberFormatException ex) {
+            System.out.println("1364 "+ex.getMessage());
         }
 
     }
@@ -1435,6 +1444,12 @@ public class DashboardController {
 
     private void BulkNumberWrite(int i, String p, javafx.scene.input.KeyEvent e) {
         // ////System.out.println(e.getKeyCode());
+        int tp = 1;
+        if (even.isSelected()) {
+            tp = 2;
+        } else if (odd.isSelected()) {
+            tp = 2;
+        }
         switch (e.getCode().toString()) {
 //            case 38:
 //
@@ -1443,14 +1458,14 @@ public class DashboardController {
 //
 //                break;
             case "LEFT"://left
-                int tempN = i - 1;
+                int tempN = i - tp;
                 if (horizontalTextField.get("B_" + tempN) != null) {
                     TextField tpf = horizontalTextField.get("B_" + tempN);
                     tpf.requestFocus();
                 }
                 break;
             case "RIGHT"://right
-                int tempP = i + 1;
+                int tempP = i + tp;
                 if (horizontalTextField.get("B_" + tempP) != null) {
                     TextField tpf = horizontalTextField.get("B_" + tempP);
                     tpf.requestFocus();
@@ -1458,51 +1473,58 @@ public class DashboardController {
                 break;
             default:
                 try {
-                    if (e.getText().equals("")) {
-                        int vartical = 0;//add 10
-                        while (i <= 99) {
-                            TextField varticalTF = varticalTextField.get("I_" + vartical);
-                            TextField jf = jField.get("E_" + i);
-                            if (!"".equals(varticalTF.getText())) {
-                                int vPoint = Integer.parseInt(varticalTF.getText());
-                                int t = vPoint + Integer.parseInt(p);
-                                jf.setText(t + "");
-                                inputSystem(i, jf);
+                if (!isNumeric(e.getText())) {
+                    int vartical = 0;//add 10
+                    while (i <= 99) {
+                        TextField varticalTF = varticalTextField.get("I_" + vartical);
+                        TextField jf = jField.get("E_" + i);
+                        if (!"".equals(varticalTF.getText())) {
+//                            value = 0;
+//                            if (!temp.getText().equals("")) {
+//                                value = Integer.parseInt(temp.getText());
+//                                if (!isNumeric(value + "")) {
+//                                    value = 0;
+//                                }
+//                            }
+                            int vPoint = Integer.parseInt(varticalTF.getText());
+                            int t = vPoint + Integer.parseInt(p);
+                            jf.setText(t + "");
+                            inputSystem(i, jf);
 
-                            } else {
-                                jf.setText(p);
-                                inputSystem(i, jf);
+                        } else {
+                            jf.setText(p);
+                            inputSystem(i, jf);
 
-                            }
-                            i = i + 10;
-                            vartical = vartical + 10;
                         }
-                    } else if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
-                        int vartical = 0;//add 10
-                        while (i <= 99) {
-                            TextField varticalTF = varticalTextField.get("I_" + vartical);
-                            TextField jf = jField.get("E_" + i);
-                            if (!"".equals(varticalTF.getText())) {
-                                int vPoint = Integer.parseInt(varticalTF.getText());
-                                int t = vPoint + Integer.parseInt(p);
-                                jf.setText(t + "");
-                                inputSystem(i, jf);
-
-                            } else {
-                                jf.setText(p);
-                                inputSystem(i, jf);
-
-                            }
-                            i = i + 10;
-                            vartical = vartical + 10;
-                        }
-                    } else {
-                        //JOptionPane.showMessageDialog(this, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
+                        i = i + 10;
+                        vartical = vartical + 10;
                     }
-                } catch (Exception ex) {
-                    ////System.out.println("B Number Error " + ex.getMessage());
+                } else if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
+                    int vartical = 0;//add 10
+                    while (i <= 99) {
+                        TextField varticalTF = varticalTextField.get("I_" + vartical);
+                        TextField jf = jField.get("E_" + i);
+                        if (!"".equals(varticalTF.getText())) {
+                            int vPoint = Integer.parseInt(varticalTF.getText());
+                            int t = vPoint + Integer.parseInt(p);
+                            jf.setText(t + "");
+                            inputSystem(i, jf);
+
+                        } else {
+                            jf.setText(p);
+                            inputSystem(i, jf);
+
+                        }
+                        i = i + 10;
+                        vartical = vartical + 10;
+                    }
+                } else {
+                    //JOptionPane.showMessageDialog(this, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
                 }
-                break;
+            } catch (Exception ex) {
+                ////System.out.println("B Number Error " + ex.getMessage());
+            }
+            break;
         }
 
     }
@@ -1531,51 +1553,82 @@ public class DashboardController {
                 break;
             default:
                 try {
-                    if (e.getText().equals("")) {
-                        int horizontal = 0;//add 10
-                        int tp = i + 10;
-                        while (i < tp) {
-                            TextField varticalTF = horizontalTextField.get("B_" + horizontal);
-                            TextField jf = jField.get("E_" + i);
-                            // e.getKeyChar();
-                            if (!"".equals(varticalTF.getText())) {
-                                int vPoint = Integer.parseInt(varticalTF.getText());
-                                int t = vPoint + Integer.parseInt(p);
-                                jf.setText(t + "");
-                                inputSystem(i, jf);
-                            } else {
+                if (!isNumeric(e.getText())) {
+                    int horizontal = 0;//add 10
+                    int tp = i + 10;
+                    while (i < tp) {
+                        TextField varticalTF = horizontalTextField.get("B_" + horizontal);
+                        TextField jf = jField.get("E_" + i);
+                        // e.getKeyChar();
+                        if (!"".equals(varticalTF.getText())) {
+                            int vPoint = Integer.parseInt(varticalTF.getText());
+                            int t = vPoint + Integer.parseInt(p);
+                            p = "" + t;
+                            //jf.setText(t + "");
+                            //inputSystem(i, jf);
+                        } else {
+                            //jf.setText(p);
+                            //inputSystem(i, jf);
+                        }
+                        if (odd.isSelected()) {
+                            if ((i % 2) == 0) {
                                 jf.setText(p);
                                 inputSystem(i, jf);
                             }
-                            i++;
-                            horizontal++;
-                        }
-                    } else if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
-                        int horizontal = 0;//add 10
-                        int tp = i + 10;
-                        while (i < tp) {
-                            TextField varticalTF = horizontalTextField.get("B_" + horizontal);
-                            TextField jf = jField.get("E_" + i);
-                            // e.getKeyChar();
-                            if (!"".equals(varticalTF.getText())) {
-                                int vPoint = Integer.parseInt(varticalTF.getText());
-                                int t = vPoint + Integer.parseInt(p);
-                                jf.setText(t + "");
-                                inputSystem(i, jf);
-                            } else {
+                        } else if (even.isSelected()) {
+                            if ((i % 2) != 0) {
                                 jf.setText(p);
                                 inputSystem(i, jf);
                             }
-                            i++;
-                            horizontal++;
+                        } else {
+                            jf.setText(p);
+                            inputSystem(i, jf);
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
+
+                        i++;
+                        horizontal++;
                     }
-                } catch (Exception ex) {
-                    //System.out.println("NUmber only " + ex.getMessage());
+                } else if (Integer.parseInt(e.getText()) >= 0 && Integer.parseInt(e.getText()) <= 9) {
+                    int horizontal = 0;//add 10
+                    int tp = i + 10;
+                    while (i < tp) {
+                        TextField varticalTF = horizontalTextField.get("B_" + horizontal);
+                        TextField jf = jField.get("E_" + i);
+                        // e.getKeyChar();
+                        if (!"".equals(varticalTF.getText())) {
+                            int vPoint = Integer.parseInt(varticalTF.getText());
+                            int t = vPoint + Integer.parseInt(p);
+                            p = "" + t;
+                            //jf.setText(t + "");
+                            //inputSystem(i, jf);
+                        } else {
+                            //jf.setText(p);
+                            //inputSystem(i, jf);
+                        }
+                        if (odd.isSelected()) {
+                            if ((i % 2) == 0) {
+                                jf.setText(p);
+                                inputSystem(i, jf);
+                            }
+                        } else if (even.isSelected()) {
+                            if ((i % 2) != 0) {
+                                jf.setText(p);
+                                inputSystem(i, jf);
+                            }
+                        } else {
+                            jf.setText(p);
+                            inputSystem(i, jf);
+                        }
+                        i++;
+                        horizontal++;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Enter Valid Number", "Error Message Box", JOptionPane.ERROR_MESSAGE);
                 }
-                break;
+            } catch (Exception ex) {
+                //System.out.println("NUmber only " + ex.getMessage());
+            }
+            break;
         }
 
     }
@@ -1608,24 +1661,29 @@ public class DashboardController {
 
     private void selectSubSeries(Button B0) {
 
-        String btxt = B0.getText();
-        subSeriesNo.setText(btxt);
-        if (checkSubSeries(btxt, seriesLable.getText())) {
+        try {
+            String btxt[] = B0.getText().split("-");
+            subSeriesNo.setText(btxt[0]);
+            String srLable[] = seriesLable.getText().split("-");
+            if (checkSubSeries(btxt[0], Integer.parseInt(srLable[0]))) {
 
-        } else {
-            setSubSeries(btxt, seriesLable.getText());
-        }
+            } else {
+                setSubSeries(Integer.parseInt(btxt[0]), Integer.parseInt(srLable[0]));
+            }
 
-        String s[] = btxt.split("-");
+            int s[] = {Integer.parseInt(btxt[0]), (Integer.parseInt(btxt[0]) + 900)};//btxt.split("-");
 
-        int ends = Integer.parseInt(s[1]);
-        int i = 0;
-        for (int starts = Integer.parseInt(s[0]); starts <= ends; starts++) {
-            TextField jf = jField.get("E_" + i);
-            jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
-            jf.setText("");
-            jf.setPromptText("" + starts);
-            i++;
+            int ends = (s[1]);
+            int i = 0;
+            for (int starts = 0; starts <= 99; starts++) {
+                TextField jf = jField.get("E_" + i);
+                jf.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
+                jf.setText("");
+                jf.setPromptText("" + (s[0] + starts));
+                i++;
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -1644,51 +1702,65 @@ public class DashboardController {
 
     private void selectAll(String WHITE) {
         B0.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B0);
+        this.selectSubSeries(B0);
         B1.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B1);
+        this.selectSubSeries(B1);
         B2.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B2);
+        this.selectSubSeries(B2);
         B3.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B3);
+        this.selectSubSeries(B3);
         B4.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B4);
+        this.selectSubSeries(B4);
         B5.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B5);
+        this.selectSubSeries(B5);
         B6.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B6);
+        this.selectSubSeries(B6);
         B7.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B7);
+        this.selectSubSeries(B7);
         B8.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B8);
+        this.selectSubSeries(B8);
         B9.setStyle("-fx-background-color:" + WHITE + ";-fx-border-color: #D3D3D3; -fx-border-radius:2px;");
-        //this.selectSubSeries(B9);
+        this.selectSubSeries(B9);
     }
 
     public void resetVarticalInput() {
-        I_0.setText("");
-        I_10.setText("");
-        I_20.setText("");
-        I_30.setText("");
-        I_40.setText("");
-        I_50.setText("");
-        I_60.setText("");
-        I_70.setText("");
-        I_80.setText("");
-        I_90.setText("");
+        int h = 0;
+        while (h < 100) {
+            TextField i_0 = varticalTextField.get("I_" + h);
+            i_0.setDisable(false);
+            i_0.setText("");
+            h = h + 10;
+        }
+//        I_0.setText("");
+//        I_10.setText("");
+//        I_20.setText("");
+//        I_30.setText("");
+//        I_40.setText("");
+//        I_50.setText("");
+//        I_60.setText("");
+//        I_70.setText("");
+//        I_80.setText("");
+//        I_90.setText("");
     }
 
     public void resetHorizontalInput() {
-        B_0.setText("");
-        B_1.setText("");
-        B_2.setText("");
-        B_3.setText("");
-        B_4.setText("");
-        B_5.setText("");
-        B_6.setText("");
-        B_7.setText("");
-        B_8.setText("");
-        B_9.setText("");
+        int h = 0;
+        while (h < 10) {
+            TextField i_0 = horizontalTextField.get("B_" + h);
+            i_0.setDisable(false);
+            i_0.setText("");
+            h++;
+        }
+//        B_0.setText("");
+//        B_1.setText("");
+//        B_2.setText("");
+//        B_3.setText("");
+//        B_4.setText("");
+//        B_5.setText("");
+//        B_6.setText("");
+//        B_7.setText("");
+//        B_8.setText("");
+//        B_9.setText("");
     }
 
     public void resetClock() {
@@ -1839,26 +1911,26 @@ public class DashboardController {
     public void calculateTotal() {
         try {
             int qty = 0;
-            String sr = "";
+            int sr = 0;
 
             final_Map = new HashMap<>();
-            for (Map.Entry<String, Map> entry : series.entrySet()) {
-                Map<String, ArrayList> test = entry.getValue();
-                for (Map.Entry<String, ArrayList> entrys : test.entrySet()) {
+            for (Map.Entry<Integer, Map> entry : series.entrySet()) {
+                Map<Integer, ArrayList> test = entry.getValue();
+                for (Map.Entry<Integer, ArrayList> entrys : test.entrySet()) {
                     sr = entry.getKey();
-                    Map<String, ArrayList> tp = (Map<String, ArrayList>) entrys.getValue();
+                    Map<Integer, ArrayList> tp = (Map<Integer, ArrayList>) entrys.getValue();
                     //////System.out.println(tp);
-                    for (Map.Entry<String, ArrayList> num : tp.entrySet()) {
+                    for (Map.Entry<Integer, ArrayList> num : tp.entrySet()) {
                         //////System.out.println(num.getValue());
                         ArrayList<Map> number = num.getValue();
                         for (int i = 0; i < number.size(); i++) {
-                            Map<String, String> numF = (number.get(i));
-                            for (Map.Entry<String, String> finas : numF.entrySet()) {
-                                String userNumber = finas.getValue();
+                            Map<Integer, Integer> numF = (number.get(i));
+                            for (Map.Entry<Integer, Integer> finas : numF.entrySet()) {
+                                Integer userNumber = finas.getValue();
                                 if (userNumber.equals("")) {
                                     number.remove(i);
                                 } else {
-                                    int userQty = Integer.parseInt(userNumber);
+                                    int userQty = userNumber;
                                     qty = qty + userQty;
 
                                 }
@@ -1885,8 +1957,8 @@ public class DashboardController {
             int finalAmt = 0;
 
             ResttotalField();
-            for (Map.Entry<String, Integer> entry : final_Map.entrySet()) {
-                String newString = entry.getKey().replace("-", "_");
+            for (Map.Entry<Integer, Integer> entry : final_Map.entrySet()) {
+                String newString = entry.getKey() + "_" + (entry.getKey() + 900);
                 TextField qtyField = totalField.get("Q" + newString);
                 qtyField.setText(entry.getValue() + "");
                 TextField amtField = totalField.get("A" + newString);
@@ -1948,104 +2020,61 @@ public class DashboardController {
     public void inputSystem(int p, TextField jf) {
         try {
             placeholder = jf.getText();
+
+            String sSplit[] = seriesLable.getText().split("-");
+            String ssSplit[] = subSeriesNo.getText().split("-");
+            int value = 0;
             if (multi.isSelected()) {
                 if ("".equals(subSeriesNo.getText()) && multiSeries.size() <= 0) {
                     JOptionPane.showMessageDialog(null, "Please select sereis first");
                 } else {
-                    String index = "" + p;
+                    int index = p;
                     int tQty = 0;
                     int tPoint = 0;
                     //System.out.println(index + "");
                     switch (NSystems.getText()) {
                         case "cross":
-                            ArrayList<String> numb = cross(p);
-                            String K;
-                            for (String numb1 : numb) {
+                            ArrayList<Integer> numb = cross(p);
+                            int K;
+                            for (Integer numb1 : numb) {
                                 K = numb1;
                                 // ////System.out.println("Cross K " + K);
                                 TextField temp = jField.get("E_" + K);
-                                if (Integer.parseInt(K) != p) {
+                                if (K != p) {
                                     temp.setText(jf.getText());
                                 }
                                 temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                                index = "" + K;
+                                index = K;
                                 tQty = tQty + Integer.parseInt(jf.getText());
-                                if (isNumeric(jf.getText())) {
-                                    setNumberMulti(index, jf.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
+                                value = 0;
+                                if (!temp.getText().equals("")) {
+                                    value = Integer.parseInt(temp.getText());
+                                    if (!isNumeric(value + "")) {
+                                        value = 0;
+                                    }
                                 } else {
-                                    setNumberMulti(index, "0", seriesLable.getText(), subSeriesNo.getText(), alls.getText());
+                                    temp.setStyle("-fx-background-color:#ffffff;-fx-border-color:#000000;-fx-border-width:2px;");
+
                                 }
+                                setNumberMulti(index, value, Integer.parseInt(sSplit[0]), Integer.parseInt(ssSplit[0]), alls.getText());
+
+//                                if (isNumeric(jf.getText())) {
+//                                    setNumberMulti(index, Integer.parseInt(jf.getText()), Integer.parseInt(ssSplit[0]), Integer.parseInt(sSplit[0]), alls.getText());
+//                                } else {
+//                                    setNumberMulti(index, 0, Integer.parseInt(ssSplit[0]), Integer.parseInt(sSplit[0]), alls.getText());
+//                                }
                             }
 
                             break;
                         case "fixed":
                             try {
 
-                                Map<String, String> jString = new HashMap<>();
-                                TextField temp = jField.get("E_" + p);
-                                temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                                jString.put("num", p + "");
-
-                                int number[] = fpNumbers(p);
-                                for (int so : number) {
-
-                                    TextField temdp = jField.get("E_" + so);
-                                    if (so != p) {
-                                        temdp.setText(jf.getText());
-                                    }
-                                    temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                                    setNumberMulti(String.valueOf(so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
-
-                                    so++;
-                                }
-                            } catch (NumberFormatException ex) {
-                                ////System.out.println(ex.getMessage());
-                            }
-                            break;
-
-                        default:
-                            index = "" + p;
+                            Map<String, Integer> jString = new HashMap<>();
                             TextField temp = jField.get("E_" + p);
                             temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                            setNumberMulti(index, temp.getText(), seriesLable.getText(), subSeriesNo.getText(), alls.getText());
-                            break;
-                    }
-
-//                                tPoint = tQty * 2;
-//                                Q1000_1900.setText(tQty + "");
-//                                A1000_1900.setText(tPoint + "");
-                }
-            } else {
-                String index = "" + p;
-                int tQty = 0;
-                int tPoint = 0;
-
-                switch (NSystems.getText()) {
-                    case "cross":
-                        ArrayList<String> numb = cross(p);
-                        String K;
-                        for (String numb1 : numb) {
-                            K = numb1;
-                            TextField temp = jField.get("E_" + K);
-                            if (Integer.parseInt(K) != p) {
-                                temp.setText(jf.getText());
-                            }
-                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                            index = "" + K;
-                            tQty = tQty + Integer.parseInt(jf.getText());
-                            setNumber(index, jf.getText(), seriesLable.getText(), subSeriesNo.getText());
-                        }
-
-                        break;
-                    case "fixed":
-                        try {
-                            Map<String, String> jString = new HashMap<>();
-                            TextField temp = jField.get("E_" + p);
-                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                            jString.put("num", p + "");
+                            jString.put("num", p);
 
                             int number[] = fpNumbers(p);
-//                         
                             for (int so : number) {
 
                                 TextField temdp = jField.get("E_" + so);
@@ -2053,7 +2082,17 @@ public class DashboardController {
                                     temdp.setText(jf.getText());
                                 }
                                 temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                                setNumber(String.valueOf(so), temdp.getText(), seriesLable.getText(), subSeriesNo.getText());
+                                value = 0;
+                                if (!temdp.getText().equals("")) {
+                                    value = Integer.parseInt(temdp.getText());
+                                    if (!isNumeric(value + "")) {
+                                        value = 0;
+                                    }
+                                } else {
+                                    temp.setStyle("-fx-background-color:#ffffff;-fx-border-color:#000000;-fx-border-width:2px;");
+
+                                }
+                                setNumberMulti(so, value, Integer.parseInt(ssSplit[0]), Integer.parseInt(sSplit[0]), alls.getText());
 
                                 so++;
                             }
@@ -2062,18 +2101,121 @@ public class DashboardController {
                         }
                         break;
 
-                    default:
-                        index = "" + p;
+                        default:
+                            index = p;
+                            TextField temp = jField.get("E_" + p);
+                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
+                            value = 0;
+                            if (!temp.getText().equals("")) {
+                                value = Integer.parseInt(temp.getText());
+                                if (!isNumeric(value + "")) {
+                                    value = 0;
+                                }
+                            } else {
+                                temp.setStyle("-fx-background-color:#ffffff;-fx-border-color:#000000;-fx-border-width:2px;");
+
+                            }
+                            setNumberMulti(index, value, Integer.parseInt(sSplit[0]), Integer.parseInt(sSplit[0]), alls.getText());
+                            break;
+                    }
+
+//                                tPoint = tQty * 2;
+//                                Q1000_1900.setText(tQty + "");
+//                                A1000_1900.setText(tPoint + "");
+                }
+            } else {
+                int index = p;
+                int tQty = 0;
+                int tPoint = 0;
+
+                switch (NSystems.getText()) {
+                    case "cross":
+                        ArrayList<Integer> numb = cross(p);
+                        int K;
+                        for (Integer numb1 : numb) {
+                            K = numb1;
+                            TextField temp = jField.get("E_" + K);
+                            if (K != p) {
+                                temp.setText(jf.getText());
+                            }
+                            temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
+                            index = K;
+                            tQty = tQty + Integer.parseInt(jf.getText());
+                            //setNumber(index, Integer.parseInt(jf.getText()), Integer.parseInt(seriesLable.getText()), Integer.parseInt(subSeriesNo.getText()));
+                            value = 0;
+                            if (!temp.getText().equals("")) {
+                                value = Integer.parseInt(temp.getText());
+                                if (!isNumeric(value + "")) {
+                                    value = 0;
+                                }
+                            } else {
+                                temp.setStyle("-fx-background-color:#ffffff;-fx-border-color:#000000;-fx-border-width:2px;");
+
+                            }
+                            setNumber(index, value, seriesLable.getText(), Integer.parseInt(ssSplit[0]), alls.getText());
+
+                        }
+
+                        break;
+                    case "fixed":
+                        try {
+                        Map<String, Integer> jString = new HashMap<>();
                         TextField temp = jField.get("E_" + p);
                         temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
-                        setNumber(index, temp.getText(), seriesLable.getText(), subSeriesNo.getText());
+                        jString.put("num", p);
+
+                        int number[] = fpNumbers(p);
+//                         
+                        for (int so : number) {
+
+                            TextField temdp = jField.get("E_" + so);
+                            if (so != p) {
+                                temdp.setText(jf.getText());
+                            }
+                            temdp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
+                            //setNumber(so, Integer.parseInt(temdp.getText()), Integer.parseInt(seriesLable.getText()), Integer.parseInt(subSeriesNo.getText()));
+                            value = 0;
+                            if (!temdp.getText().equals("")) {
+                                value = Integer.parseInt(temdp.getText());
+                                if (!isNumeric(value + "")) {
+                                    value = 0;
+                                }
+                            } else {
+                                temdp.setStyle("-fx-background-color:#ffffff;-fx-border-color:#000000;-fx-border-width:2px;");
+
+                            }
+                            setNumber(so, value, seriesLable.getText(), Integer.parseInt(ssSplit[0]), alls.getText());
+
+                            so++;
+                        }
+                    } catch (NumberFormatException ex) {
+                        ////System.out.println(ex.getMessage());
+                    }
+                    break;
+
+                    default:
+                        index = p;
+                        TextField temp = jField.get("E_" + p);
+                        temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
+                        value = 0;
+                        if (!temp.getText().equals("")) {
+                            value = Integer.parseInt(temp.getText());
+                            if (!isNumeric(value + "")) {
+                                value = 0;
+                            }
+                        } else {
+                            temp.setStyle("-fx-background-color:#ffffff;-fx-border-color:#000000;-fx-border-width:2px;");
+
+                        }
+
+                        setNumber(index, value, seriesLable.getText(), Integer.parseInt(ssSplit[0]), alls.getText());
                         break;
                 }
 
             }
             calculateTotal();
         } catch (HeadlessException | NumberFormatException ex) {
-
+            System.out.println("2103 Exce " + ex.getMessage());
         }
     }
 
@@ -2086,19 +2228,20 @@ public class DashboardController {
                     public void run() {
                         try {
                             TextField temp;
-                            String MainSeries = seriesLable.getText();
+                            String sLable[] = seriesLable.getText().split("-");
+                            int MainSeries = Integer.parseInt(sLable[0]);
                             // ////System.out.println(Dashboard.series.get("1000-1900"));
-                            Map<String, Map> subSeries = series.get(MainSeries);
+                            Map<Integer, Map> subSeries = series.get(MainSeries);
                             //////System.out.println(subSeries.get("1000-1099"));
                             String s[] = B0.getText().split("-");
-                            Map<String, ArrayList> aMap = subSeries.get(s[0]);
-                            ArrayList<Map> aListMap = aMap.get(s[0]);
+                            Map<Integer, ArrayList> aMap = subSeries.get(Integer.parseInt(s[0]));
+                            ArrayList<Map> aListMap = aMap.get(Integer.parseInt(s[0]));
                             for (Map aListMap1 : aListMap) {
-                                Map<String, String> fi = aListMap1;
-                                for (Map.Entry<String, String> entry : fi.entrySet()) {
+                                Map<Integer, Integer> fi = aListMap1;
+                                for (Map.Entry<Integer, Integer> entry : fi.entrySet()) {
                                     //////System.out.println(entry.getKey());
                                     temp = jField.get("E_" + entry.getKey());
-                                    temp.setText(entry.getValue());
+                                    temp.setText(entry.getValue() + "");
                                     temp.setStyle("-fx-background-color:#99ff99;-fx-border-color:#000000;-fx-border-width:2px;");
                                 }
                             }
@@ -2131,28 +2274,24 @@ public class DashboardController {
 
     }
 
-    private boolean checkSubSeries(String btxt, String text) {
+    private boolean checkSubSeries(String btxt, Integer text) {
         boolean r = false;
         try {
-            Map<String, Map> subSeries = series.get(text);
+            Map<Integer, Map> subSeries = series.get(text);
             String s[] = btxt.split("-");
-            Map<String, ArrayList> aMap = subSeries.get(s[0]);
-            ArrayList<Map> aListMap = aMap.get(s[0]);
-            if (aListMap.size() > 0) {
-                r = true;
-            } else {
-                r = false;
-            }
+            Map<Integer, ArrayList> aMap = subSeries.get(Integer.parseInt(s[0]));
+            ArrayList<Map> aListMap = aMap.get(Integer.parseInt(s[0]));
+            r = aListMap.size() > 0;
         } catch (Exception ex) {
-
+            System.out.println("CheckSubSeries " + ex.getMessage());
         }
         return r;
 
     }
 
-    private ArrayList<String> cross(int p) {
+    private ArrayList<Integer> cross(int p) {
         // String index = "" + p;
-        ArrayList<String> num = new ArrayList<>();
+        ArrayList<Integer> num = new ArrayList<>();
         try {
             //System.out.println("P " + p);
 //
@@ -2169,13 +2308,13 @@ public class DashboardController {
             int backword = p - ip;
             //System.out.println(forword);
             //System.out.println(backword);
-            num.add("" + p);
+            num.add(p);
             int K = p;
             int s = 1;
             while (s <= forword) {
                 K = K + 11;
                 if (K <= 99) {
-                    num.add("" + K);
+                    num.add(K);
                 } else {
                     break;
                 }
@@ -2187,7 +2326,7 @@ public class DashboardController {
             while (s <= backword) {
                 K = K - 11;
                 if (K >= 0) {
-                    num.add("" + K);
+                    num.add(K);
                 } else {
                     break;
                 }
@@ -2198,7 +2337,7 @@ public class DashboardController {
             while (s <= backword) {
                 K = K + 9;
                 if (K <= 99) {
-                    num.add("" + K);
+                    num.add(K);
                 } else {
                     break;
                 }
@@ -2209,7 +2348,7 @@ public class DashboardController {
             while (s <= forword) {
                 K = K - 9;
                 if (K >= 0) {
-                    num.add("" + K);
+                    num.add(K);
                 } else {
                     break;
                 }
@@ -2243,7 +2382,7 @@ public class DashboardController {
                             String data = httpAPI._jsonRequest("?r=UpdateBalance", jsonEmp);
                             if (data != null) {
                                 JSONObject myResponse = new JSONObject(data);
-                                mybalance = myResponse.getString("balance");
+                                mybalance = Float.parseFloat(myResponse.getString("balance"));
                                 if (myResponse.getString("status").equals("1")) {
                                     balance.setText(myResponse.getString("balance"));
                                 } else {
@@ -2255,7 +2394,7 @@ public class DashboardController {
                             }
                             //Thread.sleep(1000);
                         } catch (JSONException e) {
-                            ////System.out.println("Balance Thread Error " + e.getMessage());
+                            System.out.println("Balance Thread Error " + e.getMessage());
                         }
                     }
                 };
@@ -2330,7 +2469,7 @@ public class DashboardController {
             // loadSeries(multiMap);
             buy.setDisable(false);
         } catch (Exception e) {
-
+            System.out.println("Execption WFT " + e.getMessage());
         }
     }
 
@@ -2341,50 +2480,54 @@ public class DashboardController {
                 Runnable updater = new Runnable() {
                     @Override
                     public void run() {
-                        allCheckSelect = false;
-                        subSeriesNo.setText("");
-                        alls.setText("false");
-                        CMulti.setText("");
-                        NSystems.setText("");
-                        multi.setSelected(false);
-                        cross.setSelected(false);
-                        odd.setSelected(false);
-                        even.setSelected(false);
-                        fixed.setSelected(false);
-                        totalamt.setText("");
-                        totalqty.setText("");
-                        advance.setText("false");
-                        advanceDraw.clear();
-                        advanceDrawArray.clear();
-                        //selectSubSeries(B0);
-                        selectAll("#FFFFFF");
-                        resetVarticalInput();
-                        resetHorizontalInput();
-                        if (series.size() >= 0) {
-                            series.clear();
-                            seriesLable.setText("1000-1900");
-                            selectDefaultSeries(0);
-                            selectSubSeries(B0);
-                            //B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
-                        }
-                        if (multiSeries.size() >= 0) {
-                            multiSeries.clear();
-                        }
-                        Iterator<String> it = totalField.keySet().iterator();       //keyset is a method  
-                        while (it.hasNext()) {
-                            String key = (String) it.next();
-                            TextField tf = totalField.get(key);
-                            tf.setText("");
-                        }
+                        try {
+                            allCheckSelect = false;
+                            subSeriesNo.setText("");
+                            alls.setText("false");
+                            CMulti.setText("");
+                            NSystems.setText("");
+                            multi.setSelected(false);
+                            cross.setSelected(false);
+                            odd.setSelected(false);
+                            even.setSelected(false);
+                            fixed.setSelected(false);
+                            totalamt.setText("");
+                            totalqty.setText("");
+                            advance.setText("false");
+                            advanceDraw.clear();
+                            advanceDrawArray.clear();
+                            //selectSubSeries(B0);
+                            selectAll("#FFFFFF");
+                            resetVarticalInput();
+                            resetHorizontalInput();
+                            if (series.size() >= 0) {
+                                series.clear();
+                                seriesLable.setText("1000-1900");
+                                selectDefaultSeries(0);
+                                selectSubSeries(B0);
+                                //B0.setStyle("-fx-background-color:" + ColorArray[0] + ";");
+                            }
+                            if (multiSeries.size() >= 0) {
+                                multiSeries.clear();
+                            }
+                            Iterator<String> it = totalField.keySet().iterator();       //keyset is a method  
+                            while (it.hasNext()) {
+                                String key = (String) it.next();
+                                TextField tf = totalField.get(key);
+                                tf.setText("");
+                            }
 
-                        lastTransaction();
-                        calculateTotal();
-                        resetManualPlatSeleted();
-                        runnableBalance();
+                            lastTransaction();
+                            calculateTotal();
+                            resetManualPlatSeleted();
+                            runnableBalance();
 
-                        resetEvenOdd();
-                        // loadSeries(multiMap);
-                        buy.setDisable(false);
+                            resetEvenOdd();
+                            // loadSeries(multiMap);
+                            buy.setDisable(false);
+                        } catch (Exception ex) {
+                            System.out.println("Error " + ex.getMessage());
+                        }
                     }
                 };
                 //resetClock();
@@ -2454,7 +2597,8 @@ public class DashboardController {
                                         Map<String, String> temp = itr.next();
                                         if (seriesLable.getText().equals(temp.get("series"))) {
                                             selectDefaultSeries(Integer.parseInt(temp.get("id")) - 1);
-                                            seriesLable.setText(temp.get("series"));
+                                            String sk[] = temp.get("series").split("-");
+                                            seriesLable.setText(sk[0] + "-" + sk[1]);
                                         }
                                     }
 
@@ -2855,6 +2999,7 @@ public class DashboardController {
         if (alls.getText().equals("true")) {
             alls.setText("false");
             selectAll("#FFFFFF");
+            custome.setText(String.valueOf(10));
             subSeriesNo.setText("");
         } else {
             alls.setText("true");
@@ -2870,7 +3015,7 @@ public class DashboardController {
         if (multi.isSelected()) {
             CMulti.setText("Multi");
             multiSeries = new ArrayList<>();
-            multiSeries.add("1000-1900");
+            multiSeries.add(1000);
             //series.clear();
         } else {
             CMulti.setText("");
@@ -2902,6 +3047,14 @@ public class DashboardController {
     public void oddEven() {
         if (even.isSelected()) {
             int i = 0;
+            int h = 0;
+            while (h < 10) {
+                TextField temp = horizontalTextField.get("B_" + h);
+                if (h % 2 == 0) {
+                    temp.setDisable(true);
+                }
+                h++;
+            }
             while (i < 100) {
                 TextField temp = jField.get("E_" + i);
                 if (i % 2 == 0) {
@@ -2913,6 +3066,14 @@ public class DashboardController {
 
         } else {
             int i = 0;
+            int h = 0;
+            while (h < 10) {
+                TextField temp = horizontalTextField.get("B_" + h);
+                if (h % 2 == 0) {
+                    temp.setDisable(false);
+                }
+                h++;
+            }
             while (i < 100) {
                 TextField temp = jField.get("E_" + i);
                 if (i % 2 == 0) {
@@ -2924,6 +3085,14 @@ public class DashboardController {
         }
         if (odd.isSelected()) {
             int i = 0;
+            int h = 0;
+            while (h < 10) {
+                TextField temp = horizontalTextField.get("B_" + h);
+                if (h % 2 != 0) {
+                    temp.setDisable(true);
+                }
+                h++;
+            }
             while (i < 100) {
                 TextField temp = jField.get("E_" + i);
                 if (i % 2 != 0) {
@@ -2935,6 +3104,14 @@ public class DashboardController {
 
         } else {
             int i = 0;
+            int h = 0;
+            while (h < 10) {
+                TextField temp = horizontalTextField.get("B_" + h);
+                if (h % 2 != 0) {
+                    temp.setDisable(false);
+                }
+                h++;
+            }
             while (i < 100) {
                 TextField temp = jField.get("E_" + i);
                 if (i % 2 != 0) {
@@ -2976,7 +3153,7 @@ public class DashboardController {
     private void ActionBuy(MouseEvent event) {
         try {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
-                if (event.getClickCount() > 1) {
+                if (event.getClickCount() > 1 && process == false) {
                     System.out.println("Double clicked");
                 } else {
                     calculateTotal();
@@ -2989,6 +3166,7 @@ public class DashboardController {
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
+                                    process = false;
                                     try {
                                         String qt = totalqty.getText();
                                         String am = totalamt.getText();
@@ -3181,6 +3359,7 @@ public class DashboardController {
                             });
 
                             buy.setDisable(false);
+                            process = true;
                         }
 
                     };
@@ -3245,6 +3424,12 @@ public class DashboardController {
     private void keyRelease(javafx.scene.input.KeyEvent e, TextField jf, int p) {
         ////System.out.println(e.getText());
         TextField l = null;
+        int tp = 1;
+        if (even.isSelected()) {
+            tp = 2;
+        } else if (odd.isSelected()) {
+            tp = 2;
+        }
         switch (e.getCode().toString()) {
             case "DOWN"://down
                 l = (TextField) pevirous.get("last");
@@ -3273,7 +3458,7 @@ public class DashboardController {
                 if (l.getText().equals("")) {
                     l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
                 }
-                int left = p - 1;
+                int left = p - tp;
                 if (left >= 0 && left < 100) {
                     TextField dwnjf = jField.get("E_" + left);
                     dwnjf.requestFocus();
@@ -3284,7 +3469,7 @@ public class DashboardController {
                 if (l.getText().equals("")) {
                     l.setStyle("-fx-background-color:#FFFFFF;-fx-border-color:#000000;-fx-border-width:2px;");
                 }
-                int right = p + 1;
+                int right = p + tp;
                 if (right >= 0 && right < 100) {
                     TextField dwnjf = jField.get("E_" + right);
                     dwnjf.requestFocus();
@@ -3393,25 +3578,25 @@ public class DashboardController {
 
     }
 
-    private void loadSeries(Map<String, String> multiMap) {
+    private void loadSeries(Map<Integer, String> multiMap) {
         try {
             ////System.out.println("Selected Series " + multiMap);
             setDefauldButtonColor();
             series.clear();
             multiSeries.clear();
-            for (Map.Entry<String, String> entry : multiMap.entrySet()) {
-                multiSeries.add(entry.getValue());
-                SelectedSingleSeries = entry.getKey() + "";
-                seriesLable.setText(entry.getValue());
+            for (Map.Entry<Integer, String> entry : multiMap.entrySet()) {
+                String ss[] = entry.getValue().split("-");
+                multiSeries.add(Integer.parseInt(ss[0]));
+                seriesLable.setText(ss[0] + "-" + ss[1]);
                 if (!multi.isSelected()) {
 
-                    selectDefaultSeriesMulti(Integer.parseInt(entry.getKey()));
+                    selectDefaultSeriesMulti(entry.getKey());
                     selectSubSeries(B0);
                 } else {
                     selectDefaultSeriesMulti(0);
                     selectSubSeries(B0);
                 }
-                setMainSeries(entry.getValue());
+                setMainSeries(Integer.parseInt(ss[0]));//entry.getValue());
             }
             ////System.out.println("Series " + series);
             ////System.out.println("MultiSeries " + multiSeries);
@@ -4051,49 +4236,56 @@ public class DashboardController {
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
                     System.out.println("MultiSeries Arrayss" + multiSeries);
-                    for (String multiSerie : multiSeries) {
+                    for (Integer multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
                         //
                         int Default = 1000;
-                        String[] mult = multiSerie.split("-");
+                        Integer[] mult = {multiSerie, (multiSerie + 900)};//.split("-");
                         String bSplit[] = B0.getText().split("-");
-                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int first = Integer.parseInt(bSplit[0]) + mult[0] - Default;
                         int second = first + 99;
                         String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
-                        setSubSeries(cTxt, multiSerie);
+                        setSubSeries(first, multiSerie);
                     }
                 } else {
-                    setSubSeries(B0.getText(), seriesLable.getText());
+                    String bSplit[] = B0.getText().split("-");
+                    String sSplit[] = seriesLable.getText().split("-");
+                    setSubSeries(Integer.parseInt(bSplit[0]), Integer.parseInt(sSplit[0]));
                 }
                 count++;
+                custome.setText(String.valueOf(count));
             } else {
-                if (multi.isSelected()) {
+                if (!multi.isSelected()) {
                     ////System.out.println("MultiSeries Array" + multiSeries);
-                    for (String multiSerie : multiSeries) {
+                    for (Integer multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
                         //
                         int Default = 1000;
-                        String[] mult = multiSerie.split("-");
+                        //String[] mult = multiSerie.split("-");
+                        Integer[] mult = {multiSerie, (multiSerie + 900)};
                         String bSplit[] = B0.getText().split("-");
-                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int first = Integer.parseInt(bSplit[0]) + mult[0] - Default;
                         int second = first + 99;
                         String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
-                        unsetSubSeries(cTxt, multiSerie);
+                        unsetSubSeries(first, multiSerie);
                         //count--;
                     }
                 } else {
-                    unsetSubSeries(B0.getText(), seriesLable.getText());
+                    String bSplit[] = B0.getText().split("-");
+                    String sSplit[] = seriesLable.getText().split("-");
+                    unsetSubSeries(Integer.parseInt(bSplit[0]), Integer.parseInt(sSplit[0]));
 
                 }
                 count--;
             }
             custome.setText(String.valueOf(count));
             calculateTotal();
-        } catch (Exception ex) {
-
+        } catch (NumberFormatException ex) {
+            System.out.println("Number Exception 4127 " + ex.getMessage());
         }
+        //copy old pati data;
         copyoldpatti();
     }
 
@@ -4133,7 +4325,7 @@ public class DashboardController {
                             balance.setText("*****");
                             show = false;
                         } else {
-                            balance.setText(mybalance);
+                            balance.setText(String.valueOf(mybalance));
                             show = true;
                         }
 
@@ -4186,6 +4378,7 @@ public class DashboardController {
 
     public void loadSeriesData() {
         seriesStringData = httpAPI._jsonRequest("?r=loadSeries", "");
+        System.out.println("Series Data " + seriesStringData);
         if (seriesStringData == null) {
             JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
         }
@@ -4226,6 +4419,7 @@ public class DashboardController {
                 CheckBox check = checkBoxMap.get("c" + i);
                 check.setSelected(false);
                 singleAllDrPlatSelected(button, check);
+                custome.setText(String.valueOf(i + 1));
             }
             selectAll("#FFFFFF");
 
@@ -4244,7 +4438,7 @@ public class DashboardController {
             calculateTotal();
             allCheckSelect = false;
 
-            custome.setText(String.valueOf(0));
+            //custome.setText(String.valueOf(0));
         } else {
             alls.setText("true");
             selectAll("#00FFFF");
@@ -4281,47 +4475,51 @@ public class DashboardController {
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
                     ////System.out.println("MultiSeries Array" + multiSeries);
-                    for (String multiSerie : multiSeries) {
+                    for (Integer multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
                         //
                         int Default = 1000;
-                        String[] mult = multiSerie.split("-");
+                        int[] mult = {multiSerie, (multiSerie + 900)};//.split("-");
                         String bSplit[] = B0.getText().split("-");
-                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int first = Integer.parseInt(bSplit[0]) + mult[0] - Default;
                         int second = first + 99;
                         String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
-                        setSubSeries(cTxt, multiSerie);
+                        setSubSeries(first, multiSerie);
                     }
                 } else {
-                    setSubSeries(B0.getText(), seriesLable.getText());
+                    String bSplit[] = B0.getText().split("-");
+                    String sSplit[] = seriesLable.getText().split("-");
+                    setSubSeries(Integer.parseInt(bSplit[0]), Integer.parseInt(sSplit[0]));
                 }
                 count++;
             } else {
                 if (multi.isSelected()) {
                     ////System.out.println("MultiSeries Array" + multiSeries);
-                    for (String multiSerie : multiSeries) {
+                    for (Integer multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
                         //
                         int Default = 1000;
-                        String[] mult = multiSerie.split("-");
+                        // String[] mult = multiSerie.split("-");
+                        int[] mult = {multiSerie, (multiSerie + 900)};//.split("-");
                         String bSplit[] = B0.getText().split("-");
-                        int first = Integer.parseInt(bSplit[0]) + Integer.parseInt(mult[0]) - Default;
+                        int first = Integer.parseInt(bSplit[0]) + mult[0] - Default;
                         int second = first + 99;
                         String cTxt = String.valueOf(first) + "-" + String.valueOf(second);
-                        unsetSubSeries(cTxt, multiSerie);
+                        unsetSubSeries(first, multiSerie);
                         //count--;
                     }
                 } else {
-                    unsetSubSeries(B0.getText(), seriesLable.getText());
+                    String bSplit[] = B0.getText().split("-");
+                    unsetSubSeries(Integer.parseInt(bSplit[0]), Integer.parseInt(seriesLable.getText()));
 
                 }
                 count--;
             }
             custome.setText(String.valueOf(count));
-        } catch (Exception ex) {
-
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 

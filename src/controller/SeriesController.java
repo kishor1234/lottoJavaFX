@@ -39,7 +39,7 @@ public class SeriesController {
     @FXML
     private VBox vboxpanel;
 
-    public Map<String, String> aMap = new HashMap<>();
+    public Map<Integer, String> aMap = new HashMap<>();
     public String mult = "";
     public Map<String, CheckBox> cbMap = new HashMap<>();
 
@@ -50,17 +50,17 @@ public class SeriesController {
     private void buttonClick(ActionEvent event) {
 
         if (aMap.isEmpty()) {
-            aMap.put("0", "1000-1900");
+            aMap.put(0, "1000-1900");
         }
         btn2.getScene().getWindow().hide();
         
     }
 
-    Map<String, String> getText() {
+    Map<Integer, String> getText() {
         return aMap;
     }
 
-    void initLoadData(String multi, Map<String, String> oldMap, String seriesStringData) {
+    void initLoadData(String multi, Map<Integer, String> oldMap, String seriesStringData) {
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -119,7 +119,7 @@ public class SeriesController {
                                 close.setStyle("-fx-background-color:#ffe014; -fx-spacing: 5; -fx-border-width: 0; -fx-padding: 10 10 10 10; -fx-border-color:yellow;-fx-background-radius:3; -fx-border-radius:3;");
                                 close.setOnAction(e -> {
                                     if (aMap.isEmpty()) {
-                                        aMap.put("0", "1000-1900");
+                                        aMap.put(0, "1000-1900");
                                     }
                                     close.getScene().getWindow().hide();
                                 }); //.setOnAction(e -> aMap.put("" + sr, temp.get("series")));
@@ -162,9 +162,10 @@ public class SeriesController {
                                     Map<String, String> temp = itr.next();
                                     CheckBox checkbox = new CheckBox(temp.get("series"));
                                     int sr = Integer.parseInt(temp.get("id")) - 1;
+                                    System.out.println("aMap ="+aMap);
                                     try {
                                         if (aMap != null) {
-                                            if (aMap.get("" + sr).equals(temp.get("series"))) {
+                                            if (aMap.get(sr).equals(temp.get("series"))) {
                                                 checkbox.setSelected(true);
                                             }
                                         }
@@ -216,10 +217,10 @@ public class SeriesController {
         ////System.out.println(checkbox.isSelected());
         if (checkbox.isSelected()) {
             int sr = Integer.parseInt(temp.get("id")) - 1;
-            aMap.put("" + sr, temp.get("series"));
+            aMap.put(sr, temp.get("series"));
         } else {
             int sr = Integer.parseInt(temp.get("id")) - 1;
-            aMap.remove("" + sr);
+            aMap.remove(sr);
             //System.out.println("Remove " + sr + "" + aMap);
         }
         
@@ -227,7 +228,7 @@ public class SeriesController {
 
     private void buttonSelect(Map<String, String> temp, Button button) {
         int sr = Integer.parseInt(temp.get("id")) - 1;
-        aMap.put("" + sr, temp.get("series"));
+        aMap.put(sr, temp.get("series"));
         button.getScene().getWindow().hide();
         
 

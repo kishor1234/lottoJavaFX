@@ -205,7 +205,7 @@ public class OpratorController {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
 
-            escpos.writeLF(title, "RajLaxmi Lottery")
+            escpos.writeLF(title, "Samruddhi Lottery")
                     .writeLF(pMsdateg)
                     .writeLF(sale)
                     .writeLF(profit)

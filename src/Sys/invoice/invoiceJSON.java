@@ -44,11 +44,11 @@ public class invoiceJSON {
                 //System.out.println("Print data " + printMap);
                 //printPage += "Rajashreee Lottery\n";
                 String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "";
-                System.out.println(drDetails);
+                //System.out.println(drDetails);
                 String secondPrice = "Second Prize Amt: 180/- ";
-                System.out.println(secondPrice);
+                //System.out.println(secondPrice);
                 String numberHeader = "NUMBER QT NUMBER QT NUMBER QT";
-                System.out.println(numberHeader);
+                //System.out.println(numberHeader);
                 Map<String, ArrayList> printMapd = new TreeMap<>(ja.get(i));
                 ArrayList<Map> point = printMapd.get("point");
                 int k = 1;
@@ -93,8 +93,8 @@ public class invoiceJSON {
                     }
 
                 }
-                System.out.println(numberTable);
-                System.out.println(printPageFooter);
+                //System.out.println(numberTable);
+                //System.out.println(printPageFooter);
                 if (limit >= 1) {
                     limit = 1;
 //                    String dp = buildInvoice(numberTable, printPage, printPageFooter);

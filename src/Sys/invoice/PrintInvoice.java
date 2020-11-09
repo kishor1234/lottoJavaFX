@@ -52,7 +52,7 @@ public class PrintInvoice {
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
 
-            escpos.writeLF(title, "RajLaxmi Lottery")
+            escpos.writeLF(title, "Samrudhi Lottery")
                     .writeLF(drDetails)
                     .writeLF("Second Prize Amt: 180/-")
                     .writeLF(bold, numberHeader)

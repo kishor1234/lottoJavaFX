@@ -64,7 +64,7 @@ public class PrintInvoice1 {
             String line = "10";
             Paragraph p = new Paragraph(new Phrase(lineSpacing, line, FontFactory.getFont(FontFactory.COURIER, fntSize)));
             Font f3 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);
-            p = new Paragraph("RajLaxmi Lottery");
+            p = new Paragraph("Samrudhi Lottery");
             p.setFont(f3);
             document.add(p);
             f3 = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD, BaseColor.BLACK);

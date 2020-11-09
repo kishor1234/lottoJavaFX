@@ -101,7 +101,7 @@
                         </ImageView>
                         <Pane prefHeight="67.0" prefWidth="280.0">
                            <children>
-                              <Text fill="WHITE" layoutX="11.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="राजलक्ष्मी लॉटरी">
+                              <Text fill="WHITE" layoutX="11.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="समृद्धी  लॉटरी">
                                  <font>
                                     <Font name="System Bold" size="30.0" />
                                  </font>

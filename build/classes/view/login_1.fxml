@@ -87,11 +87,21 @@
               </HBox>
          </bottom>
          <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="126.0" prefWidth="100.0" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="केवल पारंपरिक भारतीय लॉटरी खेल द्वारा मनोरंजन के लिए आभासी जीत के लिए आभासी बिंदुओं द्वारा खेलें" textAlignment="CENTER" wrappingWidth="100.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Pane prefHeight="114.0" prefWidth="100.0" />
+               </children></VBox>
          </left>
          <center>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="96.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
@@ -101,7 +111,7 @@
                         </ImageView>
                         <Pane prefHeight="67.0" prefWidth="280.0">
                            <children>
-                              <Text fill="WHITE" layoutX="11.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="समृद्धी  लॉटरी">
+                              <Text fill="WHITE" fontSmoothingType="LCD" layoutX="11.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="राजलक्ष्मी लॉटरी">
                                  <font>
                                     <Font name="System Bold" size="30.0" />
                                  </font>
@@ -110,7 +120,7 @@
                         </Pane>
                      </children>
                   </HBox>
-                    <Pane styleClass="white-border-2" VBox.vgrow="ALWAYS">
+                    <Pane prefHeight="245.0" prefWidth="300.0" styleClass="white-border-2" VBox.vgrow="ALWAYS">
                         <children>
                             <Pane prefHeight="37.0" prefWidth="213.0" styleClass="white-border-2">
                                 <children>
@@ -141,7 +151,8 @@
                             <Button fx:id="btnLogin" layoutX="100.0" layoutY="140.0" mnemonicParsing="false" onAction="#login" text="Login">
                            <cursor>
                               <Cursor fx:constant="HAND" />
-                           </cursor></Button>
+                           </cursor>
+                        </Button>
                         <TextField fx:id="defaultPrinter" disable="true" editable="false" layoutX="166.0" layoutY="140.0" prefHeight="25.0" prefWidth="106.0" promptText="Printer" />
                         </children>
                         <opaqueInsets>
@@ -158,6 +169,17 @@
                </BorderPane.margin>
             </VBox>
          </center>
+         <top>
+            <BorderPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <top>
+                  <Label text="FREE PLAY! FREE PLAY!" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </top>
+            </BorderPane>
+         </top>
       </BorderPane>
          
     </children>
