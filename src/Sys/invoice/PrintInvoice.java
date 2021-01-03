@@ -32,13 +32,14 @@ import javax.print.PrintService;
  */
 public class PrintInvoice {
 
-    public static void Sample(String printerName, String drDetails, String secondPrice, String numberHeader, String numberTable, String printPageFooter, String Barcode) {
+    public static void Sample(String printerName, String drDetails, String secondPrice, String numberHeader, String numberTable, String printPageFooter, String Barcode, BarCode.BarCodeSystem defaultBarocde) {
 
         // get the printer service by name passed on command line...
         //this call is slow, try to use it only once and reuse the PrintService variable.
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
         try {
+            System.out.println("Default Set Barocde is " + defaultBarocde);
             escpos = new EscPos(new PrinterOutputStream(printService));
 
             Style title = new Style()
@@ -61,7 +62,7 @@ public class PrintInvoice {
             //.feed(1);
 
             BarCode barcode = new BarCode();
-            barcode.setSystem(BarCode.BarCodeSystem.CODE39_A);
+            barcode.setSystem(defaultBarocde);//BarCode.BarCodeSystem.CODE93_Default
             barcode.setHRIPosition(BarCode.BarCodeHRIPosition.BelowBarCode);
             barcode.setBarCodeSize(2, 50);
             escpos.feed(1);

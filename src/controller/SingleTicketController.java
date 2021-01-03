@@ -8,6 +8,7 @@ package controller;
 import Sys.SingleTicket;
 import Sys.api.httpAPI;
 import Sys.invoice.invoiceJSON;
+import com.github.anastaciocintra.escpos.barcode.BarCode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -66,11 +67,13 @@ public class SingleTicketController {
     private String printer;
     private String owner;
     private String amount;
+    public BarCode.BarCodeSystem defaultBarcode;
 
     /**
      * Initializes the controller class.
      */
     private void initColom() {
+
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -84,7 +87,7 @@ public class SingleTicketController {
                         mrp.setCellValueFactory(new PropertyValueFactory<>("mrp"));
                         digit.setCellValueFactory(new PropertyValueFactory<>("digit"));
                         qty.setCellValueFactory(new PropertyValueFactory<>("qty"));
-                        
+
                     }
                 });
             }
@@ -148,7 +151,7 @@ public class SingleTicketController {
                         } catch (Exception ex) {
                             httpAPI.erLog.write(ex);
                         }
-                        
+
                     }
                 });
             }
@@ -160,7 +163,7 @@ public class SingleTicketController {
     @FXML
     private void closeWindo(ActionEvent event) {
         close.getScene().getWindow().hide();
-        
+
     }
 
     @FXML
@@ -195,7 +198,7 @@ public class SingleTicketController {
                                     jsonPrint = gson.toJson(adbPrint);
                                     //System.out.println(jsonPrint);
                                     Data = httpAPI._jsonRequest("?r=advancePrint", jsonPrint);
-                                    invoiceJSON.invoiceJSONPrint(Data, printer);
+                                    invoiceJSON.invoiceJSONPrint(Data, printer, defaultBarcode);
                                 } catch (Exception ex) {
                                     httpAPI.erLog.write(ex);
                                 }
@@ -210,7 +213,7 @@ public class SingleTicketController {
                 } else {
                     JOptionPane.showMessageDialog(null, "Ticket Repring Process cancel!");
                 }
-                
+
             }
         };
         printthread.start();
@@ -221,11 +224,12 @@ public class SingleTicketController {
         cancel.getScene().getWindow().hide();
     }
 
-    void initLoadData(String owner, String ticket, String printer, String amount) {
+    void initLoadData(String owner, String ticket, String printer, String amount, BarCode.BarCodeSystem Barcode) {
         this.ticket = ticket;
         this.printer = printer;
         this.owner = owner;
         this.amount = amount;
+        defaultBarcode = Barcode;
         initColom();
         loadData();
     }

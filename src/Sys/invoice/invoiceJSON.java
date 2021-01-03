@@ -11,6 +11,7 @@ package Sys.invoice;
  */
 // Java program to read JSON from a file 
 import Sys.TimeFormats;
+import com.github.anastaciocintra.escpos.barcode.BarCode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ import org.json.simple.parser.*;
 
 public class invoiceJSON {
 
-    public static String invoiceJSONPrint(String data, String currentPrinter) throws Exception {
+    public static String invoiceJSONPrint(String data, String currentPrinter, BarCode.BarCodeSystem defaultBarcode) throws Exception {
         // parsing file "JSONExample.json" 
         //DashboardController dc = new DashboardController();
         Object obj = new JSONParser().parse(data);
@@ -34,7 +35,7 @@ public class invoiceJSON {
         String status = (String) jo.get("status");
         String Msg = (String) jo.get("msg");
         String trno = (String) jo.get("trno");
-        Map<String,String>printInformation=new HashMap<>();
+        Map<String, String> printInformation = new HashMap<>();
         if (status.equals("1")) {
             String printPage = "";
 
@@ -43,7 +44,7 @@ public class invoiceJSON {
                 Map<String, String> printMap = ja.get(i);
                 //System.out.println("Print data " + printMap);
                 //printPage += "Rajashreee Lottery\n";
-                String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "";
+                String drDetails = "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "";
                 //System.out.println(drDetails);
                 String secondPrice = "Second Prize Amt: 180/- ";
                 //System.out.println(secondPrice);
@@ -64,28 +65,45 @@ public class invoiceJSON {
                     Map<String, String> dPoint = new TreeMap<>(point.get(j));
 
                     for (Map.Entry<String, String> finas : dPoint.entrySet()) {
-                        int val = Integer.parseInt(finas.getValue());
-
-                        for (int c = 0; c < val; c++) {
-                            if (limit == 57) {
-                                limit = 1;
-                                //String dp = buildInvoice(numberTable, printPage, printPageFooter);
-                                //System.out.println(dp);
-                                PrintInvoice.Sample(currentPrinter, drDetails,secondPrice,numberHeader,numberTable,printPageFooter, printMap.get("game"));
-                                numberTable = "";
-                                numberTable += "RL" + finas.getKey() + " " + 1 + "  ";
-                                k = 2;
+                        String val = String.valueOf(finas.getValue());
+                        if (limit == 57) {
+                            limit = 1;
+                            //String dp = buildInvoice(numberTable, printPage, printPageFooter);
+                            System.out.println(numberTable);
+                            PrintInvoice.Sample(currentPrinter, drDetails, secondPrice, numberHeader, numberTable, printPageFooter, printMap.get("game"), defaultBarcode);
+                            numberTable = "";
+                            numberTable += "RL" + finas.getKey() + " " + val + "  ";
+                            k = 2;
+                        } else {
+                            if (k == 3) {
+                                numberTable += "RL" + finas.getKey() + " " + val + "  \n";
+                                k = 0;
                             } else {
-                                if (k == 3) {
-                                    numberTable += "RL" + finas.getKey() + " " + 1 + "  \n";
-                                    k = 0;
-                                } else {
-                                    numberTable += "RL" + finas.getKey() + " " + 1 + "  ";
-                                }
-                                k++;
-                                limit++;
+                                numberTable += "RL" + finas.getKey() + " " + val + "  ";
                             }
+                            k++;
+                            limit++;
                         }
+//                        for (int c = 0; c < Integer.parseInt(val); c++) {
+//                            if (limit == 57) {
+//                                limit = 1;
+//                                //String dp = buildInvoice(numberTable, printPage, printPageFooter);
+//                                //System.out.println(dp);
+//                                PrintInvoice.Sample(currentPrinter, drDetails, secondPrice, numberHeader, numberTable, printPageFooter, printMap.get("game"), defaultBarcode);
+//                                numberTable = "";
+//                                numberTable += "RL" + finas.getKey() + " " + 1 + "  ";
+//                                k = 2;
+//                            } else {
+//                                if (k == 3) {
+//                                    numberTable += "RL" + finas.getKey() + " " + 1 + "  \n";
+//                                    k = 0;
+//                                } else {
+//                                    numberTable += "RL" + finas.getKey() + " " + 1 + "  ";
+//                                }
+//                                k++;
+//                                limit++;
+//                            }
+//                        }
 
                         //k++;
                         //printPage+="Num\tqty\tNum\tqty\tNum\tqty\t";
@@ -99,12 +117,13 @@ public class invoiceJSON {
                     limit = 1;
 //                    String dp = buildInvoice(numberTable, printPage, printPageFooter);
 //                    System.out.println(dp);
-                    PrintInvoice.Sample(currentPrinter, drDetails,secondPrice,numberHeader,numberTable,printPageFooter, printMap.get("game"));
-                            
+                    System.out.println(numberTable);
+                    PrintInvoice.Sample(currentPrinter, drDetails, secondPrice, numberHeader, numberTable, printPageFooter, printMap.get("game"), defaultBarcode);
+
                     numberTable = "";
                     k = 0;
                 }
-                
+
                 //printPage += invoiceJSON.getBarocde();
                 //System.out.println(printPage);
                 //PrintInvoice.Sample(currentPrinter, printPage, printMap.get("game"));
@@ -121,4 +140,5 @@ public class invoiceJSON {
     private static String buildInvoice(String numberTable, String printPage, String printPageFooter) {
         return printPage + "\n" + numberTable + "\n" + printPageFooter;
     }
+
 }

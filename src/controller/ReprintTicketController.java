@@ -7,6 +7,7 @@ package controller;
 
 import Sys.Ticket;
 import Sys.api.httpAPI;
+import com.github.anastaciocintra.escpos.barcode.BarCode;
 import com.google.gson.JsonObject;
 import java.awt.HeadlessException;
 import java.time.LocalDateTime;
@@ -67,6 +68,7 @@ public class ReprintTicketController {
     private TableColumn<Ticket, String> utrno;
     @FXML
     private TableColumn<Ticket, String> userid;
+    private BarCode.BarCodeSystem defaultBarcode;
 
     /**
      * Initializes the controller class.
@@ -97,7 +99,7 @@ public class ReprintTicketController {
                             date.setCellValueFactory(new PropertyValueFactory<>("date"));
                             action.setCellValueFactory(new PropertyValueFactory<>("action"));
                             actionCols();
-                            
+
                         } catch (Exception ex) {
                         }
                     }
@@ -150,7 +152,7 @@ public class ReprintTicketController {
 
                                     } else {
                                         Button btn = new Button("Reprint");
-                                        btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString()));
+                                        btn.setOnAction(e -> reprintTicket(aMap1.get("utrno").toString(), aMap1.get("amount").toString(), defaultBarcode));
                                         data_ticket.add(new Ticket(aMap1.get("srno").toString(), aMap1.get("utrno").toString(), aMap1.get("amount").toString(), aMap1.get("userid").toString(), aMap1.get("date").toString(), btn));
 
                                     }
@@ -163,7 +165,7 @@ public class ReprintTicketController {
                         } catch (ParseException | HeadlessException ex) {
                             httpAPI.erLog.write(ex);
                         }
-                        
+
                     }
                 });
             }
@@ -172,7 +174,7 @@ public class ReprintTicketController {
 
     }
 
-    private void reprintTicket(String ticket, String amount) {//ticket=utrno
+    private void reprintTicket(String ticket, String amount, BarCode.BarCodeSystem defaultBarcode) {//ticket=utrno
         Thread openThread = new Thread(() -> {
             Runnable updater = () -> {
 
@@ -181,7 +183,7 @@ public class ReprintTicketController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/singleTicket.fxml"));
                     Parent root = loader.load();
                     SingleTicketController Scl = loader.getController();
-                    Scl.initLoadData(owner, ticket, printer, amount);
+                    Scl.initLoadData(owner, ticket, printer, amount, defaultBarcode);
                     Stage stage = new Stage();
                     stage.setTitle("Reprint Ticket");
                     Screen screen = Screen.getPrimary();
@@ -197,16 +199,17 @@ public class ReprintTicketController {
                 } catch (Exception ex) {
                     httpAPI.erLog.write(ex);
                 }
-                
+
             };
 
             Platform.runLater(updater);
-            
+
         });
         openThread.start();
     }
 
-    void initLoadData(String own, String print) {
+    void initLoadData(String own, String print, BarCode.BarCodeSystem barcode) {
+        defaultBarcode = barcode;
         this.owner = own;
         this.printer = print;
         initTable();
@@ -216,7 +219,7 @@ public class ReprintTicketController {
     @FXML
     private void closeWindo(ActionEvent event) {
         close.getScene().getWindow().hide();
-        
+
     }
 
     private void themStyle(Stage stage, Parent root) {

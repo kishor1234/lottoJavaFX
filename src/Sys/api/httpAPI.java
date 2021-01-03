@@ -23,8 +23,8 @@ import java.util.Map;
  */
 public class httpAPI {
 
-    public static String api_url = "http://api.samruddhilottery.in/";
-    //public static String api_url = "http://api.newloto.lcl/";
+    //public static String api_url = "http://api.samruddhilottery.in/";
+    public static String api_url = "http://api.newloto.lcl/";
     public static errorLog erLog = new errorLog();
 
     public static void main(String[] args) {

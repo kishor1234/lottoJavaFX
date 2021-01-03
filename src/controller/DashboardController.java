@@ -12,6 +12,7 @@ import Sys.api.httpAPI;
 import Sys.invoice.claimJSON;
 import Sys.invoice.invoiceJSON;
 import Sys.invoice.singleResult;
+import com.github.anastaciocintra.escpos.barcode.BarCode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.awt.HeadlessException;
@@ -23,6 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -526,11 +528,15 @@ public class DashboardController {
     private Integer perPoint = 2;
     public float mybalance = 0;
     private boolean allCheckSelect = false;
-    private int[] allCheckNo = {25, 20, 10, 5, 5, 3, 2, 1, 1, 25};
+    private int[] allCheckNo = {1, 1, 2, 3, 5, 5, 10, 20, 25, 25};
     @FXML
     private Text msgs;
     @FXML
     private VBox msgPanel;
+    public Map<String, BarCode.BarCodeSystem> barocde = new HashMap<>();
+    public BarCode.BarCodeSystem defaultBarcode = BarCode.BarCodeSystem.CODE93_Default;
+    @FXML
+    private Button btBarcode;
 
     //end
     /**
@@ -562,11 +568,13 @@ public class DashboardController {
                     @Override
                     public void run() {
                         try {
+                            resetDashboard();
                             defaultPrinter = printers;
                             myResponse = myRep;
                             pevirous.put("last", new TextField(""));
                             waits(myResponse, defaultPrinter);
-                            resetDashboard();
+
+                            setBarcoder();
                         } catch (Exception ex) {
                             System.out.println("TestException  " + ex.getMessage());
                         }
@@ -576,6 +584,29 @@ public class DashboardController {
         };
         t.start();
 
+    }
+
+    public void setBarcoder() {
+        try {
+            this.barocde.put("CODABAR_A", BarCode.BarCodeSystem.CODABAR_A);
+            this.barocde.put("CODABAR_B", BarCode.BarCodeSystem.CODABAR_B);
+            this.barocde.put("CODE128", BarCode.BarCodeSystem.CODE128);
+            this.barocde.put("CODE39_A", BarCode.BarCodeSystem.CODE39_A);
+            this.barocde.put("CODE39_B", BarCode.BarCodeSystem.CODE39_B);
+            this.barocde.put("CODE93_Default", BarCode.BarCodeSystem.CODE93_Default);
+            this.barocde.put("ITF_A", BarCode.BarCodeSystem.ITF_A);
+            this.barocde.put("ITF_B", BarCode.BarCodeSystem.ITF_B);
+            this.barocde.put("JAN13_A", BarCode.BarCodeSystem.JAN13_A);
+            this.barocde.put("JAN13_B", BarCode.BarCodeSystem.JAN13_B);
+            this.barocde.put("JAN8_A", BarCode.BarCodeSystem.JAN8_A);
+            this.barocde.put("JAN8_B", BarCode.BarCodeSystem.JAN8_B);
+            this.barocde.put("UPCA", BarCode.BarCodeSystem.UPCA);
+            this.barocde.put("UPCA_B", BarCode.BarCodeSystem.UPCA_B);
+            this.barocde.put("UPCE_A", BarCode.BarCodeSystem.UPCE_A);
+            this.barocde.put("UPCE_B", BarCode.BarCodeSystem.UPCE_B);
+        } catch (Exception ex) {
+
+        }
     }
 
     public void waits(JSONObject myResponse, String printers) {
@@ -1137,11 +1168,21 @@ public class DashboardController {
             // String s[] = subSeries.split("-");
             tempSubSeries.put(subSeries, aMap);
             mainSeries.put(subSeries, tempSubSeries);
-            System.out.println("Test " + mainSeries);
+            //System.out.println("Test " + mainSeries);
+            //Map<Integer, Map> treeMap = new TreeMap<Integer, Map>(mainSeries);
+            //printMap(treeMap);
+
         } catch (Exception ex) {
             System.out.println("1142 Error " + ex.getMessage());
         }
 
+    }
+
+    public static <K, V> void printMap(Map<K, V> map) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            System.out.println("Key : " + entry.getKey()
+                    + " Value : " + entry.getValue());
+        }
     }
 //setNumber(index, value, seriesLable.getText(), Integer.parseInt(subSeriesNo.getText()));
 
@@ -1153,24 +1194,29 @@ public class DashboardController {
                 value = 0;
             }
             // Map<String, Map> mainSeries = Dashboard.series.get(Main);//Main
-            int nt=100;
-            if(alls.getText().equals("true")){
-                nt=1000;
+            int nt = 100;
+            if (alls.getText().equals("true")) {
+                nt = 1000;
             }
             Integer ss[] = {Sub, (Sub + nt)};
             //int cno = 0;
-            for (int s = ss[0]; s <ss[1]; s = s + 100) {
+
+            for (int s = ss[0]; s < ss[1]; s = s + 100) {
                 Map<Integer, Map> mainSeries = series.get(Main);//Main
+                //Map<Integer, Map> mainSeries = new TreeMap<Integer, Map>(series.get(Main));
+                System.out.println("Main Seris " + mainSeries);
                 // String sp = s + "";
                 if (Integer.parseInt(custome.getText()) > 0) {
                     int cno = 0;
-                    for (Map.Entry<Integer, Map> mainSer : mainSeries.entrySet()) {
+                    Map<Integer, Map> treeMap = new TreeMap<Integer, Map>(mainSeries);
+                    for (Map.Entry<Integer, Map> mainSer : treeMap.entrySet()) {
                         //keyor sp ==3100 example
                         Integer tempValue = value;
                         if (allCheckSelect) {
                             value = value * allCheckNo[cno];
                             cno++;
                         }
+                        System.out.println(" MK " + mainSer.getKey());
                         Map<Integer, ArrayList> tempSubSeries = mainSeries.get(mainSer.getKey());//Sub
                         ArrayList<Map> aMap = tempSubSeries.get(mainSer.getKey());//Array
                         boolean flag = false;
@@ -1354,7 +1400,7 @@ public class DashboardController {
                             if (value > 0) {
                                 number.put(index, value);
                                 aMap.add(number);
-                                System.out.println("Ogg 0sSplit[0]"+aMap);
+                                System.out.println("Ogg 0sSplit[0]" + aMap);
                             }
                         }
                     }
@@ -1362,7 +1408,7 @@ public class DashboardController {
             }
 
         } catch (NumberFormatException ex) {
-            System.out.println("1364 "+ex.getMessage());
+            System.out.println("1364 " + ex.getMessage());
         }
 
     }
@@ -1531,6 +1577,7 @@ public class DashboardController {
 
     private void BulkNumberWriteVartical(int i, String p, javafx.scene.input.KeyEvent e) {
         //System.out.println(e.getCode().toString());
+        String tpp = p;
         switch (e.getCode().toString()) {
             case "UP":
                 int tempN = i - 10;
@@ -1559,30 +1606,29 @@ public class DashboardController {
                     while (i < tp) {
                         TextField varticalTF = horizontalTextField.get("B_" + horizontal);
                         TextField jf = jField.get("E_" + i);
+                        //p = tpp;
                         // e.getKeyChar();
                         if (!"".equals(varticalTF.getText())) {
                             int vPoint = Integer.parseInt(varticalTF.getText());
                             int t = vPoint + Integer.parseInt(p);
-                            p = "" + t;
-                            //jf.setText(t + "");
-                            //inputSystem(i, jf);
-                        } else {
-                            //jf.setText(p);
-                            //inputSystem(i, jf);
-                        }
-                        if (odd.isSelected()) {
-                            if ((i % 2) == 0) {
-                                jf.setText(p);
-                                inputSystem(i, jf);
-                            }
-                        } else if (even.isSelected()) {
-                            if ((i % 2) != 0) {
-                                jf.setText(p);
-                                inputSystem(i, jf);
-                            }
-                        } else {
-                            jf.setText(p);
+                            //p = "" + t;
+                            jf.setText("" + t);
                             inputSystem(i, jf);
+                        } else {
+                            if (odd.isSelected()) {
+                                if ((i % 2) == 0) {
+                                    jf.setText(p);
+                                    inputSystem(i, jf);
+                                }
+                            } else if (even.isSelected()) {
+                                if ((i % 2) != 0) {
+                                    jf.setText(p);
+                                    inputSystem(i, jf);
+                                }
+                            } else {
+                                jf.setText(p);
+                                inputSystem(i, jf);
+                            }
                         }
 
                         i++;
@@ -1598,27 +1644,26 @@ public class DashboardController {
                         if (!"".equals(varticalTF.getText())) {
                             int vPoint = Integer.parseInt(varticalTF.getText());
                             int t = vPoint + Integer.parseInt(p);
-                            p = "" + t;
-                            //jf.setText(t + "");
-                            //inputSystem(i, jf);
-                        } else {
-                            //jf.setText(p);
-                            //inputSystem(i, jf);
-                        }
-                        if (odd.isSelected()) {
-                            if ((i % 2) == 0) {
-                                jf.setText(p);
-                                inputSystem(i, jf);
-                            }
-                        } else if (even.isSelected()) {
-                            if ((i % 2) != 0) {
-                                jf.setText(p);
-                                inputSystem(i, jf);
-                            }
-                        } else {
-                            jf.setText(p);
+                            //p = "" + t;
+                            jf.setText(t + "");
                             inputSystem(i, jf);
+                        } else {
+                            if (odd.isSelected()) {
+                                if ((i % 2) == 0) {
+                                    jf.setText(p);
+                                    inputSystem(i, jf);
+                                }
+                            } else if (even.isSelected()) {
+                                if ((i % 2) != 0) {
+                                    jf.setText(p);
+                                    inputSystem(i, jf);
+                                }
+                            } else {
+                                jf.setText(p);
+                                inputSystem(i, jf);
+                            }
                         }
+
                         i++;
                         horizontal++;
                     }
@@ -3266,7 +3311,7 @@ public class DashboardController {
                                                                         @Override
                                                                         public void run() {
                                                                             try {
-                                                                                msg = invoiceJSON.invoiceJSONPrint(da, printer.getText());
+                                                                                msg = invoiceJSON.invoiceJSONPrint(da, printer.getText(), defaultBarcode);
                                                                                 //Thread.sleep(1000);
                                                                             } catch (Exception ex) {
                                                                                 System.out.println("Thread Tp line 2833 Error " + ex.getMessage());
@@ -3325,7 +3370,7 @@ public class DashboardController {
                                                                 @Override
                                                                 public void run() {
                                                                     try {
-                                                                        msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText());
+                                                                        msg = invoiceJSON.invoiceJSONPrint(Data, printer.getText(), defaultBarcode);
                                                                         //Thread.sleep(1000);
                                                                         if (!msg.equals("Success")) {
 
@@ -3570,6 +3615,41 @@ public class DashboardController {
                     }
                 }
 
+            };
+            Platform.runLater(updater);
+
+        });
+        openThread.start();
+
+    }
+
+    public void openBarcode() {
+        Thread openThread = new Thread(() -> {
+            Runnable updater = () -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Barcode.fxml"));
+                    Parent root = loader.load();
+                    BarcodeController Scl = loader.getController();
+                    System.out.println("Series " + barocde);
+                    Scl.initLoadData(defaultBarcode, barocde);
+                    Stage stage = new Stage();
+                    Screen screen = Screen.getPrimary();
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    stage.setX(bounds.getMinX());
+                    stage.setY(bounds.getMinY());
+                    stage.setWidth(bounds.getWidth());
+                    stage.setHeight(bounds.getHeight());
+                    stage.setScene(new Scene(root));
+                    themStyle(stage, root);
+                    stage.setTitle("Barcode");
+                    stage.setOnHidden(evt -> defaultBarcode = Scl.getBarcode());
+                    stage.showAndWait();
+                    //loadSeries(multiMap);
+                    btBarcode.setDisable(false);
+
+                } catch (IOException ex) {
+                    ////System.out.println("Multi if Error " + ex.getMessage());
+                }
             };
             Platform.runLater(updater);
 
@@ -3974,7 +4054,7 @@ public class DashboardController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/reprintTicket.fxml"));
                     Parent root = loader.load();
                     ReprintTicketController Scl = loader.getController();
-                    Scl.initLoadData(userid.getText(), printer.getText());
+                    Scl.initLoadData(userid.getText(), printer.getText(), defaultBarcode);
                     Stage stage = new Stage();
                     stage.setTitle("Reprint Ticket");
                     Screen screen = Screen.getPrimary();
@@ -4120,7 +4200,7 @@ public class DashboardController {
                                 String data = httpAPI._jsonRequest("?r=checkWinner", jsonEmp);
                                 //System.out.println(data);
                                 if (data != null) {
-                                    String msg = claimJSON.claimJSONPrint(data, printer.getText());
+                                    String msg = claimJSON.claimJSONPrint(data, printer.getText(), defaultBarcode);
                                     claimMessageBox(msg);
                                     //JOptionPane.showMessageDialog(null, msg);
                                     claimReader.setText("");
@@ -4129,7 +4209,7 @@ public class DashboardController {
                                     JOptionPane.showMessageDialog(null, "Please check you internet connection.. Host not connected");
                                 }
                             } catch (Exception ex) {
-                                ////System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
+                                System.out.println("Error on ClaimReadr Exceptione " + ex.getMessage());
                             }
                         }
                     });
@@ -4474,7 +4554,7 @@ public class DashboardController {
             int count = Integer.parseInt(custome.getText());
             if (c0.isSelected()) {
                 if (multi.isSelected()) {
-                    ////System.out.println("MultiSeries Array" + multiSeries);
+                    System.out.println("MultiSeries Array" + multiSeries);
                     for (Integer multiSerie : multiSeries) {
                         //i got form button text emx 1000-1099 but my series is 3000-3900
                         //1100+3000-1000=3100
@@ -4520,6 +4600,16 @@ public class DashboardController {
             custome.setText(String.valueOf(count));
         } catch (NumberFormatException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void selectBorcode(javafx.event.ActionEvent event) {
+        try {
+            btBarcode.setDisable(true);
+            openBarcode();
+        } catch (Exception ex) {
+            ////System.out.println("Seect Series Action Error btn " + ex.getMessage());
         }
     }
 

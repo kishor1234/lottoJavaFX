@@ -6,6 +6,7 @@
 package Sys.invoice;
 
 import Sys.TimeFormats;
+import com.github.anastaciocintra.escpos.barcode.BarCode;
 import java.util.Map;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,7 +17,7 @@ import org.json.simple.parser.JSONParser;
  */
 public class claimJSON {
 
-    public static String claimJSONPrint(String data, String printer) throws Exception {
+    public static String claimJSONPrint(String data, String printer,BarCode.BarCodeSystem defaultBarcode) throws Exception {
         // parsing file "JSONExample.json" 
         Object obj = new JSONParser().parse(data);
         // typecasting obj to JSONObject 
@@ -28,7 +29,7 @@ public class claimJSON {
         //System.out.println(jo.get("winPoint"));
         //System.exit(0);
         if (status.equals("1")) {
-            Map<String, String> wPoint = (Map<String, String>) jo.get("winPoint");
+            Map<String, Long> wPoint = (Map<String, Long>) jo.get("winPoint");
             // printPage += "RajLaxmi Lottery\n";
 //            String drDetails= "Dr.:" + printMap.get("gametimeid") + " " + printMap.get("enterydate") + " " + TimeFormats.timeConvert(printMap.get("gameendtime")) + "\n";
 //                String secondPrice = "Second Prize Amt: 180/- \n";
@@ -40,14 +41,14 @@ public class claimJSON {
             String numberHeader = "NUMBER QT NUMBER QT NUMBER QT";
             int k = 1;
             int sum = 0;
-            for (Map.Entry<String, String> finas : wPoint.entrySet()) {
+            for (Map.Entry<String, Long> finas : wPoint.entrySet()) {
                 if (k == 3) {
                     printPage += "RL" + finas.getKey() + " " + finas.getValue() + "\n";
                     k = 0;
                 } else {
                     printPage += "RL" + finas.getKey() + " " + finas.getValue() + "  ";
                 }
-                sum = sum + Integer.parseInt(finas.getValue());
+                sum = sum + finas.getValue().intValue();
                 k++;
                 //printPage+="Num\tqty\tNum\tqty\tNum\tqty\t";
                 //System.out.println(finas.getKey() + ":" + finas.getValue());
@@ -55,7 +56,7 @@ public class claimJSON {
             String printPageFooter = "\nTotal Quantity : " + sum + "\n";
             printPageFooter += "Wining point's    : " + jo.get("amount") + "\n\n";
             //System.out.println(printPage);
-            PrintInvoice.Sample(printer, drDetails, secondPrice, numberHeader, printPage, printPageFooter, (String) jo.get("id"));
+            PrintInvoice.Sample(printer, drDetails, secondPrice, numberHeader, printPage, printPageFooter, (String) jo.get("id"),defaultBarcode);
 
             //PrintInvoice.Sample(printer, printPage, (String) jo.get("id"));
         }
